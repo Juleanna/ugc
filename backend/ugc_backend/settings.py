@@ -59,18 +59,19 @@ UNFOLOD = [
 ]
 
 INSTALLED_APPS = UNFOLOD + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'apps.api.middleware.TranslationsCacheMiddleware', 
+    'apps.api.middleware.ImprovedTranslationsCacheMiddleware',  # Обновленный
+    'apps.api.middleware.CacheMonitoringMiddleware',            # Новый
+    'apps.api.middleware.SecurityHeadersMiddleware',
+    'apps.api.middleware.CacheInvalidationMiddleware',          # Новый
 ]
 
 ROOT_URLCONF = 'ugc_backend.urls'
@@ -608,19 +609,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
-        },
-        'KEY_PREFIX': 'ugc_api',
-        'TIMEOUT': 300,  # 5 хвилин за замовчуванням
-    }
-}
-
 # Дозволені методи
 CORS_ALLOW_METHODS = [
     'DELETE',
@@ -731,6 +719,14 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    # В продакшене используем более агрессивное кеширование
+    CACHES['default']['TIMEOUT'] = 60 * 60  # 1 час
+    CACHES['default']['OPTIONS']['COMPRESSOR'] = 'django_redis.compressors.lz4.Lz4Compressor'
+
+
+# Использование Redis для сессий (опционально)
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+# SESSION_CACHE_ALIAS = 'sessions'
 
 # ========== РОЗШИРЕНІ НАЛАШТУВАННЯ ДЛЯ ПЕРЕКЛАДІВ ==========
 
@@ -745,4 +741,36 @@ TRANSLATION_EXPORT_SETTINGS = {
     'CACHE_TIMEOUT': 1800,  # 30 хвилин
     'BATCH_SIZE': 1000,
     'MAX_EXPORT_SIZE': 10000,
+}
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            # Используем msgpack - более надежный
+            'SERIALIZER': 'django_redis.serializers.msgpack.MSGPackSerializer',
+            # Или обратно к JSON с обработкой ошибок
+            # 'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
+            'CONNECTION_POOL_KWARGS': {
+                'max_connections': 50,
+                'retry_on_timeout': True,
+            },
+            'IGNORE_EXCEPTIONS': True,  # ВАЖНО! Игнорировать ошибки кеша
+        },
+        'KEY_PREFIX': 'ugc_api',
+        'TIMEOUT': 300,
+    }
+}
+
+# Настройки для кеширования переводов
+TRANSLATION_CACHE_SETTINGS = {
+    'STATIC_TIMEOUT': 60 * 60,      # 1 час для статических переводов
+    'DYNAMIC_TIMEOUT': 60 * 30,     # 30 минут для динамических
+    'PO_TIMEOUT': 60 * 60 * 2,      # 2 часа для PO файлов
+    'UNIFIED_TIMEOUT': 60 * 45,     # 45 минут для объединенных
+    'MAX_CACHE_SIZE': 10000,        # Максимальный размер кеша
+    'ENABLE_COMPRESSION': True,     # Сжатие больших переводов
 }
