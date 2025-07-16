@@ -8060,3 +8060,766 @@ INFO 2025-07-16 16:22:46,766 autoreload 3700 9704 Watching for file changes with
 INFO 2025-07-16 16:23:03,696 autoreload 3700 9704 D:\ugc\backend\apps\api\views.py changed, reloading.
 INFO 2025-07-16 16:23:06,271 autoreload 10080 8648 Watching for file changes with StatReloader
 INFO 2025-07-16 16:23:55,346 autoreload 11836 12392 Watching for file changes with StatReloader
+ERROR 2025-07-16 16:24:01,390 log 11836 9844 Internal Server Error: /api/v1/about/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:01,390 log 11836 8368 Internal Server Error: /api/v1/projects/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:01,391 log 11836 3116 Internal Server Error: /api/v1/jobs/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:01,392 log 11836 9324 Internal Server Error: /api/v1/services/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:01,393 log 11836 13480 Internal Server Error: /api/v1/offices/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:01,393 log 11836 5428 Internal Server Error: /api/v1/homepage/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:01,402 basehttp 11836 9844 "GET /api/v1/about/ HTTP/1.1" 500 158492
+ERROR 2025-07-16 16:24:01,435 basehttp 11836 8368 "GET /api/v1/projects/ HTTP/1.1" 500 158517
+ERROR 2025-07-16 16:24:01,485 basehttp 11836 3116 "GET /api/v1/jobs/ HTTP/1.1" 500 158505
+ERROR 2025-07-16 16:24:01,486 basehttp 11836 9324 "GET /api/v1/services/ HTTP/1.1" 500 158517
+ERROR 2025-07-16 16:24:01,493 basehttp 11836 13480 "GET /api/v1/offices/ HTTP/1.1" 500 158482
+ERROR 2025-07-16 16:24:01,499 basehttp 11836 5428 "GET /api/v1/homepage/ HTTP/1.1" 500 158533
+ERROR 2025-07-16 16:24:01,719 log 11836 8368 Internal Server Error: /api/v1/about/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:01,839 basehttp 11836 8368 "GET /api/v1/about/ HTTP/1.1" 500 158492
+ERROR 2025-07-16 16:24:02,023 log 11836 3116 Internal Server Error: /api/v1/projects/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:02,053 log 11836 9324 Internal Server Error: /api/v1/jobs/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:02,065 log 11836 5428 Internal Server Error: /api/v1/offices/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:02,139 basehttp 11836 3116 "GET /api/v1/projects/ HTTP/1.1" 500 158517
+ERROR 2025-07-16 16:24:02,173 log 11836 9844 Internal Server Error: /api/v1/translations/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'{"locale": "uk", "translations": {"header.company": "\\u041a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0456\\u044f", "header.services": "\\u041f\\u043e\\u0441\\u043b\\u0443\\u0433\\u0438", "header.projec
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\translations_views.py", line 58, in get
+    cached_data = cache.get(cache_key)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:02,205 basehttp 11836 9324 "GET /api/v1/jobs/ HTTP/1.1" 500 158505
+ERROR 2025-07-16 16:24:02,280 log 11836 13480 Internal Server Error: /api/v1/services/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:02,282 basehttp 11836 5428 "GET /api/v1/offices/ HTTP/1.1" 500 158482
+ERROR 2025-07-16 16:24:02,399 basehttp 11836 9844 "GET /api/v1/translations/ HTTP/1.1" 500 184929
+ERROR 2025-07-16 16:24:02,384 log 11836 8368 Internal Server Error: /api/v1/homepage/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'[1752671063.6182168, 1752671063.333418, 1752671063.1365464, 1752671063.123856, 1752671062.8989813, 1752671062.4592867, 1752671062.4480443, 1752671062.441755, 1752671062.413138, 1752671062.40293, 175
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 422, in initial
+    self.check_throttles(request)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 365, in check_throttles
+    if not throttle.allow_request(request, self):
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:02,423 basehttp 11836 13480 "GET /api/v1/services/ HTTP/1.1" 500 158517
+ERROR 2025-07-16 16:24:02,521 basehttp 11836 8368 "GET /api/v1/homepage/ HTTP/1.1" 500 158533
+ERROR 2025-07-16 16:24:02,672 log 11836 9844 Internal Server Error: /api/v1/translations/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 500, in decode
+    value = int(value)
+ValueError: invalid literal for int() with base 10: b'{"locale": "uk", "translations": {"header.company": "\\u041a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0456\\u044f", "header.services": "\\u041f\\u043e\\u0441\\u043b\\u0443\\u0433\\u0438", "header.projec
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\translations_views.py", line 58, in get
+    cached_data = cache.get(cache_key)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 305, in get
+    return self.decode(value)
+           ~~~~~~~~~~~^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 505, in decode
+    value = self._serializer.loads(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\msgpack.py", line 13, in loads
+    return msgpack.loads(value, raw=False)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "msgpack/_unpacker.pyx", line 201, in msgpack._cmsgpack.unpackb
+msgpack.exceptions.ExtraData: unpack(b) received extra data.
+ERROR 2025-07-16 16:24:02,723 basehttp 11836 9844 "GET /api/v1/translations/ HTTP/1.1" 500 184929
+INFO 2025-07-16 16:24:24,328 basehttp 11836 13388 "GET /admin/ HTTP/1.1" 200 67683
+WARNING 2025-07-16 16:24:25,847 log 11836 13388 Not Found: /favicon.ico
+WARNING 2025-07-16 16:24:25,850 basehttp 11836 13388 "GET /favicon.ico HTTP/1.1" 404 3005
+INFO 2025-07-16 16:24:27,447 basehttp 11836 13388 "GET /admin/ HTTP/1.1" 200 67683
+WARNING 2025-07-16 16:24:33,137 log 11836 13388 Not Found: /v1/
+WARNING 2025-07-16 16:24:33,139 basehttp 11836 13388 "GET /v1/ HTTP/1.1" 404 2981
+INFO 2025-07-16 16:24:41,564 basehttp 11836 13388 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-16 16:24:51,586 views 11836 13388 Cache SET для api_aboutpage_list
+INFO 2025-07-16 16:24:51,588 basehttp 11836 13388 "GET /api/v1/about/ HTTP/1.1" 200 52
