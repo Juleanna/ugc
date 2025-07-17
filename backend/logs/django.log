@@ -9418,3 +9418,102 @@ INFO 2025-07-17 12:17:07,820 views 6048 13536 Cache SET для api_project_list
 INFO 2025-07-17 12:17:07,836 views 6048 9628 Cache SET для api_service_list
 INFO 2025-07-17 12:17:07,836 basehttp 6048 13536 "GET /api/v1/projects/ HTTP/1.1" 200 52
 INFO 2025-07-17 12:17:07,840 basehttp 6048 9628 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:24:37,868 views 6048 3932 Cache SET для api_project_list
+INFO 2025-07-17 12:24:37,871 basehttp 6048 3932 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:24:37,886 views 6048 13836 Cache SET для api_service_list
+INFO 2025-07-17 12:24:37,888 basehttp 6048 13836 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:24:46,114 views 6048 13836 Cache SET для api_service_list
+INFO 2025-07-17 12:24:46,116 basehttp 6048 13836 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:24:46,224 views 6048 3932 Cache SET для api_project_list
+INFO 2025-07-17 12:24:46,227 basehttp 6048 3932 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:28,573 views 6048 13836 Cache SET для api_project_list
+INFO 2025-07-17 12:25:28,593 basehttp 6048 13836 - Broken pipe from ('127.0.0.1', 20389)
+INFO 2025-07-17 12:25:28,594 views 6048 3932 Cache SET для api_service_list
+INFO 2025-07-17 12:25:28,596 basehttp 6048 3932 - Broken pipe from ('127.0.0.1', 20390)
+INFO 2025-07-17 12:25:32,249 views 6048 8220 Cache SET для api_service_list
+INFO 2025-07-17 12:25:32,249 views 6048 12452 Cache SET для api_project_list
+INFO 2025-07-17 12:25:32,249 views 6048 14724 Cache SET для api_service_list
+INFO 2025-07-17 12:25:32,249 views 6048 11356 Cache SET для api_project_list
+INFO 2025-07-17 12:25:32,251 basehttp 6048 8220 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:32,255 basehttp 6048 12452 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:32,354 basehttp 6048 11356 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:32,355 basehttp 6048 14724 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:34,224 translations_views 6048 12540 Завантажено 254 статичних перекладів
+INFO 2025-07-17 12:25:34,231 translations_views 6048 12020 Завантажено 254 статичних перекладів
+INFO 2025-07-17 12:25:34,335 translations_views 6048 12540 Завантажено 203 po перекладів
+INFO 2025-07-17 12:25:34,399 translations_views 6048 12020 Завантажено 203 po перекладів
+INFO 2025-07-17 12:25:34,498 translations_views 6048 12540 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 12:25:34,499 translations_views 6048 12540 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 12:25:34,502 translations_views 6048 12020 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 12:25:34,502 translations_views 6048 12020 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 12:25:36,529 translations_views 6048 12020 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 12:25:36,533 basehttp 6048 12020 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 12:25:36,550 translations_views 6048 12540 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 12:25:36,553 basehttp 6048 12540 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 12:25:50,795 views 6048 12020 Cache SET для api_project_list
+INFO 2025-07-17 12:25:50,796 views 6048 12540 Cache SET для api_service_list
+INFO 2025-07-17 12:25:50,798 basehttp 6048 12020 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:50,802 basehttp 6048 12540 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:59,018 views 6048 11356 Cache SET для api_project_list
+INFO 2025-07-17 12:25:59,020 basehttp 6048 11356 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:25:59,041 views 6048 12540 Cache SET для api_service_list
+INFO 2025-07-17 12:25:59,044 basehttp 6048 12540 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:41:07,928 views 6048 7512 Cache SET для api_service_list
+INFO 2025-07-17 12:41:07,929 basehttp 6048 7512 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:41:07,952 views 6048 13276 Cache SET для api_project_list
+INFO 2025-07-17 12:41:07,955 basehttp 6048 13276 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:41:16,267 views 6048 7512 Cache SET для api_service_list
+INFO 2025-07-17 12:41:16,272 basehttp 6048 7512 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:41:16,297 views 6048 13276 Cache SET для api_project_list
+INFO 2025-07-17 12:41:16,300 basehttp 6048 13276 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:51:08,308 views 6048 8944 Cache SET для api_project_list
+INFO 2025-07-17 12:51:08,310 views 6048 14908 Cache SET для api_service_list
+INFO 2025-07-17 12:51:08,315 basehttp 6048 8944 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:51:08,324 basehttp 6048 14908 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:51:16,613 views 6048 8944 Cache SET для api_project_list
+INFO 2025-07-17 12:51:16,614 views 6048 14908 Cache SET для api_service_list
+INFO 2025-07-17 12:51:16,616 basehttp 6048 8944 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:51:16,619 basehttp 6048 14908 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:52:13,454 views 6048 14908 Cache SET для api_service_list
+INFO 2025-07-17 12:52:13,456 views 6048 8944 Cache SET для api_project_list
+INFO 2025-07-17 12:52:13,466 basehttp 6048 14908 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:52:13,468 basehttp 6048 8944 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:52:21,756 views 6048 14880 Cache SET для api_project_list
+INFO 2025-07-17 12:52:21,756 views 6048 14908 Cache SET для api_service_list
+INFO 2025-07-17 12:52:21,758 basehttp 6048 14880 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:52:21,758 basehttp 6048 14908 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:54:53,269 views 6048 10040 Cache SET для api_project_list
+INFO 2025-07-17 12:54:53,271 views 6048 6920 Cache SET для api_service_list
+INFO 2025-07-17 12:54:53,274 basehttp 6048 10040 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:54:53,276 basehttp 6048 6920 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:55:01,620 views 6048 10040 Cache SET для api_project_list
+INFO 2025-07-17 12:55:01,623 basehttp 6048 10040 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:55:01,635 views 6048 5404 Cache SET для api_service_list
+INFO 2025-07-17 12:55:01,644 basehttp 6048 5404 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 12:58:03,783 basehttp 6048 8448 "OPTIONS /api/v1/contact/ HTTP/1.1" 200 0
+WARNING 2025-07-17 12:58:03,815 log 6048 8448 Not Found: /api/v1/contact/
+WARNING 2025-07-17 12:58:03,816 basehttp 6048 8448 "POST /api/v1/contact/ HTTP/1.1" 404 23300
+INFO 2025-07-17 14:28:04,418 views 6048 8800 Cache SET для api_service_list
+INFO 2025-07-17 14:28:04,423 views 6048 15328 Cache SET для api_project_list
+INFO 2025-07-17 14:28:04,450 basehttp 6048 8800 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 14:28:04,456 basehttp 6048 15328 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 14:28:06,362 translations_views 6048 1392 Завантажено 254 статичних перекладів
+INFO 2025-07-17 14:28:06,395 translations_views 6048 1392 Завантажено 203 po перекладів
+INFO 2025-07-17 14:28:06,515 translations_views 6048 1392 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 14:28:06,515 translations_views 6048 1392 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 14:28:08,543 translations_views 6048 1392 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 14:28:08,553 basehttp 6048 1392 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 14:28:12,688 views 6048 8800 Cache SET для api_service_list
+INFO 2025-07-17 14:28:12,689 views 6048 2552 Cache SET для api_project_list
+INFO 2025-07-17 14:28:12,691 basehttp 6048 8800 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 14:28:12,696 basehttp 6048 2552 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 17:55:47,876 views 6048 8960 Cache SET для api_service_list
+INFO 2025-07-17 17:55:47,879 views 6048 14948 Cache SET для api_project_list
+INFO 2025-07-17 17:55:47,882 basehttp 6048 8960 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 17:55:47,886 basehttp 6048 14948 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 17:55:49,726 translations_views 6048 14776 Завантажено 254 статичних перекладів
+INFO 2025-07-17 17:55:49,777 translations_views 6048 14776 Завантажено 203 po перекладів
+INFO 2025-07-17 17:55:49,876 translations_views 6048 14776 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 17:55:49,877 translations_views 6048 14776 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 17:55:51,914 translations_views 6048 14776 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 17:55:51,916 basehttp 6048 14776 "GET /api/v1/translations/ HTTP/1.1" 200 14161
