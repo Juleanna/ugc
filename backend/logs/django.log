@@ -9192,3 +9192,75 @@ INFO 2025-07-17 09:33:48,503 views 12936 7916 Cache HIT для api_project_list
 INFO 2025-07-17 09:33:48,505 basehttp 12936 776 "GET /api/v1/services/ HTTP/1.1" 200 52
 INFO 2025-07-17 09:33:48,507 basehttp 12936 7916 "GET /api/v1/projects/ HTTP/1.1" 200 52
 INFO 2025-07-17 10:07:37,344 autoreload 6048 11692 Watching for file changes with StatReloader
+INFO 2025-07-17 10:07:56,444 views 6048 11664 Cache SET для api_aboutpage_list
+INFO 2025-07-17 10:07:56,444 views 6048 5588 Cache SET для api_homepage_list
+INFO 2025-07-17 10:07:56,444 views 6048 12152 Cache SET для api_jobposition_list
+INFO 2025-07-17 10:07:56,448 basehttp 6048 11664 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:07:56,448 basehttp 6048 5588 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:07:56,449 basehttp 6048 12152 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:07:56,481 views 6048 1908 Cache SET для api_service_list
+INFO 2025-07-17 10:07:56,482 views 6048 14640 Cache SET для api_project_list
+INFO 2025-07-17 10:07:56,482 views 6048 15064 Cache SET для api_office_list
+INFO 2025-07-17 10:07:56,484 basehttp 6048 1908 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:07:56,485 basehttp 6048 14640 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:07:56,485 basehttp 6048 15064 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:08:04,719 views 6048 5588 Cache SET для api_jobposition_list
+INFO 2025-07-17 10:08:04,725 basehttp 6048 5588 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:08:04,735 views 6048 1908 Cache SET для api_homepage_list
+INFO 2025-07-17 10:08:04,751 views 6048 12152 Cache SET для api_aboutpage_list
+INFO 2025-07-17 10:08:04,752 views 6048 15064 Cache SET для api_project_list
+INFO 2025-07-17 10:08:04,754 views 6048 14640 Cache SET для api_service_list
+INFO 2025-07-17 10:08:04,760 basehttp 6048 1908 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:08:04,760 basehttp 6048 12152 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:08:04,762 basehttp 6048 15064 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:08:04,770 basehttp 6048 14640 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:08:06,591 translations_views 6048 11664 Завантажено 254 статичних перекладів
+INFO 2025-07-17 10:08:06,600 translations_views 6048 11664 Завантажено 203 po перекладів
+INFO 2025-07-17 10:08:06,688 translations_views 6048 11664 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:08:06,688 translations_views 6048 11664 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:08:08,724 translations_views 6048 11664 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 10:08:08,749 basehttp 6048 11664 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 10:08:13,021 views 6048 5588 Cache SET для api_office_list
+INFO 2025-07-17 10:08:13,023 basehttp 6048 5588 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:08:18,320 translations_views 6048 14640 Завантажено 254 статичних перекладів
+INFO 2025-07-17 10:08:18,329 translations_views 6048 14640 Завантажено 203 po перекладів
+INFO 2025-07-17 10:08:18,532 translations_views 6048 14640 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:08:18,533 translations_views 6048 14640 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:08:20,582 translations_views 6048 14640 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 10:08:20,584 basehttp 6048 14640 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 10:56:12,815 views 6048 11884 Cache SET для api_office_list
+INFO 2025-07-17 10:56:12,826 views 6048 8916 Cache SET для api_service_list
+INFO 2025-07-17 10:56:12,828 views 6048 14268 Cache SET для api_aboutpage_list
+INFO 2025-07-17 10:56:12,831 views 6048 11572 Cache SET для api_homepage_list
+INFO 2025-07-17 10:56:12,832 views 6048 12908 Cache SET для api_project_list
+INFO 2025-07-17 10:56:12,835 views 6048 2960 Cache SET для api_jobposition_list
+INFO 2025-07-17 10:56:12,852 basehttp 6048 11884 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:12,854 basehttp 6048 8916 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:12,860 basehttp 6048 14268 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:12,870 basehttp 6048 11572 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:12,874 basehttp 6048 12908 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:12,882 basehttp 6048 2960 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:21,186 views 6048 11572 Cache SET для api_aboutpage_list
+INFO 2025-07-17 10:56:21,189 views 6048 8916 Cache SET для api_office_list
+INFO 2025-07-17 10:56:21,190 views 6048 14268 Cache SET для api_project_list
+INFO 2025-07-17 10:56:21,191 views 6048 2960 Cache SET для api_homepage_list
+INFO 2025-07-17 10:56:21,202 basehttp 6048 11572 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:21,205 basehttp 6048 8916 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:21,206 views 6048 12908 Cache SET для api_service_list
+INFO 2025-07-17 10:56:21,218 basehttp 6048 14268 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:21,221 basehttp 6048 2960 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:21,238 basehttp 6048 12908 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:23,020 translations_views 6048 11884 Завантажено 254 статичних перекладів
+INFO 2025-07-17 10:56:23,030 translations_views 6048 11884 Завантажено 203 po перекладів
+INFO 2025-07-17 10:56:23,125 translations_views 6048 11884 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:56:23,125 translations_views 6048 11884 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:56:25,151 translations_views 6048 11884 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 10:56:25,153 basehttp 6048 11884 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 10:56:29,414 views 6048 11572 Cache SET для api_jobposition_list
+INFO 2025-07-17 10:56:29,417 basehttp 6048 11572 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:56:34,434 translations_views 6048 12908 Завантажено 254 статичних перекладів
+INFO 2025-07-17 10:56:34,471 translations_views 6048 12908 Завантажено 203 po перекладів
+INFO 2025-07-17 10:56:34,567 translations_views 6048 12908 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:56:34,568 translations_views 6048 12908 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 10:56:36,594 translations_views 6048 12908 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 10:56:36,603 basehttp 6048 12908 "GET /api/v1/translations/ HTTP/1.1" 200 14161
