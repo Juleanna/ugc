@@ -9013,3 +9013,61 @@ Traceback (most recent call last):
 TypeError: 'Meta.fields' must not contain non-model field names: department
 ERROR 2025-07-16 16:32:47,295 basehttp 5428 11476 "GET /api/v1/jobs/ HTTP/1.1" 500 194351
 INFO 2025-07-17 09:10:52,764 autoreload 12936 12016 Watching for file changes with StatReloader
+INFO 2025-07-17 09:11:02,810 views 12936 12980 Cache SET для api_homepage_list
+INFO 2025-07-17 09:11:02,836 views 12936 14948 Cache SET для api_aboutpage_list
+INFO 2025-07-17 09:11:02,852 basehttp 12936 12980 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:02,860 views 12936 1424 Cache SET для api_service_list
+INFO 2025-07-17 09:11:02,872 views 12936 2372 Cache SET для api_jobposition_list
+INFO 2025-07-17 09:11:02,873 basehttp 12936 14948 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:02,883 basehttp 12936 1424 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:02,892 translations_views 12936 12980 Завантажено 254 статичних перекладів
+INFO 2025-07-17 09:11:02,897 basehttp 12936 2372 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:02,907 views 12936 14948 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:11:02,918 views 12936 1424 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:11:02,966 basehttp 12936 14948 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:02,978 views 12936 2372 Cache HIT для api_service_list
+INFO 2025-07-17 09:11:02,982 translations_views 12936 12980 Завантажено 203 po перекладів
+INFO 2025-07-17 09:11:02,994 basehttp 12936 2372 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:02,994 basehttp 12936 1424 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:02,998 views 12936 14948 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:11:03,010 basehttp 12936 14948 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:03,010 views 12936 13628 Cache SET для api_project_list
+INFO 2025-07-17 09:11:03,017 basehttp 12936 13628 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:03,033 views 12936 13628 Cache HIT для api_project_list
+INFO 2025-07-17 09:11:03,034 basehttp 12936 13628 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:03,046 views 12936 10620 Cache SET для api_office_list
+INFO 2025-07-17 09:11:03,049 basehttp 12936 10620 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:03,060 views 12936 10620 Cache HIT для api_office_list
+INFO 2025-07-17 09:11:03,061 basehttp 12936 10620 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:11:03,168 translations_views 12936 12980 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 09:11:03,169 translations_views 12936 12980 Завантажено 0 динамічних перекладів
+INFO 2025-07-17 09:11:03,176 translations_views 12936 12980 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-17 09:11:03,179 basehttp 12936 12980 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 09:12:26,624 views 12936 1304 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:12:26,638 views 12936 10588 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:12:26,652 basehttp 12936 1304 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,655 basehttp 12936 10588 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,671 views 12936 10588 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:12:26,673 views 12936 3728 Cache HIT для api_project_list
+INFO 2025-07-17 09:12:26,678 views 12936 1304 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:12:26,689 views 12936 6376 Cache HIT для api_service_list
+INFO 2025-07-17 09:12:26,690 basehttp 12936 10588 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,695 views 12936 14528 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:12:26,697 basehttp 12936 3728 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,701 basehttp 12936 1304 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,712 basehttp 12936 6376 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,714 views 12936 10464 Cache HIT для api_office_list
+INFO 2025-07-17 09:12:26,721 basehttp 12936 14528 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,723 views 12936 10588 Cache HIT для api_project_list
+INFO 2025-07-17 09:12:26,727 basehttp 12936 10464 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,738 basehttp 12936 10588 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,738 views 12936 6376 Cache HIT для api_service_list
+INFO 2025-07-17 09:12:26,740 views 12936 14528 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:12:26,742 views 12936 10464 Cache HIT для api_office_list
+INFO 2025-07-17 09:12:26,743 basehttp 12936 6376 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,743 basehttp 12936 14528 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:12:26,745 basehttp 12936 10464 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:21:08,355 views 12936 2232 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:21:08,356 basehttp 12936 2232 "GET /api/v1/about/ HTTP/1.1" 200 52
+WARNING 2025-07-17 09:21:09,440 log 12936 2232 Not Found: /favicon.ico
+WARNING 2025-07-17 09:21:09,441 basehttp 12936 2232 "GET /favicon.ico HTTP/1.1" 404 3005
