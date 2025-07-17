@@ -119,185 +119,139 @@ const UGCDesign = () => {
     setIsSubmitting(true);
     
     try {
-      // Якщо у вас є API endpoint для форми
       const response = await fetch(`${API_BASE_URL}/contact/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
       
       if (response.ok) {
+        alert('Дякуємо! Ваше повідомлення відправлено.');
         setFormData({ name: '', email: '', phone: '', message: '' });
-        onOpen();
       } else {
-        console.error('Помилка надсилання форми');
+        alert('Помилка при відправці. Спробуйте ще раз.');
       }
     } catch (error) {
-      console.error('Помилка:', error);
-      // Для демонстрації просто показуємо успіх
-      setTimeout(() => {
-        setFormData({ name: '', email: '', phone: '', message: '' });
-        onOpen();
-      }, 1000);
+      console.error('Error:', error);
+      alert('Помилка при відправці. Спробуйте ще раз.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const scrollToSection = (sectionId) => {
-    setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setActiveSection(sectionId);
+    setIsMenuOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="min-h-screen bg-background">
       {/* Навігація */}
       <Navbar 
+        className="navbar-glass fixed top-0 z-50 w-full"
+        maxWidth="full"
+        height="4rem"
+        isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
-        className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 shadow-sm"
-        maxWidth="xl"
-        position="sticky"
       >
         <NavbarContent>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Закрити меню" : "Відкрити меню"}
-            className="sm:hidden"
-          />
           <NavbarBrand>
-            <div className="flex items-center">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-2 rounded-xl mr-3">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
-              <div className="flex flex-col">
-                <p className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                  UGC
-                </p>
-                <p className="text-xs text-gray-600 -mt-1">Ukrainian Guard Company</p>
-              </div>
-            </div>
+            <Globe className="w-4 h-4 ml-1" /><span className="font-bold text-inherit">
+                UGC</span>
           </NavbarBrand>
         </NavbarContent>
 
-        <NavbarContent className="hidden sm:flex gap-1" justify="center">
-          {navigation.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavbarItem key={item.id}>
-                <Button
-                  variant={activeSection === item.id ? "solid" : "light"}
-                  color={activeSection === item.id ? "primary" : "default"}
-                  onClick={() => scrollToSection(item.id)}
-                  className="font-medium"
-                  startContent={<Icon className="h-4 w-4" />}
-                >
-                  {item.label}
-                </Button>
-              </NavbarItem>
-            );
-          })}
+        <NavbarContent className="hidden md:flex gap-4" justify="center">
+          {navigation.map((item) => (
+            <NavbarItem key={item.id}>
+              <Button
+                variant={activeSection === item.id ? "solid" : "light"}
+                color="primary"
+                size="sm"
+                onPress={() => scrollToSection(item.id)}
+                className="font-medium"
+              >
+                {item.label}
+              </Button>
+            </NavbarItem>
+          ))}
         </NavbarContent>
 
         <NavbarContent justify="end">
-          <NavbarItem>
-            <Button 
-              color="primary" 
-              variant="solid"
-              onClick={() => scrollToSection('contact')}
-              className="font-semibold"
-            >
-              Зв'язатися
-            </Button>
-          </NavbarItem>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className=""
+          />
         </NavbarContent>
 
         <NavbarMenu>
-          {navigation.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavbarMenuItem key={item.id}>
-                <Button
-                  variant="light"
-                  className="w-full justify-start"
-                  startContent={<Icon className="h-4 w-4" />}
-                  onClick={() => {
-                    scrollToSection(item.id);
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  {item.label}
-                </Button>
-              </NavbarMenuItem>
-            );
-          })}
+          {navigation.map((item) => (
+            <NavbarMenuItem key={item.id}>
+              <Button
+                variant="light"
+                size="lg"
+                onPress={() => scrollToSection(item.id)}
+                className="w-full justify-start"
+              >
+                <item.icon className="w-5 h-5 mr-2" />
+                {item.label}
+              </Button>
+            </NavbarMenuItem>
+          ))}
         </NavbarMenu>
       </Navbar>
 
       {/* Головна секція */}
-      <section id="home" className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-50 opacity-70"></div>
-        
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="home" className="section-hero section-padding">
+        <div className="container-custom">
           <div className="text-center">
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-blue-100 border border-blue-200 mb-8">
-              <Award className="h-5 w-5 text-blue-600 mr-2" />
-              <span className="text-blue-700 font-semibold">Успішний проєкт</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-              Захист і комфорт
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+              Професійний одяг для
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                для наших захисників
-              </span>
+              <span className="text-gradient-blue">кожної сфери</span>
             </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-12 leading-relaxed">
-              Ми створюємо якісний та надійний спецодяг, який забезпечує комфорт і безпеку 
-              в будь-яких умовах. Наш досвід і прагнення до досконалості допомагають нам 
-              задовольняти потреби професіоналів у різних галузях.
+            <p className="text-lg md:text-xl text-gray-600 mb-8  animate-slide-up">
+              Ми створюємо високоякісний спецодяг, військову форму та корпоративний одяг 
+              для українських підприємств та організацій.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Button 
                 color="primary" 
-                size="lg" 
-                variant="solid"
-                endContent={<ArrowRight className="h-5 w-5" />}
-                className="font-semibold px-8 py-3 text-lg shadow-lg"
-                onClick={() => scrollToSection('projects')}
+                size="lg"
+                className="btn-primary px-8 py-6 font-semibold"
+                onPress={() => scrollToSection('projects')}
               >
+                <ArrowRight className="w-5 h-5 ml-2" />
                 Наші проєкти
               </Button>
               <Button 
-                color="default" 
                 variant="bordered"
                 size="lg"
-                endContent={<PlayCircle className="h-5 w-5" />}
-                className="font-semibold px-8 py-3 text-lg border-2"
-                onClick={() => scrollToSection('about')}
+                className="px-8 py-6 font-semibold border-2"
+                onPress={() => scrollToSection('about')}
               >
+                <PlayCircle className="w-5 h-5 mr-2" />
                 Дізнатися більше
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
               {[
                 { value: '5+', label: 'Років досвіду' },
                 { value: '100+', label: 'Проєктів' },
                 { value: '50+', label: 'Клієнтів' },
                 { value: '24/7', label: 'Підтримка' }
               ].map((stat, index) => (
-                <Card key={index} className="bg-white/60 backdrop-blur-sm border border-gray-200/50 shadow-lg">
-                  <CardBody className="text-center p-6">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-2">
+                <Card key={index} className="glass p-4 md:p-6 text-center">
+                  <CardBody className="p-0">
+                    <div className="text-2xl md:text-3xl font-bold text-gradient-blue mb-2">
                       {stat.value}
                     </div>
                     <div className="text-gray-600 text-sm font-medium">{stat.label}</div>
@@ -310,125 +264,94 @@ const UGCDesign = () => {
       </section>
 
       {/* Про нас */}
-      <section id="about" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <section id="about" className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
             <Chip color="primary" variant="flat" size="lg" className="mb-6">
-              <Shield className="h-4 w-4 mr-2" />
+              <Shield className="w-4 h-4 mr-2" />
               Про компанію
             </Chip>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Наш багаторічний досвід
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                гарантує якість
-              </span>
+              <span className="text-gradient-blue">гарантує якість</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 ">
               Ми створюємо одяг, який забезпечує безпеку і комфорт у будь-яких умовах. 
               Наша продукція відповідає найвищим стандартам якості.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="space-y-8">
-                {[
-                  {
-                    icon: Shield,
-                    title: 'Надійність',
-                    description: 'Високоякісні матеріали та перевірені технології виробництва'
-                  },
-                  {
-                    icon: Award,
-                    title: 'Якість',
-                    description: 'Кожен виріб проходить ретельний контроль якості'
-                  },
-                  {
-                    icon: Heart,
-                    title: 'Комфорт',
-                    description: 'Ергономічний дизайн для максимального комфорту користувача'
-                  }
-                ].map((feature, index) => {
-                  const Icon = feature.icon;
-                  return (
-                    <div key={index} className="flex items-start space-x-4">
-                      <div className="bg-blue-100 p-3 rounded-xl">
-                        <Icon className="h-6 w-6 text-blue-600" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                          {feature.title}
-                        </h3>
-                        <p className="text-gray-600">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-8 rounded-2xl text-white">
-                <blockquote className="text-lg font-medium mb-6">
-                  "Команда UGC перевершила наші очікування, забезпечивши високу якість 
-                  спецодягу та дотримання термінів. Відмінна комунікація і професійний 
-                  підхід зробили співпрацю легкою та ефективною."
-                </blockquote>
-                <div className="flex items-center">
-                  <div className="bg-white/20 p-3 rounded-full mr-4">
-                    <Building className="h-6 w-6 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {[
+              {
+                icon: Shield,
+                title: 'Надійність',
+                description: 'Використовуємо тільки перевірені матеріали та технології'
+              },
+              {
+                icon: Award,
+                title: 'Якість',
+                description: 'Контроль якості на кожному етапі виробництва'
+              },
+              {
+                icon: Users,
+                title: 'Довіра',
+                description: 'Понад 50 задоволених клієнтів по всій Україні'
+              }
+            ].map((item, index) => (
+              <Card key={index} className="hover-lift p-6 text-center">
+                <CardBody className="p-0">
+                  <div className="bg-gradient-blue p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                    <item.icon className="w-8 h-8 text-white" />
                   </div>
-                  <div>
-                    <div className="font-semibold">Національна Гвардія України</div>
-                    <div className="text-blue-200">Офіційний партнер</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </CardBody>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Послуги */}
-      <section id="services" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Chip color="secondary" variant="flat" size="lg" className="mb-6">
-              <Briefcase className="h-4 w-4 mr-2" />
+      <section id="services" className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <Chip color="primary" variant="flat" size="lg" className="mb-6">
+              <Briefcase className="w-4 h-4 mr-2" />
               Наші послуги
             </Chip>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Професійні рішення
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Повний цикл виробництва
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                для вашого бізнесу
-              </span>
+              <span className="text-gradient-blue">професійного одягу</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ми виготовляємо спецодяг для різних галузей, включаючи військову форму, 
-              медичний одяг, а також спецодяг для інших сфер.
+            <p className="text-lg md:text-xl text-gray-600 ">
+              Від проєктування до готового виробу - ми забезпечуємо якість на кожному етапі.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Якщо є дані з API, використовуємо їх */}
             {data.services.length > 0 ? 
               data.services.map((service, index) => {
+                const handleServiceClick = () => {
+                  console.log('Clicked service:', service.name);
+                };
+
                 return (
                   <Card 
                     key={service.id || index} 
-                    className="group hover:scale-105 transition-all duration-300 cursor-pointer border-none shadow-lg hover:shadow-2xl bg-white"
-                    isPressable
+                    className="hover-lift cursor-pointer"
+                    onPress={handleServiceClick}
                   >
                     <CardHeader className="flex gap-3 items-start pb-2">
-                      <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-3 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                        <Briefcase className="h-6 w-6 text-white" />
+                      <div className="bg-gradient-blue p-3 rounded-xl">
+                        <Briefcase className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex flex-col flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        <h3 className="text-xl font-bold text-gray-900">
                           {service.name}
                         </h3>
                       </div>
@@ -437,15 +360,16 @@ const UGCDesign = () => {
                       <p className="text-gray-600 mb-4">
                         {service.short_description || service.description}
                       </p>
-                      <Button 
-                        color="primary" 
-                        variant="light" 
-                        endContent={<ChevronRight className="h-4 w-4" />}
-                        className="w-fit group-hover:bg-blue-50"
-                        size="sm"
+                      <div 
+                        className="inline-flex items-center text-primary cursor-pointer hover:text-blue-800 transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log('Clicked details for:', service.name);
+                        }}
                       >
-                        Детальніше
-                      </Button>
+                        <span className="text-sm font-medium">Детальніше</span>
+                        <ChevronRight className="w-4 h-4 ml-1" />
+                      </div>
                     </CardBody>
                   </Card>
                 );
@@ -454,48 +378,52 @@ const UGCDesign = () => {
               [
                 {
                   title: 'Військова форма',
-                  description: 'Спеціалізована форма для військових підрозділів з урахуванням всіх вимог',
+                  description: 'Спеціалізована форма для військових підрозділів з підвищеними захисними властивостями',
                   icon: Shield
                 },
                 {
                   title: 'Медичний одяг',
-                  description: 'Комфортний та функціональний одяг для медичного персоналу',
+                  description: 'Комфортний і функціональний одяг для медичних працівників',
                   icon: Heart
                 },
                 {
-                  title: 'Спецодяг для служб',
-                  description: 'Професійний одяг для різних служб та підрозділів',
+                  title: 'Робочий одяг',
+                  description: 'Міцний і практичний одяг для різних сфер діяльності',
                   icon: Building
                 },
                 {
-                  title: 'Захисне обладнання',
-                  description: 'Сучасне захисне спорядження для різних видів діяльності',
-                  icon: Award
+                  title: 'Корпоративний одяг',
+                  description: 'Стильний корпоративний одяг для створення єдиного іміджу компанії',
+                  icon: Users
                 },
                 {
-                  title: 'Тактичний одяг',
-                  description: 'Спеціалізований тактичний одяг для оперативних підрозділів',
-                  icon: Target
-                },
-                {
-                  title: 'Зимова форма',
-                  description: 'Утеплена форма для роботи в складних погодних умовах',
+                  title: 'Спеціалізований одяг',
+                  description: 'Одяг для особливих умов праці з підвищеними вимогами безпеки',
                   icon: Zap
+                },
+                {
+                  title: 'Аксесуари',
+                  description: 'Додаткові елементи та аксесуари для комплектації одягу',
+                  icon: Star
                 }
               ].map((service, index) => {
                 const Icon = service.icon;
+                const handleServiceClick = () => {
+                  console.log('Clicked service:', service.title);
+                };
+
                 return (
                   <Card 
                     key={index} 
-                    className="group hover:scale-105 transition-all duration-300 cursor-pointer border-none shadow-lg hover:shadow-2xl bg-white"
-                    isPressable
+                    className="hover-lift cursor-pointer"
+                    onPress={handleServiceClick}
                   >
                     <CardHeader className="flex gap-3 items-start pb-2">
-                      <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-3 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="h-6 w-6 text-white" />
+                      <div className="bg-gradient-blue p-3 rounded-xl">
+                        <Icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex flex-col flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        <h3 className="text-xl font-bold text-gray-900">
                           {service.title}
                         </h3>
                       </div>
@@ -504,15 +432,16 @@ const UGCDesign = () => {
                       <p className="text-gray-600 mb-4">
                         {service.description}
                       </p>
-                      <Button 
-                        color="primary" 
-                        variant="light" 
-                        endContent={<ChevronRight className="h-4 w-4" />}
-                        className="w-fit group-hover:bg-blue-50"
-                        size="sm"
+                      <div 
+                        className="inline-flex items-center text-primary cursor-pointer hover:text-blue-800 transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log('Clicked details for:', service.title);
+                        }}
                       >
-                        Детальніше
-                      </Button>
+                        <span className="text-sm font-medium">Детальніше</span>
+                        <ChevronRight className="w-4 h-4 ml-1" />
+                      </div>
                     </CardBody>
                   </Card>
                 );
@@ -523,239 +452,244 @@ const UGCDesign = () => {
       </section>
 
       {/* Проєкти */}
-      <section id="projects" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <section id="projects" className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
             <Chip color="warning" variant="flat" size="lg" className="mb-6">
-              <FolderOpen className="h-4 w-4 mr-2" />
+              <FolderOpen className="w-4 h-4 mr-2" />
               Наші проєкти
             </Chip>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Успішні реалізації
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                та довіра клієнтів
-              </span>
+              <span className="text-gradient-blue">та довіра клієнтів</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {/* Якщо є дані з API */}
-            {data.projects.length > 0 ? 
-              data.projects.slice(0, 2).map((project, index) => (
-                <Card 
-                  key={project.id || index} 
-                  className="group hover:scale-105 transition-all duration-300 cursor-pointer border-none shadow-lg hover:shadow-2xl bg-white"
-                  isPressable
-                >
-                  <CardHeader className="pb-0">
-                    <div className="w-full">
-                      <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-100 border border-green-200 mb-4">
-                        <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
-                        <span className="text-green-700 font-semibold text-sm">Успішний проєкт</span>
+            {data.projects.length > 0 ?
+              data.projects.slice(0, 2).map((project, index) => {
+                const handleProjectClick = () => {
+                  console.log('Clicked project:', project.client || project.name);
+                };
+
+                return (
+                  <Card 
+                    key={project.id || index} 
+                    className="hover-lift cursor-pointer"
+                    onPress={handleProjectClick}
+                  >
+                    <CardHeader className="pb-0">
+                      <div className="w-full">
+                        <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-100 border border-green-200 mb-4">
+                          <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
+                          <span className="text-green-700 font-semibold text-sm">Успішний проєкт</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                          {project.client || project.name}
+                        </h3>
+                        <p className="text-lg font-medium text-primary mb-4">
+                          {project.short_description || project.description}
+                        </p>
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                        {project.client || project.name}
-                      </h3>
-                      <p className="text-lg font-medium text-blue-600 mb-4">
-                        {project.short_description || project.description}
+                    </CardHeader>
+                    <CardBody>
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {project.detailed_description || project.description}
                       </p>
-                    </div>
-                  </CardHeader>
-                  <CardBody>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      {project.detailed_description || project.description}
-                    </p>
-                    <Button 
-                      color="primary" 
-                      variant="light" 
-                      endContent={<ExternalLink className="h-4 w-4" />}
-                      className="w-fit group-hover:bg-blue-50"
-                    >
-                      Дивитися проєкт
-                    </Button>
-                  </CardBody>
-                </Card>
-              )) :
+                      <div 
+                        className="inline-flex items-center text-primary cursor-pointer hover:text-blue-800 transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log('View project details:', project.client || project.name);
+                        }}
+                      >
+                        <span className="text-sm font-medium">Дивитися проєкт</span>
+                        <ExternalLink className="w-4 h-4 ml-1" />
+                      </div>
+                    </CardBody>
+                  </Card>
+                );
+              }) :
               // Демо-дані якщо немає даних з API
               [
                 {
                   title: 'Національна Гвардія України',
                   subtitle: 'Захист і комфорт для наших захисників',
                   description: 'Національна Гвардія України забезпечує своїх працівників якісним спецодягом, який відповідає найвищим стандартам захисту і комфорту в різних умовах служби.',
-                  badge: 'Успішний проєкт',
-                  image: '/api/placeholder/600/400'
+                  badge: 'Успішний проєкт'
                 },
                 {
                   title: 'Міністерство оборони України',
                   subtitle: 'Вітро-вологозахисний костюм для військових',
                   description: 'Міністерство оборони України замовило спеціальний вітро-вологозахисний костюм, який забезпечує надійний захист і комфорт для військових у різних погодних умовах.',
-                  badge: 'Успішний проєкт',
-                  image: '/api/placeholder/600/400'
+                  badge: 'Успішний проєкт'
                 }
-              ].map((project, index) => (
-                <Card 
-                  key={index} 
-                  className="group hover:scale-105 transition-all duration-300 cursor-pointer border-none shadow-lg hover:shadow-2xl bg-white"
-                  isPressable
-                >
-                  <CardHeader className="pb-0">
-                    <div className="w-full">
-                      <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-100 border border-green-200 mb-4">
-                        <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
-                        <span className="text-green-700 font-semibold text-sm">{project.badge}</span>
+              ].map((project, index) => {
+                const handleProjectClick = () => {
+                  console.log('Clicked project:', project.title);
+                };
+
+                return (
+                  <Card 
+                    key={index} 
+                    className="hover-lift cursor-pointer"
+                    onPress={handleProjectClick}
+                  >
+                    <CardHeader className="pb-0">
+                      <div className="w-full">
+                        <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-100 border border-green-200 mb-4">
+                          <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
+                          <span className="text-green-700 font-semibold text-sm">{project.badge}</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-lg font-medium text-primary mb-4">
+                          {project.subtitle}
+                        </p>
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-lg font-medium text-blue-600 mb-4">
-                        {project.subtitle}
+                    </CardHeader>
+                    <CardBody>
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {project.description}
                       </p>
-                    </div>
-                  </CardHeader>
-                  <CardBody>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      {project.description}
-                    </p>
-                    <Button 
-                      color="primary" 
-                      variant="light" 
-                      endContent={<ExternalLink className="h-4 w-4" />}
-                      className="w-fit group-hover:bg-blue-50"
-                    >
-                      Дивитися проєкт
-                    </Button>
-                  </CardBody>
-                </Card>
-              ))
+                      <div 
+                        className="inline-flex items-center text-primary cursor-pointer hover:text-blue-800 transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log('View project details:', project.title);
+                        }}
+                      >
+                        <span className="text-sm font-medium">Дивитися проєкт</span>
+                        <ExternalLink className="w-4 h-4 ml-1" />
+                      </div>
+                    </CardBody>
+                  </Card>
+                );
+              })
             }
           </div>
         </div>
       </section>
 
       {/* Контакти */}
-      <section id="contact" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Chip color="primary" variant="flat" size="lg" className="mb-6">
-              <Mail className="h-4 w-4 mr-2" />
+      <section id="contact" className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <Chip color="success" variant="flat" size="lg" className="mb-6">
+              <Mail className="w-4 h-4 mr-2" />
               Контакти
             </Chip>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Зв'яжіться з нами
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                вже сьогодні
-              </span>
+              <span className="text-gradient-blue">прямо зараз</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Готові обговорити ваш проєкт? Заповніть форму нижче або зв'яжіться з нами напряму.
+            <p className="text-lg md:text-xl text-gray-600 ">
+              Готові допомогти вам з будь-якими питаннями та замовленнями.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             {/* Контактна інформація */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  Контактна інформація
-                </h3>
-                <div className="space-y-4">
-                  {[
-                    { icon: Phone, label: 'Телефон', value: '+380 (44) 123-45-67' },
-                    { icon: Mail, label: 'Email', value: 'info@ugc.llc' },
-                    { icon: MapPin, label: 'Адреса', value: 'м. Київ, вул. Хрещатик, 1' }
-                  ].map((contact, index) => {
-                    const Icon = contact.icon;
-                    return (
-                      <div key={index} className="flex items-start space-x-4">
-                        <div className="bg-blue-100 p-3 rounded-xl">
-                          <Icon className="h-5 w-5 text-blue-600" />
-                        </div>
-                        <div>
-                          <div className="font-semibold text-gray-900">{contact.label}</div>
-                          <div className="text-gray-600">{contact.value}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold mb-6">Наші контакти</h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="bg-gradient-blue p-3 rounded-full">
+                    <Phone className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">Телефон</p>
+                    <p className="text-gray-600">+38 (067) 123-45-67</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-2xl border border-gray-200">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                  Режим роботи
-                </h4>
-                <div className="space-y-2 text-gray-600">
-                  <div className="flex justify-between">
-                    <span>Пн-Пт:</span>
-                    <span>9:00 - 18:00</span>
+                
+                <div className="flex items-center gap-4">
+                  <div className="bg-gradient-blue p-3 rounded-full">
+                    <Mail className="w-6 h-6 text-white" />
                   </div>
-                  <div className="flex justify-between">
-                    <span>Сб:</span>
-                    <span>10:00 - 16:00</span>
+                  <div>
+                    <p className="font-semibold">Email</p>
+                    <p className="text-gray-600">info@ugc.ua</p>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Нд:</span>
-                    <span>Вихідний</span>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <div className="bg-gradient-blue p-3 rounded-full">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">Адреса</p>
+                    <p className="text-gray-600">м. Київ, вул. Промислова, 15</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Форма зв'язку */}
-            <Card className="bg-white border-none shadow-lg">
-              <CardHeader>
-                <h3 className="text-2xl font-bold text-gray-900">
-                  Надіслати повідомлення
-                </h3>
-              </CardHeader>
-              <CardBody>
-                <form onSubmit={handleFormSubmit} className="space-y-6">
+            {/* Форма зворотного зв'язку */}
+            <Card className="p-6">
+              <CardBody className="p-0">
+                <form onSubmit={handleFormSubmit} className="space-y-4">
                   <Input
-                    type="text"
-                    label="Ваше ім'я"
-                    placeholder="Введіть ваше ім'я"
+                    label="Ім'я"
+                    placeholder="Ваше ім'я"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     required
-                    size="lg"
+                    className="form-input"
                   />
+                  
                   <Input
-                    type="email"
                     label="Email"
-                    placeholder="Введіть ваш email"
+                    type="email"
+                    placeholder="your@email.com"
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                     required
-                    size="lg"
+                    className="form-input"
                   />
+                  
                   <Input
-                    type="tel"
                     label="Телефон"
-                    placeholder="Введіть ваш телефон"
+                    type="tel"
+                    placeholder="+38 (067) 123-45-67"
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    size="lg"
+                    className="form-input"
                   />
+                  
                   <Textarea
                     label="Повідомлення"
-                    placeholder="Введіть ваше повідомлення"
+                    placeholder="Розкажіть про ваш проєкт..."
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    minRows={4}
                     required
-                    size="lg"
+                    className="form-input"
+                    rows={4}
                   />
-                  <Button 
+                  
+                  <Button
                     type="submit"
-                    color="primary" 
+                    color="primary"
                     size="lg"
-                    className="w-full font-semibold"
-                    isLoading={isSubmitting}
-                    endContent={!isSubmitting && <Send className="h-4 w-4" />}
+                    className="btn-primary w-full"
+                    disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Надсилається...' : 'Надіслати повідомлення'}
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-pulse mr-2">⏳</div>
+                        Відправляємо...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Відправити повідомлення
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardBody>
@@ -765,110 +699,46 @@ const UGCDesign = () => {
       </section>
 
       {/* Футер */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Логотип та опис */}
-            <div className="md:col-span-2">
-              <div className="flex items-center mb-6">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-3 rounded-xl mr-4">
-                  <Shield className="h-8 w-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold">UGC</h3>
-                  <p className="text-gray-400 text-sm">Ukrainian Guard Company</p>
-                </div>
-              </div>
-              <p className="text-gray-400 mb-6 max-w-md">
-                Ми створюємо якісний та надійний спецодяг, який забезпечує комфорт і безпеку 
-                в будь-яких умовах для професіоналів у різних галузях.
+      <footer className="bg-gray-800 text-white py-8">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+              <h3 className="text-xl font-bold mb-4">UGC</h3>
+              <p className="text-gray-400">
+                Професійний одяг для кожної сфери діяльності
               </p>
-              <div className="flex space-x-4">
-                <Button isIconOnly variant="light" className="text-gray-400 hover:text-white">
-                  <Globe className="h-5 w-5" />
-                </Button>
-                <Button isIconOnly variant="light" className="text-gray-400 hover:text-white">
-                  <Mail className="h-5 w-5" />
-                </Button>
-                <Button isIconOnly variant="light" className="text-gray-400 hover:text-white">
-                  <Phone className="h-5 w-5" />
-                </Button>
-              </div>
             </div>
-
-            {/* Швидкі посилання */}
+            
             <div>
               <h4 className="text-lg font-semibold mb-4">Швидкі посилання</h4>
-              <ul className="space-y-2">
+              <div className="space-y-2">
                 {navigation.map((item) => (
-                  <li key={item.id}>
-                    <Button
-                      variant="light"
-                      className="text-gray-400 hover:text-white p-0 h-auto justify-start"
-                      onClick={() => scrollToSection(item.id)}
-                    >
-                      {item.label}
-                    </Button>
-                  </li>
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="block text-gray-400 hover:text-white transition-colors"
+                  >
+                    {item.label}
+                  </button>
                 ))}
-              </ul>
+              </div>
             </div>
-
-            {/* Контакти */}
+            
             <div>
               <h4 className="text-lg font-semibold mb-4">Контакти</h4>
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <MapPin className="h-5 w-5 text-gray-400 mt-0.5" />
-                  <div>
-                    <p className="text-gray-400">м. Київ, вул. Хрещатик, 1</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-5 w-5 text-gray-400" />
-                  <p className="text-gray-400">+380 (44) 123-45-67</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                  <p className="text-gray-400">info@ugc.llc</p>
-                </div>
+              <div className="space-y-2 text-gray-400">
+                <p>+38 (067) 123-45-67</p>
+                <p>info@ugc.ua</p>
+                <p>м. Київ, вул. Промислова, 15</p>
               </div>
             </div>
           </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-            <p className="text-gray-400">
-              © 2024 UGC - Ukrainian Guard Company. Всі права захищені.
-            </p>
+          
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 UGC. Всі права захищені.</p>
           </div>
         </div>
       </footer>
-
-      {/* Модальне вікно успіху */}
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-6 w-6 text-success" />
-                  <span>Повідомлення надіслано!</span>
-                </div>
-              </ModalHeader>
-              <ModalBody>
-                <p className="text-gray-600">
-                  Дякуємо за ваше повідомлення! Ми зв'яжемося з вами найближчим часом.
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" onPress={onClose}>
-                  Зрозуміло
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
     </div>
   );
 };
