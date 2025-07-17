@@ -9071,3 +9071,124 @@ INFO 2025-07-17 09:21:08,355 views 12936 2232 Cache HIT для api_aboutpage_list
 INFO 2025-07-17 09:21:08,356 basehttp 12936 2232 "GET /api/v1/about/ HTTP/1.1" 200 52
 WARNING 2025-07-17 09:21:09,440 log 12936 2232 Not Found: /favicon.ico
 WARNING 2025-07-17 09:21:09,441 basehttp 12936 2232 "GET /favicon.ico HTTP/1.1" 404 3005
+INFO 2025-07-17 09:31:51,732 views 12936 8084 Cache HIT для api_project_list
+INFO 2025-07-17 09:31:51,733 views 12936 776 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:31:51,738 basehttp 12936 8084 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,745 basehttp 12936 776 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,857 views 12936 14152 Cache SET для api_homepage_list
+INFO 2025-07-17 09:31:51,862 basehttp 12936 14152 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,868 views 12936 360 Cache SET для api_service_list
+INFO 2025-07-17 09:31:51,871 basehttp 12936 360 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,894 views 12936 360 Cache HIT для api_office_list
+INFO 2025-07-17 09:31:51,900 basehttp 12936 360 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,915 views 12936 360 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:31:51,916 views 12936 14152 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:31:51,919 basehttp 12936 360 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,922 views 12936 8084 Cache HIT для api_service_list
+INFO 2025-07-17 09:31:51,923 basehttp 12936 14152 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,934 basehttp 12936 8084 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,949 views 12936 8084 Cache HIT для api_project_list
+INFO 2025-07-17 09:31:51,951 basehttp 12936 8084 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:51,952 views 12936 14152 Cache HIT для api_office_list
+INFO 2025-07-17 09:31:51,955 basehttp 12936 14152 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:52,011 views 12936 776 Cache SET для api_jobposition_list
+INFO 2025-07-17 09:31:52,013 basehttp 12936 776 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:31:52,021 views 12936 14152 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:31:52,022 basehttp 12936 14152 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,502 views 12936 14152 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:32:00,515 basehttp 12936 14152 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,518 views 12936 776 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:32:00,523 views 12936 360 Cache HIT для api_project_list
+INFO 2025-07-17 09:32:00,524 views 12936 8084 Cache HIT для api_service_list
+INFO 2025-07-17 09:32:00,534 basehttp 12936 360 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,534 basehttp 12936 776 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,538 views 12936 14152 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:32:00,542 basehttp 12936 8084 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,543 views 12936 7916 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:32:00,548 basehttp 12936 14152 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,557 basehttp 12936 7916 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,560 views 12936 776 Cache HIT для api_project_list
+INFO 2025-07-17 09:32:00,560 views 12936 8084 Cache HIT для api_service_list
+INFO 2025-07-17 09:32:00,561 views 12936 360 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:32:00,568 basehttp 12936 776 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,571 views 12936 3212 Cache HIT для api_office_list
+INFO 2025-07-17 09:32:00,573 views 12936 7916 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:32:00,575 basehttp 12936 8084 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,580 basehttp 12936 360 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,582 basehttp 12936 3212 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,585 basehttp 12936 7916 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:32:00,601 views 12936 7916 Cache HIT для api_office_list
+INFO 2025-07-17 09:32:00,605 basehttp 12936 7916 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,565 views 12936 7916 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:33:34,565 views 12936 3212 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:33:34,571 views 12936 360 Cache HIT для api_service_list
+INFO 2025-07-17 09:33:34,576 basehttp 12936 7916 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,577 basehttp 12936 3212 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,583 views 12936 8084 Cache HIT для api_project_list
+INFO 2025-07-17 09:33:34,583 basehttp 12936 360 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,585 views 12936 14152 Cache HIT для api_office_list
+INFO 2025-07-17 09:33:34,585 views 12936 776 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:33:34,588 basehttp 12936 8084 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,592 basehttp 12936 14152 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,597 basehttp 12936 776 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,629 views 12936 14152 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:33:34,638 views 12936 776 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:33:34,641 basehttp 12936 14152 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,646 views 12936 360 Cache HIT для api_project_list
+INFO 2025-07-17 09:33:34,648 views 12936 8084 Cache HIT для api_service_list
+INFO 2025-07-17 09:33:34,649 basehttp 12936 776 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,650 views 12936 3212 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:33:34,650 views 12936 7916 Cache HIT для api_office_list
+INFO 2025-07-17 09:33:34,652 basehttp 12936 360 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,653 basehttp 12936 8084 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,655 basehttp 12936 3212 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:34,657 basehttp 12936 7916 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,356 views 12936 3212 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:33:37,357 views 12936 7916 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:33:37,358 basehttp 12936 3212 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,361 basehttp 12936 7916 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,374 views 12936 7916 Cache HIT для api_service_list
+INFO 2025-07-17 09:33:37,375 basehttp 12936 7916 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,389 views 12936 8084 Cache HIT для api_office_list
+INFO 2025-07-17 09:33:37,390 views 12936 7916 Cache HIT для api_project_list
+INFO 2025-07-17 09:33:37,390 views 12936 3212 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:33:37,392 basehttp 12936 8084 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,393 basehttp 12936 7916 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,396 basehttp 12936 3212 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,406 views 12936 3212 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:33:37,408 views 12936 7916 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:33:37,410 basehttp 12936 3212 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,414 basehttp 12936 7916 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,415 views 12936 8084 Cache HIT для api_service_list
+INFO 2025-07-17 09:33:37,418 views 12936 360 Cache HIT для api_project_list
+INFO 2025-07-17 09:33:37,420 basehttp 12936 8084 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:37,421 basehttp 12936 360 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:38,119 views 12936 360 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:33:38,121 basehttp 12936 360 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:38,137 views 12936 360 Cache HIT для api_office_list
+INFO 2025-07-17 09:33:38,139 basehttp 12936 360 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,439 views 12936 360 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:33:48,443 basehttp 12936 360 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,447 views 12936 8084 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:33:48,452 views 12936 7916 Cache HIT для api_service_list
+INFO 2025-07-17 09:33:48,453 basehttp 12936 8084 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,454 views 12936 776 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:33:48,456 views 12936 3212 Cache HIT для api_project_list
+INFO 2025-07-17 09:33:48,457 basehttp 12936 7916 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,458 views 12936 360 Cache HIT для api_office_list
+INFO 2025-07-17 09:33:48,460 basehttp 12936 776 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,461 basehttp 12936 3212 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,463 basehttp 12936 360 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,487 views 12936 3212 Cache HIT для api_aboutpage_list
+INFO 2025-07-17 09:33:48,488 views 12936 360 Cache HIT для api_homepage_list
+INFO 2025-07-17 09:33:48,492 basehttp 12936 3212 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,496 basehttp 12936 360 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,496 views 12936 8084 Cache HIT для api_jobposition_list
+INFO 2025-07-17 09:33:48,498 views 12936 14152 Cache HIT для api_office_list
+INFO 2025-07-17 09:33:48,499 views 12936 776 Cache HIT для api_service_list
+INFO 2025-07-17 09:33:48,502 basehttp 12936 14152 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,502 basehttp 12936 8084 "GET /api/v1/jobs/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,503 views 12936 7916 Cache HIT для api_project_list
+INFO 2025-07-17 09:33:48,505 basehttp 12936 776 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-17 09:33:48,507 basehttp 12936 7916 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 10:07:37,344 autoreload 6048 11692 Watching for file changes with StatReloader
