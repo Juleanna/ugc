@@ -1,4 +1,4 @@
-# backend/apps/api/views.py - ИСПРАВЛЕННАЯ ВЕРСИЯ
+# backend/apps/api/views.py - ПОВНІСТЮ ВИПРАВЛЕНА ВЕРСІЯ
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -64,7 +64,7 @@ class BaseViewSetWithCache(SafeBaseViewSetWithCache, viewsets.ReadOnlyModelViewS
 
 class HomePageViewSet(BaseViewSetWithCache):
     """API для головної сторінки"""
-    queryset = HomePage.objects.filter(is_active=True)
+    queryset = HomePage.objects.filter(is_active=True).order_by('-id')
     serializer_class = HomePageSerializer
     cache_timeout = 60 * 15  # 15 хвилин
     
@@ -88,7 +88,7 @@ class HomePageViewSet(BaseViewSetWithCache):
 
 class AboutPageViewSet(BaseViewSetWithCache):
     """API для сторінки Про нас"""
-    queryset = AboutPage.objects.filter(is_active=True)
+    queryset = AboutPage.objects.filter(is_active=True).order_by('-id')
     serializer_class = AboutPageSerializer
     cache_timeout = 60 * 30  # 30 хвилин
     
@@ -112,11 +112,13 @@ class AboutPageViewSet(BaseViewSetWithCache):
 
 class ServiceViewSet(BaseViewSetWithCache):
     """API для послуг"""
-    queryset = Service.objects.filter(is_active=True).order_by('order')
+    queryset = Service.objects.filter(is_active=True).order_by('order', 'name')
     serializer_class = ServiceListSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['is_featured']
     search_fields = ['name', 'short_description']
+    ordering_fields = ['name', 'order', 'created_at']
+    ordering = ['order', 'name']
     cache_timeout = 60 * 20  # 20 хвилин
     
     def get_serializer_class(self):
@@ -154,9 +156,10 @@ class ServiceViewSet(BaseViewSetWithCache):
 
 class ProjectCategoryViewSet(BaseViewSetWithCache):
     """API для категорій проектів"""
-    queryset = ProjectCategory.objects.filter(is_active=True).order_by('order')
+    queryset = ProjectCategory.objects.filter(is_active=True).order_by('order', 'name')
     serializer_class = ProjectCategorySerializer
     cache_timeout = 60 * 60  # 1 година
+    ordering = ['order', 'name']
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
@@ -169,11 +172,13 @@ class ProjectCategoryViewSet(BaseViewSetWithCache):
 
 class ProjectViewSet(BaseViewSetWithCache):
     """API для проектів"""
-    queryset = Project.objects.filter(is_active=True).order_by('-created_at')
+    queryset = Project.objects.filter(is_active=True).order_by('-created_at', 'title')
     serializer_class = ProjectListSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['category', 'is_featured']
     search_fields = ['title', 'short_description']
+    ordering_fields = ['title', 'created_at', 'project_date']
+    ordering = ['-created_at', 'title']
     cache_timeout = 60 * 25  # 25 хвилин
     
     def get_serializer_class(self):
@@ -213,9 +218,16 @@ class JobPositionViewSet(BaseViewSetWithCache):
     """API для вакансій"""
     queryset = JobPosition.objects.filter(is_active=True).order_by('-is_urgent', '-created_at')
     serializer_class = JobPositionListSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['is_urgent', 'employment_type', 'department']
-    search_fields = ['title', 'short_description', 'location']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    
+    # ВИПРАВЛЕНО: використовуємо тільки існуючі поля з моделі JobPosition
+    filterset_fields = ['is_urgent', 'employment_type', 'salary_currency', 'location']
+    
+    # ВИПРАВЛЕНО: використовуємо правильні поля для пошуку
+    search_fields = ['title', 'description', 'location', 'experience_required']
+    
+    ordering_fields = ['title', 'created_at', 'is_urgent', 'salary_from']
+    ordering = ['-is_urgent', '-created_at']
     cache_timeout = 60 * 10  # 10 хвилин (вакансії змінюються частіше)
     
     def get_serializer_class(self):
@@ -252,7 +264,7 @@ class JobPositionViewSet(BaseViewSetWithCache):
 
 class JobApplicationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """API для заявок на роботу"""
-    queryset = JobApplication.objects.all()
+    queryset = JobApplication.objects.all().order_by('-created_at')
     serializer_class = JobApplicationSerializer
 
     def create(self, request, *args, **kwargs):
@@ -282,9 +294,10 @@ class JobApplicationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 class OfficeViewSet(BaseViewSetWithCache):
     """API для офісів"""
-    queryset = Office.objects.filter(is_active=True).order_by('order')
+    queryset = Office.objects.filter(is_active=True).order_by('order', 'name')
     serializer_class = OfficeSerializer
     cache_timeout = 60 * 60  # 1 година
+    ordering = ['order', 'name']
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
@@ -297,7 +310,7 @@ class OfficeViewSet(BaseViewSetWithCache):
 
 class ContactInquiryViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """API для звернень"""
-    queryset = ContactInquiry.objects.all()
+    queryset = ContactInquiry.objects.all().order_by('-created_at')
     serializer_class = ContactInquirySerializer
 
     def create(self, request, *args, **kwargs):
@@ -316,7 +329,7 @@ class ContactInquiryViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 class PartnershipInfoViewSet(BaseViewSetWithCache):
     """API для інформації про партнерство"""
-    queryset = PartnershipInfo.objects.filter(is_active=True)
+    queryset = PartnershipInfo.objects.filter(is_active=True).order_by('-id')
     serializer_class = PartnershipInfoSerializer
     cache_timeout = 60 * 60  # 1 година
     
@@ -331,7 +344,7 @@ class PartnershipInfoViewSet(BaseViewSetWithCache):
 
 class PartnerInquiryViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """API для запитів партнерів"""
-    queryset = PartnerInquiry.objects.all()
+    queryset = PartnerInquiry.objects.all().order_by('-created_at')
     serializer_class = PartnerInquirySerializer
 
     def create(self, request, *args, **kwargs):
@@ -353,6 +366,7 @@ class WorkplacePhotoViewSet(BaseViewSetWithCache):
     queryset = WorkplacePhoto.objects.filter(is_active=True).order_by('order')
     serializer_class = WorkplacePhotoSerializer
     cache_timeout = 60 * 30  # 30 хвилин
+    ordering = ['order']
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
@@ -437,3 +451,21 @@ class CacheManager:
         except Exception as e:
             logger.error(f"Помилка розігріву кешу: {str(e)}")
 
+
+# Додаткові API endpoints для управління кешем (для розробки)
+@action(detail=False, methods=['post'])
+def clear_cache(self, request):
+    """Ендпоінт для очищення кешу (тільки для розробки)"""
+    if settings.DEBUG:
+        CacheManager.clear_all_api_cache()
+        return Response({'message': 'Кеш очищено'})
+    return Response({'error': 'Не дозволено'}, status=status.HTTP_403_FORBIDDEN)
+
+
+@action(detail=False, methods=['post'])
+def warm_cache(self, request):
+    """Ендпоінт для розігріву кешу (тільки для розробки)"""
+    if settings.DEBUG:
+        CacheManager.warm_up_cache()
+        return Response({'message': 'Кеш розігрітий'})
+    return Response({'error': 'Не дозволено'}, status=status.HTTP_403_FORBIDDEN)

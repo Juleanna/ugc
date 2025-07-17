@@ -750,21 +750,20 @@ CACHES = {
         'LOCATION': 'redis://127.0.0.1:6379/1',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            # Используем msgpack - более надежный
-            'SERIALIZER': 'django_redis.serializers.msgpack.MSGPackSerializer',
-            # Или обратно к JSON с обработкой ошибок
-            # 'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
+            # ТИМЧАСОВО: використовуємо JSON серіалізатор для сумісності
+            'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
+            # Або використайте pickle (більш надійний для Django об'єктів)
+            # 'SERIALIZER': 'django_redis.serializers.pickle.PickleSerializer',
             'CONNECTION_POOL_KWARGS': {
                 'max_connections': 50,
                 'retry_on_timeout': True,
             },
-            'IGNORE_EXCEPTIONS': True,  # ВАЖНО! Игнорировать ошибки кеша
+            'IGNORE_EXCEPTIONS': True,  # ВАЖЛИВО! Ігнорувати помилки кешу
         },
         'KEY_PREFIX': 'ugc_api',
         'TIMEOUT': 300,
     }
 }
-
 # Настройки для кеширования переводов
 TRANSLATION_CACHE_SETTINGS = {
     'STATIC_TIMEOUT': 60 * 60,      # 1 час для статических переводов
@@ -774,3 +773,6 @@ TRANSLATION_CACHE_SETTINGS = {
     'MAX_CACHE_SIZE': 10000,        # Максимальный размер кеша
     'ENABLE_COMPRESSION': True,     # Сжатие больших переводов
 }
+
+# Додаткові налаштування для стабільності
+CACHES['default']['OPTIONS']['COMPRESSOR'] = 'django_redis.compressors.zlib.ZlibCompressor'

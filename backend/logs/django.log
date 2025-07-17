@@ -8823,3 +8823,193 @@ WARNING 2025-07-16 16:24:33,139 basehttp 11836 13388 "GET /v1/ HTTP/1.1" 404 298
 INFO 2025-07-16 16:24:41,564 basehttp 11836 13388 "GET /api/v1/ HTTP/1.1" 200 713
 INFO 2025-07-16 16:24:51,586 views 11836 13388 Cache SET для api_aboutpage_list
 INFO 2025-07-16 16:24:51,588 basehttp 11836 13388 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:38,439 autoreload 5428 10096 Watching for file changes with StatReloader
+INFO 2025-07-16 16:32:45,903 views 5428 5944 Cache SET для api_homepage_list
+ERROR 2025-07-16 16:32:45,911 views 5428 11476 Помилка кешування для api_jobposition_list: 'Meta.fields' must not contain non-model field names: department
+INFO 2025-07-16 16:32:45,931 basehttp 5428 5944 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:45,994 translations_views 5428 5944 Завантажено 254 статичних перекладів
+INFO 2025-07-16 16:32:46,053 translations_views 5428 5944 Завантажено 203 po перекладів
+INFO 2025-07-16 16:32:46,081 views 5428 2284 Cache SET для api_aboutpage_list
+INFO 2025-07-16 16:32:46,103 views 5428 2844 Cache SET для api_project_list
+INFO 2025-07-16 16:32:46,137 basehttp 5428 2284 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,146 basehttp 5428 2844 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,164 views 5428 2284 Cache HIT для api_homepage_list
+INFO 2025-07-16 16:32:46,164 views 5428 12232 Cache SET для api_service_list
+INFO 2025-07-16 16:32:46,241 views 5428 2844 Cache HIT для api_aboutpage_list
+INFO 2025-07-16 16:32:46,246 basehttp 5428 2284 "GET /api/v1/homepage/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,256 views 5428 4012 Cache SET для api_office_list
+INFO 2025-07-16 16:32:46,263 basehttp 5428 12232 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,303 basehttp 5428 2844 "GET /api/v1/about/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,328 views 5428 2284 Cache HIT для api_project_list
+INFO 2025-07-16 16:32:46,344 basehttp 5428 4012 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,387 views 5428 12232 Cache HIT для api_service_list
+INFO 2025-07-16 16:32:46,414 basehttp 5428 2284 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,426 basehttp 5428 12232 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,433 views 5428 4012 Cache HIT для api_office_list
+INFO 2025-07-16 16:32:46,485 basehttp 5428 4012 "GET /api/v1/offices/ HTTP/1.1" 200 52
+INFO 2025-07-16 16:32:46,599 translations_views 5428 5944 Завантажено 0 динамічних перекладів
+INFO 2025-07-16 16:32:46,611 translations_views 5428 5944 Завантажено 0 динамічних перекладів
+ERROR 2025-07-16 16:32:46,612 log 5428 11476 Internal Server Error: /api/v1/jobs/
+Traceback (most recent call last):
+  File "D:\ugc\backend\apps\api\views.py", line 50, in get_cached_response
+    response = fallback_func(*args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\generics.py", line 154, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 66, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 18, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 49, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+    ...<2 lines>...
+            fields = filterset_fields
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 82, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 371, in get_filters
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: 'Meta.fields' must not contain non-model field names: department
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 230, in list
+    return self.get_cached_response(
+           ~~~~~~~~~~~~~~~~~~~~~~~~^
+        cache_key,
+        ^^^^^^^^^^
+        super().list,
+        ^^^^^^^^^^^^^
+        request, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\ugc\backend\apps\api\views.py", line 62, in get_cached_response
+    return fallback_func(*args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\generics.py", line 154, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 66, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 18, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 49, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+    ...<2 lines>...
+            fields = filterset_fields
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 82, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 371, in get_filters
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: 'Meta.fields' must not contain non-model field names: department
+INFO 2025-07-16 16:32:46,621 translations_views 5428 5944 Успішно повернуто 254 перекладів для uk
+ERROR 2025-07-16 16:32:46,643 basehttp 5428 11476 "GET /api/v1/jobs/ HTTP/1.1" 500 194351
+INFO 2025-07-16 16:32:46,646 basehttp 5428 5944 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+ERROR 2025-07-16 16:32:46,671 views 5428 11476 Помилка кешування для api_jobposition_list: 'Meta.fields' must not contain non-model field names: department
+ERROR 2025-07-16 16:32:47,234 log 5428 11476 Internal Server Error: /api/v1/jobs/
+Traceback (most recent call last):
+  File "D:\ugc\backend\apps\api\views.py", line 50, in get_cached_response
+    response = fallback_func(*args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\generics.py", line 154, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 66, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 18, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 49, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+    ...<2 lines>...
+            fields = filterset_fields
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 82, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 371, in get_filters
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: 'Meta.fields' must not contain non-model field names: department
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 230, in list
+    return self.get_cached_response(
+           ~~~~~~~~~~~~~~~~~~~~~~~~^
+        cache_key,
+        ^^^^^^^^^^
+        super().list,
+        ^^^^^^^^^^^^^
+        request, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\ugc\backend\apps\api\views.py", line 62, in get_cached_response
+    return fallback_func(*args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\generics.py", line 154, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 66, in filter_queryset
+    filterset = self.get_filterset(request, queryset, view)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 18, in get_filterset
+    filterset_class = self.get_filterset_class(view, queryset)
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\rest_framework\backends.py", line 49, in get_filterset_class
+    class AutoFilterSet(self.filterset_base):
+    ...<2 lines>...
+            fields = filterset_fields
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 82, in __new__
+    new_class.base_filters = new_class.get_filters()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_filters\filterset.py", line 371, in get_filters
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: 'Meta.fields' must not contain non-model field names: department
+ERROR 2025-07-16 16:32:47,295 basehttp 5428 11476 "GET /api/v1/jobs/ HTTP/1.1" 500 194351
+INFO 2025-07-17 09:10:52,764 autoreload 12936 12016 Watching for file changes with StatReloader
