@@ -9517,3 +9517,7 @@ INFO 2025-07-17 17:55:49,876 translations_views 6048 14776 Завантажено 0 динаміч
 INFO 2025-07-17 17:55:49,877 translations_views 6048 14776 Завантажено 0 динамічних перекладів
 INFO 2025-07-17 17:55:51,914 translations_views 6048 14776 Успішно повернуто 254 перекладів для uk
 INFO 2025-07-17 17:55:51,916 basehttp 6048 14776 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-17 17:55:56,116 views 6048 14948 Cache SET для api_project_list
+INFO 2025-07-17 17:55:56,117 views 6048 8960 Cache SET для api_service_list
+INFO 2025-07-17 17:55:56,121 basehttp 6048 14948 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-17 17:55:56,124 basehttp 6048 8960 "GET /api/v1/services/ HTTP/1.1" 200 52
