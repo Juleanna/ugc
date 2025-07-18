@@ -9788,3 +9788,19 @@ INFO 2025-07-18 17:00:38,531 basehttp 560 12620 "GET /api/v1/translations/ HTTP/
 INFO 2025-07-18 17:00:38,532 views 560 15480 Cache HIT для api_service_list
 INFO 2025-07-18 17:00:38,537 basehttp 560 9364 "GET /api/v1/projects/ HTTP/1.1" 200 52
 INFO 2025-07-18 17:00:38,541 basehttp 560 15480 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:46,652 views 560 11936 Cache HIT для api_project_list
+INFO 2025-07-18 17:07:46,657 basehttp 560 11936 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:46,666 views 560 7820 Cache HIT для api_service_list
+INFO 2025-07-18 17:07:46,668 basehttp 560 7820 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:46,677 views 560 11936 Cache HIT для api_service_list
+INFO 2025-07-18 17:07:46,678 views 560 14040 Cache HIT для api_project_list
+INFO 2025-07-18 17:07:46,679 basehttp 560 11936 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:46,681 basehttp 560 14040 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:54,246 views 560 14040 Cache HIT для api_service_list
+INFO 2025-07-18 17:07:54,249 views 560 11936 Cache HIT для api_project_list
+INFO 2025-07-18 17:07:54,320 basehttp 560 14040 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:54,347 basehttp 560 11936 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:54,411 views 560 14040 Cache HIT для api_service_list
+INFO 2025-07-18 17:07:54,413 views 560 11936 Cache HIT для api_project_list
+INFO 2025-07-18 17:07:54,418 basehttp 560 14040 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:07:54,447 basehttp 560 11936 "GET /api/v1/projects/ HTTP/1.1" 200 52
