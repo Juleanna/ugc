@@ -1,8 +1,17 @@
 import React from 'react';
-import UGCDesign from './components/UGCDesign';
+import InteractiveUGCDesign from './components/interactive/InteractiveUGCDesign';
+// import UGCDesign from './components/UGCDesign'; // Старий статичний компонент
 
 function App() {
-  return <UGCDesign />;
+  return (
+    <div className="App">
+      {/* Використовуємо новий інтерактивний компонент */}
+      <InteractiveUGCDesign />
+      
+      {/* Якщо хочете повернутися до статичного дизайну, розкоментуйте нижче */}
+      {/* <UGCDesign /> */}
+    </div>
+  );
 }
 
 export default App;
