@@ -25,10 +25,13 @@ const InteractiveBackground = () => {
         this.y = Math.random() * canvas.height;
         this.vx = (Math.random() - 0.5) * 0.5;
         this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = Math.random() * 2 + 1;
-        this.opacity = Math.random() * 0.5 + 0.2;
+        this.size = Math.random() * 15 + 10; // Розмір для іконок
+        this.opacity = Math.random() * 0.4 + 0.1;
         this.targetX = this.x;
         this.targetY = this.y;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+        this.type = Math.random() > 0.5 ? 'scissors' : 'sewing-machine'; // Тип іконки
       }
 
       update() {
@@ -40,6 +43,9 @@ const InteractiveBackground = () => {
         this.x += this.vx;
         this.y += this.vy;
 
+        // Обертання
+        this.rotation += this.rotationSpeed;
+
         // Відскок від меж
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
@@ -49,11 +55,97 @@ const InteractiveBackground = () => {
         this.y = Math.max(0, Math.min(canvas.height, this.y));
       }
 
-      draw() {
+      drawScissors() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.scale(this.size / 20, this.size / 20);
+        
+        ctx.fillStyle = `rgba(59, 130, 246, ${this.opacity})`;
+        ctx.strokeStyle = `rgba(59, 130, 246, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
+
+        // Малюємо ножиці
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        
+        // Ліве лезо
+        ctx.moveTo(-8, -5);
+        ctx.lineTo(-15, -12);
+        ctx.lineTo(-12, -15);
+        ctx.lineTo(-5, -8);
+        ctx.closePath();
+        
+        // Праве лезо
+        ctx.moveTo(8, -5);
+        ctx.lineTo(15, -12);
+        ctx.lineTo(12, -15);
+        ctx.lineTo(5, -8);
+        ctx.closePath();
+        
+        ctx.fill();
+        
+        // Центральна частина (шарнір)
+        ctx.beginPath();
+        ctx.arc(0, 0, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Ручки
+        ctx.beginPath();
+        ctx.arc(-3, 8, 4, 0, Math.PI * 2);
+        ctx.arc(3, 8, 4, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        ctx.restore();
+      }
+
+      drawSewingMachine() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.scale(this.size / 20, this.size / 20);
+        
+        ctx.fillStyle = `rgba(147, 51, 234, ${this.opacity})`;
+        ctx.strokeStyle = `rgba(147, 51, 234, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
+
+        // Основа швейної машини
+        ctx.beginPath();
+        ctx.roundRect(-12, -5, 24, 15, 3);
+        ctx.fill();
+        
+        // Верхня частина (голова)
+        ctx.beginPath();
+        ctx.roundRect(-8, -15, 16, 12, 3);
+        ctx.fill();
+        
+        // Ніжка
+        ctx.beginPath();
+        ctx.rect(-2, 10, 4, 8);
+        ctx.fill();
+        
+        // Шпулька
+        ctx.beginPath();
+        ctx.arc(0, -8, 2, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(59, 130, 246, ${this.opacity})`;
         ctx.fill();
+        
+        // Нитка
+        ctx.beginPath();
+        ctx.moveTo(0, -6);
+        ctx.lineTo(0, 5);
+        ctx.strokeStyle = `rgba(34, 197, 94, ${this.opacity})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        
+        ctx.restore();
+      }
+
+      draw() {
+        if (this.type === 'scissors') {
+          this.drawScissors();
+        } else {
+          this.drawSewingMachine();
+        }
       }
 
       // Реакція на курсор миші
@@ -66,10 +158,14 @@ const InteractiveBackground = () => {
           const force = (150 - distance) / 150;
           this.targetX = this.x + dx * force * 0.03;
           this.targetY = this.y + dy * force * 0.03;
+          // Прискорюємо обертання при наближенні миші
+          this.rotationSpeed *= 1.5;
         } else {
           // Повертаємось до випадкового руху
           this.targetX = this.x + (Math.random() - 0.5) * 2;
           this.targetY = this.y + (Math.random() - 0.5) * 2;
+          // Нормалізуємо швидкість обертання
+          this.rotationSpeed = (Math.random() - 0.5) * 0.02;
         }
       }
     }
@@ -77,7 +173,7 @@ const InteractiveBackground = () => {
     // Створюємо частинки
     const createParticles = () => {
       particlesRef.current = [];
-      const particleCount = Math.min(150, Math.floor((canvas.width * canvas.height) / 15000));
+      const particleCount = Math.min(80, Math.floor((canvas.width * canvas.height) / 20000));
       
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push(new Particle());
@@ -101,7 +197,7 @@ const InteractiveBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 120) {
-            const opacity = (120 - distance) / 120 * 0.2;
+            const opacity = (120 - distance) / 120 * 0.15;
             ctx.beginPath();
             ctx.moveTo(particlesRef.current[i].x, particlesRef.current[i].y);
             ctx.lineTo(particlesRef.current[j].x, particlesRef.current[j].y);
