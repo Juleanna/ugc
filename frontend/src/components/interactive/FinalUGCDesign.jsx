@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-// Імпорт нового реалістичного фону
-import MeshGradientBackground from './MeshGradientBackground';
+// Імпорт об'єднаного фонового компоненту
+import UnifiedBackground from './UnifiedBackground';
 import ModernNavigation from './ModernNavigation';
 import EnhancedHeroSection from './EnhancedHeroSection';
 
@@ -71,148 +71,130 @@ const FinalUGCDesign = () => {
       const currentScroll = window.scrollY;
       setScrollProgress((currentScroll / totalScroll) * 100);
 
-      // Визначаємо активну секцію
+      // Визначення активної секції
       const sections = ['home', 'about', 'services', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+      const sectionElements = sections.map(id => document.getElementById(id));
+      
+      let current = 'home';
+      sectionElements.forEach((section, index) => {
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            current = sections[index];
           }
         }
-      }
+      });
+      
+      setActiveSection(current);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleFormSubmit = async (e) => {
+  // Функція прокрутки до секції
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offsetTop = element.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Обробка форми
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
       const response = await fetch(`${API_BASE_URL}/contact/`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
       
       if (response.ok) {
-        showNotification('success', 'Дякуємо! Ваше повідомлення відправлено.');
         setFormData({ name: '', email: '', phone: '', message: '' });
+        alert('Повідомлення надіслано успішно!');
       } else {
-        showNotification('error', 'Помилка при відправці. Спробуйте ще раз.');
+        throw new Error('Помилка відправки');
       }
     } catch (error) {
-      console.error('Error:', error);
-      showNotification('error', 'Помилка при відправці. Спробуйте ще раз.');
-    } finally {
-      setIsSubmitting(false);
+      console.error('Form submission error:', error);
+      alert('Помилка відправки повідомлення. Спробуйте пізніше.');
     }
-  };
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-    setActiveSection(sectionId);
-  };
-
-  // Функція показу нотифікацій
-  const showNotification = (type, message) => {
-    // Створюємо красиву нотифікацію
-    const notification = document.createElement('div');
-    notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transform transition-all duration-500 ${
-      type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-    }`;
-    notification.textContent = message;
-    notification.style.transform = 'translateX(100%)';
     
-    document.body.appendChild(notification);
-    
-    // Анімація появи
-    setTimeout(() => {
-      notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // Автоматичне зникнення
-    setTimeout(() => {
-      notification.style.transform = 'translateX(100%)';
-      setTimeout(() => {
-        document.body.removeChild(notification);
-      }, 500);
-    }, 3000);
+    setIsSubmitting(false);
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
-      {/* Реалістичний фон як на ugc.llc */}
-      <MeshGradientBackground />
+    <div className="min-h-screen bg-white text-gray-900 relative overflow-hidden">
+      {/* Об'єднаний фоновий компонент з усіма ефектами */}
+      <UnifiedBackground />
       
-      {/* Прогрес-бар скролу */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-gray-200/20">
-        <div 
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
-      
-      {/* Сучасна навігація */}
+      {/* Індикатор прогресу скролу */}
+      <div 
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 z-50 transition-all duration-300"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      {/* Навігація */}
       <ModernNavigation 
         activeSection={activeSection}
         scrollToSection={scrollToSection}
       />
 
-      {/* Основний контент */}
-      <main className="relative z-10">
-        {/* Покращена головна секція */}
+      {/* Hero секція */}
+      <section id="home" className="relative min-h-screen">
         <EnhancedHeroSection 
           scrollToSection={scrollToSection}
+          data={data}
         />
+      </section>
 
-        {/* Про нас */}
-        <div className="relative z-20" style={{ backdropFilter: 'blur(1px)' }}>
-          <AboutSection />
+      {/* Про нас */}
+      <section id="about" className="relative py-20 bg-white/80 backdrop-blur-sm">
+        <div className="parallax-section">
+          <AboutSection data={data} />
         </div>
+      </section>
 
-        {/* Послуги */}
-        <div className="relative z-20" style={{ backdropFilter: 'blur(1px)' }}>
+      {/* Послуги */}
+      <section id="services" className="relative py-20 bg-gray-50/80 backdrop-blur-sm">
+        <div className="parallax-section">
           <ServicesSection data={data} />
         </div>
+      </section>
 
-        {/* Проєкти */}
-        <div className="relative z-20" style={{ backdropFilter: 'blur(1px)' }}>
+      {/* Проекти */}
+      <section id="projects" className="relative py-20 bg-white/80 backdrop-blur-sm">
+        <div className="parallax-section">
           <ProjectsSection data={data} />
         </div>
+      </section>
 
-        {/* Контакти */}
-        <div className="relative z-20" style={{ backdropFilter: 'blur(1px)' }}>
+      {/* Контакти */}
+      <section id="contact" className="relative py-20 bg-gray-50/80 backdrop-blur-sm">
+        <div className="parallax-section">
           <ContactSection 
             formData={formData}
-            setFormData={setFormData}
-            handleFormSubmit={handleFormSubmit}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
             isSubmitting={isSubmitting}
+            translations={data.translations}
           />
         </div>
+      </section>
 
-        {/* Футер */}
-        <div className="relative z-20">
-          <Footer scrollToSection={scrollToSection} />
-        </div>
-      </main>
+      {/* Футер */}
+      <Footer translations={data.translations} />
 
       {/* Лоадер */}
       {isLoading && (
@@ -268,7 +250,7 @@ const FinalUGCDesign = () => {
       </div>
 
       {/* Глобальні стилі */}
-      <style jsx global>{`
+      <style>{`
         html {
           scroll-behavior: smooth;
         }
