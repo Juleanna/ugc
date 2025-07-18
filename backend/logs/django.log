@@ -9746,3 +9746,45 @@ INFO 2025-07-18 16:30:34,543 views 560 2824 Cache HIT дл€ api_project_list
 INFO 2025-07-18 16:30:34,543 views 560 11760 Cache HIT дл€ api_service_list
 INFO 2025-07-18 16:30:34,545 basehttp 560 2824 "GET /api/v1/projects/ HTTP/1.1" 200 52
 INFO 2025-07-18 16:30:34,550 basehttp 560 11760 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:51:25,741 views 560 10808 Cache HIT дл€ api_project_list
+INFO 2025-07-18 16:51:25,744 basehttp 560 10808 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:51:25,766 views 560 10808 Cache HIT дл€ api_project_list
+INFO 2025-07-18 16:51:25,768 basehttp 560 10808 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:51:25,848 views 560 11276 Cache SET дл€ api_service_list
+INFO 2025-07-18 16:51:25,849 basehttp 560 11276 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:51:25,855 views 560 10808 Cache HIT дл€ api_service_list
+INFO 2025-07-18 16:51:25,856 basehttp 560 10808 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:54:55,067 views 560 10808 Cache HIT дл€ api_service_list
+INFO 2025-07-18 16:54:55,081 basehttp 560 10808 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:54:55,101 views 560 10808 Cache HIT дл€ api_service_list
+INFO 2025-07-18 16:54:55,105 basehttp 560 10808 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:54:55,220 views 560 11276 Cache SET дл€ api_project_list
+INFO 2025-07-18 16:54:55,221 basehttp 560 11276 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:54:55,227 views 560 10808 Cache HIT дл€ api_project_list
+INFO 2025-07-18 16:54:55,229 basehttp 560 10808 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:44,877 views 560 9364 Cache HIT дл€ api_service_list
+INFO 2025-07-18 16:56:44,880 views 560 15480 Cache HIT дл€ api_project_list
+INFO 2025-07-18 16:56:44,880 basehttp 560 9364 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:44,882 basehttp 560 15480 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:44,896 views 560 9364 Cache HIT дл€ api_project_list
+INFO 2025-07-18 16:56:44,896 views 560 15480 Cache HIT дл€ api_service_list
+INFO 2025-07-18 16:56:44,897 basehttp 560 9364 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:44,899 basehttp 560 15480 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:51,778 views 560 9364 Cache HIT дл€ api_project_list
+INFO 2025-07-18 16:56:51,778 views 560 15480 Cache HIT дл€ api_service_list
+INFO 2025-07-18 16:56:51,782 basehttp 560 9364 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:51,783 basehttp 560 15480 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:51,801 views 560 15480 Cache HIT дл€ api_service_list
+INFO 2025-07-18 16:56:51,802 views 560 9364 Cache HIT дл€ api_project_list
+INFO 2025-07-18 16:56:51,803 basehttp 560 15480 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 16:56:51,805 basehttp 560 9364 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:00:38,482 views 560 9364 Cache HIT дл€ api_service_list
+INFO 2025-07-18 17:00:38,490 basehttp 560 9364 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:00:38,496 views 560 15480 Cache HIT дл€ api_project_list
+INFO 2025-07-18 17:00:38,501 basehttp 560 15480 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:00:38,528 translations_views 560 12620 ¬икористанн€ кешованих переклад≥в: unified_translations_uk_all_all
+INFO 2025-07-18 17:00:38,530 views 560 9364 Cache HIT дл€ api_project_list
+INFO 2025-07-18 17:00:38,531 basehttp 560 12620 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-18 17:00:38,532 views 560 15480 Cache HIT дл€ api_service_list
+INFO 2025-07-18 17:00:38,537 basehttp 560 9364 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-18 17:00:38,541 basehttp 560 15480 "GET /api/v1/services/ HTTP/1.1" 200 52

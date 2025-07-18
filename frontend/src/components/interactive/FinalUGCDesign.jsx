@@ -160,28 +160,28 @@ const FinalUGCDesign = () => {
       </section>
 
       {/* Про нас */}
-      <section id="about" className="relative py-20 bg-white/80 backdrop-blur-sm">
+      <section id="about" className="relative bg-white/80 backdrop-blur-sm">
         <div className="parallax-section">
           <AboutSection data={data} />
         </div>
       </section>
 
       {/* Послуги */}
-      <section id="services" className="relative py-20 bg-gray-50/80 backdrop-blur-sm">
+      <section id="services" className="relative bg-gray-50/80 backdrop-blur-sm">
         <div className="parallax-section">
           <ServicesSection data={data} />
         </div>
       </section>
 
       {/* Проекти */}
-      <section id="projects" className="relative py-20 bg-white/80 backdrop-blur-sm">
+      <section id="projects" className="relative bg-white/80 backdrop-blur-sm">
         <div className="parallax-section">
           <ProjectsSection data={data} />
         </div>
       </section>
 
       {/* Контакти */}
-      <section id="contact" className="relative py-20 bg-gray-50/80 backdrop-blur-sm">
+      <section id="contact" className="relative bg-gray-50/80 backdrop-blur-sm">
         <div className="parallax-section">
           <ContactSection 
             formData={formData}

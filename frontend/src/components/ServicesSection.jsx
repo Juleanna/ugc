@@ -60,16 +60,13 @@ const ServicesSection = ({ data }) => {
     <section id="services" className="section-padding bg-gray-50">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <Chip color="primary" variant="flat" size="lg" className="mb-6">
-            <Briefcase className="w-4 h-4 mr-2" />
-            Наші послуги
-          </Chip>
+         
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Повний цикл виробництва
             <br />
             <span className="text-gradient-blue">професійного одягу</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 ">
             Від проєктування до готового виробу - ми забезпечуємо якість на кожному етапі.
           </p>
         </div>

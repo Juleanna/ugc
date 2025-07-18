@@ -25,16 +25,13 @@ const AboutSection = () => {
     <section id="about" className="section-padding bg-white">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <Chip color="primary" variant="flat" size="lg" className="mb-6">
-            <Shield className="w-4 h-4 mr-2" />
-            Про компанію
-          </Chip>
+          
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Наш багаторічний досвід
             <br />
             <span className="text-gradient-blue">гарантує якість</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 ">
             Ми створюємо одяг, який забезпечує безпеку і комфорт у будь-яких умовах. 
             Наша продукція відповідає найвищим стандартам якості.
           </p>

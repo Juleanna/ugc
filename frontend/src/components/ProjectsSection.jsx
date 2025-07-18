@@ -33,11 +33,7 @@ const ProjectsSection = ({ data }) => {
     <section id="projects" className="section-padding bg-white">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <Chip color="warning" variant="flat" size="lg" className="mb-6">
-            <FolderOpen className="w-4 h-4 mr-2" />
-            Наші проєкти
-          </Chip>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+         <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Успішні реалізації
             <br />
             <span className="text-gradient-blue">та довіра клієнтів</span>

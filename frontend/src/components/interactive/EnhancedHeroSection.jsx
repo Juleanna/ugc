@@ -49,8 +49,8 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-              <span className="block mb-2">Професійний одяг</span>
-              <span className="block mb-2">для</span>
+              <span >Професійний одяг </span>
+              <span >для </span>
               <span className="block text-gradient-blue animate-pulse">
                 кожної сфери
               </span>
@@ -59,7 +59,7 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
 
           {/* Підзаголовок */}
           <div className={`transform transition-all duration-1500 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-12  leading-relaxed">
               Ми створюємо високоякісний спецодяг, військову форму та корпоративний одяг 
               для українських підприємств та організацій. Наш досвід і прагнення до досконалості 
               допомагають нам задовольняти потреби професіоналів у різних галузях.
@@ -118,35 +118,11 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
             </div>
           </div>
 
-          {/* Додатковий CTA */}
-          <div className={`transform transition-all duration-1500 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <div className="mt-16 text-center">
-              <p className="text-gray-500 mb-4">Оберіть комфорт та безпеку з нами!</p>
-              <div className="flex justify-center space-x-8">
-                <div className="flex items-center text-sm text-gray-600">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                  Якість гарантована
-                </div>
-                <div className="flex items-center text-sm text-gray-600">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
-                  Швидка доставка
-                </div>
-                <div className="flex items-center text-sm text-gray-600">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2 animate-pulse"></div>
-                  Індивідуальний підхід
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
 
-      {/* Анімований скрол індикатор */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </div>
+
     </section>
   );
 };

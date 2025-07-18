@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from '@nextui-org/react';
-import { Menu, X, ChevronDown, Home, Info, Briefcase, Users, Phone, Star } from 'lucide-react';
+import { Button } from '@nextui-org/react';
+import { Menu, X, Home, Info, Briefcase, FolderOpen, Users, Phone } from 'lucide-react';
 
-const ModernStickyNavbar = () => {
+const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
-  // Навігаційні елементи
+  // Навігаційні елементи відповідно до ваших існуючих секцій
   const navigationItems = [
-    { id: 'home', label: 'Головна', href: '#home', icon: Home },
-    { id: 'about', label: 'Про нас', href: '#about', icon: Info },
-    { id: 'services', label: 'Послуги', href: '#services', icon: Briefcase },
-    { id: 'projects', label: 'Проєкти', href: '#projects', icon: Star },
-    { id: 'team', label: 'Команда', href: '#team', icon: Users },
-    { id: 'contact', label: 'Контакти', href: '#contact', icon: Phone },
+    { id: 'home', label: 'Головна', icon: Home },
+    { id: 'about', label: 'Про нас', icon: Info },
+    { id: 'services', label: 'Послуги', icon: Briefcase },
+    { id: 'projects', label: 'Проєкти', icon: FolderOpen },
+    { id: 'contact', label: 'Контакти', icon: Phone },
   ];
 
   // Відстеження скролу
@@ -28,17 +26,10 @@ const ModernStickyNavbar = () => {
   }, []);
 
   // Обробка кліку по навігації
-  const handleNavClick = (href, id) => {
-    setActiveSection(id);
+  const handleNavClick = (sectionId) => {
     setIsMenuOpen(false);
-    
-    // Плавний скрол до секції
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start' 
-      });
+    if (scrollToSection) {
+      scrollToSection(sectionId);
     }
   };
 
@@ -74,7 +65,7 @@ const ModernStickyNavbar = () => {
               {navigationItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavClick(item.href, item.id)}
+                  onClick={() => handleNavClick(item.id)}
                   className={`relative px-4 py-2 rounded-xl font-medium transition-all duration-300 group ${
                     activeSection === item.id
                       ? isScrolled
@@ -110,7 +101,7 @@ const ModernStickyNavbar = () => {
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5'
                     : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 border border-white/30'
                 }`}
-                onClick={() => handleNavClick('#contact', 'contact')}
+                onClick={() => handleNavClick('contact')}
               >
                 Зв'язатися з нами
               </Button>
@@ -193,7 +184,7 @@ const ModernStickyNavbar = () => {
                       style={{ transitionDelay: `${index * 100}ms` }}
                     >
                       <button
-                        onClick={() => handleNavClick(item.href, item.id)}
+                        onClick={() => handleNavClick(item.id)}
                         className={`w-full flex items-center px-4 py-4 rounded-xl transition-all duration-300 ${
                           activeSection === item.id
                             ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
@@ -218,7 +209,7 @@ const ModernStickyNavbar = () => {
             <div className="p-6 border-t border-gray-200/50">
               <Button
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium py-3 rounded-xl hover:shadow-lg transition-all duration-300"
-                onClick={() => handleNavClick('#contact', 'contact')}
+                onClick={() => handleNavClick('contact')}
               >
                 Зв'язатися з нами
               </Button>
@@ -230,35 +221,6 @@ const ModernStickyNavbar = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Демо секції для тестування */}
-      <div className="pt-20">
-        {/* Hero секція з градієнтом */}
-        <section id="home" className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 flex items-center justify-center text-white">
-          <div className="text-center">
-            <h1 className="text-6xl font-bold mb-6">UGC Professional</h1>
-            <p className="text-xl mb-8 text-white/90">Професійний одяг для кожної сфери діяльності</p>
-          </div>
-        </section>
-
-        {/* Інші секції */}
-        {navigationItems.slice(1).map((item) => (
-          <section 
-            key={item.id} 
-            id={item.id.replace('#', '')} 
-            className="min-h-screen flex items-center justify-center bg-gray-50"
-          >
-            <div className="text-center">
-              <item.icon className="w-16 h-16 mx-auto mb-4 text-blue-600" />
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">{item.label}</h2>
-              <p className="text-gray-600 max-w-2xl">
-                Це демо секція для {item.label.toLowerCase()}. 
-                Тут буде розміщений контент відповідної сторінки.
-              </p>
-            </div>
-          </section>
-        ))}
       </div>
     </>
   );
