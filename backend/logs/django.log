@@ -1,0 +1,80 @@
+INFO 2025-07-21 12:11:38,627 autoreload 14720 8808 Watching for file changes with StatReloader
+INFO 2025-07-21 12:12:07,166 views 14720 5640 Cache SET для api_project_list
+INFO 2025-07-21 12:12:07,172 basehttp 14720 5640 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:07,184 views 14720 5640 Cache HIT для api_project_list
+INFO 2025-07-21 12:12:07,185 views 14720 9996 Cache SET для api_service_list
+INFO 2025-07-21 12:12:07,188 basehttp 14720 5640 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:07,191 basehttp 14720 9996 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:07,203 views 14720 9996 Cache HIT для api_service_list
+INFO 2025-07-21 12:12:07,207 basehttp 14720 9996 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:22,605 views 14720 3956 Cache HIT для api_service_list
+INFO 2025-07-21 12:12:22,605 views 14720 3228 Cache HIT для api_project_list
+INFO 2025-07-21 12:12:22,610 basehttp 14720 3956 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:22,618 basehttp 14720 3228 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:22,622 translations_views 14720 1484 Завантажено 254 статичних перекладів
+INFO 2025-07-21 12:12:22,633 views 14720 3228 Cache HIT для api_service_list
+INFO 2025-07-21 12:12:22,634 views 14720 3956 Cache HIT для api_project_list
+INFO 2025-07-21 12:12:22,636 basehttp 14720 3228 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:22,638 basehttp 14720 3956 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:12:22,654 translations_views 14720 1484 Завантажено 203 po перекладів
+INFO 2025-07-21 12:12:22,959 translations_views 14720 1484 Завантажено 0 динамічних перекладів
+INFO 2025-07-21 12:12:22,961 translations_views 14720 1484 Завантажено 0 динамічних перекладів
+INFO 2025-07-21 12:12:22,973 translations_views 14720 1484 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-21 12:12:22,991 basehttp 14720 1484 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-21 12:16:03,689 views 14720 9084 Cache HIT для api_project_list
+INFO 2025-07-21 12:16:03,691 basehttp 14720 9084 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:16:03,696 views 14720 6208 Cache HIT для api_service_list
+INFO 2025-07-21 12:16:03,697 basehttp 14720 6208 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:16:03,710 views 14720 6208 Cache HIT для api_service_list
+INFO 2025-07-21 12:16:03,712 views 14720 9084 Cache HIT для api_project_list
+INFO 2025-07-21 12:16:03,713 basehttp 14720 6208 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:16:03,716 basehttp 14720 9084 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:03,222 views 14720 11864 Cache HIT для api_project_list
+INFO 2025-07-21 12:18:03,222 views 14720 13764 Cache HIT для api_service_list
+INFO 2025-07-21 12:18:03,227 basehttp 14720 11864 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:03,233 basehttp 14720 13764 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:03,245 views 14720 11864 Cache HIT для api_project_list
+INFO 2025-07-21 12:18:03,248 views 14720 13764 Cache HIT для api_service_list
+INFO 2025-07-21 12:18:03,249 basehttp 14720 11864 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:03,253 basehttp 14720 13764 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:22,910 views 14720 13044 Cache HIT для api_project_list
+INFO 2025-07-21 12:18:22,912 views 14720 8920 Cache HIT для api_service_list
+INFO 2025-07-21 12:18:22,916 basehttp 14720 13044 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:22,921 basehttp 14720 8920 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:22,935 views 14720 13044 Cache HIT для api_project_list
+INFO 2025-07-21 12:18:22,937 views 14720 8920 Cache HIT для api_service_list
+INFO 2025-07-21 12:18:22,938 basehttp 14720 13044 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:18:22,939 basehttp 14720 8920 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 12:24:43,518 autoreload 14720 8808 D:\ugc\backend\ugc_backend\settings.py changed, reloading.
+INFO 2025-07-21 12:24:47,950 autoreload 8096 5060 Watching for file changes with StatReloader
+INFO 2025-07-21 12:25:15,261 autoreload 8096 5060 D:\ugc\backend\ugc_backend\settings.py changed, reloading.
+INFO 2025-07-21 12:25:16,966 autoreload 12940 9580 Watching for file changes with StatReloader
+INFO 2025-07-21 12:25:32,827 autoreload 12940 9580 D:\ugc\backend\ugc_backend\settings.py changed, reloading.
+INFO 2025-07-21 12:25:34,455 autoreload 2556 15056 Watching for file changes with StatReloader
+INFO 2025-07-21 13:39:14,141 autoreload 2924 14556 Watching for file changes with StatReloader
+INFO 2025-07-21 13:43:43,325 autoreload 2924 14556 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:43:45,443 autoreload 12052 3124 Watching for file changes with StatReloader
+INFO 2025-07-21 13:43:48,025 autoreload 12052 3124 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:43:50,147 autoreload 11296 13872 Watching for file changes with StatReloader
+INFO 2025-07-21 13:43:51,602 autoreload 11296 13872 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:43:53,453 autoreload 6356 4408 Watching for file changes with StatReloader
+INFO 2025-07-21 13:44:37,157 autoreload 6356 4408 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:44:38,910 autoreload 11604 7372 Watching for file changes with StatReloader
+INFO 2025-07-21 13:44:44,261 autoreload 11604 7372 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:44:45,966 autoreload 12028 11580 Watching for file changes with StatReloader
+INFO 2025-07-21 13:45:11,801 autoreload 12028 11580 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:45:13,819 autoreload 1404 4972 Watching for file changes with StatReloader
+INFO 2025-07-21 13:45:17,901 autoreload 1404 4972 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:45:19,794 autoreload 1600 13016 Watching for file changes with StatReloader
+INFO 2025-07-21 13:45:23,442 autoreload 1600 13016 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:45:25,189 autoreload 15048 9312 Watching for file changes with StatReloader
+INFO 2025-07-21 13:45:30,426 autoreload 15048 9312 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:45:32,066 autoreload 7572 9228 Watching for file changes with StatReloader
+INFO 2025-07-21 13:45:36,233 autoreload 7572 9228 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:45:37,930 autoreload 10820 4480 Watching for file changes with StatReloader
+INFO 2025-07-21 13:45:41,475 autoreload 10820 4480 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:45:43,124 autoreload 5004 5800 Watching for file changes with StatReloader
+INFO 2025-07-21 13:45:55,748 autoreload 5004 5800 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:45:57,483 autoreload 5364 14000 Watching for file changes with StatReloader
+INFO 2025-07-21 13:59:55,396 autoreload 5364 14000 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 13:59:57,545 autoreload 3068 2860 Watching for file changes with StatReloader

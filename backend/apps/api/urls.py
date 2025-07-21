@@ -1,11 +1,20 @@
-# backend/apps/api/urls.py - ВИПРАВЛЕНИЙ БЕЗ КОНФЛІКТІВ
+# backend/apps/api/urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from apps.api.webhooks import TranslationWebhookView
-from . import views
 
-# ============================= ІМПОРТ ТІЛЬКИ НОВИХ VIEW =============================
-from .translations_views import UnifiedTranslationsAPIView
+# Імпортуємо існуючі views
+from apps.api import views
+
+# Імпортуємо views для перекладів
+from .views.translations import (
+    TranslationsAPIView, 
+    DynamicTranslationsAPIView, 
+    AllTranslationsAPIView,
+    TranslationUpdateWebhook,
+    TranslationStatsView,
+    TranslationSearchView,
+    TranslationKeysView
+)
 
 # ============================= РОУТЕР =============================
 router = DefaultRouter()
@@ -17,7 +26,7 @@ router.register(r'about', views.AboutPageViewSet, basename='about')
 # Послуги
 router.register(r'services', views.ServiceViewSet, basename='services')
 
-# Проекти
+# Проекти  
 router.register(r'project-categories', views.ProjectCategoryViewSet, basename='projectcategory')
 router.register(r'projects', views.ProjectViewSet, basename='projects')
 
@@ -38,14 +47,123 @@ router.register(r'workplace-photos', views.WorkplacePhotoViewSet, basename='work
 
 # ============================= URL PATTERNS =============================
 urlpatterns = [
-    # API роутер
+    # API роутер (ваші існуючі ендпоінти)
     path('', include(router.urls)),
     
-    # =============== ЄДИНИЙ ЕНДПОІНТ ДЛЯ ВСІХ ПЕРЕКЛАДІВ ===============
-    # Основний ендпоінт для перекладів
-    path('translations/', UnifiedTranslationsAPIView.as_view(), name='translations-default'),
-    path('translations/<str:locale>/', UnifiedTranslationsAPIView.as_view(), name='translations-locale'),
+    # =============== API ДЛЯ ПЕРЕКЛАДІВ ===============
+    
+    # Основні ендпоінти перекладів
+    path('translations/<str:lang>/', TranslationsAPIView.as_view(), name='translations-static'),
+    path('translations/<str:lang>/dynamic/', DynamicTranslationsAPIView.as_view(), name='translations-dynamic'),
+    path('translations/<str:lang>/all/', AllTranslationsAPIView.as_view(), name='translations-all'),
+    
+    # Статистика та утиліти
+    path('translations/stats/', TranslationStatsView.as_view(), name='translations-stats'),
+    path('translations/<str:lang>/search/', TranslationSearchView.as_view(), name='translations-search'),
+    path('translations/<str:lang>/keys/', TranslationKeysView.as_view(), name='translations-keys'),
     
     # =============== WEBHOOKS ===============
-    path('webhooks/translations/', TranslationWebhookView.as_view(), name='translation-webhook'),
+    path('webhooks/translations/update/', TranslationUpdateWebhook.as_view(), name='translation-webhook'),
 ]
+
+# ============================= ДОКУМЕНТАЦІЯ API ===============================
+
+"""
+API Ендпоінти для перекладів:
+
+1. БАЗОВІ ПЕРЕКЛАДИ:
+   GET /api/v1/translations/uk/ - Статичні переклади українською
+   GET /api/v1/translations/en/ - Статичні переклади англійською
+   
+2. ДИНАМІЧНІ ПЕРЕКЛАДИ (з моделей):
+   GET /api/v1/translations/uk/dynamic/ - Динамічні переклади з Django моделей
+   
+3. ВСІ ПЕРЕКЛАДИ:
+   GET /api/v1/translations/uk/all/ - Статичні + динамічні переклади
+   
+4. ПОШУК:
+   GET /api/v1/translations/uk/search/?q=пошук - Пошук перекладів
+   
+5. КЛЮЧІ:
+   GET /api/v1/translations/uk/keys/ - Список всіх ключів перекладів
+   
+6. СТАТИСТИКА:
+   GET /api/v1/translations/stats/ - Статистика по всім мовам
+   
+7. WEBHOOK:
+   POST /api/v1/webhooks/translations/update/ - Очищення кешу
+
+ПРИКЛАДИ ВІДПОВІДЕЙ:
+
+1. Базові переклади:
+{
+  "language": "uk",
+  "translations": {
+    "nav.home": "Головна",
+    "nav.about": "Про нас",
+    "common.loading": "Завантаження..."
+  },
+  "count": 3,
+  "source": "static",
+  "available_languages": ["uk", "en"]
+}
+
+2. Пошук:
+{
+  "query": "головна",
+  "language": "uk", 
+  "results": {
+    "nav.home": "Головна",
+    "page.home.title": "Головна сторінка"
+  },
+  "count": 2
+}
+
+3. Статистика:
+{
+  "languages": {
+    "uk": {
+      "name": "Українська",
+      "static_count": 45,
+      "dynamic_count": 12,
+      "total_count": 57
+    },
+    "en": {
+      "name": "English", 
+      "static_count": 43,
+      "dynamic_count": 10,
+      "total_count": 53
+    }
+  },
+  "total_languages": 2
+}
+
+ПАРАМЕТРИ ЗАПИТІВ:
+
+1. Пошук:
+   - q: текст для пошуку (обов'язковий)
+   
+2. Всі ендпоінти підтримують:
+   - Cache-Control заголовки
+   - CORS
+   - Rate limiting
+
+ПОМИЛКИ:
+
+400 Bad Request - Некоректні параметри
+404 Not Found - Мова не підтримується  
+500 Internal Server Error - Помилка сервера
+429 Too Many Requests - Перевищено ліміт запитів
+
+КЕШУВАННЯ:
+
+- Статичні переклади: 30 хвилин
+- Динамічні переклади: 15 хвилин
+- Кеш очищається через webhook або автоматично
+
+БЕЗПЕКА:
+
+- Rate limiting: 100 запитів/хвилину
+- CORS налаштований для фронтенду
+- CSRF захист для webhook
+"""

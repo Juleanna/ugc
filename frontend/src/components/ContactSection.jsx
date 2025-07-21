@@ -59,207 +59,192 @@ const ContactSection = ({ formData, setFormData, handleFormSubmit, isSubmitting 
           <Card className="p-6 shadow-xl border-0">
             <CardBody className="p-0">
               <form onSubmit={handleFormSubmit} className="space-y-6">
-                <Input
-                  label="Ім'я"
-                  placeholder="Введіть ваше ім'я"
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  required
-                  variant="flat"
-                  size="lg"
-                  labelPlacement="outside"
-                  classNames={{
-                    base: "w-full",
-                    mainWrapper: "h-full",
-                    input: [
-                      "text-black/90 dark:text-white/90",
-                      "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                    ],
-                    innerWrapper: "bg-transparent",
-                    inputWrapper: [
-                      "min-h-[3.5rem]",
-                      "shadow-lg",
-                      "bg-white/80",
-                      "dark:bg-default/60",
-                      "backdrop-blur-xl",
-                      "backdrop-saturate-200",
-                      "hover:bg-white/90",
-                      "dark:hover:bg-default/70",
-                      "group-data-[focused=true]:bg-white/90",
-                      "dark:group-data-[focused=true]:bg-default/60",
-                      "!cursor-text",
-                      "border-2",
-                      "border-gray-200/50",
-                      "hover:border-primary-300/50",
-                      "group-data-[focused=true]:border-primary-500/50",
-                      "!outline-none",
-                      "focus:outline-none",
-                      "focus:ring-0",
-                      "transition-all",
-                      "duration-300"
-                    ],
-                    label: [
-                      "text-black/70 dark:text-white/70",
-                      "text-medium",
-                      "font-medium",
-                      "mb-2",
-                      "group-data-[focused=true]:text-primary-600",
-                      "group-data-[filled=true]:text-primary-600"
-                    ]
-                  }}
-                />
                 
-                <Input
-                  label="Email"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  required
-                  variant="flat"
-                  size="lg"
-                  labelPlacement="outside"
-                  classNames={{
-                    base: "w-full",
-                    mainWrapper: "h-full",
-                    input: [
-                      "text-black/90 dark:text-white/90",
-                      "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                    ],
-                    innerWrapper: "bg-transparent",
-                    inputWrapper: [
-                      "min-h-[3.5rem]",
-                      "shadow-lg",
-                      "bg-white/80",
-                      "dark:bg-default/60",
-                      "backdrop-blur-xl",
-                      "backdrop-saturate-200",
-                      "hover:bg-white/90",
-                      "dark:hover:bg-default/70",
-                      "group-data-[focused=true]:bg-white/90",
-                      "dark:group-data-[focused=true]:bg-default/60",
-                      "!cursor-text",
-                      "border-2",
-                      "border-gray-200/50",
-                      "hover:border-primary-300/50",
-                      "group-data-[focused=true]:border-primary-500/50",
-                      "!outline-none",
-                      "focus:outline-none",
-                      "focus:ring-0",
-                      "transition-all",
-                      "duration-300"
-                    ],
-                    label: [
-                      "text-black/70 dark:text-white/70",
-                      "text-medium",
-                      "font-medium",
-                      "mb-2",
-                      "group-data-[focused=true]:text-primary-600",
-                      "group-data-[filled=true]:text-primary-600"
-                    ]
-                  }}
-                />
+                {/* Поле Ім'я */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-black/70 dark:text-white/70 text-medium font-medium">
+                    Ім'я
+                  </label>
+                  <Input
+                    placeholder="Введіть ваше ім'я"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    required
+                    variant="flat"
+                    size="lg"
+                    classNames={{
+                      base: "w-full",
+                      mainWrapper: "h-full",
+                      input: [
+                        "text-black/90 dark:text-white/90",
+                        "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+                      ],
+                      innerWrapper: "bg-transparent",
+                      inputWrapper: [
+                        "min-h-[3.5rem]",
+                        "shadow-lg",
+                        "bg-white/80",
+                        "dark:bg-default/60",
+                        "backdrop-blur-xl",
+                        "backdrop-saturate-200",
+                        "hover:bg-white/90",
+                        "dark:hover:bg-default/70",
+                        "group-data-[focused=true]:bg-white/90",
+                        "dark:group-data-[focused=true]:bg-default/60",
+                        "!cursor-text",
+                        "border-2",
+                        "border-gray-200/50",
+                        "hover:border-primary-300/50",
+                        "group-data-[focused=true]:border-primary-500/50",
+                        "!outline-none",
+                        "focus:outline-none",
+                        "focus:ring-0",
+                        "transition-all",
+                        "duration-300"
+                      ]
+                    }}
+                  />
+                </div>
                 
-                <Input
-                  label="Телефон"
-                  type="tel"
-                  placeholder="+38 (067) 123-45-67"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  variant="flat"
-                  size="lg"
-                  labelPlacement="outside"
-                  classNames={{
-                    base: "w-full",
-                    mainWrapper: "h-full",
-                    input: [
-                      "text-black/90 dark:text-white/90",
-                      "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                    ],
-                    innerWrapper: "bg-transparent",
-                    inputWrapper: [
-                      "min-h-[3.5rem]",
-                      "shadow-lg",
-                      "bg-white/80",
-                      "dark:bg-default/60",
-                      "backdrop-blur-xl",
-                      "backdrop-saturate-200",
-                      "hover:bg-white/90",
-                      "dark:hover:bg-default/70",
-                      "group-data-[focused=true]:bg-white/90",
-                      "dark:group-data-[focused=true]:bg-default/60",
-                      "!cursor-text",
-                      "border-2",
-                      "border-gray-200/50",
-                      "hover:border-primary-300/50",
-                      "group-data-[focused=true]:border-primary-500/50",
-                      "!outline-none",
-                      "focus:outline-none",
-                      "focus:ring-0",
-                      "transition-all",
-                      "duration-300"
-                    ],
-                    label: [
-                      "text-black/70 dark:text-white/70",
-                      "text-medium",
-                      "font-medium",
-                      "mb-4",
-                      "group-data-[focused=true]:text-primary-600",
-                      "group-data-[filled=true]:text-primary-600"
-                    ]
-                  }}
-                />
+                {/* Поле Email */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-black/70 dark:text-white/70 text-medium font-medium">
+                    Email
+                  </label>
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    required
+                    variant="flat"
+                    size="lg"
+                    classNames={{
+                      base: "w-full",
+                      mainWrapper: "h-full",
+                      input: [
+                        "text-black/90 dark:text-white/90",
+                        "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+                      ],
+                      innerWrapper: "bg-transparent",
+                      inputWrapper: [
+                        "min-h-[3.5rem]",
+                        "shadow-lg",
+                        "bg-white/80",
+                        "dark:bg-default/60",
+                        "backdrop-blur-xl",
+                        "backdrop-saturate-200",
+                        "hover:bg-white/90",
+                        "dark:hover:bg-default/70",
+                        "group-data-[focused=true]:bg-white/90",
+                        "dark:group-data-[focused=true]:bg-default/60",
+                        "!cursor-text",
+                        "border-2",
+                        "border-gray-200/50",
+                        "hover:border-primary-300/50",
+                        "group-data-[focused=true]:border-primary-500/50",
+                        "!outline-none",
+                        "focus:outline-none",
+                        "focus:ring-0",
+                        "transition-all",
+                        "duration-300"
+                      ]
+                    }}
+                  />
+                </div>
                 
-                <Textarea
-                  label="Повідомлення"
-                  placeholder="Розкажіть детально про ваш проєкт, вимоги та побажання..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  required
-                  variant="flat"
-                  size="lg"
-                  minRows={4}
-                  labelPlacement="outside"
-                  classNames={{
-                    base: "w-full",
-                    input: [
-                      "resize-none",
-                      "text-black/90 dark:text-white/90",
-                      "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                      "min-h-[120px]"
-                    ],
-                    innerWrapper: "bg-transparent",
-                    inputWrapper: [
-                      "shadow-lg",
-                      "bg-white/80",
-                      "dark:bg-default/60",
-                      "backdrop-blur-xl",
-                      "backdrop-saturate-200",
-                      "hover:bg-white/90",
-                      "dark:hover:bg-default/70",
-                      "group-data-[focused=true]:bg-white/90",
-                      "dark:group-data-[focused=true]:bg-default/60",
-                      "!cursor-text",
-                      "border-2",
-                      "border-gray-200/50",
-                      "hover:border-primary-300/50",
-                      "group-data-[focused=true]:border-primary-500/50",
-                      "!outline-none",
-                      "focus:outline-none",
-                      "focus:ring-0",
-                      "transition-all",
-                      "duration-300"
-                    ],
-                    label: [
-                      "text-black/70 dark:text-white/70",
-                      "text-medium",
-                      "font-medium",
-                      "mb-2",
-                      "group-data-[focused=true]:text-primary-600",
-                      "group-data-[filled=true]:text-primary-600"
-                    ]
-                  }}
-                />
+                {/* Поле Повідомлення */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-black/70 dark:text-white/70 text-medium font-medium">
+                    Повідомлення
+                  </label>
+                  <Textarea
+                    placeholder="Розкажіть детально про ваш проєкт, вимоги та побажання..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    required
+                    variant="flat"
+                    size="lg"
+                    minRows={4}
+                    classNames={{
+                      base: "w-full",
+                      input: [
+                        "resize-none",
+                        "text-black/90 dark:text-white/90",
+                        "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+                        "min-h-[120px]"
+                      ],
+                      innerWrapper: "bg-transparent",
+                      inputWrapper: [
+                        "shadow-lg",
+                        "bg-white/80",
+                        "dark:bg-default/60",
+                        "backdrop-blur-xl",
+                        "backdrop-saturate-200",
+                        "hover:bg-white/90",
+                        "dark:hover:bg-default/70",
+                        "group-data-[focused=true]:bg-white/90",
+                        "dark:group-data-[focused=true]:bg-default/60",
+                        "!cursor-text",
+                        "border-2",
+                        "border-gray-200/50",
+                        "hover:border-primary-300/50",
+                        "group-data-[focused=true]:border-primary-500/50",
+                        "!outline-none",
+                        "focus:outline-none",
+                        "focus:ring-0",
+                        "transition-all",
+                        "duration-300"
+                      ]
+                    }}
+                  />
+                </div>
+                
+                {/* Поле Телефон */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-black/70 dark:text-white/70 text-medium font-medium">
+                    Телефон
+                  </label>
+                  <Input
+                    type="tel"
+                    placeholder="+38 (067) 123-45-67"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    variant="flat"
+                    size="lg"
+                    classNames={{
+                      base: "w-full",
+                      mainWrapper: "h-full",
+                      input: [
+                        "text-black/90 dark:text-white/90",
+                        "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+                      ],
+                      innerWrapper: "bg-transparent",
+                      inputWrapper: [
+                        "min-h-[3.5rem]",
+                        "shadow-lg",
+                        "bg-white/80",
+                        "dark:bg-default/60",
+                        "backdrop-blur-xl",
+                        "backdrop-saturate-200",
+                        "hover:bg-white/90",
+                        "dark:hover:bg-default/70",
+                        "group-data-[focused=true]:bg-white/90",
+                        "dark:group-data-[focused=true]:bg-default/60",
+                        "!cursor-text",
+                        "border-2",
+                        "border-gray-200/50",
+                        "hover:border-primary-300/50",
+                        "group-data-[focused=true]:border-primary-500/50",
+                        "!outline-none",
+                        "focus:outline-none",
+                        "focus:ring-0",
+                        "transition-all",
+                        "duration-300"
+                      ]
+                    }}
+                  />
+                </div>
                 
                 <div className="pt-4">
                   <Button

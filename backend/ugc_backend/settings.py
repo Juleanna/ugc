@@ -1,23 +1,23 @@
+# backend/ugc_backend/settings.py - ВИПРАВЛЕНИЙ ФАЙЛ
 from pathlib import Path
 import os
 from decouple import config
-from django.urls import reverse_lazy
 from django.templatetags.static import static
 from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ========== ОСНОВНІ НАЛАШТУВАННЯ ==========
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost').split(',')
 
-
-
-# Application definition
+# ========== ДОДАТКИ ==========
 
 DJANGO_APPS = [
-    'modeltranslation',
+    'modeltranslation',  # ВАЖЛИВО: має бути перед django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,11 +34,9 @@ THIRD_PARTY_APPS = [
     'rosetta',
     'ckeditor',
     'ckeditor_uploader',
-
 ]
 
 LOCAL_APPS = [
-   # Ваши приложения
     'apps.content',
     'apps.services',
     'apps.projects',
@@ -46,46 +44,51 @@ LOCAL_APPS = [
     'apps.partners',
     'apps.contacts',
     'apps.api',
-    
-]
-UNFOLOD = [
-    'unfold',  # before django.contrib.admin
-    'unfold.contrib.filters',  # optional, requires django-filter
-    'unfold.contrib.forms',  # optional, requires django-crispy-forms
-    'unfold.contrib.inlines',  # optional
-    'unfold.contrib.import_export',  # optional, requires django-import-export
-    'unfold.contrib.guardian',  # optional, requires django-guardian
-    'unfold.contrib.simple_history',  # optional, requires django-simple-history
+    'ugc_backend.apps.UgcBackendConfig',  # Додаємо наш AppConfig
 ]
 
-INSTALLED_APPS = UNFOLOD + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+UNFOLD = [
+    'unfold',
+    'unfold.contrib.filters',
+    'unfold.contrib.forms',
+    'unfold.contrib.inlines',
+    'unfold.contrib.import_export',
+    'unfold.contrib.guardian',
+    'unfold.contrib.simple_history',
+]
+
+INSTALLED_APPS = UNFOLD + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+# ========== MIDDLEWARE ==========
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Для i18n
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'apps.api.middleware.ImprovedTranslationsCacheMiddleware',  # Обновленный
-    'apps.api.middleware.CacheMonitoringMiddleware',            # Новый
-    'apps.api.middleware.SecurityHeadersMiddleware',
-    'apps.api.middleware.CacheInvalidationMiddleware',          # Новый
 ]
 
 ROOT_URLCONF = 'ugc_backend.urls'
 
+# ========== ШАБЛОНИ ==========
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',  # Для i18n
             ],
         },
     },
@@ -93,8 +96,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ugc_backend.wsgi.application'
 
+# ========== БАЗА ДАНИХ ==========
 
-# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -106,9 +109,7 @@ DATABASES = {
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+# ========== ВАЛІДАЦІЯ ПАРОЛІВ ==========
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -125,30 +126,59 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Internationalization
+# ========== ЛОКАЛІЗАЦІЯ ТА ПЕРЕКЛАДИ ==========
+
+# Основні налаштування мови
 LANGUAGE_CODE = 'uk'
 TIME_ZONE = 'Europe/Kiev'
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
+# Підтримувані мови
 LANGUAGES = [
     ('uk', 'Українська'),
     ('en', 'English'),
 ]
 
+# Шляхи до файлів локалізації
 LOCALE_PATHS = [
-    BASE_DIR / 'locale',  
+    BASE_DIR / 'locale',
 ]
 
+# Налаштування для django-modeltranslation
 MODELTRANSLATION_LANGUAGES = ('uk', 'en')
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uk'
+MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'uk'
+MODELTRANSLATION_ENABLE_FALLBACKS = True
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    'default': ('uk',),
+    'uk': ('uk', 'en'),
+    'en': ('uk',),
+}
 
+# ========== СТАТИЧНІ ТА МЕДІА ФАЙЛИ ==========
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# ========== НАЛАШТУВАННЯ CKEDITOR ==========
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = True
 
 CKEDITOR_CONFIGS = {
     'default': {
-        #'skin': 'moono',
         'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
@@ -175,28 +205,21 @@ CKEDITOR_CONFIGS = {
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
             {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
             {'name': 'about', 'items': ['About']},
-            '/',  # put this to force next toolbar on new line
+            '/',
             {'name': 'yourcustomtools', 'items': [
-                # put the name of your editor.ui.addButton here
                 'Preview',
                 'Maximize',
-                
-
             ]},
         ],
-        'image2_alignClasses': ['align-left', 'align-center', 'align-right'],
-        'toolbar': 'YourCustomToolbarConfig',  
-       
+        'toolbar': 'YourCustomToolbarConfig',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', 
+            'uploadimage',
             'div',
-            'justify',
             'autolink',
             'autoembed',
             'embedsemantic',
             'autogrow',
-           
             'widget',
             'lineutils',
             'clipboard',
@@ -207,384 +230,69 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-# Unfold Admin Configuration
-UNFOLD = {
-    "SITE_TITLE": "UGC - Адмін панель",
-    "SITE_HEADER": "Управління сайтом UGC",
-    "SITE_URL": "/",
-    "SITE_ICON": lambda request: static("image/favicon.ico"),  # опционально
-    
-   
-    "SITE_SYMBOL": "business",  # symbol from icon set
-    "SHOW_HISTORY": True,  # show/hide "History" button
-    "SHOW_VIEW_ON_SITE": True,  # show/hide "View on site" button
-    "ENVIRONMENT": "ugc_backend.settings.environment_callback",  # опционально
-    "DASHBOARD_CALLBACK": "ugc_backend.settings.dashboard_callback",  # опционально
-    "LOGIN": {
-        "image": lambda request: static("login-bg.jpg"),  # опционально
-        "redirect_after": lambda request: reverse_lazy("admin:index"),
-    },
-    "STYLES": [
-        #lambda request: static("css/styles.css"),  # опционально
-    ],
-    "SCRIPTS": [
-        #lambda request: static("js/script.js"),  # опционально
-    ],
-    "COLORS": {
-        "primary": {
-            "50": "250 245 255",
-            "100": "243 232 255",
-            "200": "233 213 255",
-            "300": "216 180 254",
-            "400": "196 141 253",
-            "500": "168 85 247",
-            "600": "147 51 234",
-            "700": "126 34 206",
-            "800": "107 33 168",
-            "900": "88 28 135",
-        },
-    },
-    "EXTENSIONS": {
-        "modeltranslation": {
-            "flags": {
-                "en": "🇺🇸",
-                "uk": "🇺🇦",
+# ========== КЕШУВАННЯ ==========
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
+            'CONNECTION_POOL_KWARGS': {
+                'max_connections': 50,
+                'retry_on_timeout': True,
             },
+            'IGNORE_EXCEPTIONS': True,
         },
-    },
-    "SIDEBAR": {
-        "show_search": True,
-        "show_all_applications": False,
-        "navigation": [
-            {
-                "title": _("Навігація"),
-                "separator": True,
-                "items": [
-                    {
-                        "title": _("Головна"),
-                        "icon": "dashboard",
-                        "link": lambda request: reverse_lazy("admin:index"),
-                    },
-                ],
-            },
-            {
-                "title": _("Контент"),
-                "separator": True,
-                "items": [
-                    {
-                        "title": _("Головна сторінка"),
-                        "icon": "home",
-                        "link": lambda request: reverse_lazy("admin:content_homepage_changelist"),
-                    },
-                    {
-                        "title": _("Про нас"),
-                        "icon": "info",
-                        "link": lambda request: reverse_lazy("admin:content_aboutpage_changelist"),
-                    },
-                    {
-                        "title": _("Команда"),
-                        "icon": "group",
-                        "link": lambda request: reverse_lazy("admin:content_teammember_changelist"),
-                    },
-                    {
-                        "title": _("Сертифікати"),
-                        "icon": "verified",
-                        "link": lambda request: reverse_lazy("admin:content_certificate_changelist"),
-                    },
-                    {
-                        "title": _("Фото виробництва"),
-                        "icon": "photo_library",
-                        "link": lambda request: reverse_lazy("admin:content_productionphoto_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": _("Послуги"),
-                "separator": True,
-                "items": [
-                    {
-                        "title": _("Всі послуги"),
-                        "icon": "design_services",
-                        "link": lambda request: reverse_lazy("admin:services_service_changelist"),
-                    },
-                    {
-                        "title": _("Особливості послуг"),
-                        "icon": "star",
-                        "link": lambda request: reverse_lazy("admin:services_servicefeature_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": _("Проєкти"),
-                "separator": True,
-                "items": [
-                    {
-                        "title": _("Категорії проєктів"),
-                        "icon": "category",
-                        "link": lambda request: reverse_lazy("admin:projects_projectcategory_changelist"),
-                    },
-                    {
-                        "title": _("Всі проєкти"),
-                        "icon": "work",
-                        "link": lambda request: reverse_lazy("admin:projects_project_changelist"),
-                    },
-                    {
-                        "title": _("Зображення проєктів"),
-                        "icon": "collections",
-                        "link": lambda request: reverse_lazy("admin:projects_projectimage_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": _("Вакансії"),
-                "separator": True,
-                "items": [
-                    {
-                        "title": _("Позиції"),
-                        "icon": "work_outline",
-                        "link": lambda request: reverse_lazy("admin:jobs_jobposition_changelist"),
-                    },
-                    {
-                        "title": _("Заявки"),
-                        "icon": "assignment",
-                        "link": lambda request: reverse_lazy("admin:jobs_jobapplication_changelist"),
-                    },
-                    {
-                        "title": _("Фото робочих місць"),
-                        "icon": "business_center",
-                        "link": lambda request: reverse_lazy("admin:jobs_workplacephoto_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": _("Партнери"),
-                "separator": True,
-                "items": [
-                    {
-                        "title": _("Інформація для партнерів"),
-                        "icon": "handshake",
-                        "link": lambda request: reverse_lazy("admin:partners_partnershipinfo_changelist"),
-                    },
-                    {
-                        "title": _("Етапи роботи"),
-                        "icon": "timeline",
-                        "link": lambda request: reverse_lazy("admin:partners_workstage_changelist"),
-                    },
-                    {
-                        "title": _("Запити партнерів"),
-                        "icon": "mail",
-                        "link": lambda request: reverse_lazy("admin:partners_partnerinquiry_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": _("Контакти"),
-                "separator": True,
-                "items": [
-                    {
-                        "title": _("Офіси та фабрики"),
-                        "icon": "business",
-                        "link": lambda request: reverse_lazy("admin:contacts_office_changelist"),
-                    },
-                    {
-                        "title": _("Звернення"),
-                        "icon": "contact_support",
-                        "link": lambda request: reverse_lazy("admin:contacts_contactinquiry_changelist"),
-                    },
-                ],
-            },
-        ],
-    },
-    "TABS": [
-        {
-            "models": [
-                "contacts.office",
-            ],
-            "items": [
-                {
-                    "title": _("Всі офіси"),
-                    "link": lambda request: reverse_lazy("admin:contacts_office_changelist"),
-                },
-                {
-                    "title": _("Активні"),
-                    "link": lambda request: reverse_lazy("admin:contacts_office_changelist") + "?is_active__exact=1",
-                },
-                {
-                    "title": _("Головні офіси"),
-                    "link": lambda request: reverse_lazy("admin:contacts_office_changelist") + "?is_main__exact=1",
-                },
-            ],
-        },
-        {
-            "models": [
-                "contacts.contactinquiry",
-            ],
-            "items": [
-                {
-                    "title": _("Всі звернення"),
-                    "link": lambda request: reverse_lazy("admin:contacts_contactinquiry_changelist"),
-                },
-                {
-                    "title": _("Необроблені"),
-                    "link": lambda request: reverse_lazy("admin:contacts_contactinquiry_changelist") + "?is_processed__exact=0",
-                },
-                {
-                    "title": _("Оброблені"),
-                    "link": lambda request: reverse_lazy("admin:contacts_contactinquiry_changelist") + "?is_processed__exact=1",
-                },
-            ],
-        },
-        {
-            "models": [
-                "services.service",
-            ],
-            "items": [
-                {
-                    "title": _("Всі послуги"),
-                    "link": lambda request: reverse_lazy("admin:services_service_changelist"),
-                },
-                {
-                    "title": _("Активні"),
-                    "link": lambda request: reverse_lazy("admin:services_service_changelist") + "?is_active__exact=1",
-                },
-                {
-                    "title": _("Рекомендовані"),
-                    "link": lambda request: reverse_lazy("admin:services_service_changelist") + "?is_featured__exact=1",
-                },
-            ],
-        },
-        {
-            "models": [
-                "projects.project",
-            ],
-            "items": [
-                {
-                    "title": _("Всі проєкти"),
-                    "link": lambda request: reverse_lazy("admin:projects_project_changelist"),
-                },
-                {
-                    "title": _("Активні"),
-                    "link": lambda request: reverse_lazy("admin:projects_project_changelist") + "?is_active__exact=1",
-                },
-                {
-                    "title": _("Рекомендовані"),
-                    "link": lambda request: reverse_lazy("admin:projects_project_changelist") + "?is_featured__exact=1",
-                },
-            ],
-        },
-        {
-            "models": [
-                "jobs.jobposition",
-            ],
-            "items": [
-                {
-                    "title": _("Всі вакансії"),
-                    "link": lambda request: reverse_lazy("admin:jobs_jobposition_changelist"),
-                },
-                {
-                    "title": _("Активні"),
-                    "link": lambda request: reverse_lazy("admin:jobs_jobposition_changelist") + "?is_active__exact=1",
-                },
-                {
-                    "title": _("Термінові"),
-                    "link": lambda request: reverse_lazy("admin:jobs_jobposition_changelist") + "?is_urgent__exact=1",
-                },
-            ],
-        },
-        {
-            "models": [
-                "jobs.jobapplication",
-            ],
-            "items": [
-                {
-                    "title": _("Всі заявки"),
-                    "link": lambda request: reverse_lazy("admin:jobs_jobapplication_changelist"),
-                },
-                {
-                    "title": _("Нові"),
-                    "link": lambda request: reverse_lazy("admin:jobs_jobapplication_changelist") + "?is_reviewed__exact=0",
-                },
-                {
-                    "title": _("Переглянуті"),
-                    "link": lambda request: reverse_lazy("admin:jobs_jobapplication_changelist") + "?is_reviewed__exact=1",
-                },
-            ],
-        },
-        {
-            "models": [
-                "partners.partnerinquiry",
-            ],
-            "items": [
-                {
-                    "title": _("Всі запити"),
-                    "link": lambda request: reverse_lazy("admin:partners_partnerinquiry_changelist"),
-                },
-                {
-                    "title": _("Нові"),
-                    "link": lambda request: reverse_lazy("admin:partners_partnerinquiry_changelist") + "?is_processed__exact=0",
-                },
-                {
-                    "title": _("Оброблені"),
-                    "link": lambda request: reverse_lazy("admin:partners_partnerinquiry_changelist") + "?is_processed__exact=1",
-                },
-            ],
-        },
-    ],
+        'KEY_PREFIX': 'ugc_translations',
+        'TIMEOUT': 300,
+    }
 }
 
-def get_site_icon(request):
-    return static("image/favicon.ico")
+# Налаштування кешування перекладів
+TRANSLATION_CACHE_SETTINGS = {
+    'STATIC_TIMEOUT': 60 * 60,          # 1 година для статичних перекладів
+    'DYNAMIC_TIMEOUT': 60 * 30,         # 30 хвилин для динамічних
+    'PO_TIMEOUT': 60 * 60 * 2,          # 2 години для PO файлів
+    'UNIFIED_TIMEOUT': 60 * 45,         # 45 хвилин для об'єднаних
+    'MAX_CACHE_SIZE': 10000,            # Максимальний розмір кешу
+    'ENABLE_COMPRESSION': True,         # Стиснення великих перекладів
+    'VERSION_TIMEOUT': 60 * 60 * 24,    # 24 години для версій
+}
 
-def get_site_logo(request):
-    return static("image/logo.png")
+# ========== НАЛАШТУВАННЯ СТАТИЧНИХ ПЕРЕКЛАДІВ ==========
 
+# Директорії для різних типів перекладів
+STATIC_TRANSLATIONS_DIR = BASE_DIR / 'static_translations'
+FRONTEND_TRANSLATIONS_DIR = BASE_DIR / 'frontend_translations'
 
-def environment_callback(request):
-    """Определение окружения для отображения в админке"""
-    return "Розробка" if DEBUG else "Продакшн"
+# Створюємо директорії якщо не існують
+os.makedirs(STATIC_TRANSLATIONS_DIR, exist_ok=True)
+os.makedirs(FRONTEND_TRANSLATIONS_DIR, exist_ok=True)
 
-def dashboard_callback(request, context):
-    """Дополнительные данные для дашборда"""
-    return context
+# Шляхи для експорту
+TRANSLATION_EXPORT_PATHS = {
+    'static': STATIC_TRANSLATIONS_DIR,
+    'frontend': FRONTEND_TRANSLATIONS_DIR,
+    'nextjs': BASE_DIR.parent / 'frontend' / 'public' / 'translations',
+    'react': BASE_DIR.parent / 'frontend' / 'src' / 'translations',
+}
 
-# Static files
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Налаштування експорту перекладів
+TRANSLATION_EXPORT_SETTINGS = {
+    'INCLUDE_DYNAMIC': True,
+    'INCLUDE_PO': True,
+    'BATCH_SIZE': 1000,
+    'MAX_EXPORT_SIZE': 50000,
+    'AUTO_BACKUP': True,
+    'BACKUP_COUNT': 5,
+    'COMPRESSION_LEVEL': 6,
+    'GENERATE_TYPESCRIPT': True,
+    'GENERATE_METADATA': True,
+}
 
-# Додайте STATICFILES_DIRS
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-# CKEditor media files
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_IMAGE_BACKEND = "pillow"
-
-
-CKEDITOR_RESTRICT_BY_USER = True
-CKEDITOR_ALLOW_NONIMAGE_FILES = False
-
-# Важливо! Додайте це для правильної роботи завантаження:
-CKEDITOR_BROWSE_SHOW_DIRS = True
-CKEDITOR_UPLOAD_SLUGIFY_FILENAME = True
-
-# Переконайтеся, що MEDIA налаштування правильні:
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'uk'
-
-# CORS налаштування
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    # Додайте ваш production домен
-    # "https://yourdomain.com",
-]
-
-
+# ========== REST FRAMEWORK ==========
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
@@ -593,12 +301,17 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '1000/hour',
-        'translations': '100/min',  # Спеціальний ліміт для перекладів
+        'user': '2000/hour',
+        'translations': '100/min',
     },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 50,
@@ -607,9 +320,24 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_VERSION': 'v1',
+    'ALLOWED_VERSIONS': ['v1'],
 }
 
-# Дозволені методи
+# ========== CORS НАЛАШТУВАННЯ ==========
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",    # React/Next.js dev server
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",    # Vite dev server
+    "http://127.0.0.1:5173",
+    "http://localhost:8080",    # Vue dev server
+    "http://127.0.0.1:8080",
+    # Додайте ваш production домен
+    # "https://yourdomain.com",
+]
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -619,7 +347,6 @@ CORS_ALLOW_METHODS = [
     'PUT',
 ]
 
-# Дозволені заголовки
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -632,69 +359,12 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'x-cache',
     'cache-control',
+    'x-api-key',
 ]
 
-# Дозволити credentials
 CORS_ALLOW_CREDENTIALS = True
-
-# Префлайт кеш
 CORS_PREFLIGHT_MAX_AGE = 86400
-
-# ========== ЛОГУВАННЯ ==========
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'DEBUG' if DEBUG else 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file', 'console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'apps.api': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
-            'propagate': False,
-        },
-    },
-}
-
-# Створюємо папку для логів
-os.makedirs(os.path.join(BASE_DIR, 'logs'), exist_ok=True)
-
-# ========== НАЛАШТУВАННЯ МОДЕЛЬНОГО ПЕРЕКЛАДУ ==========
-
-# Для django-modeltranslation
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'uk'
-MODELTRANSLATION_ENABLE_FALLBACKS = True
-MODELTRANSLATION_FALLBACK_LANGUAGES = {
-    "default": ("uk",),
-    "uk": ("uk", "en"),
-}
-
+CORS_URLS_REGEX = r'^/api/.*$'
 
 # ========== БЕЗПЕКА ==========
 
@@ -719,60 +389,233 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-    # В продакшене используем более агрессивное кеширование
-    CACHES['default']['TIMEOUT'] = 60 * 60  # 1 час
-    CACHES['default']['OPTIONS']['COMPRESSOR'] = 'django_redis.compressors.lz4.Lz4Compressor'
 
-
-# Использование Redis для сессий (опционально)
-# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-# SESSION_CACHE_ALIAS = 'sessions'
-
-# ========== РОЗШИРЕНІ НАЛАШТУВАННЯ ДЛЯ ПЕРЕКЛАДІВ ==========
-
-# Шляхи до статичних файлів перекладів
-STATIC_TRANSLATIONS_DIR = os.path.join(BASE_DIR, 'static_translations')
-os.makedirs(STATIC_TRANSLATIONS_DIR, exist_ok=True)
-
-# Налаштування для експорту перекладів
-TRANSLATION_EXPORT_SETTINGS = {
-    'INCLUDE_DYNAMIC': True,
-    'INCLUDE_PO': True,
-    'CACHE_TIMEOUT': 1800,  # 30 хвилин
-    'BATCH_SIZE': 1000,
-    'MAX_EXPORT_SIZE': 10000,
+# Rate limiting для API перекладів
+TRANSLATION_RATE_LIMITING = {
+    'ENABLE': True,
+    'REQUESTS_PER_MINUTE': 60,
+    'REQUESTS_PER_HOUR': 1000,
+    'BLOCK_DURATION': 60 * 15,
 }
 
+# Валідація файлів перекладів
+TRANSLATION_VALIDATION = {
+    'MAX_FILE_SIZE': 1024 * 1024 * 5,  # 5MB
+    'ALLOWED_EXTENSIONS': ['.json', '.po', '.mo'],
+    'MAX_KEY_LENGTH': 200,
+    'MAX_VALUE_LENGTH': 1000,
+    'FORBIDDEN_KEYS': ['__proto__', 'constructor', 'prototype'],
+}
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            # ТИМЧАСОВО: використовуємо JSON серіалізатор для сумісності
-            'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
-            # Або використайте pickle (більш надійний для Django об'єктів)
-            # 'SERIALIZER': 'django_redis.serializers.pickle.PickleSerializer',
-            'CONNECTION_POOL_KWARGS': {
-                'max_connections': 50,
-                'retry_on_timeout': True,
-            },
-            'IGNORE_EXCEPTIONS': True,  # ВАЖЛИВО! Ігнорувати помилки кешу
+# ========== ЛОГУВАННЯ ==========
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
         },
-        'KEY_PREFIX': 'ugc_api',
-        'TIMEOUT': 300,
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'django.log',
+            'formatter': 'verbose',
+        },
+        'translations_file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'translations.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'apps.api': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': False,
+        },
+        'apps.api.views.translations': {
+            'handlers': ['translations_file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'apps.api.utils.translations': {
+            'handlers': ['translations_file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+# Створюємо папку для логів
+os.makedirs(BASE_DIR / 'logs', exist_ok=True)
+
+# ========== РОЗШИРЕНІ НАЛАШТУВАННЯ ==========
+
+# Автоматичне резервне копіювання
+AUTO_BACKUP_TRANSLATIONS = {
+    'ENABLED': True,
+    'SCHEDULE': '0 2 * * *',  # Щодня о 2:00
+    'RETENTION_DAYS': 30,
+    'BACKUP_DIR': BASE_DIR / 'backups' / 'translations',
+}
+
+os.makedirs(AUTO_BACKUP_TRANSLATIONS['BACKUP_DIR'], exist_ok=True)
+
+# Налаштування для webhooks
+TRANSLATION_WEBHOOKS = {
+    'ENABLED': True,
+    'SECRET_KEY': config('TRANSLATION_WEBHOOK_SECRET', default='your-secret-key'),
+    'ALLOWED_IPS': ['127.0.0.1', 'localhost'],
+    'TIMEOUT': 30,
+}
+
+# Моніторинг та метрики
+TRANSLATION_METRICS = {
+    'ENABLED': True,
+    'TRACK_USAGE': True,
+    'TRACK_PERFORMANCE': True,
+    'EXPORT_INTERVAL': 60 * 60,
+    'METRICS_DIR': BASE_DIR / 'metrics',
+}
+
+os.makedirs(TRANSLATION_METRICS['METRICS_DIR'], exist_ok=True)
+
+# Інтеграція з зовнішніми сервісами перекладу
+EXTERNAL_TRANSLATION_SERVICES = {
+    'GOOGLE_TRANSLATE': {
+        'ENABLED': False,
+        'API_KEY': config('GOOGLE_TRANSLATE_API_KEY', default=''),
+        'AUTO_TRANSLATE': False,
+    },
+    'DEEPL': {
+        'ENABLED': False,
+        'API_KEY': config('DEEPL_API_KEY', default=''),
+        'AUTO_TRANSLATE': False,
     }
 }
-# Настройки для кеширования переводов
-TRANSLATION_CACHE_SETTINGS = {
-    'STATIC_TIMEOUT': 60 * 60,      # 1 час для статических переводов
-    'DYNAMIC_TIMEOUT': 60 * 30,     # 30 минут для динамических
-    'PO_TIMEOUT': 60 * 60 * 2,      # 2 часа для PO файлов
-    'UNIFIED_TIMEOUT': 60 * 45,     # 45 минут для объединенных
-    'MAX_CACHE_SIZE': 10000,        # Максимальный размер кеша
-    'ENABLE_COMPRESSION': True,     # Сжатие больших переводов
+
+# Команди management
+TRANSLATION_MANAGEMENT = {
+    'DEFAULT_EXPORT_FORMAT': 'flat',
+    'DEFAULT_OUTPUT_DIR': 'frontend/public/translations',
+    'AUTO_VALIDATE': True,
+    'AUTO_FIX': False,
+    'BACKUP_BEFORE_EXPORT': True,
+    'NOTIFY_ON_ERRORS': True,
 }
 
-# Додаткові налаштування для стабільності
-CACHES['default']['OPTIONS']['COMPRESSOR'] = 'django_redis.compressors.zlib.ZlibCompressor'
+# ========== DEVELOPMENT/PRODUCTION СПЕЦИФІЧНІ НАЛАШТУВАННЯ ==========
+
+if DEBUG:
+    # Development налаштування
+    TRANSLATION_CACHE_SETTINGS['STATIC_TIMEOUT'] = 60
+    TRANSLATION_CACHE_SETTINGS['DYNAMIC_TIMEOUT'] = 30
+    
+    # Детальніше логування в development
+    LOGGING['loggers']['apps.api.views.translations']['level'] = 'DEBUG'
+    LOGGING['loggers']['apps.api.utils.translations']['level'] = 'DEBUG'
+    
+    # Відключення стиснення кешу в development
+    CACHES['default']['OPTIONS']['COMPRESSOR'] = 'django_redis.compressors.zlib.ZlibCompressor'
+    
+else:
+    # Production налаштування
+    TRANSLATION_CACHE_SETTINGS['ENABLE_COMPRESSION'] = True
+    
+    # Строже rate limiting
+    TRANSLATION_RATE_LIMITING['REQUESTS_PER_MINUTE'] = 30
+    TRANSLATION_RATE_LIMITING['REQUESTS_PER_HOUR'] = 500
+    
+    # Кращий компресор для production
+    CACHES['default']['OPTIONS']['COMPRESSOR'] = 'django_redis.compressors.lz4.Lz4Compressor'
+
+# ========== СПРОЩЕНІ UNFOLD НАЛАШТУВАННЯ ==========
+
+# Базові налаштування UNFOLD без reverse_lazy
+UNFOLD = {
+    "SITE_TITLE": "UGC Admin",
+    "SITE_HEADER": "UGC Administration", 
+    "SITE_URL": "/",
+    "SITE_ICON": lambda request: static("icon.svg"),
+    "SITE_SYMBOL": "speed",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": True,
+    "LOGIN": {
+        "image": lambda request: static("sample/login-bg.jpg"),
+    },
+    "STYLES": [
+        lambda request: static("css/styles.css"),
+    ],
+    "SCRIPTS": [
+        lambda request: static("js/script.js"),
+    ],
+    "COLORS": {
+        "primary": {
+            "50": "250 245 255",
+            "100": "243 232 255", 
+            "200": "233 213 255",
+            "300": "196 181 253",
+            "400": "167 139 250",
+            "500": "139 92 246",
+            "600": "124 58 237",
+            "700": "109 40 217",
+            "800": "91 33 182",
+            "900": "76 29 149",
+        },
+    },
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇬🇧",
+                "uk": "🇺🇦",
+            },
+        },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+        # Navigation буде додано через функцію після ініціалізації Django
+    },
+}
+
+# Функція для ініціалізації UNFOLD navigation після завантаження Django
+def setup_unfold_navigation():
+    """
+    Налаштовує навігацію UNFOLD після завантаження Django.
+    Викликається з apps.py
+    """
+    try:
+        from .unfold_config import get_unfold_navigation, get_unfold_tabs
+        UNFOLD["SIDEBAR"]["navigation"] = get_unfold_navigation()
+        UNFOLD["TABS"] = get_unfold_tabs()
+    except ImportError:
+        # Якщо файл unfold_config.py не існує, використовуємо базову навігацію
+        UNFOLD["SIDEBAR"]["navigation"] = [
+            {
+                "title": _("Адміністрування"),
+                "separator": True,
+                "items": [
+                    {
+                        "title": _("Головна"),
+                        "icon": "dashboard", 
+                        "link": "/admin/",
+                    },
+                ],
+            },
+        ]
