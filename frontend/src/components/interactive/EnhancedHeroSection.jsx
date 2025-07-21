@@ -43,7 +43,7 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
           <div className={`transform transition-all duration-1500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
 
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight py-20">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight pt-30">
               <span >Професійний одяг </span>
               <span >для </span>
               <span className="block text-gradient-blue animate-pulse">
@@ -87,7 +87,7 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
 
           {/* Статистика з анімацією */}
           <div className={`transform transition-all duration-1500 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pb-10">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (

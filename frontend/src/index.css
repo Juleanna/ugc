@@ -562,3 +562,10 @@ body {
   border-color: var(--color-primary) !important;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
 }
+
+/* Футер поверх анімованого фону */
+footer {
+  position: relative;
+  z-index: 10;
+  background-color: rgb(31, 41, 55); /* Темний фон футера */
+}

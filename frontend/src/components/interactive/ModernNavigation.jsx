@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@nextui-org/react';
-import { Menu, X, Home, Info, Briefcase, FolderOpen, Users, Phone } from 'lucide-react';
+import { Menu, X, Home, Info, Briefcase, FolderOpen, Phone } from 'lucide-react';
 
 const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   // Навігаційні елементи відповідно до ваших існуючих секцій
   const navigationItems = [
@@ -14,16 +13,6 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
     { id: 'projects', label: 'Проєкти', icon: FolderOpen },
     { id: 'contact', label: 'Контакти', icon: Phone },
   ];
-
-  // Відстеження скролу
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Обробка кліку по навігації
   const handleNavClick = (sectionId) => {
@@ -35,27 +24,17 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
 
   return (
     <>
-      {/* Липке меню */}
-      <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-200/30' 
-          : 'bg-transparent'
-      }`}>
+      {/* Липке меню - завжди біле */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg border-b border-gray-200/30">
         <div className="container mx-auto max-w-7xl px-4">
           <div className="flex items-center justify-between h-20">
             
             {/* Логотип */}
             <div className="flex items-center space-x-3">
-              <div className={`text-3xl font-bold transition-all duration-300 ${
-                isScrolled 
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' 
-                  : 'text-white drop-shadow-lg'
-              }`}>
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 UGC
               </div>
-              <div className={`text-sm font-medium transition-colors duration-300 ${
-                isScrolled ? 'text-gray-600' : 'text-white/90'
-              }`}>
+              <div className="text-sm font-medium text-gray-600">
                 Professional Clothing
               </div>
             </div>
@@ -68,23 +47,15 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
                   onClick={() => handleNavClick(item.id)}
                   className={`relative px-4 py-2 rounded-xl font-medium transition-all duration-300 group ${
                     activeSection === item.id
-                      ? isScrolled
-                        ? 'text-blue-600 bg-blue-50'
-                        : 'text-white bg-white/20'
-                      : isScrolled
-                        ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                        : 'text-white/90 hover:text-white hover:bg-white/20'
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
                   <span className="relative z-10">{item.label}</span>
                   
                   {/* Індикатор активної секції */}
                   {activeSection === item.id && (
-                    <div className={`absolute inset-0 rounded-xl transition-all duration-300 ${
-                      isScrolled 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 opacity-10' 
-                        : 'bg-white/30 backdrop-blur-sm'
-                    }`} />
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-10 transition-all duration-300" />
                   )}
                   
                   {/* Hover ефект */}
@@ -96,11 +67,7 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
             {/* CTA кнопка */}
             <div className="hidden lg:block">
               <Button
-                className={`font-medium px-6 py-2 rounded-xl transition-all duration-300 ${
-                  isScrolled
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5'
-                    : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 border border-white/30'
-                }`}
+                className="font-medium px-6 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 transition-all duration-300"
                 onClick={() => handleNavClick('contact')}
               >
                 Зв'язатися з нами
@@ -110,11 +77,7 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
             {/* Мобільне меню кнопка */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`lg:hidden p-2 rounded-xl transition-all duration-300 ${
-                isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/20'
-              }`}
+              className="lg:hidden p-2 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-300"
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
