@@ -41,14 +41,9 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
         <div className="text-center max-w-6xl mx-auto">
           {/* Головний заголовок з анімацією */}
           <div className={`transform transition-all duration-1500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <div className="mb-6">
-              <span className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100/80 backdrop-blur-sm border border-blue-200/50 text-blue-700 font-medium text-sm mb-6">
-                <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
-                Професійний виробник спецодягу в Україні
-              </span>
-            </div>
+
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight py-20">
               <span >Професійний одяг </span>
               <span >для </span>
               <span className="block text-gradient-blue animate-pulse">

@@ -9804,3 +9804,4 @@ INFO 2025-07-18 17:07:54,411 views 560 14040 Cache HIT для api_service_list
 INFO 2025-07-18 17:07:54,413 views 560 11936 Cache HIT для api_project_list
 INFO 2025-07-18 17:07:54,418 basehttp 560 14040 "GET /api/v1/services/ HTTP/1.1" 200 52
 INFO 2025-07-18 17:07:54,447 basehttp 560 11936 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:03,983 autoreload 13612 8224 Watching for file changes with StatReloader

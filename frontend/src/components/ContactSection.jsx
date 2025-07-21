@@ -25,16 +25,13 @@ const ContactSection = ({ formData, setFormData, handleFormSubmit, isSubmitting 
     <section id="contact" className="section-padding bg-gray-50">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <Chip color="success" variant="flat" size="lg" className="mb-6">
-            <Mail className="w-4 h-4 mr-2" />
-            Контакти
-          </Chip>
+
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Зв'яжіться з нами
             <br />
             <span className="text-gradient-blue">прямо зараз</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 ">
             Готові допомогти вам з будь-якими питаннями та замовленнями.
           </p>
         </div>
