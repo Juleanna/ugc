@@ -450,3 +450,34 @@ INFO 2025-07-21 15:35:27,567 autoreload 11844 12536 Watching for file changes wi
 INFO 2025-07-21 15:36:01,201 autoreload 3720 3400 Watching for file changes with StatReloader
 INFO 2025-07-21 15:36:08,865 autoreload 3720 3400 D:\ugc\backend\apps\api\translations.py changed, reloading.
 INFO 2025-07-21 15:36:10,374 autoreload 13496 2508 Watching for file changes with StatReloader
+WARNING 2025-07-21 15:36:45,282 log 13496 1184 Not Found: /api/
+WARNING 2025-07-21 15:36:45,283 basehttp 13496 1184 "GET /api/ HTTP/1.1" 404 2984
+INFO 2025-07-21 15:36:53,545 basehttp 13496 1184 "GET /api/v1/ HTTP/1.1" 200 713
+WARNING 2025-07-21 15:37:06,632 log 13496 12412 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:37:06,638 basehttp 13496 12412 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 15:37:06,679 log 13496 496 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:37:06,689 basehttp 13496 496 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:37:06,842 views 13496 2568 Cache SET для api_service_list
+INFO 2025-07-21 15:37:06,847 basehttp 13496 2568 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:37:06,863 views 13496 496 Cache HIT для api_service_list
+INFO 2025-07-21 15:37:06,865 basehttp 13496 496 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:37:06,917 views 13496 9892 Cache SET для api_project_list
+INFO 2025-07-21 15:37:06,953 basehttp 13496 9892 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:37:07,114 views 13496 496 Cache HIT для api_project_list
+INFO 2025-07-21 15:37:07,152 basehttp 13496 496 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 15:37:25,500 log 13496 1184 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:37:25,502 basehttp 13496 1184 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 15:38:00,165 log 13496 1184 Not Found: /translations-static
+WARNING 2025-07-21 15:38:00,173 basehttp 13496 1184 "GET /translations-static HTTP/1.1" 404 3029
+INFO 2025-07-21 15:38:12,389 basehttp 13496 1184 "GET /api/v1/ HTTP/1.1" 200 713
+WARNING 2025-07-21 15:38:59,192 log 13496 1184 Not Found: /api/v1/translations-static
+WARNING 2025-07-21 15:38:59,194 basehttp 13496 1184 "GET /api/v1/translations-static HTTP/1.1" 404 24553
+INFO 2025-07-21 15:39:18,896 basehttp 13496 1184 "GET /api/v1/translations/uk HTTP/1.1" 301 0
+INFO 2025-07-21 15:39:18,916 translations 13496 7956 Loaded translations for uk from file
+INFO 2025-07-21 15:39:18,917 basehttp 13496 7956 "GET /api/v1/translations/uk/ HTTP/1.1" 200 702
+INFO 2025-07-21 15:40:00,134 basehttp 13496 6272 "GET /api/v1/translations/uk/all HTTP/1.1" 301 0
+INFO 2025-07-21 15:40:00,147 translations 13496 6256 Loaded translations for uk from cache
+INFO 2025-07-21 15:40:00,259 translations 13496 6256 Loaded dynamic translations for uk from models
+INFO 2025-07-21 15:40:00,261 basehttp 13496 6256 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+INFO 2025-07-21 15:40:43,020 translations 13496 5520 Loaded translations for uk from cache
+INFO 2025-07-21 15:40:43,022 basehttp 13496 5520 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
