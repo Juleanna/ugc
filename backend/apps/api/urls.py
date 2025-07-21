@@ -3,7 +3,9 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 # Імпортуємо існуючі views
-from apps.api import views
+from .views import (HomePageViewSet, AboutPageViewSet, ServiceViewSet, JobPositionViewSet, JobApplicationViewSet,
+ OfficeViewSet, ContactInquiryViewSet, PartnershipInfoViewSet, PartnerInquiryViewSet,WorkplacePhotoViewSet,
+ProjectCategoryViewSet, ProjectViewSet)
 
 # Імпортуємо views для перекладів
 from .views.translations import (
@@ -20,30 +22,30 @@ from .views.translations import (
 router = DefaultRouter()
 
 # Контент
-router.register(r'homepage', views.HomePageViewSet, basename='homepage')
-router.register(r'about', views.AboutPageViewSet, basename='about')
+router.register(r'homepage', HomePageViewSet, basename='homepage')
+router.register(r'about', AboutPageViewSet, basename='about')
 
 # Послуги
-router.register(r'services', views.ServiceViewSet, basename='services')
+router.register(r'services', ServiceViewSet, basename='services')
 
 # Проекти  
-router.register(r'project-categories', views.ProjectCategoryViewSet, basename='projectcategory')
-router.register(r'projects', views.ProjectViewSet, basename='projects')
+router.register(r'project-categories', ProjectCategoryViewSet, basename='projectcategory')
+router.register(r'projects', ProjectViewSet, basename='projects')
 
 # Вакансії
-router.register(r'jobs', views.JobPositionViewSet, basename='jobs')
-router.register(r'job-applications', views.JobApplicationViewSet, basename='jobapplications')
+router.register(r'jobs', JobPositionViewSet, basename='jobs')
+router.register(r'job-applications', JobApplicationViewSet, basename='jobapplications')
 
 # Офіси та контакти
-router.register(r'offices', views.OfficeViewSet, basename='offices')
-router.register(r'contact-inquiries', views.ContactInquiryViewSet, basename='contactinquiries')
+router.register(r'offices', OfficeViewSet, basename='offices')
+router.register(r'contact-inquiries', ContactInquiryViewSet, basename='contactinquiries')
 
 # Партнерство
-router.register(r'partnership-info', views.PartnershipInfoViewSet, basename='partnershipinfo')
-router.register(r'partner-inquiries', views.PartnerInquiryViewSet, basename='partnerinquiries')
+router.register(r'partnership-info', PartnershipInfoViewSet, basename='partnershipinfo')
+router.register(r'partner-inquiries', PartnerInquiryViewSet, basename='partnerinquiries')
 
 # Фото
-router.register(r'workplace-photos', views.WorkplacePhotoViewSet, basename='workplacephotos')
+router.register(r'workplace-photos', WorkplacePhotoViewSet, basename='workplacephotos')
 
 # ============================= URL PATTERNS =============================
 urlpatterns = [

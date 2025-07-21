@@ -78,3 +78,11 @@ INFO 2025-07-21 13:45:55,748 autoreload 5004 5800 D:\ugc\backend\apps\api\urls.p
 INFO 2025-07-21 13:45:57,483 autoreload 5364 14000 Watching for file changes with StatReloader
 INFO 2025-07-21 13:59:55,396 autoreload 5364 14000 D:\ugc\backend\apps\api\urls.py changed, reloading.
 INFO 2025-07-21 13:59:57,545 autoreload 3068 2860 Watching for file changes with StatReloader
+INFO 2025-07-21 14:01:06,624 autoreload 14032 9936 Watching for file changes with StatReloader
+INFO 2025-07-21 14:04:20,750 autoreload 14032 9936 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 14:04:22,834 autoreload 9796 2752 Watching for file changes with StatReloader
+INFO 2025-07-21 14:04:25,997 autoreload 9796 2752 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 14:04:28,228 autoreload 6784 10052 Watching for file changes with StatReloader
+INFO 2025-07-21 14:04:29,861 autoreload 6784 10052 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 14:04:31,449 autoreload 4124 9096 Watching for file changes with StatReloader
+INFO 2025-07-21 14:09:28,559 autoreload 8896 9996 Watching for file changes with StatReloader

@@ -10,6 +10,8 @@ from django.utils import timezone
 from datetime import timedelta
 import logging
 from .cache_utils import SafeCache, SafeBaseViewSetWithCache
+from django.conf import settings
+
 
 from .serializers import *
 
