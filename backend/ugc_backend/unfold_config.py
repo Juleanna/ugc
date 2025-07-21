@@ -30,9 +30,24 @@ def get_unfold_navigation():
                     "link": reverse_lazy("admin:content_homepage_changelist"),
                 },
                 {
-                    "title": _("Сторінки"),
+                    "title": _("Про нас"),
                     "icon": "article",
-                    "link": reverse_lazy("admin:content_page_changelist"),
+                    "link": reverse_lazy("admin:content_aboutpage_changelist"),
+                },
+                {
+                    "title": _("Команда"),
+                    "icon": "people",
+                    "link": reverse_lazy("admin:content_teammember_changelist"),
+                },
+                {
+                    "title": _("Сертифікати"),
+                    "icon": "verified",
+                    "link": reverse_lazy("admin:content_certificate_changelist"),
+                },
+                {
+                    "title": _("Фото виробництва"),
+                    "icon": "photo_camera",
+                    "link": reverse_lazy("admin:content_productionphoto_changelist"),
                 },
             ],
         },
@@ -56,6 +71,11 @@ def get_unfold_navigation():
                     "icon": "recommend",
                     "link": "/admin/services/service/?is_recommended__exact=1",
                 },
+                {
+                    "title": _("Функції послуг"),
+                    "icon": "featured_play_list",
+                    "link": reverse_lazy("admin:services_servicefeature_changelist"),
+                },
             ],
         },
         {
@@ -78,6 +98,16 @@ def get_unfold_navigation():
                     "icon": "recommend",
                     "link": "/admin/projects/project/?is_recommended__exact=1",
                 },
+                {
+                    "title": _("Категорії"),
+                    "icon": "category",
+                    "link": reverse_lazy("admin:projects_projectcategory_changelist"),
+                },
+                {
+                    "title": _("Зображення проектів"),
+                    "icon": "image",
+                    "link": reverse_lazy("admin:projects_projectimage_changelist"),
+                },
             ],
         },
         {
@@ -86,46 +116,24 @@ def get_unfold_navigation():
             "collapsible": True,
             "items": [
                 {
-                    "title": _("Всі партнери"),
-                    "icon": "handshake",
-                    "link": reverse_lazy("admin:partners_partner_changelist"),
+                    "title": _("Інформація про партнерство"),
+                    "icon": "info",
+                    "link": reverse_lazy("admin:partners_partnershipinfo_changelist"),
                 },
                 {
-                    "title": _("Активні"),
-                    "icon": "verified",
-                    "link": "/admin/partners/partner/?is_active__exact=1",
-                },
-            ],
-        },
-        {
-            "title": _("Контакти"),
-            "separator": True,
-            "collapsible": True,
-            "items": [
-                {
-                    "title": _("Всі офіси"),
-                    "icon": "location_on",
-                    "link": reverse_lazy("admin:contacts_contact_changelist"),
+                    "title": _("Етапи роботи"),
+                    "icon": "timeline",
+                    "link": reverse_lazy("admin:partners_workstage_changelist"),
                 },
                 {
-                    "title": _("Активні"),
-                    "icon": "verified",
-                    "link": "/admin/contacts/contact/?is_active__exact=1",
+                    "title": _("Заявки партнерів"),
+                    "icon": "contact_mail",
+                    "link": reverse_lazy("admin:partners_partnerinquiry_changelist"),
                 },
                 {
-                    "title": _("Головні офіси"),
-                    "icon": "business",
-                    "link": "/admin/contacts/contact/?is_main__exact=1",
-                },
-                {
-                    "title": _("Повідомлення"),
-                    "icon": "email",
-                    "link": reverse_lazy("admin:contacts_contactmessage_changelist"),
-                },
-                {
-                    "title": _("Необроблені"),
-                    "icon": "mark_email_unread",
-                    "link": "/admin/contacts/contactmessage/?is_processed__exact=0",
+                    "title": _("Нові заявки"),
+                    "icon": "fiber_new",
+                    "link": "/admin/partners/partnerinquiry/?is_processed__exact=0",
                 },
             ],
         },
@@ -136,18 +144,18 @@ def get_unfold_navigation():
             "items": [
                 {
                     "title": _("Всі вакансії"),
-                    "icon": "work_history",
-                    "link": reverse_lazy("admin:jobs_job_changelist"),
+                    "icon": "work",
+                    "link": reverse_lazy("admin:jobs_jobposition_changelist"),
                 },
                 {
                     "title": _("Активні"),
                     "icon": "verified",
-                    "link": "/admin/jobs/job/?is_active__exact=1",
+                    "link": "/admin/jobs/jobposition/?is_active__exact=1",
                 },
                 {
                     "title": _("Термінові"),
                     "icon": "priority_high",
-                    "link": "/admin/jobs/job/?is_urgent__exact=1",
+                    "link": "/admin/jobs/jobposition/?is_urgent__exact=1",
                 },
                 {
                     "title": _("Заявки"),
@@ -158,6 +166,43 @@ def get_unfold_navigation():
                     "title": _("Нові заявки"),
                     "icon": "fiber_new",
                     "link": "/admin/jobs/jobapplication/?status__exact=new",
+                },
+                {
+                    "title": _("Фото робочих місць"),
+                    "icon": "photo_camera",
+                    "link": reverse_lazy("admin:jobs_workplacephoto_changelist"),
+                },
+            ],
+        },
+        {
+            "title": _("Контакти"),
+            "separator": True,
+            "collapsible": True,
+            "items": [
+                {
+                    "title": _("Офіси/Фабрики"),
+                    "icon": "location_on",
+                    "link": reverse_lazy("admin:contacts_office_changelist"),
+                },
+                {
+                    "title": _("Активні офіси"),
+                    "icon": "verified",
+                    "link": "/admin/contacts/office/?is_active__exact=1",
+                },
+                {
+                    "title": _("Головні офіси"),
+                    "icon": "business",
+                    "link": "/admin/contacts/office/?is_main__exact=1",
+                },
+                {
+                    "title": _("Звернення"),
+                    "icon": "email",
+                    "link": reverse_lazy("admin:contacts_contactinquiry_changelist"),
+                },
+                {
+                    "title": _("Нові звернення"),
+                    "icon": "mark_email_unread",
+                    "link": "/admin/contacts/contactinquiry/?is_processed__exact=0",
                 },
             ],
         },
@@ -192,57 +237,151 @@ def get_unfold_tabs():
     return [
         {
             "models": [
-                "apps.content.models.HomePage",
+                "content.homepage",
+                "content.aboutpage",
             ],
             "items": [
                 {
                     "title": _("Основна інформація"),
                     "icon": "info",
-                    "fields": ["title", "subtitle", "description"],
-                },
-                {
-                    "title": _("SEO"),
-                    "icon": "search",
-                    "fields": ["meta_title", "meta_description", "meta_keywords"],
-                },
-            ],
-        },
-        {
-            "models": [
-                "apps.services.models.Service",
-            ],
-            "items": [
-                {
-                    "title": _("Основна інформація"),
-                    "icon": "info",
-                    "fields": ["title", "description", "price"],
-                },
-                {
-                    "title": _("Налаштування"),
-                    "icon": "settings",
-                    "fields": ["is_active", "is_recommended", "order"],
-                },
-            ],
-        },
-        {
-            "models": [
-                "apps.projects.models.Project",
-            ],
-            "items": [
-                {
-                    "title": _("Основна інформація"),
-                    "icon": "info",
-                    "fields": ["title", "description", "client"],
+                    "link": "#",
                 },
                 {
                     "title": _("Медіа"),
                     "icon": "image",
-                    "fields": ["image", "gallery"],
+                    "link": "#",
+                },
+            ],
+        },
+        {
+            "models": [
+                "content.teammember",
+            ],
+            "items": [
+                {
+                    "title": _("Особиста інформація"),
+                    "icon": "person",
+                    "link": "#",
+                },
+                {
+                    "title": _("Контакти"),
+                    "icon": "contact_mail",
+                    "link": "#",
+                },
+            ],
+        },
+        {
+            "models": [
+                "services.service",
+            ],
+            "items": [
+                {
+                    "title": _("Основна інформація"),
+                    "icon": "info",
+                    "link": "#",
+                },
+                {
+                    "title": _("Медіа"),
+                    "icon": "image",
+                    "link": "#",
                 },
                 {
                     "title": _("Налаштування"),
                     "icon": "settings",
-                    "fields": ["is_active", "is_recommended", "order"],
+                    "link": "#",
+                },
+            ],
+        },
+        {
+            "models": [
+                "projects.project",
+            ],
+            "items": [
+                {
+                    "title": _("Основна інформація"),
+                    "icon": "info",
+                    "link": "#",
+                },
+                {
+                    "title": _("Медіа"),
+                    "icon": "image",
+                    "link": "#",
+                },
+                {
+                    "title": _("Налаштування"),
+                    "icon": "settings",
+                    "link": "#",
+                },
+            ],
+        },
+        {
+            "models": [
+                "jobs.jobposition",
+            ],
+            "items": [
+                {
+                    "title": _("Основна інформація"),
+                    "icon": "info",
+                    "link": "#",
+                },
+                {
+                    "title": _("Вимоги"),
+                    "icon": "checklist",
+                    "link": "#",
+                },
+                {
+                    "title": _("Зарплата"),
+                    "icon": "payments",
+                    "link": "#",
+                },
+                {
+                    "title": _("Налаштування"),
+                    "icon": "settings",
+                    "link": "#",
+                },
+            ],
+        },
+        {
+            "models": [
+                "partners.partnershipinfo",
+            ],
+            "items": [
+                {
+                    "title": _("Основна інформація"),
+                    "icon": "info",
+                    "link": "#",
+                },
+                {
+                    "title": _("FAQ"),
+                    "icon": "help",
+                    "link": "#",
+                },
+                {
+                    "title": _("Налаштування"),
+                    "icon": "settings",
+                    "link": "#",
+                },
+            ],
+        },
+        {
+            "models": [
+                "contacts.office",
+            ],
+            "items": [
+                {
+                    "title": _("Основна інформація"),
+                    "icon": "info",
+                    "link": "#",
+                },
+                {
+                    "title": _("Контакти"),
+                    "icon": "contact_mail",
+                    "link": "#",
+                },
+                {
+                    "title": _("Місцезнаходження"),
+                    "icon": "location_on",
+                    "link": "#",
                 },
             ],
         },

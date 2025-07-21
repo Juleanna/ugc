@@ -28,8 +28,17 @@ class UgcBackendConfig(AppConfig):
             
             # Оновлюємо UNFOLD конфігурацію
             if hasattr(settings, 'UNFOLD'):
-                settings.UNFOLD["SIDEBAR"]["navigation"] = get_unfold_navigation()
-                settings.UNFOLD["TABS"] = get_unfold_tabs()
+                navigation = get_unfold_navigation()
+                tabs = get_unfold_tabs()
+                
+                # Безпечно оновлюємо налаштування
+                if navigation:
+                    settings.UNFOLD["SIDEBAR"]["navigation"] = navigation
+                
+                if tabs:
+                    settings.UNFOLD["TABS"] = tabs
+                
+                print("✓ UNFOLD navigation configured successfully")
                 
         except ImportError as e:
             # Якщо файл unfold_config.py не існує або має помилки
@@ -50,6 +59,16 @@ class UgcBackendConfig(AppConfig):
                         ],
                     },
                 ]
+                # Видаляємо проблемне налаштування TABS
+                if "TABS" in settings.UNFOLD:
+                    del settings.UNFOLD["TABS"]
+                    
+        except Exception as e:
+            print(f"Error configuring UNFOLD: {e}")
+            # У випадку будь-якої помилки, видаляємо проблемні налаштування
+            if hasattr(settings, 'UNFOLD'):
+                if "TABS" in settings.UNFOLD:
+                    del settings.UNFOLD["TABS"]
 
     def setup_translations(self):
         """Ініціалізує систему перекладів"""

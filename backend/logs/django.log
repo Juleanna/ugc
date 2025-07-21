@@ -87,3 +87,269 @@ INFO 2025-07-21 14:04:29,861 autoreload 6784 10052 D:\ugc\backend\apps\api\urls.
 INFO 2025-07-21 14:04:31,449 autoreload 4124 9096 Watching for file changes with StatReloader
 INFO 2025-07-21 14:09:28,559 autoreload 8896 9996 Watching for file changes with StatReloader
 INFO 2025-07-21 14:11:05,106 autoreload 3368 7208 Watching for file changes with StatReloader
+INFO 2025-07-21 14:50:12,132 autoreload 3368 7208 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 14:50:14,814 autoreload 13020 12900 Watching for file changes with StatReloader
+INFO 2025-07-21 14:52:11,578 autoreload 1360 11472 Watching for file changes with StatReloader
+INFO 2025-07-21 14:54:21,778 autoreload 1360 11472 D:\ugc\backend\apps\api\views\__init__.py changed, reloading.
+INFO 2025-07-21 14:54:29,874 autoreload 8444 12080 Watching for file changes with StatReloader
+INFO 2025-07-21 14:55:08,150 autoreload 14516 11724 Watching for file changes with StatReloader
+INFO 2025-07-21 14:56:23,669 autoreload 10512 6752 Watching for file changes with StatReloader
+INFO 2025-07-21 14:56:40,267 views 10512 13140 Cache SET для api_aboutpage_list
+INFO 2025-07-21 14:56:40,270 basehttp 10512 13140 "GET /api/v1/about/ HTTP/1.1" 200 52
+WARNING 2025-07-21 14:56:41,387 log 10512 13140 Not Found: /favicon.ico
+WARNING 2025-07-21 14:56:41,429 basehttp 10512 13140 "GET /favicon.ico HTTP/1.1" 404 3005
+ERROR 2025-07-21 14:56:43,080 log 10512 13140 Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 139, in index
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 112, in each_context
+    "tab_list": self.get_tabs_list(request),
+                ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 324, in get_tabs_list
+    if isinstance(item["link"], Callable):
+                  ~~~~^^^^^^^^
+KeyError: 'link'
+ERROR 2025-07-21 14:56:43,086 basehttp 10512 13140 "GET /admin/ HTTP/1.1" 500 129795
+ERROR 2025-07-21 14:56:49,460 log 10512 13140 Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 139, in index
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 112, in each_context
+    "tab_list": self.get_tabs_list(request),
+                ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 324, in get_tabs_list
+    if isinstance(item["link"], Callable):
+                  ~~~~^^^^^^^^
+KeyError: 'link'
+ERROR 2025-07-21 14:56:49,463 basehttp 10512 13140 "GET /admin/ HTTP/1.1" 500 129932
+INFO 2025-07-21 15:01:03,556 autoreload 10512 6752 D:\ugc\backend\ugc_backend\unfold_config.py changed, reloading.
+INFO 2025-07-21 15:01:05,659 autoreload 4152 1132 Watching for file changes with StatReloader
+INFO 2025-07-21 15:01:22,019 autoreload 8480 6508 Watching for file changes with StatReloader
+ERROR 2025-07-21 15:01:25,066 log 8480 5424 Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 139, in index
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 121, in each_context
+    "sidebar_navigation": self.get_sidebar_list(request)
+                          ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 240, in get_sidebar_list
+    group["items"] = self._get_navigation_items(request, group["items"], tabs)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 256, in _get_navigation_items
+    item["active"] = self._get_is_active(
+                     ~~~~~~~~~~~~~~~~~~~^
+        request, item.get("link_callback") or link
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 372, in _get_is_active
+    link = str(link)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\functional.py", line 119, in __str__
+    return str(self.__cast())
+               ~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\functional.py", line 110, in __cast
+    return func(*self._args, **self._kw)
+  File "D:\ugc-project\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'content_page_changelist' not found. 'content_page_changelist' is not a valid view function or pattern name.
+ERROR 2025-07-21 15:01:25,073 basehttp 8480 5424 "GET /admin/ HTTP/1.1" 500 162475
+INFO 2025-07-21 15:01:51,041 autoreload 8480 6508 D:\ugc\backend\ugc_backend\apps.py changed, reloading.
+INFO 2025-07-21 15:01:52,880 autoreload 8064 9240 Watching for file changes with StatReloader
+ERROR 2025-07-21 15:01:56,239 log 8064 11800 Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 139, in index
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 121, in each_context
+    "sidebar_navigation": self.get_sidebar_list(request)
+                          ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 240, in get_sidebar_list
+    group["items"] = self._get_navigation_items(request, group["items"], tabs)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 256, in _get_navigation_items
+    item["active"] = self._get_is_active(
+                     ~~~~~~~~~~~~~~~~~~~^
+        request, item.get("link_callback") or link
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\ugc-project\venv\Lib\site-packages\unfold\sites.py", line 372, in _get_is_active
+    link = str(link)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\functional.py", line 119, in __str__
+    return str(self.__cast())
+               ~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\functional.py", line 110, in __cast
+    return func(*self._args, **self._kw)
+  File "D:\ugc-project\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'content_page_changelist' not found. 'content_page_changelist' is not a valid view function or pattern name.
+ERROR 2025-07-21 15:01:56,250 basehttp 8064 11800 "GET /admin/ HTTP/1.1" 500 162475
+WARNING 2025-07-21 15:03:28,488 log 8064 2876 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:03:28,489 basehttp 8064 2876 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 15:03:28,524 log 8064 12528 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:03:28,527 basehttp 8064 12528 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:03:28,805 views 8064 11300 Cache SET для api_service_list
+INFO 2025-07-21 15:03:28,813 basehttp 8064 11300 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:03:28,857 views 8064 12528 Cache HIT для api_service_list
+INFO 2025-07-21 15:03:28,875 basehttp 8064 12528 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:03:28,877 views 8064 4076 Cache SET для api_project_list
+INFO 2025-07-21 15:03:28,907 basehttp 8064 4076 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:03:28,940 views 8064 12528 Cache HIT для api_project_list
+INFO 2025-07-21 15:03:28,942 basehttp 8064 12528 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:04:26,241 autoreload 8064 9240 D:\ugc\backend\ugc_backend\unfold_config.py changed, reloading.
+INFO 2025-07-21 15:04:28,307 autoreload 14272 1336 Watching for file changes with StatReloader
+INFO 2025-07-21 15:04:29,175 basehttp 14272 8636 "GET /admin/ HTTP/1.1" 200 96811
+INFO 2025-07-21 15:04:29,230 basehttp 14272 8636 "GET /static/unfold/fonts/inter/styles.css HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,245 basehttp 14272 12476 "GET /static/unfold/fonts/material-symbols/styles.css HTTP/1.1" 304 0
+WARNING 2025-07-21 15:04:29,277 basehttp 14272 3860 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-21 15:04:29,290 basehttp 14272 1808 "GET /static/unfold/css/simplebar/simplebar.css HTTP/1.1" 304 0
+WARNING 2025-07-21 15:04:29,290 basehttp 14272 8636 "GET /static/css/styles.css HTTP/1.1" 404 1969
+INFO 2025-07-21 15:04:29,292 basehttp 14272 12476 "GET /static/unfold/js/chart/chart.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,294 basehttp 14272 4408 "GET /static/unfold/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,300 basehttp 14272 12620 "GET /static/unfold/js/htmx/htmx.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,321 basehttp 14272 3236 "GET /static/unfold/js/app.js HTTP/1.1" 304 0
+WARNING 2025-07-21 15:04:29,342 basehttp 14272 12476 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 15:04:29,345 basehttp 14272 4408 "GET /static/unfold/js/simplebar/simplebar.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,368 basehttp 14272 3236 "GET /static/unfold/js/alpine/alpine.persist.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,370 basehttp 14272 12620 "GET /static/unfold/js/alpine/alpine.sort.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,371 basehttp 14272 4408 "GET /static/unfold/js/alpine/alpine.anchor.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,374 basehttp 14272 1808 "GET /static/unfold/js/alpine/alpine.resize.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,383 basehttp 14272 15208 "GET /static/unfold/js/alpine/alpine.js HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,551 basehttp 14272 15208 "GET /static/unfold/fonts/inter/Inter-SemiBold.woff2 HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,552 basehttp 14272 1808 "GET /static/unfold/fonts/material-symbols/Material-Symbols-Outlined.woff2 HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,552 basehttp 14272 4408 "GET /static/unfold/fonts/inter/Inter-Medium.woff2 HTTP/1.1" 304 0
+INFO 2025-07-21 15:04:29,553 basehttp 14272 12620 "GET /static/unfold/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 304 0
+WARNING 2025-07-21 15:04:44,620 log 14272 14900 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:04:44,622 basehttp 14272 14900 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 15:04:44,645 log 14272 5188 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:04:44,647 basehttp 14272 5188 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:04:44,671 views 14272 5268 Cache HIT для api_project_list
+INFO 2025-07-21 15:04:44,673 views 14272 14828 Cache HIT для api_service_list
+INFO 2025-07-21 15:04:44,676 basehttp 14272 5268 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:04:44,680 basehttp 14272 14828 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:04:44,695 views 14272 5188 Cache HIT для api_service_list
+INFO 2025-07-21 15:04:44,695 views 14272 5268 Cache HIT для api_project_list
+INFO 2025-07-21 15:04:44,696 basehttp 14272 5188 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:04:44,698 basehttp 14272 5268 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:06:29,366 autoreload 10196 2128 Watching for file changes with StatReloader
+WARNING 2025-07-21 15:06:44,893 log 10196 3464 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:06:44,894 basehttp 10196 3464 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 15:06:44,925 log 10196 11772 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:06:44,926 basehttp 10196 11772 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:06:44,966 views 10196 10616 Cache HIT для api_project_list
+INFO 2025-07-21 15:06:44,969 basehttp 10196 10616 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:06:44,989 views 10196 11772 Cache HIT для api_project_list
+INFO 2025-07-21 15:06:44,993 basehttp 10196 11772 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:06:45,011 views 10196 10192 Cache HIT для api_service_list
+INFO 2025-07-21 15:06:45,014 basehttp 10196 10192 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:06:45,036 views 10196 11772 Cache HIT для api_service_list
+INFO 2025-07-21 15:06:45,044 basehttp 10196 11772 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:06:59,201 basehttp 10196 4888 "GET /admin/ HTTP/1.1" 200 96811
+WARNING 2025-07-21 15:06:59,291 basehttp 10196 4888 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 15:07:03,780 log 10196 12844 Not Found: /
+WARNING 2025-07-21 15:07:03,782 basehttp 10196 12844 "GET / HTTP/1.1" 404 2954
+INFO 2025-07-21 15:07:20,896 basehttp 10196 12844 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:10:11,696 autoreload 10196 2128 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:10:13,588 autoreload 14708 6164 Watching for file changes with StatReloader
+INFO 2025-07-21 15:10:17,824 autoreload 14708 6164 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:10:20,118 autoreload 13876 11500 Watching for file changes with StatReloader
+INFO 2025-07-21 15:10:22,415 autoreload 13876 11500 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:10:24,558 autoreload 13760 7892 Watching for file changes with StatReloader
+INFO 2025-07-21 15:10:26,834 autoreload 13760 7892 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:10:29,128 autoreload 14900 11244 Watching for file changes with StatReloader
+INFO 2025-07-21 15:10:34,074 autoreload 14900 11244 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:10:42,069 autoreload 9972 1204 Watching for file changes with StatReloader
+INFO 2025-07-21 15:10:54,993 basehttp 9972 7884 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:12:36,165 autoreload 9972 1204 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:12:38,013 autoreload 12296 2188 Watching for file changes with StatReloader
+INFO 2025-07-21 15:13:05,855 autoreload 12296 2188 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:13:07,697 autoreload 14784 3076 Watching for file changes with StatReloader
+INFO 2025-07-21 15:13:12,500 autoreload 14784 3076 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:13:14,472 autoreload 3908 6924 Watching for file changes with StatReloader
+INFO 2025-07-21 15:13:40,024 autoreload 3908 6924 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:13:41,782 autoreload 15000 10268 Watching for file changes with StatReloader
+INFO 2025-07-21 15:14:12,142 autoreload 15000 10268 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:14:14,557 autoreload 2876 13020 Watching for file changes with StatReloader
+INFO 2025-07-21 15:14:17,450 autoreload 2876 13020 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:14:19,325 autoreload 13964 6356 Watching for file changes with StatReloader
+INFO 2025-07-21 15:14:24,158 autoreload 13964 6356 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:14:26,304 autoreload 1472 14308 Watching for file changes with StatReloader
+INFO 2025-07-21 15:14:33,900 basehttp 1472 13200 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:14:59,145 autoreload 9832 14272 Watching for file changes with StatReloader
+INFO 2025-07-21 15:15:15,074 basehttp 9832 14084 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:16:00,522 autoreload 9832 14272 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:16:02,693 autoreload 5004 1664 Watching for file changes with StatReloader
+INFO 2025-07-21 15:16:05,188 autoreload 5004 1664 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:16:07,028 autoreload 4184 3044 Watching for file changes with StatReloader
+INFO 2025-07-21 15:16:11,800 basehttp 4184 10804 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:16:44,688 autoreload 4184 3044 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:16:47,806 autoreload 10328 10652 Watching for file changes with StatReloader
+INFO 2025-07-21 15:16:50,735 autoreload 10328 10652 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:16:52,605 autoreload 9172 2868 Watching for file changes with StatReloader

@@ -32,7 +32,7 @@ class TranslationManager:
     def preload_translations():
         """Попередньо завантажує переклади в кеш"""
         from django.conf import settings
-        from .translations_views import TranslationsAPIView, DynamicTranslationsAPIView
+        from .translations import TranslationsAPIView, DynamicTranslationsAPIView
         
         for lang_code, _ in settings.LANGUAGES:
             try:
@@ -53,7 +53,7 @@ class TranslationManager:
     def export_to_frontend(output_path):
         """Експортує переклади для фронтенду"""
         from django.conf import settings
-        from .translations_views import TranslationsAPIView, DynamicTranslationsAPIView
+        from .translations import TranslationsAPIView, DynamicTranslationsAPIView
         
         os.makedirs(output_path, exist_ok=True)
         
