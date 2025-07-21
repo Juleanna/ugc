@@ -1,4 +1,4 @@
-# backend/apps/api/views/translations.py
+# backend/apps/api/translations.py
 import json
 import os
 from django.http import JsonResponse
@@ -69,23 +69,71 @@ class TranslationsAPIView(View):
                 return {}
         else:
             logger.warning(f"Translation file not found: {file_path}")
-            return {}
+            return self.get_default_translations(lang)
+    
+    def get_default_translations(self, lang):
+        """Повертає базові переклади якщо файл не знайдено"""
+        if lang == 'uk':
+            return {
+                "nav.home": "Головна",
+                "nav.about": "Про нас",
+                "nav.services": "Послуги",
+                "nav.projects": "Проекти",
+                "nav.contact": "Контакти",
+                "common.loading": "Завантаження...",
+                "common.error": "Помилка",
+                "common.success": "Успіх",
+                "common.save": "Зберегти",
+                "common.cancel": "Скасувати",
+                "form.name": "Ім'я",
+                "form.email": "Електронна пошта",
+                "form.phone": "Телефон",
+                "form.message": "Повідомлення"
+            }
+        else:
+            return {
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.services": "Services", 
+                "nav.projects": "Projects",
+                "nav.contact": "Contact",
+                "common.loading": "Loading...",
+                "common.error": "Error",
+                "common.success": "Success",
+                "common.save": "Save",
+                "common.cancel": "Cancel",
+                "form.name": "Name",
+                "form.email": "Email",
+                "form.phone": "Phone",
+                "form.message": "Message"
+            }
 
 class DynamicTranslationsAPIView(View):
     """API для динамічних перекладів з моделей"""
     
     def get(self, request, lang='uk'):
         try:
-            # Тут буде логіка для отримання перекладів з моделей
-            # Поки що повертаємо порожній результат
-            dynamic_translations = self.get_model_translations(lang)
+            # Спробуємо отримати з кешу
+            cache_key = f'dynamic_translations_{lang}'
+            translations = cache.get(cache_key)
+            
+            if translations is None:
+                # Завантажуємо з моделей
+                translations = self.load_dynamic_translations(lang)
+                
+                # Зберігаємо в кеш на 15 хвилин
+                cache.set(cache_key, translations, 60 * 15)
+                logger.info(f"Loaded dynamic translations for {lang} from models")
+            else:
+                logger.info(f"Loaded dynamic translations for {lang} from cache")
             
             return JsonResponse({
                 'language': lang,
-                'translations': dynamic_translations,
-                'count': len(dynamic_translations),
+                'translations': translations,
+                'count': len(translations),
                 'source': 'dynamic'
             })
+            
         except Exception as e:
             logger.error(f"Error loading dynamic translations for {lang}: {str(e)}")
             return JsonResponse({
@@ -95,34 +143,29 @@ class DynamicTranslationsAPIView(View):
                 'count': 0
             }, status=500)
     
-    def get_model_translations(self, lang):
-        """Отримує переклади з моделей"""
+    def load_dynamic_translations(self, lang):
+        """Завантажує переклади з Django моделей"""
         dynamic_translations = {}
         
         try:
-            # Приклад отримання перекладів з моделей
-            # Якщо використовуєте django-modeltranslation
-            
             # Переклади послуг
             try:
                 from apps.services.models import Service
                 services = Service.objects.filter(is_active=True)
                 
                 for service in services:
-                    # Якщо є поле title з перекладами
                     if hasattr(service, f'title_{lang}'):
                         title = getattr(service, f'title_{lang}', None)
                         if title:
                             dynamic_translations[f'service.{service.id}.title'] = title
                     
-                    # Якщо є поле description з перекладами
                     if hasattr(service, f'description_{lang}'):
-                        description = getattr(service, f'description_{lang}', None)
-                        if description:
-                            dynamic_translations[f'service.{service.id}.description'] = description
+                        desc = getattr(service, f'description_{lang}', None)
+                        if desc:
+                            dynamic_translations[f'service.{service.id}.description'] = desc
                             
             except ImportError:
-                pass  # Модель не існує
+                logger.warning("Services app not found")
             
             # Переклади проектів
             try:
@@ -136,21 +179,30 @@ class DynamicTranslationsAPIView(View):
                             dynamic_translations[f'project.{project.id}.title'] = title
                             
             except ImportError:
-                pass  # Модель не існує
+                logger.warning("Projects app not found")
             
-            # Переклади категорій
+            # Переклади контенту
             try:
-                from apps.content.models import Category
-                categories = Category.objects.filter(is_active=True)
+                from apps.content.models import HomePage, AboutPage
                 
-                for category in categories:
-                    if hasattr(category, f'name_{lang}'):
-                        name = getattr(category, f'name_{lang}', None)
-                        if name:
-                            dynamic_translations[f'category.{category.id}.name'] = name
+                # Головна сторінка
+                homepage = HomePage.objects.filter(is_active=True).first()
+                if homepage:
+                    if hasattr(homepage, f'company_description_{lang}'):
+                        desc = getattr(homepage, f'company_description_{lang}', None)
+                        if desc:
+                            dynamic_translations['homepage.company_description'] = desc
+                
+                # Сторінка про нас
+                aboutpage = AboutPage.objects.filter(is_active=True).first()
+                if aboutpage:
+                    if hasattr(aboutpage, f'history_text_{lang}'):
+                        history = getattr(aboutpage, f'history_text_{lang}', None)
+                        if history:
+                            dynamic_translations['aboutpage.history_text'] = history
                             
             except ImportError:
-                pass  # Модель не існує
+                logger.warning("Content app not found")
                 
         except Exception as e:
             logger.error(f"Error getting model translations for {lang}: {e}")
@@ -203,81 +255,6 @@ class AllTranslationsAPIView(View):
                 'count': 0
             }, status=500)
 
-@method_decorator(csrf_exempt, name='dispatch')
-class TranslationUpdateWebhook(View):
-    """Webhook для оновлення кешу при зміні перекладів"""
-    
-    def post(self, request):
-        try:
-            # Очищаємо кеш
-            for lang_code, _ in settings.LANGUAGES:
-                cache_keys = [
-                    f'static_translations_{lang_code}',
-                    f'dynamic_translations_{lang_code}',
-                    f'combined_translations_{lang_code}'
-                ]
-                
-                for key in cache_keys:
-                    cache.delete(key)
-            
-            logger.info("Translation cache cleared via webhook")
-            
-            return JsonResponse({
-                'status': 'success', 
-                'message': 'Translation cache cleared successfully'
-            })
-        except Exception as e:
-            logger.error(f"Error clearing translation cache: {str(e)}")
-            return JsonResponse({
-                'status': 'error', 
-                'message': str(e)
-            }, status=500)
-
-class TranslationStatsView(View):
-    """Статистика перекладів"""
-    
-    def get(self, request):
-        try:
-            stats = {}
-            
-            for lang_code, lang_name in settings.LANGUAGES:
-                # Статичні переклади
-                static_view = TranslationsAPIView()
-                static_response = static_view.get(request, lang_code)
-                
-                if static_response.status_code == 200:
-                    static_data = json.loads(static_response.content)
-                    static_count = static_data.get('count', 0)
-                else:
-                    static_count = 0
-                
-                # Динамічні переклади
-                dynamic_view = DynamicTranslationsAPIView()
-                dynamic_response = dynamic_view.get(request, lang_code)
-                
-                if dynamic_response.status_code == 200:
-                    dynamic_data = json.loads(dynamic_response.content)
-                    dynamic_count = dynamic_data.get('count', 0)
-                else:
-                    dynamic_count = 0
-                
-                stats[lang_code] = {
-                    'name': lang_name,
-                    'static_count': static_count,
-                    'dynamic_count': dynamic_count,
-                    'total_count': static_count + dynamic_count
-                }
-            
-            return JsonResponse({
-                'languages': stats,
-                'total_languages': len(settings.LANGUAGES)
-            })
-        except Exception as e:
-            logger.error(f"Error getting translation stats: {str(e)}")
-            return JsonResponse({
-                'error': str(e)
-            }, status=500)
-
 class TranslationSearchView(View):
     """Пошук перекладів"""
     
@@ -287,11 +264,10 @@ class TranslationSearchView(View):
             
             if not query:
                 return JsonResponse({
-                    'error': 'Query parameter "q" is required',
-                    'results': {}
+                    'error': 'Query parameter "q" is required'
                 }, status=400)
             
-            # Завантажуємо переклади
+            # Отримуємо всі переклади
             static_view = TranslationsAPIView()
             static_response = static_view.get(request, lang)
             
@@ -307,7 +283,7 @@ class TranslationSearchView(View):
             
             for key, value in translations.items():
                 if (query_lower in key.lower() or 
-                    query_lower in value.lower()):
+                    query_lower in str(value).lower()):
                     results[key] = value
             
             return JsonResponse({
@@ -361,4 +337,78 @@ class TranslationKeysView(View):
             logger.error(f"Error getting translation keys: {str(e)}")
             return JsonResponse({
                 'error': str(e)
+            }, status=500)
+
+class TranslationStatsView(View):
+    """Статистика перекладів"""
+    
+    def get(self, request):
+        try:
+            stats = {}
+            
+            for lang_code, lang_name in settings.LANGUAGES:
+                # Статичні переклади
+                static_view = TranslationsAPIView()
+                static_response = static_view.get(request, lang_code)
+                
+                static_count = 0
+                if static_response.status_code == 200:
+                    static_data = json.loads(static_response.content)
+                    static_count = static_data.get('count', 0)
+                
+                # Динамічні переклади
+                dynamic_view = DynamicTranslationsAPIView()
+                dynamic_response = dynamic_view.get(request, lang_code)
+                
+                dynamic_count = 0
+                if dynamic_response.status_code == 200:
+                    dynamic_data = json.loads(dynamic_response.content)
+                    dynamic_count = dynamic_data.get('count', 0)
+                
+                stats[lang_code] = {
+                    'name': lang_name,
+                    'static_count': static_count,
+                    'dynamic_count': dynamic_count,
+                    'total_count': static_count + dynamic_count
+                }
+            
+            return JsonResponse({
+                'languages': stats,
+                'total_languages': len(stats)
+            })
+            
+        except Exception as e:
+            logger.error(f"Error getting translation stats: {str(e)}")
+            return JsonResponse({
+                'error': str(e)
+            }, status=500)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class TranslationUpdateWebhook(View):
+    """Webhook для оновлення кешу при зміні перекладів"""
+    
+    def post(self, request):
+        try:
+            # Очищаємо кеш
+            for lang_code, _ in settings.LANGUAGES:
+                cache_keys = [
+                    f'static_translations_{lang_code}',
+                    f'dynamic_translations_{lang_code}',
+                    f'combined_translations_{lang_code}'
+                ]
+                
+                for key in cache_keys:
+                    cache.delete(key)
+            
+            logger.info("Translation cache cleared via webhook")
+            
+            return JsonResponse({
+                'status': 'success', 
+                'message': 'Translation cache cleared successfully'
+            })
+        except Exception as e:
+            logger.error(f"Error clearing translation cache: {str(e)}")
+            return JsonResponse({
+                'status': 'error', 
+                'message': str(e)
             }, status=500)

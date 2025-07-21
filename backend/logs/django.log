@@ -353,3 +353,31 @@ INFO 2025-07-21 15:16:44,688 autoreload 4184 3044 D:\ugc\backend\apps\api\urls.p
 INFO 2025-07-21 15:16:47,806 autoreload 10328 10652 Watching for file changes with StatReloader
 INFO 2025-07-21 15:16:50,735 autoreload 10328 10652 D:\ugc\backend\apps\api\urls.py changed, reloading.
 INFO 2025-07-21 15:16:52,605 autoreload 9172 2868 Watching for file changes with StatReloader
+INFO 2025-07-21 15:20:30,994 autoreload 9172 2868 D:\ugc\backend\apps\api\translations.py changed, reloading.
+INFO 2025-07-21 15:20:33,309 autoreload 13140 11228 Watching for file changes with StatReloader
+INFO 2025-07-21 15:21:09,928 autoreload 13140 11228 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:21:19,546 autoreload 9632 14940 Watching for file changes with StatReloader
+INFO 2025-07-21 15:21:29,732 basehttp 9632 7232 "GET /admin/ HTTP/1.1" 200 96811
+INFO 2025-07-21 15:21:31,892 basehttp 9632 7420 "GET /admin/ HTTP/1.1" 200 96811
+WARNING 2025-07-21 15:21:31,960 basehttp 9632 7420 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 15:21:31,979 basehttp 9632 7936 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 15:21:31,997 basehttp 9632 11972 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 15:21:34,766 basehttp 9632 7816 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:22:15,611 autoreload 9632 14940 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:22:17,597 autoreload 1924 3224 Watching for file changes with StatReloader
+INFO 2025-07-21 15:22:20,573 basehttp 1924 6248 "GET /api/v1/ HTTP/1.1" 200 713
+WARNING 2025-07-21 15:22:32,470 log 1924 6248 Not Found: /
+WARNING 2025-07-21 15:22:32,471 basehttp 1924 6248 "GET / HTTP/1.1" 404 2954
+INFO 2025-07-21 15:22:41,698 basehttp 1924 6248 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:22:45,177 basehttp 1924 6456 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:23:01,616 autoreload 1924 3224 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:23:03,674 autoreload 5564 4800 Watching for file changes with StatReloader
+INFO 2025-07-21 15:23:06,846 autoreload 5564 4800 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:23:08,448 autoreload 11800 2604 Watching for file changes with StatReloader
+INFO 2025-07-21 15:23:10,816 autoreload 11800 2604 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-21 15:23:12,593 autoreload 8752 4080 Watching for file changes with StatReloader
+INFO 2025-07-21 15:24:58,775 basehttp 8752 7732 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:25:19,651 basehttp 8752 11952 "GET /api/v1/ HTTP/1.1" 200 713
+WARNING 2025-07-21 15:25:19,919 log 8752 11952 Not Found: /favicon.ico
+WARNING 2025-07-21 15:25:19,920 basehttp 8752 11952 "GET /favicon.ico HTTP/1.1" 404 3005
+INFO 2025-07-21 15:26:13,467 autoreload 12652 10900 Watching for file changes with StatReloader
