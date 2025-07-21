@@ -9805,3 +9805,33 @@ INFO 2025-07-18 17:07:54,413 views 560 11936 Cache HIT для api_project_list
 INFO 2025-07-18 17:07:54,418 basehttp 560 14040 "GET /api/v1/services/ HTTP/1.1" 200 52
 INFO 2025-07-18 17:07:54,447 basehttp 560 11936 "GET /api/v1/projects/ HTTP/1.1" 200 52
 INFO 2025-07-21 08:30:03,983 autoreload 13612 8224 Watching for file changes with StatReloader
+INFO 2025-07-21 08:30:12,523 translations_views 13612 5908 Завантажено 254 статичних перекладів
+INFO 2025-07-21 08:30:12,545 translations_views 13612 5908 Завантажено 203 po перекладів
+INFO 2025-07-21 08:30:12,681 views 13612 10500 Cache SET для api_project_list
+INFO 2025-07-21 08:30:12,725 basehttp 13612 10500 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:12,774 views 13612 12744 Cache SET для api_service_list
+INFO 2025-07-21 08:30:12,806 translations_views 13612 5908 Завантажено 0 динамічних перекладів
+INFO 2025-07-21 08:30:12,806 basehttp 13612 12744 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:12,824 views 13612 10500 Cache HIT для api_project_list
+INFO 2025-07-21 08:30:12,865 translations_views 13612 5908 Завантажено 0 динамічних перекладів
+INFO 2025-07-21 08:30:12,892 views 13612 12744 Cache HIT для api_service_list
+INFO 2025-07-21 08:30:12,906 basehttp 13612 10500 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:12,966 translations_views 13612 5908 Успішно повернуто 254 перекладів для uk
+INFO 2025-07-21 08:30:12,976 basehttp 13612 12744 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:13,047 basehttp 13612 5908 "GET /api/v1/translations/ HTTP/1.1" 200 14161
+INFO 2025-07-21 08:30:52,043 views 13612 11900 Cache HIT для api_project_list
+INFO 2025-07-21 08:30:52,050 views 13612 13328 Cache HIT для api_service_list
+INFO 2025-07-21 08:30:52,051 basehttp 13612 11900 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:52,055 basehttp 13612 13328 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:52,069 views 13612 13328 Cache HIT для api_service_list
+INFO 2025-07-21 08:30:52,069 views 13612 11900 Cache HIT для api_project_list
+INFO 2025-07-21 08:30:52,071 basehttp 13612 13328 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:30:52,074 basehttp 13612 11900 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:32:28,868 views 13612 10604 Cache HIT для api_service_list
+INFO 2025-07-21 08:32:28,872 views 13612 1724 Cache HIT для api_project_list
+INFO 2025-07-21 08:32:28,880 basehttp 13612 10604 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:32:28,886 basehttp 13612 1724 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:32:28,897 views 13612 10604 Cache HIT для api_service_list
+INFO 2025-07-21 08:32:28,899 views 13612 1724 Cache HIT для api_project_list
+INFO 2025-07-21 08:32:28,900 basehttp 13612 10604 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 08:32:28,901 basehttp 13612 1724 "GET /api/v1/projects/ HTTP/1.1" 200 52
