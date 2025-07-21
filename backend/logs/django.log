@@ -86,3 +86,4 @@ INFO 2025-07-21 14:04:28,228 autoreload 6784 10052 Watching for file changes wit
 INFO 2025-07-21 14:04:29,861 autoreload 6784 10052 D:\ugc\backend\apps\api\urls.py changed, reloading.
 INFO 2025-07-21 14:04:31,449 autoreload 4124 9096 Watching for file changes with StatReloader
 INFO 2025-07-21 14:09:28,559 autoreload 8896 9996 Watching for file changes with StatReloader
+INFO 2025-07-21 14:11:05,106 autoreload 3368 7208 Watching for file changes with StatReloader
