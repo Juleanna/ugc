@@ -1,0 +1,255 @@
+/* frontend/src/components/LanguageSwitcher/LanguageSwitcher.css */
+
+.language-switcher {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+}
+
+.language-switcher__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  min-width: 4rem;
+}
+
+.language-switcher__trigger:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.language-switcher__trigger:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.language-switcher__trigger.active {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.language-switcher__trigger.loading {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.language-switcher__trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.language-switcher__flag {
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.language-switcher__text {
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #1f2937;
+}
+
+.language-switcher__arrow {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+  color: #6b7280;
+}
+
+.language-switcher__arrow.up {
+  transform: rotate(180deg);
+}
+
+.language-switcher__loader {
+  animation: spin 1s linear infinite;
+  font-size: 0.875rem;
+  color: #3b82f6;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.language-switcher__dropdown {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 50;
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+  min-width: 8rem;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.language-switcher__option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.language-switcher__option:hover {
+  background: #f8fafc;
+}
+
+.language-switcher__option:focus {
+  outline: none;
+  background: #f1f5f9;
+}
+
+.language-switcher__option.active {
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.language-switcher__option:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.language-switcher__option:not(:last-child) {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.language-switcher__name {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.language-switcher__check {
+  color: #10b981;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.language-switcher__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: transparent;
+}
+
+/* Варіанти розмірів */
+.language-switcher--small .language-switcher__trigger {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75rem;
+  min-width: 3rem;
+}
+
+.language-switcher--small .language-switcher__flag {
+  font-size: 1rem;
+}
+
+.language-switcher--large .language-switcher__trigger {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  min-width: 5rem;
+}
+
+.language-switcher--large .language-switcher__flag {
+  font-size: 1.25rem;
+}
+
+/* Варіанти стилів */
+.language-switcher--minimal .language-switcher__trigger {
+  border: none;
+  background: transparent;
+  padding: 0.25rem;
+}
+
+.language-switcher--minimal .language-switcher__trigger:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.language-switcher--dark .language-switcher__trigger {
+  background: #374151;
+  border-color: #4b5563;
+  color: white;
+}
+
+.language-switcher--dark .language-switcher__trigger:hover {
+  background: #4b5563;
+}
+
+.language-switcher--dark .language-switcher__dropdown {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+.language-switcher--dark .language-switcher__option {
+  color: white;
+}
+
+.language-switcher--dark .language-switcher__option:hover {
+  background: #4b5563;
+}
+
+.language-switcher--dark .language-switcher__option.active {
+  background: #1f2937;
+  color: #60a5fa;
+}
+
+/* Респонсивність */
+@media (max-width: 640px) {
+  .language-switcher__dropdown {
+    left: auto;
+    right: 0;
+    min-width: 7rem;
+  }
+  
+  .language-switcher__name {
+    font-size: 0.75rem;
+  }
+}
+
+/* Анімації для плавної появи */
+.language-switcher__trigger,
+.language-switcher__option {
+  will-change: background-color, border-color, transform;
+}
+
+/* Додаткові стилі для підсвічування активного стану */
+.language-switcher__trigger.active .language-switcher__text {
+  color: #1d4ed8;
+}
+
+.language-switcher__trigger.active .language-switcher__arrow {
+  color: #1d4ed8;
+}

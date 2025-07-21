@@ -382,3 +382,71 @@ WARNING 2025-07-21 15:25:19,919 log 8752 11952 Not Found: /favicon.ico
 WARNING 2025-07-21 15:25:19,920 basehttp 8752 11952 "GET /favicon.ico HTTP/1.1" 404 3005
 INFO 2025-07-21 15:26:13,467 autoreload 12652 10900 Watching for file changes with StatReloader
 INFO 2025-07-21 15:26:20,712 basehttp 12652 8884 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:28:22,710 autoreload 12652 10900 D:\ugc\backend\ugc_backend\urls.py changed, reloading.
+INFO 2025-07-21 15:28:24,648 autoreload 13696 7892 Watching for file changes with StatReloader
+INFO 2025-07-21 15:30:31,457 autoreload 15224 11576 Watching for file changes with StatReloader
+INFO 2025-07-21 15:30:40,167 basehttp 15224 7148 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:30:40,189 translations 15224 5036 Loaded translations for uk from file
+ERROR 2025-07-21 15:30:40,281 log 15224 5036 Internal Server Error: /api/v1/translations/uk/
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 196, in _view_wrapper
+    return _post_process_request(request, response)
+  File "D:\ugc-project\venv\Lib\site-packages\django\utils\decorators.py", line 163, in _post_process_request
+    return middleware.process_response(request, response)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\middleware\cache.py", line 129, in process_response
+    self.cache.set(cache_key, response, timeout)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\cache.py", line 81, in set
+    return self.client.set(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 186, in set
+    nvalue = self.encode(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\client\default.py", line 514, in encode
+    value = self._serializer.dumps(value)
+  File "D:\ugc-project\venv\Lib\site-packages\django_redis\serializers\json.py", line 13, in dumps
+    return json.dumps(value, cls=self.encoder_class).encode()
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Þë³ÿÏ³äë³ñíà\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\Þë³ÿÏ³äë³ñíà\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\Þë³ÿÏ³äë³ñíà\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\serializers\json.py", line 114, in default
+    return super().default(o)
+           ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Þë³ÿÏ³äë³ñíà\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type JsonResponse is not JSON serializable
+ERROR 2025-07-21 15:30:40,289 basehttp 15224 5036 "GET /api/v1/translations/uk/ HTTP/1.1" 500 165217
+INFO 2025-07-21 15:32:21,196 basehttp 15224 2300 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:32:22,761 basehttp 15224 2300 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:32:55,011 basehttp 15224 14884 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-21 15:33:40,314 autoreload 15224 11576 D:\ugc\backend\apps\api\translations.py changed, reloading.
+INFO 2025-07-21 15:33:42,950 autoreload 208 1140 Watching for file changes with StatReloader
+INFO 2025-07-21 15:34:37,840 basehttp 208 6452 "GET /api/v1/ HTTP/1.1" 200 713
+WARNING 2025-07-21 15:34:51,639 log 208 6452 Not Found: /
+WARNING 2025-07-21 15:34:51,641 basehttp 208 6452 "GET / HTTP/1.1" 404 2954
+WARNING 2025-07-21 15:34:59,722 log 208 6452 Not Found: /api/
+WARNING 2025-07-21 15:34:59,723 basehttp 208 6452 "GET /api/ HTTP/1.1" 404 2984
+INFO 2025-07-21 15:35:25,793 autoreload 208 1140 D:\ugc\backend\apps\api\translations.py changed, reloading.
+INFO 2025-07-21 15:35:27,567 autoreload 11844 12536 Watching for file changes with StatReloader
+INFO 2025-07-21 15:36:01,201 autoreload 3720 3400 Watching for file changes with StatReloader
+INFO 2025-07-21 15:36:08,865 autoreload 3720 3400 D:\ugc\backend\apps\api\translations.py changed, reloading.
+INFO 2025-07-21 15:36:10,374 autoreload 13496 2508 Watching for file changes with StatReloader
