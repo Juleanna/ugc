@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '@nextui-org/react';
 import { Menu, X, Home, Info, Briefcase, FolderOpen, Phone } from 'lucide-react';
+import { useTranslation } from '../../hooks/useTranslation';
 
 const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t, currentLanguage } = useTranslation();
 
   // Навігаційні елементи відповідно до ваших існуючих секцій
   const navigationItems = [
@@ -20,6 +22,13 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
     if (scrollToSection) {
       scrollToSection(sectionId);
     }
+  };
+
+    // Функція для отримання перекладу з fallback
+  const getTranslation = (key, fallback) => {
+    const translation = t(key);
+    // Якщо переклад повертає той самий ключ, використовуємо fallback
+    return translation === key ? fallback : translation;
   };
 
   return (
@@ -70,7 +79,7 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
                 className="font-medium px-6 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 transition-all duration-300"
                 onClick={() => handleNavClick('contact')}
               >
-                Зв'язатися з нами
+                {getTranslation('contact.email', 'Звязатися з нами')}
               </Button>
             </div>
 

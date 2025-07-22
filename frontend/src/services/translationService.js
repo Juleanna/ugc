@@ -1,7 +1,8 @@
 // frontend/src/services/translationService.js
-class TranslationService {
+class UGCTranslationService {
   constructor() {
-    this.baseURL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000/api/v1';
+    // Використовуємо Vite environment variables
+    this.baseURL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1';
     this.currentLanguage = 'uk';
     this.translations = new Map();
     this.listeners = new Set();
@@ -20,20 +21,14 @@ class TranslationService {
     await this.loadTranslations(this.currentLanguage);
   }
 
-  /**
-   * Отримує збережену мову з localStorage
-   */
   getStoredLanguage() {
     try {
-      return localStorage.getItem('app_language');
+      return localStorage.getItem('ugc_language');
     } catch (e) {
       return null;
     }
   }
 
-  /**
-   * Отримує мову браузера
-   */
   getBrowserLanguage() {
     const lang = navigator.language || navigator.userLanguage;
     if (lang.startsWith('uk')) return 'uk';
@@ -41,19 +36,16 @@ class TranslationService {
     return 'uk';
   }
 
-  /**
-   * Зберігає мову в localStorage
-   */
   storeLanguage(lang) {
     try {
-      localStorage.setItem('app_language', lang);
+      localStorage.setItem('ugc_language', lang);
     } catch (e) {
       console.warn('Cannot save language to localStorage:', e);
     }
   }
 
   /**
-   * Завантажує переклади з API
+   * Завантажує переклади з вашого Django API
    */
   async loadTranslations(lang, type = 'all') {
     const cacheKey = `${lang}_${type}`;
@@ -81,6 +73,8 @@ class TranslationService {
           endpoint = `/translations/${lang}/all/`;
           break;
       }
+
+      console.log(`🌍 Завантаження перекладів: ${this.baseURL}${endpoint}`);
 
       const response = await fetch(`${this.baseURL}${endpoint}`, {
         method: 'GET',
@@ -120,28 +114,84 @@ class TranslationService {
   }
 
   /**
-   * Базові переклади при помилці завантаження
+   * Базові переклади для UGC проекту
    */
   getFallbackTranslations(lang) {
     if (lang === 'uk') {
       return {
+        // Навігація
         'nav.home': 'Головна',
         'nav.about': 'Про нас',
         'nav.services': 'Послуги',
+        'nav.projects': 'Проекти',
         'nav.contact': 'Контакти',
+
+        // Сервіси
+        'services.title': 'Повний цикл виробництва професійного одягу',
+        'services.subtitle': 'Від проєктування до готового виробу - ми забезпечуємо якість на кожному етапі',
+        'services.details': 'Детальніше',
+
+        // Проекти
+        'projects.title': 'Наші проекти',
+        'projects.subtitle': 'Успішно реалізовані рішення',
+        'projects.badge.success': 'Успішний проєкт',
+
+        // Контакти
+        'contact.title': 'Зв\'яжіться з нами',
+        'contact.subtitle': 'прямо зараз',
+        'contact.description': 'Готові допомогти вам з будь-якими питаннями та замовленнями',
+
+        // Форма
+        'form.name': 'Ім\'я',
+        'form.email': 'Email',
+        'form.phone': 'Телефон',
+        'form.message': 'Повідомлення',
+        'form.send': 'Відправити',
+        'form.sending': 'Відправляємо...',
+
+        // Загальні
         'common.loading': 'Завантаження...',
         'common.error': 'Помилка',
-        'common.success': 'Успіх'
+        'common.success': 'Успіх',
+        'common.close': 'Закрити',
       };
     } else {
       return {
+        // Навігація
         'nav.home': 'Home',
         'nav.about': 'About',
         'nav.services': 'Services',
+        'nav.projects': 'Projects',
         'nav.contact': 'Contact',
+
+        // Сервіси
+        'services.title': 'Full cycle of professional clothing production',
+        'services.subtitle': 'From design to finished product - we ensure quality at every stage',
+        'services.details': 'Details',
+
+        // Проекти
+        'projects.title': 'Our Projects',
+        'projects.subtitle': 'Successfully implemented solutions',
+        'projects.badge.success': 'Successful project',
+
+        // Контакти
+        'contact.title': 'Contact us',
+        'contact.subtitle': 'right now',
+        'contact.description': 'Ready to help you with any questions and orders',
+
+        // Форма
+        'form.name': 'Name',
+        'form.email': 'Email',
+        'form.phone': 'Phone',
+        'form.message': 'Message',
+        'form.send': 'Send',
+        'form.sending': 'Sending...',
+
+        // Загальні
         'common.loading': 'Loading...',
         'common.error': 'Error',
-        'common.success': 'Success'
+        'common.success': 'Success',
+        'common.close': 'Close',
       };
     }
   }
@@ -161,10 +211,14 @@ class TranslationService {
       translation = enTranslations[key];
     }
     
-    // Якщо і в англійській немає, повертаємо ключ
+    // Якщо і в англійській немає, повертаємо ключ або fallback
     if (!translation) {
-      translation = key;
-      console.warn(`🔍 Переклад не знайдено: ${key}`);
+      const fallback = this.getFallbackTranslations(lang)[key];
+      translation = fallback || key;
+      
+      if (!fallback) {
+        console.warn(`🔍 Переклад не знайдено: ${key} (${lang})`);
+      }
     }
 
     // Заміна параметрів в перекладі
@@ -172,7 +226,7 @@ class TranslationService {
   }
 
   /**
-   * Інтерполяція параметрів в переклад
+   * Інтерполяція параметрів
    */
   interpolate(text, params) {
     return text.replace(/\{\{(\w+)\}\}/g, (match, key) => {
@@ -186,6 +240,8 @@ class TranslationService {
   async setLanguage(lang) {
     if (this.currentLanguage === lang) return;
 
+    console.log(`🔄 Зміна мови: ${this.currentLanguage} → ${lang}`);
+
     this.currentLanguage = lang;
     this.storeLanguage(lang);
 
@@ -196,9 +252,6 @@ class TranslationService {
     this.notifyListeners();
   }
 
-  /**
-   * Отримує поточну мову
-   */
   getCurrentLanguage() {
     return this.currentLanguage;
   }
@@ -218,24 +271,6 @@ class TranslationService {
   }
 
   /**
-   * Пошук перекладів
-   */
-  async searchTranslations(query, lang = null) {
-    const searchLang = lang || this.currentLanguage;
-    
-    try {
-      const response = await fetch(
-        `${this.baseURL}/translations/${searchLang}/search/?q=${encodeURIComponent(query)}`
-      );
-      const data = await response.json();
-      return data.results || {};
-    } catch (error) {
-      console.error('Помилка пошуку перекладів:', error);
-      return {};
-    }
-  }
-
-  /**
    * Очищає кеш перекладів
    */
   clearCache() {
@@ -247,6 +282,7 @@ class TranslationService {
    * Оновлює переклади з сервера
    */
   async refreshTranslations() {
+    console.log('🔄 Оновлення перекладів...');
     this.clearCache();
     await this.loadTranslations(this.currentLanguage);
     this.notifyListeners();
@@ -280,71 +316,6 @@ class TranslationService {
   }
 
   /**
-   * Перевіряє чи ключ є плюральним
-   */
-  isPlural(key) {
-    return key.includes('_plural') || key.includes('_count');
-  }
-
-  /**
-   * Обробляє плюральні форми
-   */
-  plural(key, count, params = {}) {
-    const lang = this.currentLanguage;
-    
-    // Для української мови
-    if (lang === 'uk') {
-      let pluralKey;
-      if (count === 1) {
-        pluralKey = `${key}_one`;
-      } else if (count >= 2 && count <= 4) {
-        pluralKey = `${key}_few`;
-      } else {
-        pluralKey = `${key}_many`;
-      }
-      
-      return this.t(pluralKey, { ...params, count });
-    }
-    
-    // Для англійської мови
-    if (lang === 'en') {
-      const pluralKey = count === 1 ? `${key}_one` : `${key}_other`;
-      return this.t(pluralKey, { ...params, count });
-    }
-    
-    // Fallback
-    return this.t(key, { ...params, count });
-  }
-
-  /**
-   * Форматує дату згідно з поточною мовою
-   */
-  formatDate(date, options = {}) {
-    const lang = this.currentLanguage;
-    const locale = lang === 'uk' ? 'uk-UA' : 'en-US';
-    
-    try {
-      return new Intl.DateTimeFormat(locale, options).format(new Date(date));
-    } catch (error) {
-      return date.toString();
-    }
-  }
-
-  /**
-   * Форматує число згідно з поточною мовою
-   */
-  formatNumber(number, options = {}) {
-    const lang = this.currentLanguage;
-    const locale = lang === 'uk' ? 'uk-UA' : 'en-US';
-    
-    try {
-      return new Intl.NumberFormat(locale, options).format(number);
-    } catch (error) {
-      return number.toString();
-    }
-  }
-
-  /**
    * Отримує статистику перекладів
    */
   async getTranslationStats() {
@@ -356,17 +327,39 @@ class TranslationService {
       return null;
     }
   }
+
+  /**
+   * Синхронізація з Django API (викликає webhook для очищення кешу)
+   */
+  async syncWithBackend() {
+    try {
+      await fetch(`${this.baseURL}/webhooks/translations/update/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      // Оновлюємо локальний кеш
+      await this.refreshTranslations();
+      
+      console.log('✅ Синхронізація з backend завершена');
+    } catch (error) {
+      console.error('❌ Помилка синхронізації:', error);
+    }
+  }
 }
 
 // Створюємо єдиний екземпляр сервісу
-const translationService = new TranslationService();
+const ugcTranslationService = new UGCTranslationService();
 
 // Експортуємо сервіс та функції для зручності
-export default translationService;
+export default ugcTranslationService;
 
-// Експортуємо зручні функції
-export const t = (key, params) => translationService.t(key, params);
-export const setLanguage = (lang) => translationService.setLanguage(lang);
-export const getCurrentLanguage = () => translationService.getCurrentLanguage();
-export const addLanguageChangeListener = (callback) => translationService.addLanguageChangeListener(callback);
-export const removeLanguageChangeListener = (callback) => translationService.removeLanguageChangeListener(callback);
+// Зручні функції для використання в компонентах
+export const t = (key, params) => ugcTranslationService.t(key, params);
+export const setLanguage = (lang) => ugcTranslationService.setLanguage(lang);
+export const getCurrentLanguage = () => ugcTranslationService.getCurrentLanguage();
+export const addLanguageChangeListener = (callback) => ugcTranslationService.addLanguageChangeListener(callback);
+export const removeLanguageChangeListener = (callback) => ugcTranslationService.removeLanguageChangeListener(callback);
+export const refreshTranslations = () => ugcTranslationService.refreshTranslations();

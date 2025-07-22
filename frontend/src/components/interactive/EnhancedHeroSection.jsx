@@ -1,16 +1,40 @@
+// frontend/src/components/interactive/EnhancedHeroSection.jsx
 import React, { useState, useEffect } from 'react';
 import { Button, Card, CardBody } from "@nextui-org/react";
 import { ArrowRight, PlayCircle, Sparkles, Zap, Shield, Award } from 'lucide-react';
+import { useTranslation } from '../../hooks/useTranslation';
 
-const EnhancedHeroSection = ({ scrollToSection }) => {
+const EnhancedHeroSection = ({ scrollToSection, data }) => {
+  const { t, currentLanguage } = useTranslation();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
 
+  // Статистика з перекладами
   const stats = [
-    { value: '5+', label: 'Років досвіду', icon: Award },
-    { value: '100+', label: 'Проєктів', icon: Zap },
-    { value: '50+', label: 'Клієнтів', icon: Shield },
-    { value: '24/7', label: 'Підтримка', icon: Sparkles }
+    { 
+      value: '5+', 
+      labelKey: 'hero.stats.experience',
+      fallbackLabel: 'Років досвіду',
+      icon: Award 
+    },
+    { 
+      value: '100+', 
+      labelKey: 'hero.stats.projects',
+      fallbackLabel: 'Проєктів',
+      icon: Zap 
+    },
+    { 
+      value: '50+', 
+      labelKey: 'hero.stats.clients',
+      fallbackLabel: 'Клієнтів',
+      icon: Shield 
+    },
+    { 
+      value: '24/7', 
+      labelKey: 'hero.stats.support',
+      fallbackLabel: 'Підтримка',
+      icon: Sparkles 
+    }
   ];
 
   useEffect(() => {
@@ -27,6 +51,13 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Функція для отримання перекладу з fallback
+  const getTranslation = (key, fallback) => {
+    const translation = t(key);
+    // Якщо переклад повертає той самий ключ, використовуємо fallback
+    return translation === key ? fallback : translation;
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Динамічні градієнти що реагують на курсор */}
@@ -39,29 +70,28 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
       
       <div className="container-custom relative z-10">
         <div className="text-center max-w-6xl mx-auto">
-          {/* Головний заголовок з анімацією */}
+          {/* Головний заголовок з анімацією та перекладами */}
           <div className={`transform transition-all duration-1500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-
-            
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight pt-30">
-              <span >Професійний одяг </span>
-              <span >для </span>
+              <span>{getTranslation('hero.title.main', 'Професійний одяг')} </span>
+              <span>{getTranslation('hero.title.for', 'для')} </span>
               <span className="block text-gradient-blue animate-pulse">
-                кожної сфери
+                {getTranslation('hero.title.sphere', 'кожної сфери')}
               </span>
             </h1>
           </div>
 
-          {/* Підзаголовок */}
+          {/* Підзаголовок з перекладами */}
           <div className={`transform transition-all duration-1500 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-12  leading-relaxed">
-              Ми створюємо високоякісний спецодяг, військову форму та корпоративний одяг 
-              для українських підприємств та організацій. Наш досвід і прагнення до досконалості 
-              допомагають нам задовольняти потреби професіоналів у різних галузях.
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-12 leading-relaxed">
+              {getTranslation(
+                'hero.subtitle', 
+                'Ми створюємо високоякісний спецодяг, військову форму та корпоративний одяг для українських підприємств та організацій. Наш досвід і прагнення до досконалості допомагають нам задовольняти потреби професіоналів у різних галузях.'
+              )}
             </p>
           </div>
 
-          {/* Кнопки дій */}
+          {/* Кнопки дій з перекладами */}
           <div className={`transform transition-all duration-1500 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
               <Button 
@@ -70,7 +100,7 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
                 onPress={() => scrollToSection('projects')}
               >
                 <ArrowRight className="w-6 h-6 mr-2 group-hover:translate-x-1 transition-transform duration-300" />
-                Наші проєкти
+                {getTranslation('hero.button.projects', 'Наші проєкти')}
               </Button>
               
               <Button 
@@ -80,16 +110,18 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
                 onPress={() => scrollToSection('about')}
               >
                 <PlayCircle className="w-6 h-6 mr-2 group-hover:scale-110 transition-transform duration-300" />
-                Дізнатися більше
+                {getTranslation('hero.button.learn_more', 'Дізнатися більше')}
               </Button>
             </div>
           </div>
 
-          {/* Статистика з анімацією */}
+          {/* Статистика з анімацією та перекладами */}
           <div className={`transform transition-all duration-1500 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pb-10">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
+                const label = getTranslation(stat.labelKey, stat.fallbackLabel);
+                
                 return (
                   <Card 
                     key={index} 
@@ -104,7 +136,7 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
                         {stat.value}
                       </div>
                       <div className="text-gray-600 font-medium group-hover:text-gray-700 transition-colors duration-300">
-                        {stat.label}
+                        {label}
                       </div>
                     </CardBody>
                   </Card>
@@ -116,8 +148,6 @@ const EnhancedHeroSection = ({ scrollToSection }) => {
 
         </div>
       </div>
-
-
     </section>
   );
 };

@@ -50,7 +50,7 @@ const FinalUGCDesign = () => {
       const [servicesResponse, projectsResponse, translationsResponse] = await Promise.all([
         apiCall('/services/'),
         apiCall('/projects/'),
-        apiCall('/translations/')
+        
       ]);
 
       setData({

@@ -481,3 +481,534 @@ INFO 2025-07-21 15:40:00,259 translations 13496 6256 Loaded dynamic translations
 INFO 2025-07-21 15:40:00,261 basehttp 13496 6256 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
 INFO 2025-07-21 15:40:43,020 translations 13496 5520 Loaded translations for uk from cache
 INFO 2025-07-21 15:40:43,022 basehttp 13496 5520 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+INFO 2025-07-21 15:52:25,039 basehttp 13496 5968 "OPTIONS /api/v1/translations/uk/all/ HTTP/1.1" 200 0
+INFO 2025-07-21 15:52:25,047 translations 13496 5968 Loaded translations for uk from cache
+INFO 2025-07-21 15:52:25,048 translations 13496 5968 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 15:52:25,050 basehttp 13496 5968 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+INFO 2025-07-21 15:52:56,878 translations 13496 1472 Loaded translations for uk from cache
+INFO 2025-07-21 15:52:56,880 translations 13496 1472 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 15:52:56,882 basehttp 13496 1472 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+INFO 2025-07-21 15:52:57,180 translations 13496 1472 Loaded translations for uk from cache
+INFO 2025-07-21 15:52:57,182 basehttp 13496 1472 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+INFO 2025-07-21 15:52:57,197 translations 13496 11140 Loaded translations for uk from cache
+WARNING 2025-07-21 15:52:57,228 log 13496 6768 Not Found: /api/v1/translations/
+INFO 2025-07-21 15:52:57,228 basehttp 13496 11140 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+WARNING 2025-07-21 15:52:57,231 basehttp 13496 6768 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:52:57,239 views 13496 3308 Cache HIT для api_service_list
+INFO 2025-07-21 15:52:57,239 translations 13496 596 Loaded translations for uk from cache
+WARNING 2025-07-21 15:52:57,253 log 13496 11140 Not Found: /api/v1/translations/
+INFO 2025-07-21 15:52:57,257 basehttp 13496 3308 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:52:57,258 basehttp 13496 596 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+WARNING 2025-07-21 15:52:57,259 basehttp 13496 11140 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:52:57,261 views 13496 1472 Cache HIT для api_project_list
+INFO 2025-07-21 15:52:57,270 basehttp 13496 1472 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:52:57,271 translations 13496 5228 Loaded translations for uk from cache
+INFO 2025-07-21 15:52:57,275 basehttp 13496 5228 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+INFO 2025-07-21 15:52:57,277 views 13496 6768 Cache HIT для api_service_list
+INFO 2025-07-21 15:52:57,279 basehttp 13496 6768 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:52:57,281 views 13496 11140 Cache HIT для api_project_list
+INFO 2025-07-21 15:52:57,283 basehttp 13496 11140 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:53:56,546 translations 13496 7496 Loaded translations for uk from cache
+INFO 2025-07-21 15:53:56,568 translations 13496 7496 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 15:53:56,579 basehttp 13496 7496 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+INFO 2025-07-21 15:53:57,065 translations 13496 7496 Loaded translations for uk from cache
+INFO 2025-07-21 15:53:57,084 basehttp 13496 7496 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+INFO 2025-07-21 15:53:57,103 views 13496 2604 Cache HIT для api_project_list
+INFO 2025-07-21 15:53:57,123 basehttp 13496 2604 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:53:57,132 views 13496 5000 Cache HIT для api_service_list
+INFO 2025-07-21 15:53:57,138 basehttp 13496 5000 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:53:57,148 views 13496 7496 Cache HIT для api_project_list
+INFO 2025-07-21 15:53:57,153 views 13496 2604 Cache HIT для api_service_list
+WARNING 2025-07-21 15:53:57,176 log 13496 2188 Not Found: /api/v1/translations/
+INFO 2025-07-21 15:53:57,188 basehttp 13496 7496 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:53:57,197 basehttp 13496 2604 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:53:57,207 translations 13496 5728 Loaded translations for uk from cache
+WARNING 2025-07-21 15:53:57,209 basehttp 13496 2188 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:53:57,214 basehttp 13496 5728 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+WARNING 2025-07-21 15:53:57,243 log 13496 2604 Not Found: /api/v1/translations/
+INFO 2025-07-21 15:53:57,329 translations 13496 2188 Loaded translations for uk from cache
+WARNING 2025-07-21 15:53:57,332 basehttp 13496 2604 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:53:57,333 basehttp 13496 2188 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+INFO 2025-07-21 15:53:57,342 translations 13496 5728 Loaded translations for uk from cache
+INFO 2025-07-21 15:53:57,348 basehttp 13496 5728 "GET /api/v1/translations/stats/ HTTP/1.1" 200 702
+INFO 2025-07-21 15:54:51,157 translations 13496 6840 Loaded translations for uk from cache
+INFO 2025-07-21 15:54:51,159 translations 13496 6840 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 15:54:51,162 basehttp 13496 6840 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+WARNING 2025-07-21 15:54:51,448 log 13496 3204 Not Found: /api/v1/translations/
+INFO 2025-07-21 15:54:51,449 views 13496 6840 Cache HIT для api_service_list
+INFO 2025-07-21 15:54:51,450 views 13496 796 Cache HIT для api_project_list
+WARNING 2025-07-21 15:54:51,450 basehttp 13496 3204 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:54:51,452 basehttp 13496 6840 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:54:51,454 basehttp 13496 796 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 15:54:51,481 log 13496 3204 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:54:51,483 basehttp 13496 3204 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:54:51,484 views 13496 6840 Cache HIT для api_project_list
+INFO 2025-07-21 15:54:51,487 basehttp 13496 6840 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:54:51,488 views 13496 13432 Cache HIT для api_service_list
+INFO 2025-07-21 15:54:51,490 basehttp 13496 13432 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:56:20,279 translations 13496 3812 Loaded translations for uk from cache
+INFO 2025-07-21 15:56:20,694 translations 13496 3812 Loaded dynamic translations for uk from models
+INFO 2025-07-21 15:56:20,697 basehttp 13496 3812 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+INFO 2025-07-21 15:56:21,165 views 13496 3812 Cache HIT для api_service_list
+WARNING 2025-07-21 15:56:21,167 log 13496 6208 Not Found: /api/v1/translations/
+INFO 2025-07-21 15:56:21,168 views 13496 516 Cache HIT для api_project_list
+INFO 2025-07-21 15:56:21,168 basehttp 13496 3812 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 15:56:21,170 basehttp 13496 6208 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:56:21,172 basehttp 13496 516 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 15:56:21,199 log 13496 9344 Not Found: /api/v1/translations/
+WARNING 2025-07-21 15:56:21,201 basehttp 13496 9344 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 15:56:21,205 views 13496 6208 Cache HIT для api_project_list
+INFO 2025-07-21 15:56:21,206 views 13496 3812 Cache HIT для api_service_list
+INFO 2025-07-21 15:56:21,207 basehttp 13496 6208 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 15:56:21,208 basehttp 13496 3812 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:09,286 translations 13496 3192 Loaded translations for uk from cache
+INFO 2025-07-21 16:05:09,288 translations 13496 3192 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:05:09,289 basehttp 13496 3192 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+WARNING 2025-07-21 16:05:09,515 log 13496 7120 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:05:09,542 basehttp 13496 7120 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:05:09,588 log 13496 14800 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:05:09,591 basehttp 13496 14800 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:05:09,654 views 13496 3192 Cache SET для api_service_list
+INFO 2025-07-21 16:05:09,655 basehttp 13496 3192 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:09,664 views 13496 14800 Cache HIT для api_service_list
+INFO 2025-07-21 16:05:09,668 basehttp 13496 14800 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:09,669 views 13496 13004 Cache SET для api_project_list
+INFO 2025-07-21 16:05:09,670 basehttp 13496 13004 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:09,680 views 13496 14800 Cache HIT для api_project_list
+INFO 2025-07-21 16:05:09,682 basehttp 13496 14800 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:18,121 translations 13496 14800 Loaded translations for uk from cache
+INFO 2025-07-21 16:05:18,134 translations 13496 14800 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:05:18,137 basehttp 13496 14800 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+WARNING 2025-07-21 16:05:18,409 log 13496 3192 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:05:18,410 basehttp 13496 3192 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:05:18,431 log 13496 7120 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:05:18,432 views 13496 13004 Cache HIT для api_project_list
+INFO 2025-07-21 16:05:18,432 views 13496 14800 Cache HIT для api_service_list
+WARNING 2025-07-21 16:05:18,433 basehttp 13496 7120 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:05:18,437 basehttp 13496 13004 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:18,438 basehttp 13496 14800 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:18,451 views 13496 7120 Cache HIT для api_project_list
+INFO 2025-07-21 16:05:18,452 views 13496 13004 Cache HIT для api_service_list
+INFO 2025-07-21 16:05:18,454 basehttp 13496 7120 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:05:18,456 basehttp 13496 13004 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:07:00,559 translations 13496 13004 Loaded translations for uk from cache
+INFO 2025-07-21 16:07:00,569 translations 13496 13004 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:07:00,571 basehttp 13496 13004 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+WARNING 2025-07-21 16:07:01,066 log 13496 14800 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:07:01,071 views 13496 7120 Cache HIT для api_project_list
+INFO 2025-07-21 16:07:01,127 views 13496 13004 Cache HIT для api_service_list
+WARNING 2025-07-21 16:07:01,127 basehttp 13496 14800 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:07:01,131 basehttp 13496 7120 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:07:01,133 basehttp 13496 13004 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:07:01,169 log 13496 3192 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:07:01,176 views 13496 14800 Cache HIT для api_project_list
+INFO 2025-07-21 16:07:01,176 views 13496 7120 Cache HIT для api_service_list
+WARNING 2025-07-21 16:07:01,184 basehttp 13496 3192 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:07:01,186 basehttp 13496 14800 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:07:01,188 basehttp 13496 7120 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:09:01,031 translations 13496 8484 Loaded translations for uk from cache
+INFO 2025-07-21 16:09:01,032 translations 13496 8484 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:09:01,035 basehttp 13496 8484 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 743
+INFO 2025-07-21 16:09:01,480 views 13496 8484 Cache HIT для api_service_list
+INFO 2025-07-21 16:09:01,491 basehttp 13496 8484 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:09:01,505 views 13496 5060 Cache HIT для api_project_list
+INFO 2025-07-21 16:09:01,518 basehttp 13496 5060 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:09:01,541 log 13496 11064 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:09:01,544 basehttp 13496 11064 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:09:01,574 log 13496 8484 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:09:01,576 basehttp 13496 8484 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:09:01,607 views 13496 5060 Cache HIT для api_project_list
+INFO 2025-07-21 16:09:01,608 views 13496 6452 Cache HIT для api_service_list
+INFO 2025-07-21 16:09:01,611 basehttp 13496 5060 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:09:01,612 basehttp 13496 6452 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:10:13,048 autoreload 9052 12932 Watching for file changes with StatReloader
+INFO 2025-07-21 16:10:21,361 translations 9052 8984 Loaded translations for uk from file
+INFO 2025-07-21 16:10:21,365 basehttp 9052 8984 "GET /api/v1/translations/stats/ HTTP/1.1" 200 8249
+INFO 2025-07-21 16:10:38,335 translations 9052 6920 Loaded translations for uk from cache
+INFO 2025-07-21 16:10:38,340 translations 9052 6920 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:10:38,347 basehttp 9052 6920 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8291
+INFO 2025-07-21 16:10:38,816 views 9052 6920 Cache HIT для api_service_list
+INFO 2025-07-21 16:10:38,822 basehttp 9052 6920 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:10:38,870 log 9052 5804 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:10:38,875 views 9052 9592 Cache HIT для api_service_list
+INFO 2025-07-21 16:10:38,879 views 9052 11600 Cache HIT для api_project_list
+WARNING 2025-07-21 16:10:38,880 basehttp 9052 5804 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:10:38,883 basehttp 9052 9592 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:10:38,887 basehttp 9052 11600 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:10:38,916 log 9052 6920 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:10:38,922 basehttp 9052 6920 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:10:38,926 views 9052 9592 Cache HIT для api_project_list
+INFO 2025-07-21 16:10:38,930 basehttp 9052 9592 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:11:33,409 translations 9052 5356 Loaded translations for uk from cache
+INFO 2025-07-21 16:11:33,623 translations 9052 5356 Loaded dynamic translations for uk from models
+INFO 2025-07-21 16:11:33,625 basehttp 9052 5356 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8291
+INFO 2025-07-21 16:11:33,892 views 9052 5356 Cache HIT для api_service_list
+INFO 2025-07-21 16:11:33,894 basehttp 9052 5356 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:11:33,909 views 9052 3876 Cache HIT для api_project_list
+INFO 2025-07-21 16:11:33,921 basehttp 9052 3876 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:11:33,956 log 9052 3232 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:11:33,958 views 9052 5356 Cache HIT для api_service_list
+WARNING 2025-07-21 16:11:33,963 basehttp 9052 3232 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:11:33,964 views 9052 9472 Cache HIT для api_project_list
+INFO 2025-07-21 16:11:33,966 basehttp 9052 5356 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:11:33,994 log 9052 3876 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:11:33,995 basehttp 9052 9472 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:11:33,998 basehttp 9052 3876 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:13:31,743 translations 9052 14808 Loaded translations for uk from cache
+INFO 2025-07-21 16:13:31,754 translations 9052 14808 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:13:31,757 basehttp 9052 14808 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8291
+WARNING 2025-07-21 16:13:32,253 log 9052 6864 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:13:32,254 views 9052 14808 Cache HIT для api_service_list
+INFO 2025-07-21 16:13:32,256 views 9052 356 Cache HIT для api_project_list
+WARNING 2025-07-21 16:13:32,264 basehttp 9052 6864 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:13:32,278 basehttp 9052 14808 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:13:32,281 basehttp 9052 356 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:13:32,294 views 9052 6864 Cache HIT для api_service_list
+INFO 2025-07-21 16:13:32,298 basehttp 9052 6864 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:13:32,330 log 9052 3864 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:13:32,335 views 9052 14808 Cache HIT для api_project_list
+WARNING 2025-07-21 16:13:32,338 basehttp 9052 3864 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:13:32,341 basehttp 9052 14808 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:13:46,927 translations 9052 7644 Loaded translations for uk from cache
+INFO 2025-07-21 16:13:46,951 translations 9052 7644 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:13:46,954 basehttp 9052 7644 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8291
+INFO 2025-07-21 16:13:47,392 views 9052 7644 Cache HIT для api_service_list
+INFO 2025-07-21 16:13:47,408 basehttp 9052 7644 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:13:47,417 log 9052 14184 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:13:47,418 views 9052 10388 Cache HIT для api_project_list
+WARNING 2025-07-21 16:13:47,429 basehttp 9052 14184 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:13:47,430 views 9052 7644 Cache HIT для api_service_list
+WARNING 2025-07-21 16:13:47,462 log 9052 7244 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:13:47,463 basehttp 9052 10388 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:13:47,468 basehttp 9052 7644 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:13:47,469 basehttp 9052 7244 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:13:47,483 views 9052 10388 Cache HIT для api_project_list
+INFO 2025-07-21 16:13:47,485 basehttp 9052 10388 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:14:21,811 translations 9052 10388 Loaded translations for uk from cache
+INFO 2025-07-21 16:14:21,820 translations 9052 10388 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:14:21,822 basehttp 9052 10388 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8291
+INFO 2025-07-21 16:14:22,273 views 9052 10388 Cache HIT для api_service_list
+INFO 2025-07-21 16:14:22,283 basehttp 9052 10388 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:14:22,307 log 9052 7644 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:14:22,312 basehttp 9052 7644 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:14:22,314 views 9052 7244 Cache HIT для api_project_list
+INFO 2025-07-21 16:14:22,317 views 9052 14184 Cache HIT для api_service_list
+INFO 2025-07-21 16:14:22,322 basehttp 9052 7244 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:14:22,349 log 9052 10388 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:14:22,350 basehttp 9052 14184 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:14:22,355 views 9052 7644 Cache HIT для api_project_list
+WARNING 2025-07-21 16:14:22,359 basehttp 9052 10388 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:14:22,364 basehttp 9052 7644 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:13,262 translations 9052 8428 Loaded translations for uk from file
+INFO 2025-07-21 16:15:13,451 translations 9052 8428 Loaded dynamic translations for uk from models
+INFO 2025-07-21 16:15:13,453 basehttp 9052 8428 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8292
+WARNING 2025-07-21 16:15:13,835 log 9052 1572 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:15:13,837 basehttp 9052 1572 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:15:13,867 log 9052 1572 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:15:13,881 basehttp 9052 1572 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:15:13,963 views 9052 8428 Cache SET для api_service_list
+INFO 2025-07-21 16:15:13,966 basehttp 9052 8428 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:13,988 views 9052 5912 Cache SET для api_project_list
+INFO 2025-07-21 16:15:13,990 views 9052 8428 Cache HIT для api_service_list
+INFO 2025-07-21 16:15:13,991 basehttp 9052 5912 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:13,994 basehttp 9052 8428 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:14,008 views 9052 1572 Cache HIT для api_project_list
+INFO 2025-07-21 16:15:14,020 basehttp 9052 1572 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:40,443 translations 9052 2124 Loaded translations for uk from file
+INFO 2025-07-21 16:15:40,581 translations 9052 2124 Loaded dynamic translations for uk from models
+INFO 2025-07-21 16:15:40,583 basehttp 9052 2124 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8292
+WARNING 2025-07-21 16:15:40,944 log 9052 6564 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:15:41,028 views 9052 2124 Cache SET для api_service_list
+WARNING 2025-07-21 16:15:41,051 basehttp 9052 6564 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:15:41,057 basehttp 9052 2124 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:41,167 views 9052 8560 Cache SET для api_project_list
+WARNING 2025-07-21 16:15:41,197 log 9052 2496 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:15:41,200 basehttp 9052 8560 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:15:41,207 basehttp 9052 2496 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:15:41,225 views 9052 9500 Cache HIT для api_service_list
+INFO 2025-07-21 16:15:41,231 views 9052 2124 Cache HIT для api_project_list
+INFO 2025-07-21 16:15:41,283 basehttp 9052 9500 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:41,294 basehttp 9052 2124 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:54,420 translations 9052 32 Loaded translations for uk from cache
+INFO 2025-07-21 16:15:54,421 translations 9052 32 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:15:54,423 basehttp 9052 32 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8292
+INFO 2025-07-21 16:15:55,047 views 9052 9132 Cache HIT для api_service_list
+INFO 2025-07-21 16:15:55,057 basehttp 9052 9132 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:55,058 views 9052 2840 Cache HIT для api_project_list
+INFO 2025-07-21 16:15:55,079 basehttp 9052 2840 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:15:55,112 log 9052 12884 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:15:55,117 views 9052 9132 Cache HIT для api_service_list
+INFO 2025-07-21 16:15:55,120 views 9052 2056 Cache HIT для api_project_list
+WARNING 2025-07-21 16:15:55,133 basehttp 9052 12884 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:15:55,135 basehttp 9052 9132 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:15:55,137 basehttp 9052 2056 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:15:55,169 log 9052 2840 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:15:55,182 basehttp 9052 2840 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:17:55,114 translations 9052 8472 Loaded translations for uk from cache
+INFO 2025-07-21 16:17:55,116 translations 9052 8472 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:17:55,119 basehttp 9052 8472 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8292
+INFO 2025-07-21 16:17:55,614 views 9052 8472 Cache HIT для api_service_list
+INFO 2025-07-21 16:17:55,652 basehttp 9052 8472 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:17:55,674 views 9052 12512 Cache HIT для api_project_list
+INFO 2025-07-21 16:17:55,679 basehttp 9052 12512 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:17:55,732 log 9052 2596 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:17:55,742 views 9052 8472 Cache HIT для api_service_list
+INFO 2025-07-21 16:17:55,743 views 9052 7372 Cache HIT для api_project_list
+INFO 2025-07-21 16:17:55,744 basehttp 9052 8472 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:17:55,745 basehttp 9052 2596 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:17:55,747 basehttp 9052 7372 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:17:55,777 log 9052 8472 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:17:55,778 basehttp 9052 8472 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:18:37,432 translations 9052 9472 Loaded translations for uk from file
+INFO 2025-07-21 16:18:37,659 translations 9052 9472 Loaded dynamic translations for uk from models
+INFO 2025-07-21 16:18:37,661 basehttp 9052 9472 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8291
+WARNING 2025-07-21 16:18:37,795 log 9052 6856 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:18:37,798 basehttp 9052 6856 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:18:37,833 log 9052 7508 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:18:37,835 basehttp 9052 7508 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:18:37,913 views 9052 9472 Cache SET для api_service_list
+INFO 2025-07-21 16:18:37,914 basehttp 9052 9472 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:18:37,925 views 9052 7508 Cache HIT для api_service_list
+INFO 2025-07-21 16:18:37,927 basehttp 9052 7508 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:18:37,946 views 9052 7896 Cache SET для api_project_list
+INFO 2025-07-21 16:18:37,947 basehttp 9052 7896 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:18:37,955 views 9052 7508 Cache HIT для api_project_list
+INFO 2025-07-21 16:18:37,956 basehttp 9052 7508 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:19:37,566 translations 9052 6504 Loaded translations for uk from cache
+INFO 2025-07-21 16:19:37,567 translations 9052 6504 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:19:37,569 basehttp 9052 6504 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8291
+WARNING 2025-07-21 16:19:37,845 log 9052 9136 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:19:37,847 basehttp 9052 9136 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:19:37,849 views 9052 6504 Cache HIT для api_service_list
+INFO 2025-07-21 16:19:37,850 views 9052 13432 Cache HIT для api_project_list
+INFO 2025-07-21 16:19:37,874 basehttp 9052 6504 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:19:37,873 log 9052 9136 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:19:37,876 basehttp 9052 13432 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:19:37,878 basehttp 9052 9136 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:19:37,883 views 9052 12512 Cache HIT для api_service_list
+INFO 2025-07-21 16:19:37,885 basehttp 9052 12512 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:19:37,887 views 9052 6504 Cache HIT для api_project_list
+INFO 2025-07-21 16:19:37,889 basehttp 9052 6504 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:25:48,524 translations 9052 11304 Loaded translations for uk from file
+INFO 2025-07-21 16:25:48,663 translations 9052 11304 Loaded dynamic translations for uk from models
+INFO 2025-07-21 16:25:48,669 basehttp 9052 11304 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8399
+INFO 2025-07-21 16:26:15,047 translations 9052 11304 Loaded translations for uk from cache
+INFO 2025-07-21 16:26:15,049 translations 9052 11304 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:26:15,051 basehttp 9052 11304 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8399
+INFO 2025-07-21 16:26:27,753 translations 9052 11304 Loaded translations for uk from cache
+INFO 2025-07-21 16:26:27,759 translations 9052 11304 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:26:27,763 basehttp 9052 11304 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8399
+WARNING 2025-07-21 16:26:37,928 log 9052 1808 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:26:37,938 basehttp 9052 1808 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:26:37,990 log 9052 9876 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:26:37,991 basehttp 9052 9876 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:26:38,055 views 9052 11304 Cache SET для api_service_list
+INFO 2025-07-21 16:26:38,056 basehttp 9052 11304 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:26:38,067 views 9052 9876 Cache HIT для api_service_list
+INFO 2025-07-21 16:26:38,073 basehttp 9052 9876 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:26:38,073 views 9052 9716 Cache SET для api_project_list
+INFO 2025-07-21 16:26:38,075 basehttp 9052 9716 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:26:38,086 views 9052 9876 Cache HIT для api_project_list
+INFO 2025-07-21 16:26:38,087 basehttp 9052 9876 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:27:12,540 log 9052 11304 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:27:12,541 views 9052 9876 Cache HIT для api_service_list
+INFO 2025-07-21 16:27:12,543 views 9052 9716 Cache HIT для api_project_list
+WARNING 2025-07-21 16:27:12,543 basehttp 9052 11304 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:27:12,544 basehttp 9052 9876 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:27:12,548 basehttp 9052 9716 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:27:12,607 views 9052 9716 Cache HIT для api_service_list
+INFO 2025-07-21 16:27:12,610 basehttp 9052 9716 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:27:12,626 views 9052 9716 Cache HIT для api_project_list
+INFO 2025-07-21 16:27:12,627 basehttp 9052 9716 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:27:12,654 log 9052 9716 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:27:12,655 basehttp 9052 9716 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:27:29,517 log 9052 9876 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:27:29,522 views 9052 9716 Cache HIT для api_service_list
+INFO 2025-07-21 16:27:29,523 views 9052 11304 Cache HIT для api_project_list
+WARNING 2025-07-21 16:27:29,527 basehttp 9052 9876 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:27:29,542 basehttp 9052 9716 "GET /api/v1/services/ HTTP/1.1" 200 52
+WARNING 2025-07-21 16:27:29,577 log 9052 1808 Not Found: /api/v1/translations/
+INFO 2025-07-21 16:27:29,578 basehttp 9052 11304 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:27:29,716 views 9052 9876 Cache HIT для api_service_list
+INFO 2025-07-21 16:27:29,822 views 9052 9716 Cache HIT для api_project_list
+WARNING 2025-07-21 16:27:29,899 basehttp 9052 1808 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:27:30,006 basehttp 9052 9876 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:27:30,111 basehttp 9052 9716 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:28:13,645 translations 9052 9716 Loaded translations for uk from file
+INFO 2025-07-21 16:28:13,800 translations 9052 9716 Loaded dynamic translations for uk from models
+INFO 2025-07-21 16:28:13,802 basehttp 9052 9716 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8400
+WARNING 2025-07-21 16:28:13,911 log 9052 1808 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:28:13,913 basehttp 9052 1808 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+WARNING 2025-07-21 16:28:13,946 log 9052 11304 Not Found: /api/v1/translations/
+WARNING 2025-07-21 16:28:13,951 basehttp 9052 11304 "GET /api/v1/translations/ HTTP/1.1" 404 24535
+INFO 2025-07-21 16:28:14,062 views 9052 9716 Cache SET для api_service_list
+INFO 2025-07-21 16:28:14,063 views 9052 9876 Cache SET для api_project_list
+INFO 2025-07-21 16:28:14,064 basehttp 9052 9716 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:28:14,066 basehttp 9052 9876 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:28:14,076 views 9052 9716 Cache HIT для api_project_list
+INFO 2025-07-21 16:28:14,076 views 9052 11304 Cache HIT для api_service_list
+INFO 2025-07-21 16:28:14,078 basehttp 9052 9716 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:28:14,079 basehttp 9052 11304 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:31:08,591 translations 9052 11304 Loaded translations for uk from cache
+INFO 2025-07-21 16:31:08,594 translations 9052 11304 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:31:08,598 basehttp 9052 11304 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8400
+INFO 2025-07-21 16:31:09,130 views 9052 11304 Cache HIT для api_service_list
+INFO 2025-07-21 16:31:09,130 views 9052 9716 Cache HIT для api_project_list
+INFO 2025-07-21 16:31:09,166 basehttp 9052 11304 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:31:09,170 basehttp 9052 9716 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:31:09,196 views 9052 9876 Cache HIT для api_service_list
+INFO 2025-07-21 16:31:09,217 basehttp 9052 9876 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:31:09,223 views 9052 11304 Cache HIT для api_project_list
+INFO 2025-07-21 16:31:09,226 basehttp 9052 11304 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:34:10,832 translations 9052 11304 Loaded translations for uk from cache
+INFO 2025-07-21 16:34:10,834 translations 9052 11304 Loaded dynamic translations for uk from cache
+INFO 2025-07-21 16:34:10,837 basehttp 9052 11304 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8400
+INFO 2025-07-21 16:34:11,158 views 9052 11304 Cache HIT для api_service_list
+INFO 2025-07-21 16:34:11,161 basehttp 9052 11304 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:34:11,167 views 9052 9876 Cache HIT для api_project_list
+INFO 2025-07-21 16:34:11,170 basehttp 9052 9876 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:34:11,187 views 9052 11304 Cache HIT для api_service_list
+INFO 2025-07-21 16:34:11,187 views 9052 9716 Cache HIT для api_project_list
+INFO 2025-07-21 16:34:11,188 basehttp 9052 11304 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:34:11,191 basehttp 9052 9716 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:41:34,985 basehttp 9052 9252 "GET /admin/content/homepage/ HTTP/1.1" 200 83786
+WARNING 2025-07-21 16:41:35,093 basehttp 9052 9252 "GET /static/css/styles.css HTTP/1.1" 404 1969
+INFO 2025-07-21 16:41:35,339 basehttp 9052 7664 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:41:35,365 basehttp 9052 7664 "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-07-21 16:41:35,370 basehttp 9052 2576 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-07-21 16:41:35,394 basehttp 9052 7664 "GET /static/modeltranslation/js/force_jquery.js HTTP/1.1" 200 65
+INFO 2025-07-21 16:41:35,398 basehttp 9052 8484 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-07-21 16:41:35,407 basehttp 9052 2576 "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2025-07-21 16:41:35,422 basehttp 9052 7664 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9222
+INFO 2025-07-21 16:41:35,428 basehttp 9052 2576 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-07-21 16:41:35,430 basehttp 9052 7664 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+WARNING 2025-07-21 16:41:35,454 basehttp 9052 7664 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-21 16:41:35,455 basehttp 9052 12548 "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+INFO 2025-07-21 16:41:35,456 basehttp 9052 8484 "GET /static/modeltranslation/js/tabbed_translation_fields.js HTTP/1.1" 200 18925
+INFO 2025-07-21 16:41:35,469 basehttp 9052 236 "GET /static/modeltranslation/css/tabbed_translation_fields.css HTTP/1.1" 200 4250
+INFO 2025-07-21 16:41:35,471 basehttp 9052 2576 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-07-21 16:41:35,473 basehttp 9052 8848 "GET /static/unfold/filters/js/DateTimeShortcuts.js HTTP/1.1" 200 19332
+WARNING 2025-07-21 16:41:35,504 basehttp 9052 12548 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:41:38,225 basehttp 9052 8848 "GET /admin/content/aboutpage/ HTTP/1.1" 200 83866
+WARNING 2025-07-21 16:41:38,314 basehttp 9052 8848 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:41:38,350 basehttp 9052 8484 "GET /static/icon.svg HTTP/1.1" 404 1951
+WARNING 2025-07-21 16:41:38,352 basehttp 9052 2576 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-21 16:41:38,448 basehttp 9052 236 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:41:45,884 basehttp 9052 236 "GET /admin/auth/user/ HTTP/1.1" 200 92868
+WARNING 2025-07-21 16:41:45,950 basehttp 9052 236 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:41:45,971 basehttp 9052 9900 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:41:45,993 basehttp 9052 496 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:41:46,095 basehttp 9052 14528 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:41:47,803 basehttp 9052 14528 "GET /rosetta/ HTTP/1.1" 302 0
+INFO 2025-07-21 16:41:47,952 basehttp 9052 14528 "GET /rosetta/files/project/ HTTP/1.1" 200 5678
+INFO 2025-07-21 16:41:48,027 basehttp 9052 14528 "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-07-21 16:41:48,030 basehttp 9052 14568 "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-07-21 16:41:48,044 basehttp 9052 8340 "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-07-21 16:41:48,048 basehttp 9052 14568 "GET /static/admin/css/widgets.css HTTP/1.1" 200 11991
+INFO 2025-07-21 16:41:48,050 basehttp 9052 4124 "GET /static/admin/rosetta/css/rosetta.css HTTP/1.1" 200 3176
+INFO 2025-07-21 16:41:48,052 basehttp 9052 1104 "GET /static/admin/rosetta/js/rosetta.js HTTP/1.1" 200 10590
+INFO 2025-07-21 16:41:55,952 basehttp 9052 4124 "GET /rosetta/files/project/en/0/ HTTP/1.1" 200 27057
+INFO 2025-07-21 16:41:56,070 basehttp 9052 4124 "GET /static/admin/img/icon_searchbox_rosetta.png HTTP/1.1" 200 667
+INFO 2025-07-21 16:42:00,648 basehttp 9052 2216 "GET /rosetta/files/project/ HTTP/1.1" 200 5678
+INFO 2025-07-21 16:42:01,800 basehttp 9052 2216 "GET /admin/auth/user/ HTTP/1.1" 200 92868
+INFO 2025-07-21 16:42:04,139 basehttp 9052 2216 "GET /admin/auth/group/ HTTP/1.1" 200 75019
+WARNING 2025-07-21 16:42:04,235 basehttp 9052 2216 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:04,255 basehttp 9052 6872 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:04,277 basehttp 9052 7456 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:04,368 basehttp 9052 5060 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:08,792 basehttp 9052 5060 "GET /admin/auth/user/ HTTP/1.1" 200 92868
+WARNING 2025-07-21 16:42:08,860 basehttp 9052 5060 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:08,885 basehttp 9052 8380 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:08,905 basehttp 9052 6324 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:09,000 basehttp 9052 9088 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:13,502 basehttp 9052 9088 "GET /admin/contacts/contactinquiry/?is_processed__exact=0 HTTP/1.1" 200 88596
+WARNING 2025-07-21 16:42:13,600 basehttp 9052 9088 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:13,614 basehttp 9052 3428 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:13,639 basehttp 9052 1324 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:13,721 basehttp 9052 4076 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:16,254 basehttp 9052 4076 "GET /admin/contacts/contactinquiry/ HTTP/1.1" 200 88002
+WARNING 2025-07-21 16:42:16,324 basehttp 9052 4076 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:16,350 basehttp 9052 9676 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:16,368 basehttp 9052 9800 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:16,483 basehttp 9052 8464 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:18,108 basehttp 9052 528 "GET /admin/contacts/office/?is_main__exact=1 HTTP/1.1" 200 87265
+WARNING 2025-07-21 16:42:18,187 basehttp 9052 528 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:18,211 basehttp 9052 1148 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:18,228 basehttp 9052 9348 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:18,316 basehttp 9052 4484 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:19,938 basehttp 9052 4484 "GET /admin/contacts/office/?is_active__exact=1 HTTP/1.1" 200 87287
+WARNING 2025-07-21 16:42:20,023 basehttp 9052 4484 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:20,023 basehttp 9052 6780 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:20,050 basehttp 9052 15000 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:20,159 basehttp 9052 4680 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:21,388 basehttp 9052 4680 "GET /admin/contacts/office/ HTTP/1.1" 200 86705
+WARNING 2025-07-21 16:42:21,472 basehttp 9052 4680 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:21,493 basehttp 9052 3764 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:21,512 basehttp 9052 8140 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:21,619 basehttp 9052 4016 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:29,573 basehttp 9052 8376 "GET /admin/content/certificate/ HTTP/1.1" 200 83403
+WARNING 2025-07-21 16:42:29,663 basehttp 9052 8376 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:29,682 basehttp 9052 10336 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:29,700 basehttp 9052 10328 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:29,852 basehttp 9052 14272 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:31,897 basehttp 9052 14272 "GET /admin/ HTTP/1.1" 200 96811
+WARNING 2025-07-21 16:42:31,996 basehttp 9052 14272 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:32,014 basehttp 9052 3028 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:32,039 basehttp 9052 9568 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:37,079 basehttp 9052 9060 "GET /admin/content/homepage/ HTTP/1.1" 200 83786
+WARNING 2025-07-21 16:42:37,163 basehttp 9052 9060 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:37,180 basehttp 9052 14516 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:42:37,201 basehttp 9052 7896 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:37,312 basehttp 9052 3920 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:39,402 basehttp 9052 3920 "GET /admin/content/homepage/add/ HTTP/1.1" 200 99800
+WARNING 2025-07-21 16:42:39,499 basehttp 9052 3920 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:42:39,523 basehttp 9052 7196 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-21 16:42:39,530 basehttp 9052 12476 "GET /static/ckeditor/ckeditor.css HTTP/1.1" 200 691
+INFO 2025-07-21 16:42:39,533 basehttp 9052 692 "GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 200 1576
+WARNING 2025-07-21 16:42:39,566 basehttp 9052 12476 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:42:39,569 basehttp 9052 12928 "GET /static/ckeditor/fixups.js HTTP/1.1" 200 172
+INFO 2025-07-21 16:42:39,573 basehttp 9052 12940 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-07-21 16:42:39,587 basehttp 9052 460 "GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 200 761161
+INFO 2025-07-21 16:42:39,640 basehttp 9052 460 "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-07-21 16:42:39,678 basehttp 9052 5704 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:42:39,885 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/config.js?t=N5UC HTTP/1.1" 200 346
+INFO 2025-07-21 16:42:40,059 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/skins/office2013/skin.js?t=N5UC HTTP/1.1" 200 283
+INFO 2025-07-21 16:42:40,127 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/skins/office2013/editor.css?t=N5UC HTTP/1.1" 200 36398
+INFO 2025-07-21 16:42:40,127 basehttp 9052 460 "GET /static/ckeditor/ckeditor/lang/uk.js?t=N5UC HTTP/1.1" 200 28185
+INFO 2025-07-21 16:42:40,214 basehttp 9052 460 "GET /static/ckeditor/ckeditor/styles.js?t=N5UC HTTP/1.1" 200 5577
+INFO 2025-07-21 16:42:40,261 basehttp 9052 460 "GET /static/ckeditor/ckeditor/plugins/autolink/plugin.js?t=N5UC HTTP/1.1" 200 588
+INFO 2025-07-21 16:42:40,262 basehttp 9052 12940 "GET /static/ckeditor/ckeditor/plugins/embedsemantic/plugin.js?t=N5UC HTTP/1.1" 200 1466
+INFO 2025-07-21 16:42:40,265 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/plugins/autoembed/plugin.js?t=N5UC HTTP/1.1" 200 2342
+INFO 2025-07-21 16:42:40,266 basehttp 9052 12928 "GET /static/ckeditor/ckeditor/plugins/autogrow/plugin.js?t=N5UC HTTP/1.1" 200 1919
+INFO 2025-07-21 16:42:40,282 basehttp 9052 12928 "GET /static/ckeditor/ckeditor/plugins/embedbase/plugin.js?t=N5UC HTTP/1.1" 200 3415
+INFO 2025-07-21 16:42:40,303 basehttp 9052 12928 "GET /static/ckeditor/ckeditor/plugins/scayt/dialogs/dialog.css?t=N5UC HTTP/1.1" 200 419
+INFO 2025-07-21 16:42:40,304 basehttp 9052 12940 "GET /static/ckeditor/ckeditor/plugins/autoembed/lang/en.js?t=N5UC HTTP/1.1" 200 164
+INFO 2025-07-21 16:42:40,305 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/plugins/tableselection/styles/tableselection.css?t=N5UC HTTP/1.1" 200 1145
+INFO 2025-07-21 16:42:40,304 basehttp 9052 460 "GET /static/ckeditor/ckeditor/plugins/embedbase/lang/en.js?t=N5UC HTTP/1.1" 200 470
+INFO 2025-07-21 16:42:40,329 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/plugins/copyformatting/styles/copyformatting.css?t=N5UC HTTP/1.1" 200 1511
+INFO 2025-07-21 16:42:40,367 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/plugins/dialog/styles/dialog.css?t=N5UC HTTP/1.1" 200 249
+INFO 2025-07-21 16:42:40,416 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/skins/office2013/icons.png HTTP/1.1" 200 10440
+INFO 2025-07-21 16:42:40,425 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/plugins/icons.png?t=N5UC HTTP/1.1" 200 12237
+INFO 2025-07-21 16:42:40,503 basehttp 9052 5704 "GET /static/ckeditor/ckeditor/contents.css?t=N5UC HTTP/1.1" 200 3092
+INFO 2025-07-21 16:44:22,327 signals 9052 4872 Очищено кеш всіх перекладів
+INFO 2025-07-21 16:44:22,328 signals 9052 4872 Очищено кеш перекладів через створення HomePage
+INFO 2025-07-21 16:44:22,334 signals 9052 4872 Переклади перезавантажено в кеш
+INFO 2025-07-21 16:44:22,362 basehttp 9052 4872 "POST /admin/content/homepage/add/ HTTP/1.1" 302 0
+INFO 2025-07-21 16:44:22,500 basehttp 9052 4872 "GET /admin/content/homepage/ HTTP/1.1" 200 93838
+WARNING 2025-07-21 16:44:22,591 basehttp 9052 4872 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-21 16:44:22,616 basehttp 9052 2284 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-21 16:44:22,632 basehttp 9052 8896 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-21 16:44:22,711 basehttp 9052 12292 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-21 16:44:30,202 translations 9052 3984 Loaded translations for uk from file
+INFO 2025-07-21 16:44:30,323 translations 9052 3984 Loaded dynamic translations for uk from models
+INFO 2025-07-21 16:44:30,325 basehttp 9052 3984 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8617
+INFO 2025-07-21 16:44:30,519 views 9052 8348 Cache HIT для api_project_list
+INFO 2025-07-21 16:44:30,520 views 9052 3984 Cache HIT для api_service_list
+INFO 2025-07-21 16:44:30,521 basehttp 9052 8348 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:44:30,525 basehttp 9052 3984 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:44:30,542 views 9052 8348 Cache HIT для api_project_list
+INFO 2025-07-21 16:44:30,542 views 9052 3984 Cache HIT для api_service_list
+INFO 2025-07-21 16:44:30,544 basehttp 9052 8348 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:44:30,545 basehttp 9052 3984 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-21 16:46:09,258 basehttp 9052 13864 "GET /api/v1/ HTTP/1.1" 200 713
+INFO 2025-07-22 08:37:13,552 autoreload 12064 12400 Watching for file changes with StatReloader

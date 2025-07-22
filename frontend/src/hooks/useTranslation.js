@@ -1,40 +1,38 @@
 // frontend/src/hooks/useTranslation.js
 import { useState, useEffect, useCallback } from 'react';
-import translationService from '../services/translationService';
+import ugcTranslationService from '../services/translationService';
 
 /**
- * React хук для роботи з перекладами
+ * React хук для роботи з перекладами в UGC проекті
  */
 export const useTranslation = () => {
-  const [currentLanguage, setCurrentLanguage] = useState(translationService.getCurrentLanguage());
+  const [currentLanguage, setCurrentLanguage] = useState(ugcTranslationService.getCurrentLanguage());
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Функція перекладу
   const t = useCallback((key, params = {}) => {
-    return translationService.t(key, params);
-  }, [currentLanguage]);
-
-  // Функція для плюральних форм
-  const plural = useCallback((key, count, params = {}) => {
-    return translationService.plural(key, count, params);
+    return ugcTranslationService.t(key, params);
   }, [currentLanguage]);
 
   // Зміна мови
   const changeLanguage = useCallback(async (lang) => {
+    if (lang === currentLanguage) return;
+
     setIsLoading(true);
     setError(null);
 
     try {
-      await translationService.setLanguage(lang);
+      await ugcTranslationService.setLanguage(lang);
       setCurrentLanguage(lang);
+      console.log(`✅ Мова змінена на: ${lang}`);
     } catch (err) {
       setError(err.message);
-      console.error('Помилка зміни мови:', err);
+      console.error('❌ Помилка зміни мови:', err);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [currentLanguage]);
 
   // Оновлення перекладів
   const refreshTranslations = useCallback(async () => {
@@ -42,56 +40,35 @@ export const useTranslation = () => {
     setError(null);
 
     try {
-      await translationService.refreshTranslations();
+      await ugcTranslationService.refreshTranslations();
+      console.log('✅ Переклади оновлено');
     } catch (err) {
       setError(err.message);
-      console.error('Помилка оновлення перекладів:', err);
+      console.error('❌ Помилка оновлення перекладів:', err);
     } finally {
       setIsLoading(false);
     }
-  }, []);
-
-  // Форматування дати
-  const formatDate = useCallback((date, options = {}) => {
-    return translationService.formatDate(date, options);
-  }, [currentLanguage]);
-
-  // Форматування числа
-  const formatNumber = useCallback((number, options = {}) => {
-    return translationService.formatNumber(number, options);
-  }, [currentLanguage]);
-
-  // Пошук перекладів
-  const searchTranslations = useCallback(async (query, lang = null) => {
-    return await translationService.searchTranslations(query, lang);
   }, []);
 
   // Слухач зміни мови
   useEffect(() => {
     const handleLanguageChange = (newLang) => {
       setCurrentLanguage(newLang);
+      console.log(`🔄 Мова оновлена в хуку: ${newLang}`);
     };
 
-    translationService.addLanguageChangeListener(handleLanguageChange);
+    ugcTranslationService.addLanguageChangeListener(handleLanguageChange);
 
     return () => {
-      translationService.removeLanguageChangeListener(handleLanguageChange);
+      ugcTranslationService.removeLanguageChangeListener(handleLanguageChange);
     };
   }, []);
 
   return {
     // Основні функції
     t,
-    plural,
     changeLanguage,
     refreshTranslations,
-    
-    // Форматування
-    formatDate,
-    formatNumber,
-    
-    // Пошук
-    searchTranslations,
     
     // Стан
     currentLanguage,
@@ -100,6 +77,10 @@ export const useTranslation = () => {
     
     // Додаткові функції
     clearError: () => setError(null),
+    
+    // Перевірки мови
+    isUkrainian: currentLanguage === 'uk',
+    isEnglish: currentLanguage === 'en',
   };
 };
 
@@ -114,7 +95,7 @@ export const useAvailableLanguages = () => {
     const loadLanguages = async () => {
       setIsLoading(true);
       try {
-        const availableLanguages = await translationService.getAvailableLanguages();
+        const availableLanguages = await ugcTranslationService.getAvailableLanguages();
         setLanguages(availableLanguages);
       } catch (error) {
         console.error('Помилка завантаження списку мов:', error);
@@ -130,7 +111,7 @@ export const useAvailableLanguages = () => {
 };
 
 /**
- * Хук для статистики перекладів
+ * Хук для статистики перекладів (для адміністраторів)
  */
 export const useTranslationStats = () => {
   const [stats, setStats] = useState(null);
@@ -139,7 +120,7 @@ export const useTranslationStats = () => {
   const loadStats = useCallback(async () => {
     setIsLoading(true);
     try {
-      const translationStats = await translationService.getTranslationStats();
+      const translationStats = await ugcTranslationService.getTranslationStats();
       setStats(translationStats);
     } catch (error) {
       console.error('Помилка завантаження статистики:', error);
