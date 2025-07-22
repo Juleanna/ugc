@@ -7,13 +7,19 @@ import ugcTranslationService from '../services/translationService';
  */
 export const useTranslation = () => {
   const [currentLanguage, setCurrentLanguage] = useState(ugcTranslationService.getCurrentLanguage());
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isReady, setIsReady] = useState(ugcTranslationService.isTranslationsReady());
   const [error, setError] = useState(null);
 
-  // Функція перекладу
+  // Функція перекладу з покращеною логікою
   const t = useCallback((key, params = {}) => {
+    // Якщо переклади ще не готові, повертаємо ключ без попередження
+    if (!isReady) {
+      return key;
+    }
+    
     return ugcTranslationService.t(key, params);
-  }, [currentLanguage]);
+  }, [isReady]);
 
   // Зміна мови
   const changeLanguage = useCallback(async (lang) => {
@@ -50,6 +56,26 @@ export const useTranslation = () => {
     }
   }, []);
 
+  // Ініціалізація та слухач готовності перекладів
+  useEffect(() => {
+    const checkReadiness = async () => {
+      try {
+        // Чекаємо готовності перекладів
+        await ugcTranslationService.waitForReady();
+        setIsReady(true);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Помилка ініціалізації перекладів:', error);
+        setError(error.message);
+        setIsLoading(false);
+      }
+    };
+
+    if (!isReady) {
+      checkReadiness();
+    }
+  }, [isReady]);
+
   // Слухач зміни мови
   useEffect(() => {
     const handleLanguageChange = (newLang) => {
@@ -73,6 +99,7 @@ export const useTranslation = () => {
     // Стан
     currentLanguage,
     isLoading,
+    isReady,
     error,
     
     // Додаткові функції
@@ -134,6 +161,27 @@ export const useTranslationStats = () => {
   }, [loadStats]);
 
   return { stats, isLoading, refreshStats: loadStats };
+};
+
+/**
+ * Хук для компонентів, які потребують готових перекладів
+ * Показує завантаження до готовності перекладів
+ */
+export const useTranslationWithLoader = () => {
+  const translation = useTranslation();
+  
+  // Якщо переклади не готові, показуємо індикатор завантаження
+  if (!translation.isReady) {
+    return {
+      ...translation,
+      shouldShowLoader: true,
+    };
+  }
+
+  return {
+    ...translation,
+    shouldShowLoader: false,
+  };
 };
 
 export default useTranslation;

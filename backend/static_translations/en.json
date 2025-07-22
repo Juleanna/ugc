@@ -38,6 +38,11 @@
   "services.consultation.description": "Professional consultations on the choice of materials, design and technical characteristics of clothing.",
   "services.aftercare.title": "After-sales Service",
   "services.aftercare.description": "We provide full support after purchase: repair, replacement, adaptation to customer needs.",
-  "contact.email": "Contact Us"
+  "contact.email": "Contact Us",
+  "common.language": "Language",
+  "language.ukrainian": "Ukrainian",
+  "language.english": "English", 
+  "language.switch": "Switch language",
+  "language.current": "Current language"
 
 }

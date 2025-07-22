@@ -9,6 +9,11 @@ class UGCTranslationService {
     this.cache = new Map();
     this.cacheTimeout = 30 * 60 * 1000; // 30 хвилин
     
+    // Статус завантаження
+    this.isLoading = false;
+    this.isReady = false;
+    this.loadingPromises = new Map();
+    
     // Ініціалізація
     this.init();
   }
@@ -17,8 +22,23 @@ class UGCTranslationService {
     // Отримуємо мову з localStorage або браузера
     this.currentLanguage = this.getStoredLanguage() || this.getBrowserLanguage() || 'uk';
     
-    // Завантажуємо переклади
+    // Ініціалізуємо базові переклади одразу
+    this.initializeFallbackTranslations();
+    
+    // Завантажуємо переклади з сервера
     await this.loadTranslations(this.currentLanguage);
+    this.isReady = true;
+  }
+
+  /**
+   * Ініціалізує базові переклади для уникнення помилок
+   */
+  initializeFallbackTranslations() {
+    const ukTranslations = this.getFallbackTranslations('uk');
+    const enTranslations = this.getFallbackTranslations('en');
+    
+    this.translations.set('uk', ukTranslations);
+    this.translations.set('en', enTranslations);
   }
 
   getStoredLanguage() {
@@ -50,15 +70,35 @@ class UGCTranslationService {
   async loadTranslations(lang, type = 'all') {
     const cacheKey = `${lang}_${type}`;
     
+    // Якщо вже завантажуємо цю мову, повертаємо існуючий проміс
+    if (this.loadingPromises.has(cacheKey)) {
+      return this.loadingPromises.get(cacheKey);
+    }
+    
     // Перевіряємо кеш
     if (this.cache.has(cacheKey)) {
       const cached = this.cache.get(cacheKey);
       if (Date.now() - cached.timestamp < this.cacheTimeout) {
-        this.translations.set(lang, cached.data);
-        return cached.data;
+        // Об'єднуємо з існуючими fallback перекладами
+        const existingTranslations = this.translations.get(lang) || {};
+        const mergedTranslations = { ...existingTranslations, ...cached.data };
+        this.translations.set(lang, mergedTranslations);
+        return mergedTranslations;
       }
     }
 
+    const loadPromise = this.doLoadTranslations(lang, type, cacheKey);
+    this.loadingPromises.set(cacheKey, loadPromise);
+    
+    try {
+      const result = await loadPromise;
+      return result;
+    } finally {
+      this.loadingPromises.delete(cacheKey);
+    }
+  }
+
+  async doLoadTranslations(lang, type, cacheKey) {
     try {
       let endpoint;
       switch (type) {
@@ -89,24 +129,34 @@ class UGCTranslationService {
       }
 
       const data = await response.json();
-      const translations = data.translations || {};
+      const newTranslations = data.translations || {};
 
       // Зберігаємо в кеш
       this.cache.set(cacheKey, {
-        data: translations,
+        data: newTranslations,
         timestamp: Date.now()
       });
 
-      // Зберігаємо переклади
-      this.translations.set(lang, translations);
+      // Об'єднуємо з існуючими перекладами (fallback + нові)
+      const existingTranslations = this.translations.get(lang) || {};
+      const mergedTranslations = { ...existingTranslations, ...newTranslations };
+      this.translations.set(lang, mergedTranslations);
 
-      console.log(`✅ Завантажено ${Object.keys(translations).length} перекладів для ${lang}`);
-      return translations;
+      console.log(`✅ Завантажено ${Object.keys(newTranslations).length} перекладів для ${lang}`);
+      console.log(`📝 Загалом доступно ${Object.keys(mergedTranslations).length} перекладів`);
+      
+      return mergedTranslations;
 
     } catch (error) {
       console.error(`❌ Помилка завантаження перекладів для ${lang}:`, error);
       
-      // Повертаємо базові переклади при помилці
+      // При помилці використовуємо існуючі переклади або fallback
+      const existingTranslations = this.translations.get(lang);
+      if (existingTranslations) {
+        console.log(`🔄 Використовуємо існуючі переклади для ${lang}`);
+        return existingTranslations;
+      }
+      
       const fallbackTranslations = this.getFallbackTranslations(lang);
       this.translations.set(lang, fallbackTranslations);
       return fallbackTranslations;
@@ -114,7 +164,7 @@ class UGCTranslationService {
   }
 
   /**
-   * Базові переклади для UGC проекту
+   * Розширені базові переклади для UGC проекту
    */
   getFallbackTranslations(lang) {
     if (lang === 'uk') {
@@ -125,6 +175,18 @@ class UGCTranslationService {
         'nav.services': 'Послуги',
         'nav.projects': 'Проекти',
         'nav.contact': 'Контакти',
+
+        // Hero секція
+        'hero.title.main': 'Професійний одяг',
+        'hero.title.for': 'для',
+        'hero.title.sphere': 'будь-якої сфери',
+        'hero.subtitle': 'Якість, надійність, безпека',
+        'hero.button.projects': 'Наші проекти',
+        'hero.button.learn_more': 'Дізнатися більше',
+        'hero.stats.experience': 'Роки досвіду',
+        'hero.stats.projects': 'Завершених проектів',
+        'hero.stats.clients': 'Задоволених клієнтів',
+        'hero.stats.support': 'Підтримка 24/7',
 
         // Сервіси
         'services.title': 'Повний цикл виробництва професійного одягу',
@@ -154,6 +216,7 @@ class UGCTranslationService {
         'common.error': 'Помилка',
         'common.success': 'Успіх',
         'common.close': 'Закрити',
+        'common.language': 'Мова',
       };
     } else {
       return {
@@ -163,6 +226,18 @@ class UGCTranslationService {
         'nav.services': 'Services',
         'nav.projects': 'Projects',
         'nav.contact': 'Contact',
+
+        // Hero секція
+        'hero.title.main': 'Professional clothing',
+        'hero.title.for': 'for',
+        'hero.title.sphere': 'any sphere',
+        'hero.subtitle': 'Quality, reliability, safety',
+        'hero.button.projects': 'Our projects',
+        'hero.button.learn_more': 'Learn more',
+        'hero.stats.experience': 'Years of experience',
+        'hero.stats.projects': 'Completed projects',
+        'hero.stats.clients': 'Satisfied clients',
+        'hero.stats.support': '24/7 Support',
 
         // Сервіси
         'services.title': 'Full cycle of professional clothing production',
@@ -192,12 +267,13 @@ class UGCTranslationService {
         'common.error': 'Error',
         'common.success': 'Success',
         'common.close': 'Close',
+        'common.language': 'Language',
       };
     }
   }
 
   /**
-   * Отримує переклад за ключем
+   * Отримує переклад за ключем з покращеною логікою
    */
   t(key, params = {}) {
     const lang = this.currentLanguage;
@@ -211,14 +287,14 @@ class UGCTranslationService {
       translation = enTranslations[key];
     }
     
-    // Якщо і в англійській немає, повертаємо ключ або fallback
+    // Якщо і в англійській немає, повертаємо ключ
     if (!translation) {
-      const fallback = this.getFallbackTranslations(lang)[key];
-      translation = fallback || key;
-      
-      if (!fallback) {
+      // Логуємо тільки якщо переклади готові (щоб уникнути спаму при ініціалізації)
+      if (this.isReady) {
         console.warn(`🔍 Переклад не знайдено: ${key} (${lang})`);
       }
+      
+      translation = key;
     }
 
     // Заміна параметрів в перекладі
@@ -254,6 +330,31 @@ class UGCTranslationService {
 
   getCurrentLanguage() {
     return this.currentLanguage;
+  }
+
+  /**
+   * Перевіряє чи готові переклади
+   */
+  isTranslationsReady() {
+    return this.isReady;
+  }
+
+  /**
+   * Чекає готовності перекладів
+   */
+  async waitForReady() {
+    if (this.isReady) return;
+    
+    return new Promise((resolve) => {
+      const checkReady = () => {
+        if (this.isReady) {
+          resolve();
+        } else {
+          setTimeout(checkReady, 100);
+        }
+      };
+      checkReady();
+    });
   }
 
   /**
@@ -363,3 +464,5 @@ export const getCurrentLanguage = () => ugcTranslationService.getCurrentLanguage
 export const addLanguageChangeListener = (callback) => ugcTranslationService.addLanguageChangeListener(callback);
 export const removeLanguageChangeListener = (callback) => ugcTranslationService.removeLanguageChangeListener(callback);
 export const refreshTranslations = () => ugcTranslationService.refreshTranslations();
+export const isTranslationsReady = () => ugcTranslationService.isTranslationsReady();
+export const waitForReady = () => ugcTranslationService.waitForReady();

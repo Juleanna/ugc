@@ -38,5 +38,11 @@
   "services.consultation.description": "Професійні консультації щодо вибору матеріалів, дизайну та технічних характеристик одягу.",
   "services.aftercare.title": "Післяпродажне обслуговування",
   "services.aftercare.description": "Надаємо повну підтримку після покупки: ремонт, заміна, адаптація під потреби клієнта.",
-  "contact.email": "Зв'язатися з нами"
+  "contact.email": "Зв'язатися з нами",
+  "common.language": "Мова",
+  "language.ukrainian": "Українська",
+  "language.english": "Англійська",
+  "language.switch": "Змінити мову",
+  "language.current": "Поточна мова"
+
 }
