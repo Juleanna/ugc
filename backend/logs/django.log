@@ -1377,3 +1377,26 @@ WARNING 2025-07-22 10:46:02,332 basehttp 8876 8464 "GET /static/icon.svg HTTP/1.
 INFO 2025-07-22 10:46:02,438 basehttp 8876 6532 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
 INFO 2025-07-22 12:59:09,339 basehttp 8876 13892 "GET /admin/content/homepage/add/ HTTP/1.1" 200 109703
 WARNING 2025-07-22 12:59:09,850 basehttp 8876 13892 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-22 16:35:34,502 signals 8876 11752 Очищено кеш всіх перекладів
+INFO 2025-07-22 16:35:34,511 signals 8876 11752 Очищено кеш перекладів через створення HomePage
+INFO 2025-07-22 16:35:34,520 signals 8876 11752 Переклади перезавантажено в кеш
+INFO 2025-07-22 16:35:34,578 basehttp 8876 11752 "POST /admin/content/homepage/add/ HTTP/1.1" 302 0
+INFO 2025-07-22 16:35:34,811 basehttp 8876 11752 "GET /admin/content/homepage/ HTTP/1.1" 200 93988
+WARNING 2025-07-22 16:35:34,925 basehttp 8876 11752 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-22 16:35:34,939 basehttp 8876 2948 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-22 16:35:35,008 basehttp 8876 18336 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-22 16:35:35,131 basehttp 8876 9084 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-22 16:35:40,308 basehttp 8876 9084 "GET /admin/content/homepage/1/change/ HTTP/1.1" 200 111687
+WARNING 2025-07-22 16:35:40,397 basehttp 8876 9084 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-22 16:35:40,420 basehttp 8876 13752 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-22 16:35:40,442 basehttp 8876 6788 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-22 16:35:40,531 basehttp 8876 17148 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-22 16:35:47,144 basehttp 8876 17148 "GET /admin/content/homepage/ HTTP/1.1" 200 93492
+WARNING 2025-07-22 16:35:47,215 basehttp 8876 17148 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-22 16:35:47,238 basehttp 8876 15368 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-22 16:35:47,255 basehttp 8876 8352 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-22 16:35:47,359 basehttp 8876 13468 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-22 16:41:37,887 basehttp 8876 13556 "OPTIONS /api/v1/translations/uk/all/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:41:41,941 translations 8876 13556 Loaded translations for uk from file
+INFO 2025-07-22 16:41:46,291 translations 8876 13556 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:41:46,294 basehttp 8876 13556 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
