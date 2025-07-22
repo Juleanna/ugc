@@ -2,7 +2,8 @@ from modeltranslation.translator import translator, TranslationOptions
 from .models import HomePage, AboutPage, TeamMember, Certificate, ProductionPhoto
 
 class HomePageTranslationOptions(TranslationOptions):
-    fields = ('company_description', 'mission_text', 'values_text')
+    fields = ( 'sphere_title', 'subtitle',
+              'primary_button_text', 'secondary_button_text',)
 
 class AboutPageTranslationOptions(TranslationOptions):
     fields = ('history_text', 'mission_text', 'values_text', 'social_responsibility')

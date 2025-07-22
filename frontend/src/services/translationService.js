@@ -180,17 +180,18 @@ class UGCTranslationService {
         'hero.title.main': 'Професійний одяг',
         'hero.title.for': 'для',
         'hero.title.sphere': 'будь-якої сфери',
-        'hero.subtitle': 'Якість, надійність, безпека',
+        'hero.subtitle': 'Ми створюємо високоякісний спецодяг, військову форму та корпоративний одяг для українських підприємств та організацій. Наш досвід і прагнення до досконалості допомагають нам задовольняти потреби професіоналів у різних галузях.',
         'hero.button.projects': 'Наші проекти',
         'hero.button.learn_more': 'Дізнатися більше',
         'hero.stats.experience': 'Роки досвіду',
-        'hero.stats.projects': 'Завершених проектів',
-        'hero.stats.clients': 'Задоволених клієнтів',
-        'hero.stats.support': 'Підтримка 24/7',
+        'hero.stats.projects': 'Проектів',
+        'hero.stats.clients': 'Клієнтів',
+        'hero.stats.support': 'Підтримка',
 
         // Сервіси
-        'services.title': 'Повний цикл виробництва професійного одягу',
-        'services.subtitle': 'Від проєктування до готового виробу - ми забезпечуємо якість на кожному етапі',
+        'services.title': 'Повний цикл виробництва',
+        'services.subtitle': 'професійного одягу',
+        'services.description': 'Від проєктування до готового виробу - ми забезпечуємо якість на кожному етапі',
         'services.details': 'Детальніше',
 
         // Проекти
@@ -231,7 +232,7 @@ class UGCTranslationService {
         'hero.title.main': 'Professional clothing',
         'hero.title.for': 'for',
         'hero.title.sphere': 'any sphere',
-        'hero.subtitle': 'Quality, reliability, safety',
+        'hero.subtitle': 'We create high-quality workwear, military uniforms and corporate clothing for Ukrainian enterprises and organizations. Our experience and pursuit of excellence help us meet the needs of professionals in various industries.',
         'hero.button.projects': 'Our projects',
         'hero.button.learn_more': 'Learn more',
         'hero.stats.experience': 'Years of experience',

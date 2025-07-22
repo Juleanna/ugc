@@ -22,17 +22,14 @@ class HomePageAdmin(UnfoldTabbedTranslationAdmin):
         'is_active',
         ('updated_at', RangeDateFilter),
     ]
-    search_fields = ['company_description']
+    
     
     fieldsets = [
         (_("Контент"), {
-            'fields': ['company_description', 'mission_text', 'values_text'],
+            'fields': [ 'sphere_title', 'subtitle'],
             'classes': ['tab'],
         }),
-        (_("Медіа"), {
-            'fields': ['hero_video', 'hero_image'],
-            'classes': ['tab'],
-        }),
+       
         (_("Статистика"), {
             'fields': ['years_experience', 'employees_count', 'projects_completed'],
             'classes': ['tab'],

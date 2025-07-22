@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@nextui-org/react';
 import { Menu, X, Home, Info, Briefcase, FolderOpen, Phone, Globe, ChevronDown } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -7,6 +7,10 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const { t, currentLanguage, changeLanguage } = useTranslation();
+  
+  // Ref для випадаючого меню мови
+  const langMenuRef = useRef(null);
+  const langButtonRef = useRef(null);
 
   // Доступні мови
   const languages = [
@@ -31,10 +35,29 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
     }
   };
 
-  // Обробка зміни мови
+  // Покращений обробник зміни мови
   const handleLanguageChange = async (langCode) => {
-    setIsLangMenuOpen(false);
-    await changeLanguage(langCode);
+    console.log(`🖱️ Клік по мові: ${langCode}`);
+    
+    if (langCode === currentLanguage) {
+      console.log(`ℹ️ Мова вже активна: ${langCode}`);
+      setIsLangMenuOpen(false);
+      return;
+    }
+
+    try {
+      console.log(`🔄 Зміна мови: ${currentLanguage} → ${langCode}`);
+      
+      // Закриваємо меню
+      setIsLangMenuOpen(false);
+      
+      // Змінюємо мову
+      await changeLanguage(langCode);
+      
+      console.log(`✅ Мова успішно змінена на: ${langCode}`);
+    } catch (error) {
+      console.error('❌ Помилка зміни мови:', error);
+    }
   };
 
   // Функція для отримання перекладу з fallback
@@ -45,6 +68,35 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
 
   // Поточна мова для відображення
   const currentLang = languages.find(lang => lang.code === currentLanguage) || languages[0];
+
+  // Обробник кліків поза межами меню
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Перевіряємо, чи клік був поза межами кнопки та меню
+      if (
+        langMenuRef.current && 
+        langButtonRef.current &&
+        !langMenuRef.current.contains(event.target) && 
+        !langButtonRef.current.contains(event.target)
+      ) {
+        console.log('🖱️ Клік поза межами меню мови');
+        setIsLangMenuOpen(false);
+      }
+    };
+
+    // Додаємо обробник тільки якщо меню відкрите
+    if (isLangMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isLangMenuOpen]);
+
+  // Відлагодження поточної мови
+  useEffect(() => {
+    console.log(`🔄 Поточна мова в навігації: ${currentLanguage}`);
+  }, [currentLanguage]);
 
   return (
     <>
@@ -94,8 +146,14 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
               {/* Перемикач мови (десктоп) */}
               <div className="relative">
                 <button
-                  onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                  className="hidden lg:flex items-center space-x-2 px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
+                  ref={langButtonRef}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log(`🖱️ Клік по кнопці мови, стан: ${isLangMenuOpen}`);
+                    setIsLangMenuOpen(!isLangMenuOpen);
+                  }}
+                  className="hidden lg:flex items-center space-x-2 px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >
                   <Globe className="w-4 h-4 text-gray-600" />
                   <span className="text-sm font-medium text-gray-700">
@@ -108,12 +166,19 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
 
                 {/* Випадаюче меню мов */}
                 {isLangMenuOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-60">
+                  <div 
+                    ref={langMenuRef}
+                    className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-[100] animate-in fade-in duration-200"
+                  >
                     {languages.map((language) => (
                       <button
                         key={language.code}
-                        onClick={() => handleLanguageChange(language.code)}
-                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors duration-150 ${
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleLanguageChange(language.code);
+                        }}
+                        className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition-colors duration-150 focus:outline-none focus:bg-gray-50 ${
                           currentLanguage === language.code 
                             ? 'text-blue-600 bg-blue-50 font-medium' 
                             : 'text-gray-700'
@@ -123,7 +188,9 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
                           <span className="text-lg">{language.flag}</span>
                           <span>{language.name}</span>
                           {currentLanguage === language.code && (
-                            <div className="ml-auto w-2 h-2 bg-blue-600 rounded-full" />
+                            <div className="ml-auto">
+                              <div className="w-2 h-2 bg-blue-600 rounded-full" />
+                            </div>
                           )}
                         </div>
                       </button>
@@ -224,14 +291,6 @@ const ModernStickyNavbar = ({ activeSection, scrollToSection }) => {
           </div>
         </div>
       </div>
-
-      {/* Клік поза межами для закриття випадаючого меню мови */}
-      {isLangMenuOpen && (
-        <div
-          className="fixed inset-0 z-50"
-          onClick={() => setIsLangMenuOpen(false)}
-        />
-      )}
     </>
   );
 };

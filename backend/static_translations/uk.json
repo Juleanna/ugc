@@ -6,6 +6,7 @@
   "common.loading": "Завантаження...",
   "common.error": "Помилка",
   "common.success": "Успіх",
+  "common.close": "Закрити",
   "form.name": "Ім'я",
   "form.email": "Електронна пошта",
   "hero.title.main": "Професійний одяг",
@@ -44,5 +45,6 @@
   "language.english": "Англійська",
   "language.switch": "Змінити мову",
   "language.current": "Поточна мова"
+  
 
 }

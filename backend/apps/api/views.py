@@ -1,4 +1,4 @@
-# backend/apps/api/views.py - ПОВНІСТЮ ВИПРАВЛЕНА ВЕРСІЯ
+# backend/apps/api/views.py
 from rest_framework import viewsets, status, filters, mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -7,117 +7,281 @@ from rest_framework.throttling import AnonRateThrottle
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.cache import cache
 from django.utils import timezone
+from django.conf import settings
 from datetime import timedelta
 import logging
-from .cache_utils import SafeCache, SafeBaseViewSetWithCache
-from django.conf import settings
 
+# Моделі
+from apps.content.models import HomePage, AboutPage, TeamMember, Certificate, ProductionPhoto
+from apps.services.models import Service, ServiceFeature
+from apps.projects.models import Project, ProjectCategory, ProjectImage
+from apps.jobs.models import JobPosition, JobApplication, WorkplacePhoto
+from apps.partners.models import PartnershipInfo, WorkStage, PartnerInquiry
+from apps.contacts.models import Office, ContactInquiry
 
-from .serializers import *
+# Серіалізатори
+from .serializers import (
+    HomePageSerializer, AboutPageSerializer, TeamMemberSerializer, CertificateSerializer,
+    ProductionPhotoSerializer, ServiceListSerializer, ServiceDetailSerializer, ServiceFeatureSerializer,
+    ProjectListSerializer, ProjectDetailSerializer, ProjectCategorySerializer, ProjectImageSerializer,
+    JobPositionListSerializer, JobPositionDetailSerializer, JobApplicationSerializer, WorkplacePhotoSerializer,
+    PartnershipInfoSerializer, WorkStageSerializer, PartnerInquirySerializer,
+    OfficeSerializer, ContactInquirySerializer, APIStatsSerializer, ErrorResponseSerializer
+)
 
 logger = logging.getLogger(__name__)
 
-# Rate throttle для перекладів
-class TranslationsRateThrottle(AnonRateThrottle):
-    """Спеціальний throttle для API перекладів"""
-    scope = 'translations'
-    rate = '30/min'  # 30 запитів за хвилину
 
+# ============================================================================
+# БАЗОВІ КЛАСИ
+# ============================================================================
 
-class BaseViewSetWithCache(SafeBaseViewSetWithCache, viewsets.ReadOnlyModelViewSet):
-    """Базовий ViewSet з кешуванням даних"""
+class BaseViewSetWithCache(viewsets.ReadOnlyModelViewSet):
+    """Базовий ViewSet з підтримкою кешування"""
     cache_timeout = 60 * 15  # 15 хвилин за замовчуванням
     cache_key_prefix = 'api'
     
     def get_cache_key(self, action='list', **kwargs):
-        """Генерує ключ кешу"""
+        """Генерує ключ кешу з врахуванням параметрів"""
         model_name = self.queryset.model.__name__.lower()
-        key_parts = [self.cache_key_prefix, model_name, action]
+        language = getattr(self.request, 'LANGUAGE_CODE', 'uk')
+        
+        key_parts = [self.cache_key_prefix, model_name, action, language]
         
         # Додаємо параметри до ключа
         if kwargs:
-            key_parts.extend([f"{k}_{v}" for k, v in sorted(kwargs.items())])
+            sorted_params = sorted(kwargs.items())
+            key_parts.extend([f"{k}_{v}" for k, v in sorted_params])
             
-        return "_".join(key_parts)
+        return "_".join(str(part) for part in key_parts)
     
     def get_cached_response(self, cache_key, fallback_func, *args, **kwargs):
         """Отримує дані з кешу або виконує fallback функцію"""
         try:
+            # Спробуємо отримати з кешу
             cached_data = cache.get(cache_key)
             if cached_data is not None:
-                logger.info(f"Cache HIT для {cache_key}")
+                logger.info(f"Cache HIT: {cache_key}")
                 return Response(cached_data)
             
             # Виконуємо оригінальну функцію
             response = fallback_func(*args, **kwargs)
             
             # Кешуємо тільки успішні відповіді
-            if response.status_code == 200:
+            if hasattr(response, 'status_code') and response.status_code == 200:
                 cache.set(cache_key, response.data, self.cache_timeout)
-                logger.info(f"Cache SET для {cache_key}")
+                logger.info(f"Cache SET: {cache_key}")
             
             return response
             
         except Exception as e:
-            logger.error(f"Помилка кешування для {cache_key}: {str(e)}")
-            # Якщо кеш не працює, повертаємо дані без кешування
+            logger.error(f"Cache error for {cache_key}: {str(e)}")
+            # При помилці кешу повертаємо дані без кешування
             return fallback_func(*args, **kwargs)
+    
+    def get_serializer_context(self):
+        """Додає контекст для серіалізаторів"""
+        context = super().get_serializer_context()
+        context.update({
+            'cache_timeout': self.cache_timeout,
+            'cache_enabled': True
+        })
+        return context
 
+
+class CreateOnlyViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """ViewSet тільки для створення об'єктів"""
+    pass
+
+
+# ============================================================================
+# HOMEPAGE VIEWSETS
+# ============================================================================
 
 class HomePageViewSet(BaseViewSetWithCache):
-    """API для головної сторінки"""
+    """API для головної сторінки з розширеною підтримкою Hero секції"""
     queryset = HomePage.objects.filter(is_active=True).order_by('-id')
     serializer_class = HomePageSerializer
     cache_timeout = 60 * 15  # 15 хвилин
     
-    def list(self, request, *args, **kwargs):
-        cache_key = self.get_cache_key('list')
-        return self.get_cached_response(
-            cache_key, 
-            super().list, 
-            request, *args, **kwargs
+    def get_queryset(self):
+        """Оптимізований queryset з prefetch"""
+        return super().get_queryset().prefetch_related(
+            'teammember_set',
+            'certificate_set', 
+            'productionphoto_set'
         )
     
-    def retrieve(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        cache_key = self.get_cache_key('detail', pk=pk)
-        return self.get_cached_response(
-            cache_key,
-            super().retrieve,
-            request, *args, **kwargs
-        )
+    def list(self, request, *args, **kwargs):
+        """Отримати дані головної сторінки"""
+        cache_key = self.get_cache_key('list')
+        
+        def get_homepage_data():
+            queryset = self.get_queryset()
+            homepage = queryset.first()
+            
+            if not homepage:
+                return Response({
+                    'success': False,
+                    'message': 'Дані головної сторінки не знайдено',
+                    'data': None
+                }, status=status.HTTP_404_NOT_FOUND)
+            
+            serializer = self.get_serializer(homepage)
+            return Response({
+                'success': True,
+                'message': 'Дані головної сторінки завантажено успішно',
+                'data': serializer.data
+            })
+        
+        return self.get_cached_response(cache_key, get_homepage_data)
+    
+    @action(detail=False, methods=['get'])
+    def hero_data(self, request):
+        """Спеціальний endpoint для Hero секції"""
+        cache_key = self.get_cache_key('hero_data')
+        
+        def get_hero_data():
+            try:
+                homepage = self.get_queryset().first()
+                if not homepage:
+                    return Response({
+                        'success': False,
+                        'message': 'Дані для Hero секції не знайдено',
+                        'data': self._get_default_hero_data()
+                    })
+                
+                # Формуємо Hero дані
+                hero_data = {
+                    'main_title': homepage.main_title or 'Професійний одяг',
+                    'sphere_title': homepage.sphere_title or 'кожної сфери',
+                    'subtitle': homepage.subtitle or '',
+                    'primary_button_text': homepage.primary_button_text or 'Наші проєкти',
+                    'secondary_button_text': homepage.secondary_button_text or 'Дізнатися більше',
+                    'additional_info': homepage.additional_info or '',
+                    
+                    'stats': homepage.get_stats_dict(),
+                    'meta': {
+                        'title': homepage.meta_title or '',
+                        'description': homepage.meta_description or ''
+                    }
+                }
+                
+                # Додаємо рекомендовані послуги
+                if homepage.show_featured_services:
+                    featured_services = homepage.get_featured_services()
+                    hero_data['featured_services'] = ServiceListSerializer(
+                        featured_services, 
+                        many=True, 
+                        context={'request': request}
+                    ).data
+                
+                return Response({
+                    'success': True,
+                    'message': 'Hero дані завантажено успішно',
+                    'data': hero_data
+                })
+                
+            except Exception as e:
+                logger.error(f"Error loading hero data: {str(e)}")
+                return Response({
+                    'success': False,
+                    'message': f'Помилка завантаження Hero даних: {str(e)}',
+                    'data': self._get_default_hero_data()
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        return self.get_cached_response(cache_key, get_hero_data)
+    
+    @action(detail=False, methods=['get'])
+    def stats(self, request):
+        """Endpoint для отримання статистики"""
+        cache_key = self.get_cache_key('stats')
+        
+        def get_stats():
+            try:
+                homepage = self.get_queryset().first()
+                
+                if homepage:
+                    # Збираємо актуальну статистику
+                    actual_projects = Project.objects.filter(is_active=True).count()
+                    actual_services = Service.objects.filter(is_active=True).count()
+                    
+                    stats = {
+                        'experience': homepage.years_experience or '5+',
+                        'projects': f"{max(actual_projects, homepage.completed_projects or 0)}+",
+                        'clients': homepage.satisfied_clients or '50+',
+                        'employees': f"{homepage.employees_count}+" if homepage.employees_count else '20+',
+                        'services': f"{actual_services}+",
+                        'support': '24/7',
+                        'last_updated': homepage.updated_at.isoformat() if homepage.updated_at else timezone.now().isoformat()
+                    }
+                else:
+                    # Дефолтна статистика
+                    stats = {
+                        'experience': '5+',
+                        'projects': '100+',
+                        'clients': '50+',
+                        'employees': '20+',
+                        'services': '12+',
+                        'support': '24/7',
+                        'last_updated': timezone.now().isoformat()
+                    }
+                
+                return Response({
+                    'success': True,
+                    'message': 'Статистика завантажена успішно',
+                    'data': stats
+                })
+                
+            except Exception as e:
+                logger.error(f"Error loading stats: {str(e)}")
+                return Response({
+                    'success': False,
+                    'message': 'Помилка завантаження статистики',
+                    'data': {}
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        return self.get_cached_response(cache_key, get_stats)
+    
+    def _get_default_hero_data(self):
+        """Повертає дефолтні Hero дані"""
+        return {
+            'main_title': 'Професійний одяг',
+            'sphere_title': 'кожної сфери',
+            'subtitle': 'Ми створюємо високоякісний спецодяг для українських підприємств',
+            'primary_button_text': 'Наші проєкти',
+            'secondary_button_text': 'Дізнатися більше',
+            'stats': {
+                'experience': '5+',
+                'projects': '100+',
+                'clients': '50+',
+                'support': '24/7'
+            },
+            'featured_services': []
+        }
 
 
 class AboutPageViewSet(BaseViewSetWithCache):
-    """API для сторінки Про нас"""
+    """API для сторінки 'Про нас'"""
     queryset = AboutPage.objects.filter(is_active=True).order_by('-id')
     serializer_class = AboutPageSerializer
     cache_timeout = 60 * 30  # 30 хвилин
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
-    
-    def retrieve(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        cache_key = self.get_cache_key('detail', pk=pk)
-        return self.get_cached_response(
-            cache_key,
-            super().retrieve,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
 
+
+# ============================================================================
+# SERVICE VIEWSETS
+# ============================================================================
 
 class ServiceViewSet(BaseViewSetWithCache):
     """API для послуг"""
     queryset = Service.objects.filter(is_active=True).order_by('order', 'name')
     serializer_class = ServiceListSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['is_featured']
+    filterset_fields = ['is_featured', 'is_active']
     search_fields = ['name', 'short_description']
     ordering_fields = ['name', 'order', 'created_at']
     ordering = ['order', 'name']
@@ -129,58 +293,57 @@ class ServiceViewSet(BaseViewSetWithCache):
         return ServiceListSerializer
     
     def list(self, request, *args, **kwargs):
-        # Враховуємо фільтри та пошук в ключі кешу
-        query_params = dict(request.query_params.items())
+        # Враховуємо фільтри в ключі кешу
+        query_params = {k: v for k, v in request.query_params.items()}
         cache_key = self.get_cache_key('list', **query_params)
-        
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
     
     @action(detail=False, methods=['get'])
     def featured(self, request):
-        """Отримати рекомендовані послуги"""
+        """Рекомендовані послуги"""
         cache_key = self.get_cache_key('featured')
         
-        def get_featured_services():
-            featured_services = self.queryset.filter(is_featured=True)[:6]
+        def get_featured():
+            featured_services = self.get_queryset().filter(is_featured=True)[:6]
             serializer = ServiceListSerializer(
                 featured_services, 
                 many=True, 
                 context={'request': request}
             )
-            return Response(serializer.data)
+            return Response({
+                'success': True,
+                'message': 'Рекомендовані послуги завантажено',
+                'data': serializer.data,
+                'count': len(serializer.data)
+            })
         
-        return self.get_cached_response(cache_key, get_featured_services)
+        return self.get_cached_response(cache_key, get_featured)
 
+
+# ============================================================================
+# PROJECT VIEWSETS
+# ============================================================================
 
 class ProjectCategoryViewSet(BaseViewSetWithCache):
     """API для категорій проектів"""
     queryset = ProjectCategory.objects.filter(is_active=True).order_by('order', 'name')
     serializer_class = ProjectCategorySerializer
     cache_timeout = 60 * 60  # 1 година
-    ordering = ['order', 'name']
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
 
 
 class ProjectViewSet(BaseViewSetWithCache):
     """API для проектів"""
-    queryset = Project.objects.filter(is_active=True).order_by('-created_at', 'title')
+    queryset = Project.objects.filter(is_active=True).order_by('-created_at')
     serializer_class = ProjectListSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['category', 'is_featured']
-    search_fields = ['title', 'short_description']
+    filterset_fields = ['category', 'is_featured', 'is_active']
+    search_fields = ['title', 'short_description', 'client_name']
     ordering_fields = ['title', 'created_at', 'project_date']
-    ordering = ['-created_at', 'title']
+    ordering = ['-created_at']
     cache_timeout = 60 * 25  # 25 хвилин
     
     def get_serializer_class(self):
@@ -188,49 +351,51 @@ class ProjectViewSet(BaseViewSetWithCache):
             return ProjectDetailSerializer
         return ProjectListSerializer
     
+    def get_queryset(self):
+        """Оптимізований queryset"""
+        return super().get_queryset().select_related('category').prefetch_related('images')
+    
     def list(self, request, *args, **kwargs):
-        # Враховуємо фільтри в ключі кешу
-        query_params = dict(request.query_params.items())
+        query_params = {k: v for k, v in request.query_params.items()}
         cache_key = self.get_cache_key('list', **query_params)
-        
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
     
     @action(detail=False, methods=['get'])
     def featured(self, request):
-        """Отримати рекомендовані проекти"""
+        """Рекомендовані проекти"""
         cache_key = self.get_cache_key('featured')
         
-        def get_featured_projects():
-            featured_projects = self.queryset.filter(is_featured=True)[:6]
+        def get_featured():
+            featured_projects = self.get_queryset().filter(is_featured=True)[:6]
             serializer = ProjectListSerializer(
-                featured_projects,
-                many=True,
+                featured_projects, 
+                many=True, 
                 context={'request': request}
             )
-            return Response(serializer.data)
+            return Response({
+                'success': True,
+                'message': 'Рекомендовані проекти завантажено',
+                'data': serializer.data,
+                'count': len(serializer.data)
+            })
         
-        return self.get_cached_response(cache_key, get_featured_projects)
+        return self.get_cached_response(cache_key, get_featured)
 
+
+# ============================================================================
+# JOB VIEWSETS
+# ============================================================================
 
 class JobPositionViewSet(BaseViewSetWithCache):
     """API для вакансій"""
-    queryset = JobPosition.objects.filter(is_active=True).order_by('-is_urgent', '-created_at')
+    queryset = JobPosition.objects.filter(is_active=True).order_by('-created_at')
     serializer_class = JobPositionListSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    
-    # ВИПРАВЛЕНО: використовуємо тільки існуючі поля з моделі JobPosition
-    filterset_fields = ['is_urgent', 'employment_type', 'salary_currency', 'location']
-    
-    # ВИПРАВЛЕНО: використовуємо правильні поля для пошуку
-    search_fields = ['title', 'description', 'location', 'experience_required']
-    
-    ordering_fields = ['title', 'created_at', 'is_urgent', 'salary_from']
-    ordering = ['-is_urgent', '-created_at']
-    cache_timeout = 60 * 10  # 10 хвилин (вакансії змінюються частіше)
+    filterset_fields = ['employment_type', 'location', 'is_urgent', 'is_active']
+    search_fields = ['title', 'description']
+    ordering_fields = ['title', 'created_at', 'deadline']
+    ordering = ['-created_at']
+    cache_timeout = 60 * 10  # 10 хвилин
     
     def get_serializer_class(self):
         if self.action == 'retrieve':
@@ -238,96 +403,100 @@ class JobPositionViewSet(BaseViewSetWithCache):
         return JobPositionListSerializer
     
     def list(self, request, *args, **kwargs):
-        query_params = dict(request.query_params.items())
+        query_params = {k: v for k, v in request.query_params.items()}
         cache_key = self.get_cache_key('list', **query_params)
-        
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
     
     @action(detail=False, methods=['get'])
     def urgent(self, request):
-        """Отримати терміново потрібні вакансії"""
+        """Терміново вакансії"""
         cache_key = self.get_cache_key('urgent')
         
-        def get_urgent_jobs():
-            urgent_jobs = self.queryset.filter(is_urgent=True)[:5]
+        def get_urgent():
+            urgent_jobs = self.get_queryset().filter(is_urgent=True)[:5]
             serializer = JobPositionListSerializer(
-                urgent_jobs,
-                many=True,
+                urgent_jobs, 
+                many=True, 
                 context={'request': request}
             )
-            return Response(serializer.data)
+            return Response({
+                'success': True,
+                'message': 'Термінові вакансії завантажено',
+                'data': serializer.data,
+                'count': len(serializer.data)
+            })
         
-        return self.get_cached_response(cache_key, get_urgent_jobs)
+        return self.get_cached_response(cache_key, get_urgent)
 
 
-class JobApplicationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class JobApplicationViewSet(CreateOnlyViewSet):
     """API для заявок на роботу"""
-    queryset = JobApplication.objects.all().order_by('-created_at')
+    queryset = JobApplication.objects.all()
     serializer_class = JobApplicationSerializer
-
+    
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-
-        # Очищаємо пов'язані кеші
-        self.clear_related_cache()
-
-        return Response(
-            {'message': 'Заявку успішно відправлено'},
-            status=status.HTTP_201_CREATED
-        )
+        application = serializer.save()
+        
+        # Очищаємо кеш вакансій
+        self._clear_job_cache()
+        
+        return Response({
+            'success': True,
+            'message': 'Заявку успішно відправлено',
+            'data': {'id': application.id}
+        }, status=status.HTTP_201_CREATED)
     
-    def clear_related_cache(self):
-        """Очищає пов'язані кеші при створенні заявки"""
+    def _clear_job_cache(self):
+        """Очищає кеш пов'язаний з вакансіями"""
         try:
-            # Очищаємо статистику вакансій
-            cache.delete_many([
-                'api_jobposition_list',
-                'api_jobposition_urgent'
-            ])
+            cache_keys = [
+                'api_jobposition_list_uk',
+                'api_jobposition_list_en',
+                'api_jobposition_urgent_uk',
+                'api_jobposition_urgent_en'
+            ]
+            cache.delete_many(cache_keys)
         except Exception as e:
-            logger.warning(f"Не вдалося очистити кеш: {str(e)}")
+            logger.warning(f"Failed to clear job cache: {str(e)}")
 
+
+# ============================================================================
+# CONTACT AND OFFICE VIEWSETS
+# ============================================================================
 
 class OfficeViewSet(BaseViewSetWithCache):
     """API для офісів"""
     queryset = Office.objects.filter(is_active=True).order_by('order', 'name')
     serializer_class = OfficeSerializer
     cache_timeout = 60 * 60  # 1 година
-    ordering = ['order', 'name']
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
 
 
-class ContactInquiryViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class ContactInquiryViewSet(CreateOnlyViewSet):
     """API для звернень"""
-    queryset = ContactInquiry.objects.all().order_by('-created_at')
+    queryset = ContactInquiry.objects.all()
     serializer_class = ContactInquirySerializer
-
+    
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        inquiry = serializer.save()
+        
+        return Response({
+            'success': True,
+            'message': 'Звернення успішно відправлено',
+            'data': {'id': inquiry.id}
+        }, status=status.HTTP_201_CREATED)
 
-        # Відправка повідомлення (якщо налаштовано)
-        # send_contact_inquiry_notification.delay(serializer.instance.id)
 
-        return Response(
-            {'message': 'Звернення успішно відправлено'},
-            status=status.HTTP_201_CREATED
-        )
-
+# ============================================================================
+# PARTNER VIEWSETS
+# ============================================================================
 
 class PartnershipInfoViewSet(BaseViewSetWithCache):
     """API для інформації про партнерство"""
@@ -337,30 +506,24 @@ class PartnershipInfoViewSet(BaseViewSetWithCache):
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
 
 
-class PartnerInquiryViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class PartnerInquiryViewSet(CreateOnlyViewSet):
     """API для запитів партнерів"""
-    queryset = PartnerInquiry.objects.all().order_by('-created_at')
+    queryset = PartnerInquiry.objects.all()
     serializer_class = PartnerInquirySerializer
-
+    
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-
-        # Відправка повідомлення (якщо налаштовано)
-        # send_partner_inquiry_notification.delay(serializer.instance.id)
-
-        return Response(
-            {'message': 'Запит успішно відправлений'}, 
-            status=status.HTTP_201_CREATED
-        )
+        inquiry = serializer.save()
+        
+        return Response({
+            'success': True,
+            'message': 'Запит партнера успішно відправлено',
+            'data': {'id': inquiry.id}
+        }, status=status.HTTP_201_CREATED)
 
 
 class WorkplacePhotoViewSet(BaseViewSetWithCache):
@@ -368,106 +531,129 @@ class WorkplacePhotoViewSet(BaseViewSetWithCache):
     queryset = WorkplacePhoto.objects.filter(is_active=True).order_by('order')
     serializer_class = WorkplacePhotoSerializer
     cache_timeout = 60 * 30  # 30 хвилин
-    ordering = ['order']
     
     def list(self, request, *args, **kwargs):
         cache_key = self.get_cache_key('list')
-        return self.get_cached_response(
-            cache_key,
-            super().list,
-            request, *args, **kwargs
-        )
+        return self.get_cached_response(cache_key, super().list, request, *args, **kwargs)
 
 
-# Утилітарні функції для управління кешем
-class CacheManager:
-    """Клас для управління кешем API"""
+# ============================================================================
+# UTILITY AND MANAGEMENT VIEWS
+# ============================================================================
+
+class APIStatsViewSet(viewsets.ViewSet):
+    """API для загальної статистики"""
     
-    @staticmethod
-    def clear_model_cache(model_name):
-        """Очищає весь кеш для конкретної моделі"""
-        try:
-            cache_pattern = f"api_{model_name.lower()}_*"
-            
-            # Для Redis
+    @action(detail=False, methods=['get'])
+    def overview(self, request):
+        """Загальна статистика API"""
+        cache_key = 'api_stats_overview'
+        
+        def get_overview_stats():
             try:
-                from django_redis import get_redis_connection
-                con = get_redis_connection("default")
-                keys = con.keys(cache_pattern)
-                if keys:
-                    con.delete(*keys)
-                    logger.info(f"Очищено {len(keys)} ключів кешу для {model_name}")
-            except ImportError:
-                # Fallback для локального кешу
-                cache.clear()
-                logger.info(f"Очищено весь локальний кеш для {model_name}")
+                stats = {
+                    'services_count': Service.objects.filter(is_active=True).count(),
+                    'projects_count': Project.objects.filter(is_active=True).count(),
+                    'jobs_count': JobPosition.objects.filter(is_active=True).count(),
+                    'offices_count': Office.objects.filter(is_active=True).count(),
+                    'categories_count': ProjectCategory.objects.filter(is_active=True).count(),
+                    'applications_count': JobApplication.objects.count(),
+                    'inquiries_count': ContactInquiry.objects.count(),
+                    'last_updated': timezone.now().isoformat()
+                }
                 
-        except Exception as e:
-            logger.error(f"Помилка очищення кешу для {model_name}: {str(e)}")
-    
-    @staticmethod
-    def clear_all_api_cache():
-        """Очищає весь кеш API"""
-        try:
-            cache_pattern = "api_*"
-            
-            try:
-                from django_redis import get_redis_connection
-                con = get_redis_connection("default")
-                keys = con.keys(cache_pattern)
-                if keys:
-                    con.delete(*keys)
-                    logger.info(f"Очищено {len(keys)} ключів API кешу")
-            except ImportError:
-                cache.clear()
-                logger.info("Очищено весь локальний кеш")
+                return Response({
+                    'success': True,
+                    'message': 'Статистика API завантажена',
+                    'data': stats
+                })
                 
-        except Exception as e:
-            logger.error(f"Помилка очищення всього кешу: {str(e)}")
+            except Exception as e:
+                logger.error(f"Error loading API stats: {str(e)}")
+                return Response({
+                    'success': False,
+                    'message': 'Помилка завантаження статистики',
+                    'data': {}
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        # Кешуємо на 30 хвилин
+        cached_data = cache.get(cache_key)
+        if cached_data:
+            return Response(cached_data)
+        
+        response = get_overview_stats()
+        if response.status_code == 200:
+            cache.set(cache_key, response.data, 60 * 30)
+        
+        return response
+
+
+# ============================================================================
+# CACHE MANAGEMENT (DEBUG ONLY)
+# ============================================================================
+
+class CacheManagementViewSet(viewsets.ViewSet):
+    """ViewSet для управління кешем (тільки для DEBUG)"""
     
-    @staticmethod
-    def warm_up_cache():
-        """Розігріває кеш популярними запитами"""
+    @action(detail=False, methods=['post'])
+    def clear_all(self, request):
+        """Очищення всього кешу"""
+        if not settings.DEBUG:
+            return Response({
+                'success': False,
+                'message': 'Доступно тільки в DEBUG режимі'
+            }, status=status.HTTP_403_FORBIDDEN)
+        
         try:
-            from django.test import RequestFactory
-            factory = RequestFactory()
-            
-            # Список ViewSet'ів для розігріву
-            viewsets_to_warm = [
-                (HomePageViewSet, 'homepage'),
-                (AboutPageViewSet, 'about'),
-                (ServiceViewSet, 'services'),
-                (OfficeViewSet, 'offices'),
-            ]
-            
-            for viewset_class, name in viewsets_to_warm:
-                try:
-                    request = factory.get(f'/api/v1/{name}/')
-                    viewset = viewset_class()
-                    viewset.request = request
-                    viewset.list(request)
-                    logger.info(f"Розігрітий кеш для {name}")
-                except Exception as e:
-                    logger.warning(f"Не вдалося розігріти кеш для {name}: {str(e)}")
-                    
+            cache.clear()
+            return Response({
+                'success': True,
+                'message': 'Весь кеш очищено успішно'
+            })
         except Exception as e:
-            logger.error(f"Помилка розігріву кешу: {str(e)}")
-
-
-# Додаткові API endpoints для управління кешем (для розробки)
-@action(detail=False, methods=['post'])
-def clear_cache(self, request):
-    """Ендпоінт для очищення кешу (тільки для розробки)"""
-    if settings.DEBUG:
-        CacheManager.clear_all_api_cache()
-        return Response({'message': 'Кеш очищено'})
-    return Response({'error': 'Не дозволено'}, status=status.HTTP_403_FORBIDDEN)
-
-
-@action(detail=False, methods=['post'])
-def warm_cache(self, request):
-    """Ендпоінт для розігріву кешу (тільки для розробки)"""
-    if settings.DEBUG:
-        CacheManager.warm_up_cache()
-        return Response({'message': 'Кеш розігрітий'})
-    return Response({'error': 'Не дозволено'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({
+                'success': False,
+                'message': f'Помилка очищення кешу: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['get'])
+    def info(self, request):
+        """Інформація про кеш"""
+        if not settings.DEBUG:
+            return Response({
+                'success': False,
+                'message': 'Доступно тільки в DEBUG режимі'
+            }, status=status.HTTP_403_FORBIDDEN)
+        
+        try:
+            # Спробуємо отримати Redis статистику
+            from django_redis import get_redis_connection
+            con = get_redis_connection("default")
+            info = con.info()
+            
+            cache_info = {
+                'redis_version': info.get('redis_version'),
+                'connected_clients': info.get('connected_clients'),
+                'used_memory_human': info.get('used_memory_human'),
+                'total_commands_processed': info.get('total_commands_processed'),
+                'keyspace_hits': info.get('keyspace_hits'),
+                'keyspace_misses': info.get('keyspace_misses')
+            }
+            
+            return Response({
+                'success': True,
+                'message': 'Інформація про кеш отримана',
+                'data': cache_info
+            })
+            
+        except ImportError:
+            return Response({
+                'success': True,
+                'message': 'Використовується локальний кеш Django',
+                'data': {'type': 'local'}
+            })
+        except Exception as e:
+            return Response({
+                'success': False,
+                'message': f'Помилка отримання інформації: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

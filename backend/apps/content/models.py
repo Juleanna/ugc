@@ -1,24 +1,144 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class HomePage(models.Model):
-    """Контент главной страницы"""
-    company_description=RichTextUploadingField(verbose_name=_("Короткий опис компанії"))
-    mission_text=models.TextField(verbose_name=_("Місія"), blank=True)
-    values_text=models.TextField(verbose_name=_("Цінності"), blank=True)
+    """Модель для головної сторінки з підтримкою Hero секції"""
     
-    hero_video = models.FileField(upload_to='videos/', blank=True, null=True)
-    hero_image = models.ImageField(upload_to='hero/', blank=True, null=True)
-    years_experience = models.PositiveIntegerField(default=0, verbose_name=_("Років досвіду"))
-    employees_count = models.PositiveIntegerField(default=0, verbose_name=_("Кількість співробітників"))
-    projects_completed = models.PositiveIntegerField(default=0, verbose_name=_("Виконано проєктів"))
-    is_active = models.BooleanField(default=True, verbose_name=_("Активна"))
-    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Оновлено"))
+    # Основний контент Hero секції
+    main_title = models.CharField(
+        "Основний заголовок",
+        max_length=200,
+        default="Професійний одяг",
+        help_text="Перший рядок заголовка Hero секції"
+    )
+    
+    sphere_title = models.CharField(
+        "Заголовок сфери",
+        max_length=200,
+        default="кожної сфери",
+        help_text="Другий рядок заголовка (після 'для')"
+    )
+    
+    subtitle = models.TextField(
+        "Підзаголовок",
+        max_length=500,
+        help_text="Опис під заголовком Hero секції"
+    )
+    
+    # Кнопки дій
+    primary_button_text = models.CharField(
+        "Текст основної кнопки",
+        max_length=100,
+        default="Наші проєкти",
+        help_text="Текст для головної кнопки дії"
+    )
+    
+    secondary_button_text = models.CharField(
+        "Текст другорядної кнопки",
+        max_length=100,
+        default="Дізнатися більше",
+        help_text="Текст для другорядної кнопки"
+    )
+    
+    # Статистика
+    years_experience = models.CharField(
+        "Роки досвіду",
+        max_length=10,
+        default="5+",
+        help_text="Кількість років досвіду (наприклад: '5+', '10')"
+    )
+    
+    satisfied_clients = models.CharField(
+        "Задоволені клієнти",
+        max_length=10,
+        default="50+",
+        help_text="Кількість задоволених клієнтів (наприклад: '50+', '100')"
+    )
+    
+    completed_projects = models.IntegerField(
+        "Завершені проєкти",
+        default=100,
+        validators=[MinValueValidator(0)],
+        help_text="Кількість завершених проєктів (число)"
+    )
+    
+    # Додаткова інформація
+    additional_info = models.TextField(
+        "Додаткова інформація",
+        blank=True,
+        help_text="Додатковий текст для відображення в Hero секції"
+    )
+    
+    # SEO та метадані
+    meta_title = models.CharField(
+        "Meta заголовок",
+        max_length=60,
+        blank=True,
+        help_text="SEO заголовок сторінки"
+    )
+    
+    meta_description = models.TextField(
+        "Meta опис",
+        max_length=160,
+        blank=True,
+        help_text="SEO опис сторінки"
+    )
+    
+    # Налаштування
+    is_active = models.BooleanField(
+        "Активна",
+        default=True,
+        help_text="Чи активна ця версія головної сторінки"
+    )
+    
+    show_featured_services = models.BooleanField(
+        "Показувати рекомендовані послуги",
+        default=True,
+        help_text="Показувати блок рекомендованих послуг в Hero секції"
+    )
+    
+    featured_services_count = models.IntegerField(
+        "Кількість рекомендованих послуг",
+        default=3,
+        validators=[MinValueValidator(1), MaxValueValidator(6)],
+        help_text="Скільки рекомендованих послуг показувати"
+    )
 
+    
+    
+    # Системні поля
+    created_at = models.DateTimeField("Створено", auto_now_add=True)
+    updated_at = models.DateTimeField("Оновлено", auto_now=True)
+    
     class Meta:
-        verbose_name = _("Головна сторінка")
-        verbose_name_plural = _("Головна сторінка")
+        verbose_name = "Головна сторінка"
+        verbose_name_plural = "Головна сторінка"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Головна сторінка ({self.main_title})"
+    
+    def get_stats_dict(self):
+        """Повертає статистику у вигляді словника для API"""
+        return {
+            'experience': self.years_experience,
+            'projects': f"{self.completed_projects}+" if self.completed_projects else "100+",
+            'clients': self.satisfied_clients,
+            'support': '24/7'
+        }
+    
+    def get_featured_services(self):
+        """Повертає рекомендовані послуги"""
+        if not self.show_featured_services:
+            return []
+        
+        from apps.content.models import Service  # Уникаємо циклічний імпорт
+        return Service.objects.filter(
+            is_active=True, 
+            is_featured=True
+        ).order_by('order', 'name')[:self.featured_services_count]
 
 
 class AboutPage(models.Model):
