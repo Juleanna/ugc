@@ -1,3 +1,4 @@
+# backend/apps/content/models.py
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -18,7 +19,7 @@ class HomePage(models.Model):
         "Заголовок сфери",
         max_length=200,
         default="кожної сфери",
-        help_text="Другий рядок заголовка (після 'для')"
+        help_text="Другий рядок заголовка"
     )
     
     subtitle = models.TextField(
@@ -64,6 +65,14 @@ class HomePage(models.Model):
         help_text="Кількість завершених проєктів (число)"
     )
     
+    # ДОДАЄМО ВІДСУТНЄ ПОЛЕ employees_count
+    employees_count = models.IntegerField(
+        "Кількість співробітників",
+        default=20,
+        validators=[MinValueValidator(1)],
+        help_text="Кількість співробітників компанії"
+    )
+    
     # Додаткова інформація
     additional_info = models.TextField(
         "Додаткова інформація",
@@ -105,8 +114,6 @@ class HomePage(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(6)],
         help_text="Скільки рекомендованих послуг показувати"
     )
-
-    
     
     # Системні поля
     created_at = models.DateTimeField("Створено", auto_now_add=True)
@@ -126,6 +133,7 @@ class HomePage(models.Model):
             'experience': self.years_experience,
             'projects': f"{self.completed_projects}+" if self.completed_projects else "100+",
             'clients': self.satisfied_clients,
+            'employees': f"{self.employees_count}+" if self.employees_count else "20+",
             'support': '24/7'
         }
     
@@ -134,7 +142,7 @@ class HomePage(models.Model):
         if not self.show_featured_services:
             return []
         
-        from apps.content.models import Service  # Уникаємо циклічний імпорт
+        from apps.services.models import Service  # Уникаємо циклічний імпорт
         return Service.objects.filter(
             is_active=True, 
             is_featured=True
@@ -143,10 +151,10 @@ class HomePage(models.Model):
 
 class AboutPage(models.Model):
     """Страница О нас"""
-    history_text=RichTextUploadingField(verbose_name=_("Історія компанії"))
-    mission_text=RichTextUploadingField(verbose_name=_("Місія"))
-    values_text=RichTextUploadingField(verbose_name=_("Цінності"))
-    social_responsibility=RichTextUploadingField(verbose_name=_("Соціальна відповідальність"), blank=True)
+    history_text = RichTextUploadingField(verbose_name=_("Історія компанії"))
+    mission_text = RichTextUploadingField(verbose_name=_("Місія"))
+    values_text = RichTextUploadingField(verbose_name=_("Цінності"))
+    social_responsibility = RichTextUploadingField(verbose_name=_("Соціальна відповідальність"), blank=True)
     
     is_active = models.BooleanField(default=True, verbose_name=_("Активна"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Оновлено"))
@@ -158,9 +166,9 @@ class AboutPage(models.Model):
 
 class TeamMember(models.Model):
     """Команда/Руководство"""
-    name=models.CharField(max_length=100, verbose_name=_("Ім'я"))
-    position=models.CharField(max_length=100, verbose_name=_("Посада"))
-    bio=RichTextUploadingField(blank=True, verbose_name=_("Біографія"))
+    name = models.CharField(max_length=100, verbose_name=_("Ім'я"))
+    position = models.CharField(max_length=100, verbose_name=_("Посада"))
+    bio = RichTextUploadingField(blank=True, verbose_name=_("Біографія"))
     
     photo = models.ImageField(upload_to='team/', verbose_name=_("Фото"))
     email = models.EmailField(blank=True, verbose_name=_("Електронна пошта"))
@@ -170,20 +178,20 @@ class TeamMember(models.Model):
     is_active = models.BooleanField(default=True, verbose_name=_("Активний"))
 
     class Meta:
-        ordering = ['order']
+        ordering = ['order', 'name']
         verbose_name = _("Член команди")
         verbose_name_plural = _("Команда")
 
 
 class Certificate(models.Model):
-    """Сертификаты и награды"""
-    title=models.CharField(max_length=200, verbose_name=_("Назва"))
-    description=models.TextField(blank=True, verbose_name=_("Опис"))
+    """Сертификаты компании"""
+    title = models.CharField(max_length=200, verbose_name=_("Назва"))
+    description = models.TextField(blank=True, verbose_name=_("Опис"))
     
     image = models.ImageField(upload_to='certificates/', verbose_name=_("Зображення"))
     issued_date = models.DateField(verbose_name=_("Дата видачі"))
-    issuing_organization = models.CharField(max_length=200, blank=True, verbose_name=_("Організація"))
-    certificate_url = models.URLField(blank=True, verbose_name=_("Посилання"))
+    issuing_organization = models.CharField(max_length=200, verbose_name=_("Організація, що видала"))
+    certificate_url = models.URLField(blank=True, verbose_name=_("Посилання на сертифікат"))
     is_active = models.BooleanField(default=True, verbose_name=_("Активний"))
 
     class Meta:

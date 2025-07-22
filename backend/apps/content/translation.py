@@ -2,7 +2,7 @@ from modeltranslation.translator import translator, TranslationOptions
 from .models import HomePage, AboutPage, TeamMember, Certificate, ProductionPhoto
 
 class HomePageTranslationOptions(TranslationOptions):
-    fields = ( 'sphere_title', 'subtitle',
+    fields = ( 'main_title','sphere_title', 'subtitle',
               'primary_button_text', 'secondary_button_text',)
 
 class AboutPageTranslationOptions(TranslationOptions):

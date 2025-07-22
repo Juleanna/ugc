@@ -12,9 +12,10 @@ from .models import HomePage, AboutPage, TeamMember, Certificate, ProductionPhot
 class HomePageAdmin(UnfoldTabbedTranslationAdmin):
     """Админка для главной страницы"""
     list_display = [
+        'main_title',
         'years_experience', 
         'employees_count', 
-        'projects_completed', 
+        'completed_projects',  # Виправлено назву поля
         'is_active_display',
         'updated_at'
     ]
@@ -23,18 +24,32 @@ class HomePageAdmin(UnfoldTabbedTranslationAdmin):
         ('updated_at', RangeDateFilter),
     ]
     
-    
     fieldsets = [
-        (_("Контент"), {
-            'fields': [ 'sphere_title', 'subtitle'],
+        (_("Основний контент"), {
+            'fields': ['main_title', 'sphere_title', 'subtitle'],
             'classes': ['tab'],
         }),
-       
+        (_("Кнопки дій"), {
+            'fields': ['primary_button_text', 'secondary_button_text'],
+            'classes': ['tab'],
+        }),
         (_("Статистика"), {
-            'fields': ['years_experience', 'employees_count', 'projects_completed'],
+            'fields': ['years_experience', 'satisfied_clients', 'completed_projects', 'employees_count'],
             'classes': ['tab'],
         }),
-        (_("Налаштування"), {
+        (_("Додаткова інформація"), {
+            'fields': ['additional_info'],
+            'classes': ['tab'],
+        }),
+        (_("SEO"), {
+            'fields': ['meta_title', 'meta_description'],
+            'classes': ['tab'],
+        }),
+        (_("Налаштування послуг"), {
+            'fields': ['show_featured_services', 'featured_services_count'],
+            'classes': ['tab'],
+        }),
+        (_("Системні налаштування"), {
             'fields': ['is_active'],
             'classes': ['tab'],
         }),
@@ -50,7 +65,7 @@ class HomePageAdmin(UnfoldTabbedTranslationAdmin):
             '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Неактивна</span>'
         )
 
-   
+
 
 @admin.register(AboutPage)
 class AboutPageAdmin(UnfoldTabbedTranslationAdmin):
