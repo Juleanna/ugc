@@ -1,3 +1,4 @@
+// frontend/src/components/ServicesSection.jsx
 import React from 'react';
 import { Card, CardBody, CardHeader, Chip } from "@nextui-org/react";
 import { 
@@ -54,19 +55,52 @@ const ServicesSection = ({ data }) => {
     console.log('Clicked details for:', service.name || service.title);
   };
 
-  const services = data.services?.length > 0 ? data.services : defaultServices;
+  // ВИПРАВЛЕНО: Додано перевірки на існування data та data.services
+  // Якщо data не передано або data.services не існує, використовуємо defaultServices
+  const services = React.useMemo(() => {
+    if (!data) {
+      console.warn('ServicesSection: data prop не передано, використовуємо defaultServices');
+      return defaultServices;
+    }
+    
+    if (!data.services) {
+      console.warn('ServicesSection: data.services не існує, використовуємо defaultServices');
+      return defaultServices;
+    }
+    
+    if (Array.isArray(data.services) && data.services.length > 0) {
+      return data.services;
+    }
+    
+    console.info('ServicesSection: data.services порожній, використовуємо defaultServices');
+    return defaultServices;
+  }, [data]);
+
+  // Додаткова перевірка для рендерингу
+  if (!services || services.length === 0) {
+    return (
+      <section id="services" className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Завантаження послуг...
+            </h2>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="services" className="section-padding bg-gray-50">
       <div className="container-custom">
         <div className="text-center mb-12">
-         
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Повний цикл виробництва
             <br />
             <span className="text-gradient-blue">професійного одягу</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 ">
+          <p className="text-lg md:text-xl text-gray-600">
             Від проєктування до готового виробу - ми забезпечуємо якість на кожному етапі.
           </p>
         </div>
@@ -74,12 +108,12 @@ const ServicesSection = ({ data }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => {
             const Icon = service.icon || Briefcase;
-            const title = service.name || service.title;
-            const description = service.short_description || service.description;
+            const title = service.name || service.title || `Послуга ${index + 1}`;
+            const description = service.short_description || service.description || 'Опис послуги';
 
             return (
               <Card 
-                key={service.id || index} 
+                key={service.id || `service-${index}`} 
                 className="hover-lift cursor-pointer"
                 onPress={() => handleServiceClick(service)}
               >

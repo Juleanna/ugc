@@ -1,100 +1,78 @@
 // frontend/src/components/interactive/FinalUGCDesign.jsx
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Spinner, Card, CardBody, Button } from '@nextui-org/react';
-import { ChevronUp, Wifi, WifiOff } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
-// Імпорт розширених API хуків
-import { 
-  useEnhancedHomepage, 
-  useHeroSectionData, 
-  useFeaturedServices, 
-  useFeaturedProjects 
-} from '../../hooks/useEnhancedAPI';
-
-// Імпорт хука перекладів
-import { useTranslation } from '../../hooks/useTranslation';
-
-// Імпорт компонентів
+// Імпорт об'єднаного фонового компоненту
 import UnifiedBackground from './UnifiedBackground';
 import ModernNavigation from './ModernNavigation';
 import EnhancedHeroSection from './EnhancedHeroSection';
 
-// Імпорт секцій
+// Імпорт існуючих секцій
 import AboutSection from '../AboutSection';
 import ServicesSection from '../ServicesSection';
 import ProjectsSection from '../ProjectsSection';
 import ContactSection from '../ContactSection';
 import Footer from '../Footer';
 
+// API конфігурація
+const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
+
+const apiCall = async (endpoint) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+    if (!response.ok) throw new Error('Network error');
+    return await response.json();
+  } catch (error) {
+    console.error('API Error:', error);
+    return null;
+  }
+};
+
 const FinalUGCDesign = () => {
-  // Стан компонента
   const [activeSection, setActiveSection] = useState('home');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [data, setData] = useState({
+    services: [],
+    projects: [],
+    translations: {}
+  });
+  const [isLoading, setIsLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
-  // Хуки для перекладів
-  const { t, isLoading: translationsLoading } = useTranslation();
-
-  // Розширені API хуки
-  const { 
-    heroData, 
-    stats, 
-    isLoading: heroLoading, 
-    error: heroError 
-  } = useHeroSectionData();
-
-  const { 
-    services, 
-    isLoading: servicesLoading, 
-    error: servicesError 
-  } = useFeaturedServices();
-
-  const { 
-    projects, 
-    isLoading: projectsLoading, 
-    error: projectsError 
-  } = useFeaturedProjects();
-
-  // Загальний стан завантаження
-  const isLoading = useMemo(() => 
-    heroLoading || servicesLoading || projectsLoading || translationsLoading,
-    [heroLoading, servicesLoading, projectsLoading, translationsLoading]
-  );
-
-  // Об'єднані дані для передачі в компоненти
-  const combinedData = useMemo(() => ({
-    hero: heroData,
-    services: services,
-    projects: projects,
-    stats: stats
-  }), [heroData, services, projects, stats]);
-
-  // Моніторинг підключення до інтернету
+  // Завантаження даних з API
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
+    const loadData = async () => {
+      setIsLoading(true);
+      
+      // ВИПРАВЛЕНО: Додано відсутній виклик API для translations
+      const [servicesResponse, projectsResponse, translationsResponse] = await Promise.all([
+        apiCall('/services/'),
+        apiCall('/projects/'),
+        apiCall('/translations/uk/all/') // Додано відсутню лінію
+      ]);
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      setData({
+        services: servicesResponse?.results || [],
+        projects: projectsResponse?.results || [],
+        translations: translationsResponse?.translations || {}
+      });
+      setIsLoading(false);
     };
+
+    loadData();
   }, []);
 
-  // Відстеження скролу та активної секції
+  // Відстеження скролу
   useEffect(() => {
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const currentScroll = window.scrollY;
-      
-      // Прогрес скролу
       setScrollProgress((currentScroll / totalScroll) * 100);
-      
-      // Показ кнопки "Вгору"
-      setShowScrollToTop(currentScroll > 300);
 
       // Визначення активної секції
       const sections = ['home', 'about', 'services', 'projects', 'contact'];
@@ -104,146 +82,78 @@ const FinalUGCDesign = () => {
       sectionElements.forEach((section, index) => {
         if (section) {
           const rect = section.getBoundingClientRect();
-          const sectionCenter = rect.top + (rect.height / 2);
-          
-          // Секція вважається активною, якщо її центр знаходиться у верхній половині вікна
-          if (sectionCenter <= window.innerHeight / 2 && sectionCenter >= -rect.height / 2) {
+          if (rect.top <= window.innerHeight / 3) {
             current = sections[index];
           }
         }
       });
       
-      if (current !== activeSection) {
-        setActiveSection(current);
-      }
+      setActiveSection(current);
     };
 
-    // Throttled scroll handler для кращої продуктивності
-    let scrollTimeout;
-    const throttledScrollHandler = () => {
-      if (scrollTimeout) return;
-      scrollTimeout = setTimeout(() => {
-        handleScroll();
-        scrollTimeout = null;
-      }, 16); // ~60fps
-    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
-    
-    // Ініціальний виклик
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', throttledScrollHandler);
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-    };
-  }, [activeSection]);
-
-  // Функція плавної прокрутки до секції
-  const scrollToSection = useCallback((sectionId) => {
+  // Плавний скрол до секції
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navHeight = 80; // Висота навігації
-      const offsetTop = element.offsetTop - navHeight;
-      
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
       });
-      
-      // Оновлюємо активну секцію одразу для кращого UX
       setActiveSection(sectionId);
     }
-  }, []);
+  };
 
-  // Прокрутка вгору
-  const scrollToTop = useCallback(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }, []);
+  // Обробка форми
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-  // Обробка помилок
-  const hasErrors = heroError || servicesError || projectsError;
-  const errorMessages = [heroError, servicesError, projectsError]
-    .filter(Boolean)
-    .map(error => error.toString());
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const response = await apiCall('/contacts/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
 
-  // Індикатор стану підключення
-  const ConnectionIndicator = () => (
-    <div className={`fixed top-20 right-4 z-40 transition-all duration-300 ${
-      isOnline ? 'opacity-0 pointer-events-none' : 'opacity-100'
-    }`}>
-      <Card className="bg-red-50 border border-red-200">
-        <CardBody className="p-3 flex flex-row items-center gap-2">
-          <WifiOff className="w-4 h-4 text-red-600" />
-          <span className="text-sm text-red-700">
-            {t('common.offline', 'Немає підключення')}
-          </span>
-        </CardBody>
-      </Card>
-    </div>
-  );
-
-  // Компонент завантаження
-  const LoadingOverlay = () => (
-    <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
-      <Card className="glass border border-white/20">
-        <CardBody className="p-8 text-center">
-          <Spinner size="lg" className="mb-4" />
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">
-            {t('common.loading', 'Завантаження...')}
-          </h3>
-          <p className="text-gray-500">
-            {t('common.loading_data', 'Підготовка контенту')}
-          </p>
-        </CardBody>
-      </Card>
-    </div>
-  );
-
-  // Компонент помилок
-  const ErrorDisplay = () => (
-    hasErrors && (
-      <div className="fixed top-20 left-4 z-40">
-        <Card className="bg-red-50 border border-red-200 max-w-sm">
-          <CardBody className="p-4">
-            <h4 className="font-semibold text-red-700 mb-2">
-              {t('common.error', 'Помилка завантаження')}
-            </h4>
-            <div className="text-sm text-red-600 space-y-1">
-              {errorMessages.map((message, index) => (
-                <p key={index}>{message}</p>
-              ))}
-            </div>
-          </CardBody>
-        </Card>
-      </div>
-    )
-  );
+      if (response) {
+        // Успішно відправлено
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        alert('Повідомлення надіслано успішно!');
+      }
+    } catch (error) {
+      console.error('Помилка відправки:', error);
+      alert('Помилка відправки. Спробуйте пізніше.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 relative overflow-hidden">
-      {/* Показуємо overlay завантаження тільки при першому завантаженні */}
-      {isLoading && !combinedData.hero && <LoadingOverlay />}
-      
-      {/* Фоновий компонент з усіма ефектами */}
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Уніфікований фоновий компонент */}
       <UnifiedBackground />
       
-      {/* Індикатор прогресу скролу */}
-      <div 
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 z-50 transition-all duration-300 ease-out"
-        style={{ width: `${scrollProgress}%` }}
-      />
-
-      {/* Індикатор підключення */}
-      <ConnectionIndicator />
-
-      {/* Відображення помилок */}
-      <ErrorDisplay />
+      {/* Прогрес скролу */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200/30 z-50">
+        <div 
+          className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
 
       {/* Навігація */}
       <ModernNavigation 
@@ -251,91 +161,88 @@ const FinalUGCDesign = () => {
         scrollToSection={scrollToSection}
       />
 
-      {/* Основний контент */}
-      <main>
-        {/* Hero секція з розширеними даними */}
-        <section id="home" className="relative min-h-screen">
-          <EnhancedHeroSection 
-            scrollToSection={scrollToSection}
-            heroData={combinedData.hero}
-            stats={combinedData.stats}
-            isLoading={heroLoading}
+      {/* Головна секція */}
+      <section id="home" className="relative min-h-screen">
+        <EnhancedHeroSection 
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+          heroData={data.hero}
+        />
+      </section>
+
+      {/* Про нас */}
+      <section id="about" className="relative bg-white/80 backdrop-blur-sm">
+        <div className="parallax-section">
+          <AboutSection data={data} />
+        </div>
+      </section>
+
+      {/* Послуги */}
+      <section id="services" className="relative bg-gray-50/80 backdrop-blur-sm">
+        <div className="parallax-section">
+          <ServicesSection data={data} />
+        </div>
+      </section>
+
+      {/* Проекти */}
+      <section id="projects" className="relative bg-white/80 backdrop-blur-sm">
+        <div className="parallax-section">
+          <ProjectsSection data={data} />
+        </div>
+      </section>
+
+      {/* Контакти */}
+      <section id="contact" className="relative bg-gray-50/80 backdrop-blur-sm">
+        <div className="parallax-section">
+          <ContactSection 
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
+            translations={data.translations}
           />
-        </section>
-
-        {/* Секція "Про нас" */}
-        <section id="about" className="relative bg-white/80 backdrop-blur-sm">
-          <div className="parallax-section">
-            <AboutSection 
-              data={combinedData}
-              isLoading={isLoading}
-            />
-          </div>
-        </section>
-
-        {/* Секція послуг з розширеними даними */}
-        <section id="services" className="relative bg-gray-50/80 backdrop-blur-sm">
-          <div className="parallax-section">
-            <ServicesSection 
-              services={combinedData.services}
-              isLoading={servicesLoading}
-              error={servicesError}
-            />
-          </div>
-        </section>
-
-        {/* Секція проектів з розширеними даними */}
-        <section id="projects" className="relative bg-white/80 backdrop-blur-sm">
-          <div className="parallax-section">
-            <ProjectsSection 
-              projects={combinedData.projects}
-              isLoading={projectsLoading}
-              error={projectsError}
-            />
-          </div>
-        </section>
-
-        {/* Секція контактів */}
-        <section id="contact" className="relative bg-gray-50/80 backdrop-blur-sm">
-          <div className="parallax-section">
-            <ContactSection 
-              data={combinedData}
-              isLoading={isLoading}
-            />
-          </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
       {/* Футер */}
-      <Footer data={combinedData} />
+      <Footer translations={data.translations} />
 
-      {/* Кнопка прокрутки вгору */}
-      <Button
-        isIconOnly
-        className={`fixed bottom-8 right-8 z-40 bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 ${
-          showScrollToTop 
-            ? 'translate-y-0 opacity-100 scale-100' 
-            : 'translate-y-16 opacity-0 scale-75 pointer-events-none'
-        }`}
-        size="lg"
-        onPress={scrollToTop}
-        aria-label={t('common.scroll_to_top', 'Прокрутити вгору')}
-      >
-        <ChevronUp className="w-6 h-6" />
-      </Button>
-
-      {/* Дебаг інформація (тільки в режимі розробки) */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="fixed bottom-4 left-4 z-40 bg-black/80 text-white text-xs p-3 rounded-lg font-mono">
-          <div>Active: {activeSection}</div>
-          <div>Scroll: {Math.round(scrollProgress)}%</div>
-          <div>Online: {isOnline ? '✓' : '✗'}</div>
-          <div>Loading: {isLoading ? '⏳' : '✓'}</div>
-          <div>Hero: {combinedData.hero ? '✓' : '✗'}</div>
-          <div>Services: {combinedData.services?.length || 0}</div>
-          <div>Projects: {combinedData.projects?.length || 0}</div>
+      {/* Лоадер */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-white/95 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="relative">
+              <div className="w-20 h-20 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="absolute inset-0 w-20 h-20 border-4 border-purple-200 border-b-purple-600 rounded-full animate-spin mx-auto" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+            </div>
+            <p className="text-gray-600 font-medium text-lg">Завантаження UGC...</p>
+            <p className="text-gray-400 text-sm mt-2">Готуємо для вас найкраще</p>
+          </div>
         </div>
       )}
+
+      {/* Кнопка швидкого повернення наверх */}
+      <button
+        onClick={() => scrollToSection('home')}
+        className={`fixed bottom-8 right-8 z-30 w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-110 ${
+          activeSection === 'home' ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+        aria-label="Повернутися наверх"
+      >
+        <svg 
+          className="w-6 h-6 mx-auto" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M5 10l7-7m0 0l7 7m-7-7v18" 
+          />
+        </svg>
+      </button>
     </div>
   );
 };

@@ -1400,3 +1400,527 @@ INFO 2025-07-22 16:41:37,887 basehttp 8876 13556 "OPTIONS /api/v1/translations/u
 INFO 2025-07-22 16:41:41,941 translations 8876 13556 Loaded translations for uk from file
 INFO 2025-07-22 16:41:46,291 translations 8876 13556 Loaded dynamic translations for uk from models
 INFO 2025-07-22 16:41:46,294 basehttp 8876 13556 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+INFO 2025-07-22 16:43:38,259 basehttp 8876 6744 "GET /admin/content/aboutpage/ HTTP/1.1" 200 83866
+WARNING 2025-07-22 16:43:38,365 basehttp 8876 6744 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-22 16:43:38,384 basehttp 8876 10476 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-22 16:43:38,463 basehttp 8876 16380 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-22 16:43:38,573 basehttp 8876 9260 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-22 16:43:45,805 basehttp 8876 9260 "GET /admin/content/aboutpage/add/ HTTP/1.1" 200 114653
+WARNING 2025-07-22 16:43:45,915 basehttp 8876 9260 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-22 16:43:45,930 basehttp 8876 16168 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-22 16:43:46,000 basehttp 8876 15636 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-22 16:43:46,188 basehttp 8876 7320 "GET /static/ckeditor/ckeditor.css HTTP/1.1" 200 691
+INFO 2025-07-22 16:43:46,207 basehttp 8876 17780 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-22 16:43:46,215 basehttp 8876 16896 "GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 200 1576
+INFO 2025-07-22 16:43:46,225 basehttp 8876 14136 "GET /static/ckeditor/fixups.js HTTP/1.1" 200 172
+INFO 2025-07-22 16:43:46,235 basehttp 8876 17784 "GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 200 761161
+INFO 2025-07-22 16:43:46,510 basehttp 8876 17784 "GET /static/ckeditor/ckeditor/config.js?t=N5UC HTTP/1.1" 200 346
+INFO 2025-07-22 16:43:46,684 basehttp 8876 17784 "GET /static/ckeditor/ckeditor/skins/office2013/skin.js?t=N5UC HTTP/1.1" 200 283
+INFO 2025-07-22 16:43:46,766 basehttp 8876 17784 "GET /static/ckeditor/ckeditor/skins/office2013/editor.css?t=N5UC HTTP/1.1" 200 36398
+INFO 2025-07-22 16:43:46,767 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/lang/uk.js?t=N5UC HTTP/1.1" 200 28185
+INFO 2025-07-22 16:43:46,853 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/styles.js?t=N5UC HTTP/1.1" 200 5577
+INFO 2025-07-22 16:43:46,900 basehttp 8876 16896 "GET /static/ckeditor/ckeditor/plugins/embedsemantic/plugin.js?t=N5UC HTTP/1.1" 200 1466
+INFO 2025-07-22 16:43:46,901 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/plugins/autolink/plugin.js?t=N5UC HTTP/1.1" 200 588
+INFO 2025-07-22 16:43:46,901 basehttp 8876 17784 "GET /static/ckeditor/ckeditor/plugins/autoembed/plugin.js?t=N5UC HTTP/1.1" 200 2342
+INFO 2025-07-22 16:43:46,901 basehttp 8876 17780 "GET /static/ckeditor/ckeditor/plugins/autogrow/plugin.js?t=N5UC HTTP/1.1" 200 1919
+INFO 2025-07-22 16:43:46,985 basehttp 8876 17780 "GET /static/ckeditor/ckeditor/plugins/embedbase/plugin.js?t=N5UC HTTP/1.1" 200 3415
+INFO 2025-07-22 16:43:47,013 basehttp 8876 17780 "GET /static/ckeditor/ckeditor/plugins/scayt/dialogs/dialog.css?t=N5UC HTTP/1.1" 200 419
+INFO 2025-07-22 16:43:47,022 basehttp 8876 16896 "GET /static/ckeditor/ckeditor/plugins/tableselection/styles/tableselection.css?t=N5UC HTTP/1.1" 304 0
+INFO 2025-07-22 16:43:47,022 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/plugins/embedbase/lang/en.js?t=N5UC HTTP/1.1" 200 470
+INFO 2025-07-22 16:43:47,023 basehttp 8876 17784 "GET /static/ckeditor/ckeditor/plugins/autoembed/lang/en.js?t=N5UC HTTP/1.1" 200 164
+INFO 2025-07-22 16:43:47,061 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/plugins/copyformatting/styles/copyformatting.css?t=N5UC HTTP/1.1" 304 0
+INFO 2025-07-22 16:43:47,093 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/plugins/dialog/styles/dialog.css?t=N5UC HTTP/1.1" 200 249
+INFO 2025-07-22 16:43:47,145 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/skins/office2013/icons.png HTTP/1.1" 200 10440
+INFO 2025-07-22 16:43:47,156 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/plugins/icons.png?t=N5UC HTTP/1.1" 200 12237
+INFO 2025-07-22 16:43:47,263 basehttp 8876 14136 "GET /static/ckeditor/ckeditor/contents.css?t=N5UC HTTP/1.1" 304 0
+INFO 2025-07-22 16:57:27,049 basehttp 8876 12836 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:57:27,059 basehttp 8876 17680 "OPTIONS /api/v1/homepage/hero_data/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:57:27,209 basehttp 8876 13020 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:57:27,288 basehttp 8876 3876 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:57:27,342 basehttp 8876 1200 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:57:27,362 basehttp 8876 13864 "OPTIONS /api/v1/homepage/hero_data/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:57:31,318 translations 8876 12836 Loaded translations for uk from file
+INFO 2025-07-22 16:57:35,665 translations 8876 12836 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:57:35,669 basehttp 8876 12836 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+ERROR 2025-07-22 16:57:38,739 views 8876 1200 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:57:38,751 log 8876 1200 Internal Server Error: /api/v1/homepage/hero_data/
+INFO 2025-07-22 16:57:38,753 basehttp 8876 1200 - Broken pipe from ('127.0.0.1', 33685)
+INFO 2025-07-22 16:57:39,805 translations 8876 12836 Loaded translations for uk from file
+INFO 2025-07-22 16:57:40,484 views 8876 3876 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:57:40,488 basehttp 8876 3876 - Broken pipe from ('127.0.0.1', 33684)
+INFO 2025-07-22 16:57:40,682 views 8876 13020 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:57:40,686 basehttp 8876 13020 - Broken pipe from ('127.0.0.1', 33682)
+INFO 2025-07-22 16:57:40,912 views 8876 17680 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:57:40,917 basehttp 8876 17680 - Broken pipe from ('127.0.0.1', 33681)
+INFO 2025-07-22 16:57:40,992 views 8876 13864 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:57:41,061 basehttp 8876 13864 - Broken pipe from ('127.0.0.1', 33686)
+INFO 2025-07-22 16:57:43,790 translations 8876 12648 Loaded translations for uk from file
+INFO 2025-07-22 16:57:44,915 translations 8876 12836 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:57:44,917 basehttp 8876 12836 - Broken pipe from ('127.0.0.1', 33680)
+INFO 2025-07-22 16:57:48,105 translations 8876 12648 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:57:48,107 basehttp 8876 12648 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+ERROR 2025-07-22 16:57:50,276 views 8876 10828 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:57:50,278 log 8876 10828 Internal Server Error: /api/v1/homepage/hero_data/
+ERROR 2025-07-22 16:57:50,278 basehttp 8876 10828 "GET /api/v1/homepage/hero_data/ HTTP/1.1" 500 637
+INFO 2025-07-22 16:57:50,357 views 8876 12520 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:57:50,362 basehttp 8876 12520 - Broken pipe from ('127.0.0.1', 33731)
+INFO 2025-07-22 16:57:50,901 views 8876 9916 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:57:50,902 basehttp 8876 9916 - Broken pipe from ('127.0.0.1', 33732)
+INFO 2025-07-22 16:57:52,181 translations 8876 12648 Loaded translations for uk from file
+INFO 2025-07-22 16:57:52,433 views 8876 17072 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:57:52,433 views 8876 13484 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:57:52,435 basehttp 8876 17072 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:57:52,435 basehttp 8876 13484 "GET /api/v1/services/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:57:52,441 basehttp 8876 17072 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-22 16:57:52,449 views 8876 2500 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:57:52,451 basehttp 8876 2500 "GET /api/v1/projects/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:57:52,826 views 8876 16232 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:57:52,828 basehttp 8876 16232 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:57:56,459 translations 8876 12648 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:57:56,504 basehttp 8876 12648 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+ERROR 2025-07-22 16:58:00,704 views 8876 10828 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:00,706 log 8876 10828 Internal Server Error: /api/v1/homepage/hero_data/
+INFO 2025-07-22 16:58:00,707 basehttp 8876 10828 - Broken pipe from ('127.0.0.1', 33751)
+INFO 2025-07-22 16:58:03,358 translations 8876 17068 Loaded translations for uk from file
+ERROR 2025-07-22 16:58:03,633 views 8876 2500 Cache error for api_homepage_list_uk: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+INFO 2025-07-22 16:58:03,979 translations 8876 9628 Loaded translations for uk from file
+ERROR 2025-07-22 16:58:04,019 log 8876 2500 Internal Server Error: /api/v1/homepage/
+Traceback (most recent call last):
+  File "D:\ugc\backend\apps\api\views.py", line 68, in get_cached_response
+    response = fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 137, in list
+    return self.get_cached_response(cache_key, get_homepage_data)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc\backend\apps\api\views.py", line 80, in get_cached_response
+    return fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+INFO 2025-07-22 16:58:04,105 basehttp 8876 2500 - Broken pipe from ('127.0.0.1', 33753)
+INFO 2025-07-22 16:58:05,799 views 8876 17072 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:58:05,810 basehttp 8876 17072 - Broken pipe from ('127.0.0.1', 33754)
+INFO 2025-07-22 16:58:05,844 views 8876 16232 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:58:05,847 basehttp 8876 16232 - Broken pipe from ('127.0.0.1', 33756)
+INFO 2025-07-22 16:58:06,287 views 8876 13484 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:58:06,296 basehttp 8876 13484 - Broken pipe from ('127.0.0.1', 33752)
+INFO 2025-07-22 16:58:08,386 translations 8876 17068 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:58:08,395 basehttp 8876 17068 - Broken pipe from ('127.0.0.1', 33849)
+INFO 2025-07-22 16:58:09,021 translations 8876 9628 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:58:09,027 basehttp 8876 9628 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+INFO 2025-07-22 16:58:10,045 views 8876 12648 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:58:10,050 basehttp 8876 12648 - Broken pipe from ('127.0.0.1', 33748)
+ERROR 2025-07-22 16:58:11,591 views 8876 16880 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:11,599 log 8876 16880 Internal Server Error: /api/v1/homepage/hero_data/
+ERROR 2025-07-22 16:58:11,604 basehttp 8876 16880 "GET /api/v1/homepage/hero_data/ HTTP/1.1" 500 637
+INFO 2025-07-22 16:58:13,318 translations 8876 9628 Loaded translations for uk from file
+INFO 2025-07-22 16:58:13,826 views 8876 18416 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:58:13,837 basehttp 8876 18416 "GET /api/v1/projects/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:58:14,067 views 8876 10252 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:58:14,071 basehttp 8876 10252 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:58:14,337 views 8876 16332 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:58:14,343 basehttp 8876 16332 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:58:14,584 views 8876 10280 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:58:14,587 basehttp 8876 10280 "GET /api/v1/services/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:58:17,949 translations 8876 9628 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:58:17,957 basehttp 8876 9628 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+ERROR 2025-07-22 16:58:21,906 views 8876 16880 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:21,907 log 8876 16880 Internal Server Error: /api/v1/homepage/hero_data/
+ERROR 2025-07-22 16:58:21,908 basehttp 8876 16880 "GET /api/v1/homepage/hero_data/ HTTP/1.1" 500 637
+ERROR 2025-07-22 16:58:24,882 views 8876 18416 Cache error for api_homepage_list_uk: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:25,073 log 8876 18416 Internal Server Error: /api/v1/homepage/
+Traceback (most recent call last):
+  File "D:\ugc\backend\apps\api\views.py", line 68, in get_cached_response
+    response = fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 137, in list
+    return self.get_cached_response(cache_key, get_homepage_data)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc\backend\apps\api\views.py", line 80, in get_cached_response
+    return fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:25,144 basehttp 8876 18416 "GET /api/v1/homepage/ HTTP/1.1" 500 32862
+INFO 2025-07-22 16:58:26,563 translations 8876 16880 Loaded translations for uk from file
+INFO 2025-07-22 16:58:27,066 views 8876 10252 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:58:27,067 basehttp 8876 10252 "GET /api/v1/projects/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:58:27,257 views 8876 10280 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:58:27,261 basehttp 8876 10280 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:58:27,801 views 8876 16332 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:58:27,804 basehttp 8876 16332 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:58:31,078 translations 8876 16880 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:58:31,081 basehttp 8876 16880 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+INFO 2025-07-22 16:58:31,341 views 8876 9628 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:58:31,343 basehttp 8876 9628 "GET /api/v1/services/featured/ HTTP/1.1" 200 113
+ERROR 2025-07-22 16:58:36,249 views 8876 18416 Cache error for api_homepage_list_uk: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:36,400 log 8876 18416 Internal Server Error: /api/v1/homepage/
+Traceback (most recent call last):
+  File "D:\ugc\backend\apps\api\views.py", line 68, in get_cached_response
+    response = fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 137, in list
+    return self.get_cached_response(cache_key, get_homepage_data)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc\backend\apps\api\views.py", line 80, in get_cached_response
+    return fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:36,434 basehttp 8876 18416 "GET /api/v1/homepage/ HTTP/1.1" 500 32862
+INFO 2025-07-22 16:58:52,096 translations 8876 18416 Loaded translations for uk from file
+INFO 2025-07-22 16:58:56,593 translations 8876 18416 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:58:56,596 basehttp 8876 18416 - Broken pipe from ('127.0.0.1', 33859)
+INFO 2025-07-22 16:58:57,685 translations 8876 5664 Loaded translations for uk from file
+ERROR 2025-07-22 16:58:58,798 views 8876 9628 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:58:58,810 log 8876 9628 Internal Server Error: /api/v1/homepage/hero_data/
+INFO 2025-07-22 16:58:58,811 basehttp 8876 9628 - Broken pipe from ('127.0.0.1', 33854)
+INFO 2025-07-22 16:59:00,694 views 8876 16880 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:59:00,697 basehttp 8876 16880 - Broken pipe from ('127.0.0.1', 33861)
+INFO 2025-07-22 16:59:01,030 views 8876 10252 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:59:01,032 basehttp 8876 10252 - Broken pipe from ('127.0.0.1', 33862)
+INFO 2025-07-22 16:59:01,063 views 8876 10280 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:59:01,071 basehttp 8876 10280 - Broken pipe from ('127.0.0.1', 33860)
+INFO 2025-07-22 16:59:01,361 views 8876 16332 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:59:01,365 basehttp 8876 16332 - Broken pipe from ('127.0.0.1', 33858)
+INFO 2025-07-22 16:59:01,958 translations 8876 5664 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:59:01,961 basehttp 8876 5664 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+ERROR 2025-07-22 16:59:04,510 views 8876 8600 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:59:04,516 log 8876 8600 Internal Server Error: /api/v1/homepage/hero_data/
+ERROR 2025-07-22 16:59:04,518 basehttp 8876 8600 "GET /api/v1/homepage/hero_data/ HTTP/1.1" 500 637
+INFO 2025-07-22 16:59:06,289 views 8876 6288 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:59:06,293 basehttp 8876 6288 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:59:06,549 views 8876 9264 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:59:06,556 basehttp 8876 9264 "GET /api/v1/services/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:59:06,659 translations 8876 5664 Loaded translations for uk from file
+INFO 2025-07-22 16:59:07,162 views 8876 18160 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:59:07,165 basehttp 8876 18160 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:59:07,206 views 8876 9004 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:59:07,208 basehttp 8876 9004 "GET /api/v1/projects/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:59:10,972 translations 8876 5664 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:59:10,978 basehttp 8876 5664 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+ERROR 2025-07-22 16:59:14,839 views 8876 8600 Error loading hero data: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:59:14,845 log 8876 8600 Internal Server Error: /api/v1/homepage/hero_data/
+ERROR 2025-07-22 16:59:14,847 basehttp 8876 8600 "GET /api/v1/homepage/hero_data/ HTTP/1.1" 500 637
+ERROR 2025-07-22 16:59:16,774 views 8876 6288 Cache error for api_homepage_list_uk: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:59:16,926 log 8876 6288 Internal Server Error: /api/v1/homepage/
+Traceback (most recent call last):
+  File "D:\ugc\backend\apps\api\views.py", line 68, in get_cached_response
+    response = fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 137, in list
+    return self.get_cached_response(cache_key, get_homepage_data)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc\backend\apps\api\views.py", line 80, in get_cached_response
+    return fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:59:16,966 basehttp 8876 6288 "GET /api/v1/homepage/ HTTP/1.1" 500 32862
+INFO 2025-07-22 16:59:18,987 translations 8876 8600 Loaded translations for uk from file
+INFO 2025-07-22 16:59:19,191 views 8876 9264 Cache SET: api_project_list_uk
+INFO 2025-07-22 16:59:19,193 basehttp 8876 9264 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:59:19,556 views 8876 18160 Cache SET: api_service_featured_uk
+INFO 2025-07-22 16:59:19,560 basehttp 8876 18160 "GET /api/v1/services/featured/ HTTP/1.1" 200 113
+INFO 2025-07-22 16:59:19,648 views 8876 9004 Cache SET: api_service_list_uk
+INFO 2025-07-22 16:59:19,652 basehttp 8876 9004 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-22 16:59:23,275 translations 8876 8600 Loaded dynamic translations for uk from models
+INFO 2025-07-22 16:59:23,277 basehttp 8876 8600 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8859
+INFO 2025-07-22 16:59:23,400 views 8876 5664 Cache SET: api_project_featured_uk
+INFO 2025-07-22 16:59:23,414 basehttp 8876 5664 "GET /api/v1/projects/featured/ HTTP/1.1" 200 113
+ERROR 2025-07-22 16:59:27,375 views 8876 6288 Cache error for api_homepage_list_uk: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:59:27,484 log 8876 6288 Internal Server Error: /api/v1/homepage/
+Traceback (most recent call last):
+  File "D:\ugc\backend\apps\api\views.py", line 68, in get_cached_response
+    response = fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\ugc-project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\ugc-project\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 137, in list
+    return self.get_cached_response(cache_key, get_homepage_data)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc\backend\apps\api\views.py", line 80, in get_cached_response
+    return fallback_func(*args, **kwargs)
+  File "D:\ugc\backend\apps\api\views.py", line 121, in get_homepage_data
+    homepage = queryset.first()
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1104, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1951, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 1328, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ugc-project\venv\Lib\site-packages\django\db\models\query.py", line 2372, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'teammember_set' on HomePage object, 'teammember_set' is an invalid parameter to prefetch_related()
+ERROR 2025-07-22 16:59:27,501 basehttp 8876 6288 "GET /api/v1/homepage/ HTTP/1.1" 500 32862
+INFO 2025-07-23 08:42:40,698 autoreload 10856 16220 Watching for file changes with StatReloader
