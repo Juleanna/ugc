@@ -262,7 +262,7 @@ const EnhancedHeroSection = ({
         <div className={`transform transition-all duration-1500 delay-300 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-12 leading-relaxed max-w-4xl mx-auto">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-12 leading-relaxed ">
             {getContent(
               heroData?.subtitle,
               'hero.subtitle',

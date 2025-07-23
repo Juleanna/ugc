@@ -163,6 +163,9 @@ class AboutPage(models.Model):
         verbose_name = _("Сторінка 'Про нас'")
         verbose_name_plural = _("Сторінка 'Про нас'")
 
+    def __str__(self):
+        return "Сторінка 'Про нас'"
+
 
 class TeamMember(models.Model):
     """Команда/Руководство"""
@@ -173,6 +176,18 @@ class TeamMember(models.Model):
     photo = models.ImageField(upload_to='team/', verbose_name=_("Фото"))
     email = models.EmailField(blank=True, verbose_name=_("Електронна пошта"))
     linkedin = models.URLField(blank=True, verbose_name=_("LinkedIn"))
+    
+    # ДОДАЄМО зв'язок з HomePage
+    homepage = models.ForeignKey(
+        HomePage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='teammember_set',  # Зберігаємо існуючу назву для зворотної сумісності
+        verbose_name=_("Головна сторінка"),
+        help_text=_("Чи показувати цього члена команди на головній сторінці")
+    )
+    
     order = models.PositiveIntegerField(default=0, verbose_name=_("Порядок"))
     is_management = models.BooleanField(default=False, verbose_name=_("Керівництво"))
     is_active = models.BooleanField(default=True, verbose_name=_("Активний"))
@@ -181,6 +196,9 @@ class TeamMember(models.Model):
         ordering = ['order', 'name']
         verbose_name = _("Член команди")
         verbose_name_plural = _("Команда")
+
+    def __str__(self):
+        return f"{self.name} - {self.position}"
 
 
 class Certificate(models.Model):
@@ -193,24 +211,52 @@ class Certificate(models.Model):
     issuing_organization = models.CharField(max_length=200, verbose_name=_("Організація, що видала"))
     certificate_url = models.URLField(blank=True, verbose_name=_("Посилання на сертифікат"))
     is_active = models.BooleanField(default=True, verbose_name=_("Активний"))
+    
+    # ДОДАЄМО зв'язок з HomePage
+    homepage = models.ForeignKey(
+        HomePage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='certificate_set',
+        verbose_name=_("Головна сторінка"),
+        help_text=_("Чи показувати цей сертифікат на головній сторінці")
+    )
 
     class Meta:
         ordering = ['-issued_date']
         verbose_name = _("Сертифікат")
         verbose_name_plural = _("Сертифікати")
 
+    def __str__(self):
+        return self.title
+
 
 class ProductionPhoto(models.Model):
     """Фото с производства"""
-    title=models.CharField(max_length=100, verbose_name=_("Назва"))
-    description=models.TextField(blank=True, verbose_name=_("Опис"))
+    title = models.CharField(max_length=100, verbose_name=_("Назва"))
+    description = models.TextField(blank=True, verbose_name=_("Опис"))
     
     image = models.ImageField(upload_to='production/', verbose_name=_("Зображення"))
     order = models.PositiveIntegerField(default=0, verbose_name=_("Порядок"))
     is_featured = models.BooleanField(default=False, verbose_name=_("Рекомендоване"))
     is_active = models.BooleanField(default=True, verbose_name=_("Активний"))
+    
+    # ДОДАЄМО зв'язок з HomePage
+    homepage = models.ForeignKey(
+        HomePage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='productionphoto_set',
+        verbose_name=_("Головна сторінка"),
+        help_text=_("Чи показувати це фото на головній сторінці")
+    )
 
     class Meta:
         ordering = ['order']
         verbose_name = _("Фото виробництва")
         verbose_name_plural = _("Фото виробництва")
+
+    def __str__(self):
+        return self.title

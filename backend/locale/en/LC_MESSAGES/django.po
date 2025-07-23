@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 15:12+0300\n"
+"POT-Creation-Date: 2025-07-23 15:01+0300\n"
 "PO-Revision-Date: 2025-06-17 14:07+0300\n"
 "Last-Translator: <juleannadafna@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.10.2\n"
 
-#: .\apps\contacts\admin.py:36 .\apps\content\admin.py:115
-#: .\apps\content\admin.py:200 .\apps\content\admin.py:259
-#: .\apps\jobs\admin.py:57 .\apps\jobs\admin.py:268
-#: .\apps\partners\admin.py:42 .\apps\partners\admin.py:98
-#: .\apps\projects\admin.py:55 .\apps\projects\admin.py:150
-#: .\apps\services\admin.py:61 .\apps\services\admin.py:165
+#: .\apps\contacts\admin.py:36 .\apps\content\admin.py:148
+#: .\apps\content\admin.py:265 .\apps\content\admin.py:360
+#: .\apps\jobs\admin.py:52 .\apps\jobs\admin.py:263 .\apps\partners\admin.py:40
+#: .\apps\partners\admin.py:96 .\apps\projects\admin.py:48
+#: .\apps\projects\admin.py:143 .\apps\services\admin.py:55
+#: .\apps\services\admin.py:159 .\ugc_backend\unfold_config.py:245
+#: .\ugc_backend\unfold_config.py:279 .\ugc_backend\unfold_config.py:301
+#: .\ugc_backend\unfold_config.py:323 .\ugc_backend\unfold_config.py:350
+#: .\ugc_backend\unfold_config.py:372
 msgid "Основна інформація"
 msgstr "Basic information"
 
@@ -32,17 +35,18 @@ msgstr "Basic information"
 msgid "Контактна інформація"
 msgstr "Contact information"
 
-#: .\apps\contacts\admin.py:44
+#: .\apps\contacts\admin.py:44 .\ugc_backend\unfold_config.py:382
 msgid "Місцезнаходження"
 msgstr "Location"
 
-#: .\apps\contacts\admin.py:48 .\apps\content\admin.py:40
-#: .\apps\content\admin.py:77 .\apps\content\admin.py:127
-#: .\apps\content\admin.py:212 .\apps\content\admin.py:267
-#: .\apps\jobs\admin.py:73 .\apps\jobs\admin.py:276
-#: .\apps\partners\admin.py:54 .\apps\partners\admin.py:106
-#: .\apps\projects\admin.py:63 .\apps\projects\admin.py:170
-#: .\apps\services\admin.py:73 .\apps\services\admin.py:169
+#: .\apps\contacts\admin.py:48 .\apps\content\admin.py:109
+#: .\apps\content\admin.py:160 .\apps\content\admin.py:277
+#: .\apps\content\admin.py:368 .\apps\jobs\admin.py:68 .\apps\jobs\admin.py:271
+#: .\apps\partners\admin.py:52 .\apps\partners\admin.py:104
+#: .\apps\projects\admin.py:56 .\apps\projects\admin.py:163
+#: .\apps\services\admin.py:67 .\apps\services\admin.py:163
+#: .\ugc_backend\unfold_config.py:289 .\ugc_backend\unfold_config.py:311
+#: .\ugc_backend\unfold_config.py:338 .\ugc_backend\unfold_config.py:360
 msgid "Налаштування"
 msgstr "Налаштування"
 
@@ -55,25 +59,25 @@ msgid "Головний"
 msgstr "Головний"
 
 #: .\apps\contacts\admin.py:77 .\apps\contacts\admin.py:173
-#: .\apps\content\admin.py:46 .\apps\content\admin.py:83
-#: .\apps\content\admin.py:152 .\apps\content\admin.py:227
-#: .\apps\content\admin.py:292 .\apps\jobs\admin.py:102
-#: .\apps\jobs\admin.py:201 .\apps\jobs\admin.py:222 .\apps\jobs\admin.py:291
-#: .\apps\partners\admin.py:69 .\apps\partners\admin.py:163
-#: .\apps\partners\admin.py:183 .\apps\projects\admin.py:69
-#: .\apps\projects\admin.py:195 .\apps\services\admin.py:98
+#: .\apps\content\admin.py:75 .\apps\content\admin.py:115
+#: .\apps\content\admin.py:198 .\apps\content\admin.py:305
+#: .\apps\content\admin.py:406 .\apps\jobs\admin.py:97 .\apps\jobs\admin.py:196
+#: .\apps\jobs\admin.py:217 .\apps\jobs\admin.py:286
+#: .\apps\partners\admin.py:67 .\apps\partners\admin.py:161
+#: .\apps\partners\admin.py:181 .\apps\projects\admin.py:62
+#: .\apps\projects\admin.py:188 .\apps\services\admin.py:92
 msgid "Статус"
 msgstr "Статус"
 
-#: .\apps\contacts\admin.py:91 .\apps\content\admin.py:304
-#: .\apps\jobs\admin.py:133 .\apps\jobs\admin.py:303
-#: .\apps\projects\admin.py:99 .\apps\services\admin.py:120
+#: .\apps\contacts\admin.py:91 .\apps\content\admin.py:431
+#: .\apps\jobs\admin.py:128 .\apps\jobs\admin.py:298
+#: .\apps\projects\admin.py:92 .\apps\services\admin.py:114
 msgid "Позначити як активні"
 msgstr "Позначити як активні"
 
-#: .\apps\contacts\admin.py:96 .\apps\content\admin.py:309
-#: .\apps\jobs\admin.py:138 .\apps\jobs\admin.py:308
-#: .\apps\projects\admin.py:104 .\apps\services\admin.py:125
+#: .\apps\contacts\admin.py:96 .\apps\content\admin.py:436
+#: .\apps\jobs\admin.py:133 .\apps\jobs\admin.py:303
+#: .\apps\projects\admin.py:97 .\apps\services\admin.py:119
 msgid "Позначити як неактивні"
 msgstr "Позначити як неактивні"
 
@@ -86,7 +90,7 @@ msgid "Інформація про відправника"
 msgstr "Інформація про відправника"
 
 #: .\apps\contacts\admin.py:144 .\apps\contacts\models.py:64
-#: .\apps\contacts\models.py:65 .\ugc_backend\settings.py:425
+#: .\apps\contacts\models.py:65 .\ugc_backend\unfold_config.py:198
 msgid "Звернення"
 msgstr "Звернення"
 
@@ -99,22 +103,22 @@ msgid "Системна інформація"
 msgstr "Системна інформація"
 
 #: .\apps\contacts\admin.py:158 .\apps\contacts\models.py:53
-#: .\apps\partners\admin.py:169 .\apps\partners\models.py:50
+#: .\apps\partners\admin.py:167 .\apps\partners\models.py:49
 msgid "Тип запиту"
 msgstr "Тип запиту"
 
-#: .\apps\contacts\admin.py:187 .\apps\partners\admin.py:195
+#: .\apps\contacts\admin.py:187 .\apps\partners\admin.py:193
 msgid "Позначити як оброблені"
 msgstr "Позначити як оброблені"
 
-#: .\apps\contacts\admin.py:193 .\apps\partners\admin.py:200
+#: .\apps\contacts\admin.py:193 .\apps\partners\admin.py:198
 msgid "Позначити як необроблені"
 msgstr "Позначити як необроблені"
 
-#: .\apps\contacts\models.py:7 .\apps\content\models.py:60
-#: .\apps\content\models.py:77 .\apps\jobs\models.py:60
-#: .\apps\partners\models.py:26 .\apps\projects\models.py:9
-#: .\apps\projects\models.py:26 .\apps\services\models.py:8
+#: .\apps\contacts\models.py:7 .\apps\content\models.py:206
+#: .\apps\content\models.py:237 .\apps\jobs\models.py:58
+#: .\apps\partners\models.py:25 .\apps\projects\models.py:7
+#: .\apps\projects\models.py:23 .\apps\services\models.py:8
 #: .\apps\services\models.py:32
 msgid "Назва"
 msgstr "Назва"
@@ -123,10 +127,10 @@ msgstr "Назва"
 msgid "Адреса"
 msgstr "Адреса"
 
-#: .\apps\contacts\models.py:9 .\apps\content\models.py:61
-#: .\apps\content\models.py:78 .\apps\jobs\models.py:9
-#: .\apps\jobs\models.py:61 .\apps\partners\models.py:27
-#: .\apps\projects\models.py:10 .\apps\services\models.py:33
+#: .\apps\contacts\models.py:9 .\apps\content\models.py:207
+#: .\apps\content\models.py:238 .\apps\jobs\models.py:8
+#: .\apps\jobs\models.py:59 .\apps\partners\models.py:26
+#: .\apps\projects\models.py:8 .\apps\services\models.py:33
 msgid "Опис"
 msgstr "Опис"
 
@@ -143,13 +147,13 @@ msgid "Склад"
 msgstr "Склад"
 
 #: .\apps\contacts\models.py:21 .\apps\contacts\models.py:50
-#: .\apps\jobs\models.py:46 .\apps\partners\models.py:44
+#: .\apps\jobs\models.py:44 .\apps\partners\models.py:43
 msgid "Телефон"
 msgstr "Телефон"
 
 #: .\apps\contacts\models.py:22 .\apps\contacts\models.py:49
-#: .\apps\content\models.py:46 .\apps\jobs\models.py:45
-#: .\apps\partners\models.py:43
+#: .\apps\content\models.py:177 .\apps\jobs\models.py:43
+#: .\apps\partners\models.py:42
 msgid "Електронна пошта"
 msgstr "Електронна пошта"
 
@@ -165,10 +169,10 @@ msgstr "Широта"
 msgid "Довгота"
 msgstr "Довгота"
 
-#: .\apps\contacts\models.py:28 .\apps\content\models.py:48
-#: .\apps\content\models.py:81 .\apps\jobs\models.py:65
-#: .\apps\partners\models.py:30 .\apps\projects\models.py:15
-#: .\apps\projects\models.py:57 .\apps\services\models.py:18
+#: .\apps\contacts\models.py:28 .\apps\content\models.py:191
+#: .\apps\content\models.py:241 .\apps\jobs\models.py:62
+#: .\apps\partners\models.py:29 .\apps\projects\models.py:12
+#: .\apps\projects\models.py:54 .\apps\services\models.py:18
 #: .\apps\services\models.py:36
 msgid "Порядок"
 msgstr "Порядок"
@@ -177,9 +181,9 @@ msgstr "Порядок"
 msgid "Головний офіс"
 msgstr "Головний офіс"
 
-#: .\apps\contacts\models.py:30 .\apps\content\models.py:50
-#: .\apps\content\models.py:67 .\apps\content\models.py:83
-#: .\apps\jobs\models.py:66 .\apps\projects\models.py:43
+#: .\apps\contacts\models.py:30 .\apps\content\models.py:193
+#: .\apps\content\models.py:213 .\apps\content\models.py:243
+#: .\apps\jobs\models.py:63 .\apps\projects\models.py:40
 msgid "Активний"
 msgstr "Активний"
 
@@ -187,7 +191,7 @@ msgstr "Активний"
 msgid "Офіс/Фабрика"
 msgstr "Офіс/Фабрика"
 
-#: .\apps\contacts\models.py:35
+#: .\apps\contacts\models.py:35 .\ugc_backend\unfold_config.py:183
 msgid "Офіси/Фабрики"
 msgstr "Офіси/Фабрики"
 
@@ -195,7 +199,7 @@ msgstr "Офіси/Фабрики"
 msgid "Загальне запитання"
 msgstr "Загальне запитання"
 
-#: .\apps\contacts\models.py:42 .\apps\partners\models.py:46
+#: .\apps\contacts\models.py:42 .\apps\partners\models.py:45
 msgid "Співпраця"
 msgstr "Співпраця"
 
@@ -211,8 +215,8 @@ msgstr "Пропозиція"
 msgid "Запит вартості"
 msgstr "Запит вартості"
 
-#: .\apps\contacts\models.py:48 .\apps\content\models.py:41
-#: .\apps\jobs\admin.py:207 .\apps\jobs\models.py:43
+#: .\apps\contacts\models.py:48 .\apps\content\models.py:172
+#: .\apps\jobs\admin.py:202 .\apps\jobs\models.py:41
 msgid "Ім'я"
 msgstr "Ім'я"
 
@@ -224,7 +228,7 @@ msgstr "Компанія"
 msgid "Тема"
 msgstr "Тема"
 
-#: .\apps\contacts\models.py:55 .\apps\partners\models.py:51
+#: .\apps\contacts\models.py:55 .\apps\partners\models.py:50
 msgid "Повідомлення"
 msgstr "Повідомлення"
 
@@ -232,7 +236,7 @@ msgstr "Повідомлення"
 msgid "Дата створення"
 msgstr "Дата створення"
 
-#: .\apps\contacts\models.py:58 .\apps\partners\models.py:55
+#: .\apps\contacts\models.py:58 .\apps\partners\models.py:54
 msgid "Оброблено"
 msgstr "Оброблено"
 
@@ -244,541 +248,580 @@ msgstr "Відповідь"
 msgid "Дата обробки"
 msgstr "Дата обробки"
 
-#: .\apps\content\admin.py:28 .\ugc_backend\settings.py:306
-msgid "Контент"
-msgstr "Контент"
-
-#: .\apps\content\admin.py:32 .\apps\projects\admin.py:162
-#: .\apps\services\admin.py:65
-msgid "Медіа"
-msgstr "Медіа"
-
-#: .\apps\content\admin.py:36
-msgid "Статистика"
-msgstr "Статистика"
-
-#: .\apps\content\admin.py:69
+#: .\apps\content\admin.py:32 .\apps\content\admin.py:101
 msgid "Основний контент"
 msgstr "Основний контент"
 
-#: .\apps\content\admin.py:73
-msgid "Додатковий контент"
-msgstr "Додатковий контент"
+#: .\apps\content\admin.py:36
+msgid "Кнопки дій"
+msgstr ""
 
-#: .\apps\content\admin.py:119 .\apps\content\admin.py:133
-#: .\apps\content\admin.py:273 .\apps\content\models.py:45
-#: .\apps\jobs\admin.py:282
-msgid "Фото"
-msgstr "Фото"
+#: .\apps\content\admin.py:40
+msgid "Статистика"
+msgstr "Статистика"
 
-#: .\apps\content\admin.py:123 .\ugc_backend\settings.py:416
-msgid "Контакти"
-msgstr "Контакти"
-
-#: .\apps\content\admin.py:142 .\apps\content\models.py:49
-msgid "Керівництво"
-msgstr "Керівництво"
-
-#: .\apps\content\admin.py:164
-msgid "Позначити як активних"
-msgstr "Позначити як активних"
-
-#: .\apps\content\admin.py:169
-msgid "Позначити як неактивних"
-msgstr "Позначити як неактивних"
-
-#: .\apps\content\admin.py:174
-msgid "Позначити як керівництво"
-msgstr "Позначити як керівництво"
-
-#: .\apps\content\admin.py:204
-msgid "Деталі сертифікату"
-msgstr "Деталі сертифікату"
-
-#: .\apps\content\admin.py:208 .\apps\content\admin.py:218
-#: .\apps\content\admin.py:263 .\apps\content\models.py:63
-#: .\apps\content\models.py:80 .\apps\jobs\admin.py:272
-#: .\apps\jobs\models.py:64 .\apps\projects\admin.py:59
-#: .\apps\projects\admin.py:79 .\apps\projects\admin.py:176
-#: .\apps\projects\models.py:14 .\apps\projects\models.py:55
-#: .\apps\services\admin.py:79
-msgid "Зображення"
-msgstr "Зображення"
-
-#: .\apps\content\admin.py:282 .\apps\content\models.py:82
-msgid "Рекомендоване"
-msgstr "Рекомендоване"
-
-#: .\apps\content\admin.py:314 .\apps\services\admin.py:130
-msgid "Позначити як рекомендовані"
-msgstr "Позначити як рекомендовані"
-
-#: .\apps\content\models.py:7
-msgid "Короткий опис компанії"
-msgstr "Короткий опис компанії"
-
-#: .\apps\content\models.py:8 .\apps\content\models.py:27
-msgid "Місія"
-msgstr "Місія"
-
-#: .\apps\content\models.py:9 .\apps\content\models.py:28
-msgid "Цінності"
-msgstr "Цінності"
-
-#: .\apps\content\models.py:13
-msgid "Років досвіду"
-msgstr "Років досвіду"
-
-#: .\apps\content\models.py:14
-msgid "Кількість співробітників"
-msgstr "Кількість співробітників"
-
-#: .\apps\content\models.py:15
-msgid "Виконано проєктів"
-msgstr "Виконано проєктів"
-
-#: .\apps\content\models.py:16 .\apps\content\models.py:31
-#: .\apps\jobs\models.py:29 .\apps\partners\models.py:15
-#: .\apps\projects\models.py:16 .\apps\services\models.py:20
-msgid "Активна"
-msgstr "Активна"
-
-#: .\apps\content\models.py:17 .\apps\content\models.py:32
-#: .\apps\partners\models.py:16
-msgid "Оновлено"
-msgstr "Оновлено"
-
-#: .\apps\content\models.py:20 .\apps\content\models.py:21
-#: .\ugc_backend\settings.py:310
-msgid "Головна сторінка"
-msgstr "Головна сторінка"
-
-#: .\apps\content\models.py:26
-msgid "Історія компанії"
-msgstr "Історія компанії"
-
-#: .\apps\content\models.py:29
-msgid "Соціальна відповідальність"
-msgstr "Соціальна відповідальність"
-
-#: .\apps\content\models.py:35 .\apps\content\models.py:36
-msgid "Сторінка 'Про нас'"
-msgstr "Сторінка 'Про нас'"
-
-#: .\apps\content\models.py:42
-msgid "Посада"
-msgstr "Посада"
-
-#: .\apps\content\models.py:43
-msgid "Біографія"
-msgstr "Біографія"
-
-#: .\apps\content\models.py:47
-msgid "LinkedIn"
-msgstr "LinkedIn"
-
-#: .\apps\content\models.py:54
-msgid "Член команди"
-msgstr "Член команди"
-
-#: .\apps\content\models.py:55 .\ugc_backend\settings.py:320
-msgid "Команда"
-msgstr "Команда"
-
-#: .\apps\content\models.py:64
-msgid "Дата видачі"
-msgstr "Дата видачі"
-
-#: .\apps\content\models.py:65
-msgid "Організація"
-msgstr "Організація"
-
-#: .\apps\content\models.py:66
-msgid "Посилання"
-msgstr "Посилання"
-
-#: .\apps\content\models.py:71
-msgid "Сертифікат"
-msgstr "Сертифікат"
-
-#: .\apps\content\models.py:72 .\ugc_backend\settings.py:325
-msgid "Сертифікати"
-msgstr "Сертифікати"
-
-#: .\apps\content\models.py:87 .\apps\content\models.py:88
-#: .\ugc_backend\settings.py:330
-msgid "Фото виробництва"
-msgstr "Фото виробництва"
-
-#: .\apps\jobs\admin.py:61
-msgid "Вимоги та обов'язки"
-msgstr "Вимоги та обов'язки"
-
-#: .\apps\jobs\admin.py:65
-msgid "Умови роботи"
-msgstr "Умови роботи"
-
-#: .\apps\jobs\admin.py:69 .\apps\jobs\admin.py:92
-msgid "Зарплата"
-msgstr "Зарплата"
-
-#: .\apps\jobs\admin.py:79 .\apps\jobs\models.py:21
-msgid "Тип зайнятості"
-msgstr "Тип зайнятості"
-
-#: .\apps\jobs\admin.py:112 .\apps\jobs\models.py:30
-msgid "Терміново"
-msgstr "Терміново"
-
-#: .\apps\jobs\admin.py:122 .\ugc_backend\settings.py:383
-msgid "Заявки"
-msgstr "Заявки"
-
-#: .\apps\jobs\admin.py:143
-msgid "Позначити як термінові"
-msgstr "Позначити як термінові"
-
-#: .\apps\jobs\admin.py:148
-msgid "Зняти позначку 'Терміново'"
-msgstr "Зняти позначку 'Терміново'"
-
-#: .\apps\jobs\admin.py:189
-msgid "Персональна інформація"
-msgstr "Персональна інформація"
-
-#: .\apps\jobs\admin.py:193 .\apps\jobs\models.py:36 .\apps\jobs\models.py:42
-msgid "Вакансія"
-msgstr "Вакансія"
-
-#: .\apps\jobs\admin.py:197 .\apps\services\admin.py:69
+#: .\apps\content\admin.py:44 .\apps\jobs\admin.py:192
+#: .\apps\services\admin.py:63
 msgid "Додаткова інформація"
 msgstr "Додаткова інформація"
 
-#: .\apps\jobs\admin.py:211 .\apps\jobs\models.py:48
+#: .\apps\content\admin.py:48 .\apps\projects\admin.py:159
+msgid "SEO"
+msgstr "SEO"
+
+#: .\apps\content\admin.py:52
+#, fuzzy
+#| msgid "Налаштування"
+msgid "Налаштування послуг"
+msgstr "Налаштування"
+
+#: .\apps\content\admin.py:56
+#, fuzzy
+#| msgid "Налаштування"
+msgid "Системні налаштування"
+msgstr "Налаштування"
+
+#: .\apps\content\admin.py:62
+#, fuzzy
+#| msgid "Член команди"
+msgid "Членів команди"
+msgstr "Член команди"
+
+#: .\apps\content\admin.py:105
+msgid "Додатковий контент"
+msgstr "Додатковий контент"
+
+#: .\apps\content\admin.py:152 .\apps\content\admin.py:168
+#: .\apps\content\models.py:176 .\apps\jobs\admin.py:277
+msgid "Фото"
+msgstr "Фото"
+
+#: .\apps\content\admin.py:156 .\ugc_backend\unfold_config.py:178
+#: .\ugc_backend\unfold_config.py:267 .\ugc_backend\unfold_config.py:377
+msgid "Контакти"
+msgstr "Контакти"
+
+#: .\apps\content\admin.py:177 .\apps\content\admin.py:294
+#: .\apps\content\admin.py:385 .\apps\content\models.py:187
+#: .\apps\content\models.py:222 .\apps\content\models.py:252
+#: .\ugc_backend\unfold_config.py:28
+msgid "Головна сторінка"
+msgstr "Головна сторінка"
+
+#: .\apps\content\admin.py:188 .\apps\content\models.py:192
+msgid "Керівництво"
+msgstr "Керівництво"
+
+#: .\apps\content\admin.py:213
+msgid "Позначити як активних"
+msgstr "Позначити як активних"
+
+#: .\apps\content\admin.py:218
+msgid "Позначити як неактивних"
+msgstr "Позначити як неактивних"
+
+#: .\apps\content\admin.py:223
+msgid "Позначити як керівництво"
+msgstr "Позначити як керівництво"
+
+#: .\apps\content\admin.py:228 .\apps\content\admin.py:319
+#: .\apps\content\admin.py:441
+#, fuzzy
+#| msgid "Позначити як головний офіс"
+msgid "Додати на головну сторінку"
+msgstr "Позначити як головний офіс"
+
+#: .\apps\content\admin.py:269
+msgid "Деталі сертифікату"
+msgstr "Деталі сертифікату"
+
+#: .\apps\content\admin.py:273 .\apps\content\admin.py:285
+#: .\apps\content\admin.py:364 .\apps\content\admin.py:376
+#: .\apps\content\models.py:209 .\apps\content\models.py:240
+#: .\apps\jobs\admin.py:267 .\apps\jobs\models.py:61
+#: .\apps\projects\admin.py:52 .\apps\projects\admin.py:72
+#: .\apps\projects\admin.py:169 .\apps\projects\models.py:11
+#: .\apps\projects\models.py:52 .\apps\services\admin.py:73
+msgid "Зображення"
+msgstr "Зображення"
+
+#: .\apps\content\admin.py:332 .\apps\content\admin.py:454
+#, fuzzy
+#| msgid "Головна сторінка"
+msgid "Прибрати з головної сторінки"
+msgstr "Головна сторінка"
+
+#: .\apps\content\admin.py:396 .\apps\content\models.py:242
+msgid "Рекомендоване"
+msgstr "Рекомендоване"
+
+#: .\apps\content\admin.py:421 .\apps\services\admin.py:124
+msgid "Позначити як рекомендовані"
+msgstr "Позначити як рекомендовані"
+
+#: .\apps\content\admin.py:426
+#, fuzzy
+#| msgid "Позначити як рекомендовані"
+msgid "Прибрати з рекомендованих"
+msgstr "Позначити як рекомендовані"
+
+#: .\apps\content\models.py:154
+msgid "Історія компанії"
+msgstr "Історія компанії"
+
+#: .\apps\content\models.py:155
+msgid "Місія"
+msgstr "Місія"
+
+#: .\apps\content\models.py:156
+msgid "Цінності"
+msgstr "Цінності"
+
+#: .\apps\content\models.py:157
+msgid "Соціальна відповідальність"
+msgstr "Соціальна відповідальність"
+
+#: .\apps\content\models.py:159 .\apps\jobs\models.py:27
+#: .\apps\partners\models.py:14 .\apps\projects\models.py:13
+#: .\apps\services\models.py:20
+msgid "Активна"
+msgstr "Активна"
+
+#: .\apps\content\models.py:160 .\apps\partners\models.py:15
+msgid "Оновлено"
+msgstr "Оновлено"
+
+#: .\apps\content\models.py:163 .\apps\content\models.py:164
+msgid "Сторінка 'Про нас'"
+msgstr "Сторінка 'Про нас'"
+
+#: .\apps\content\models.py:173
+msgid "Посада"
+msgstr "Посада"
+
+#: .\apps\content\models.py:174
+msgid "Біографія"
+msgstr "Біографія"
+
+#: .\apps\content\models.py:178
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .\apps\content\models.py:188
+msgid "Чи показувати цього члена команди на головній сторінці"
+msgstr ""
+
+#: .\apps\content\models.py:197
+msgid "Член команди"
+msgstr "Член команди"
+
+#: .\apps\content\models.py:198 .\ugc_backend\unfold_config.py:38
+msgid "Команда"
+msgstr "Команда"
+
+#: .\apps\content\models.py:210
+msgid "Дата видачі"
+msgstr "Дата видачі"
+
+#: .\apps\content\models.py:211
+#, fuzzy
+#| msgid "Організація"
+msgid "Організація, що видала"
+msgstr "Організація"
+
+#: .\apps\content\models.py:212
+#, fuzzy
+#| msgid "Деталі сертифікату"
+msgid "Посилання на сертифікат"
+msgstr "Деталі сертифікату"
+
+#: .\apps\content\models.py:223
+msgid "Чи показувати цей сертифікат на головній сторінці"
+msgstr ""
+
+#: .\apps\content\models.py:228
+msgid "Сертифікат"
+msgstr "Сертифікат"
+
+#: .\apps\content\models.py:229 .\ugc_backend\unfold_config.py:43
+msgid "Сертифікати"
+msgstr "Сертифікати"
+
+#: .\apps\content\models.py:253
+msgid "Чи показувати це фото на головній сторінці"
+msgstr ""
+
+#: .\apps\content\models.py:258 .\apps\content\models.py:259
+#: .\ugc_backend\unfold_config.py:48
+msgid "Фото виробництва"
+msgstr "Фото виробництва"
+
+#: .\apps\jobs\admin.py:56
+msgid "Вимоги та обов'язки"
+msgstr "Вимоги та обов'язки"
+
+#: .\apps\jobs\admin.py:60
+msgid "Умови роботи"
+msgstr "Умови роботи"
+
+#: .\apps\jobs\admin.py:64 .\apps\jobs\admin.py:87
+#: .\ugc_backend\unfold_config.py:333
+msgid "Зарплата"
+msgstr "Зарплата"
+
+#: .\apps\jobs\admin.py:74 .\apps\jobs\models.py:19
+msgid "Тип зайнятості"
+msgstr "Тип зайнятості"
+
+#: .\apps\jobs\admin.py:107 .\apps\jobs\models.py:28
+msgid "Терміново"
+msgstr "Терміново"
+
+#: .\apps\jobs\admin.py:117 .\ugc_backend\unfold_config.py:161
+msgid "Заявки"
+msgstr "Заявки"
+
+#: .\apps\jobs\admin.py:138
+msgid "Позначити як термінові"
+msgstr "Позначити як термінові"
+
+#: .\apps\jobs\admin.py:143
+msgid "Зняти позначку 'Терміново'"
+msgstr "Зняти позначку 'Терміново'"
+
+#: .\apps\jobs\admin.py:184
+msgid "Персональна інформація"
+msgstr "Персональна інформація"
+
+#: .\apps\jobs\admin.py:188 .\apps\jobs\models.py:34 .\apps\jobs\models.py:40
+msgid "Вакансія"
+msgstr "Вакансія"
+
+#: .\apps\jobs\admin.py:206 .\apps\jobs\models.py:46
 msgid "Резюме"
 msgstr "Резюме"
 
-#: .\apps\jobs\admin.py:236
+#: .\apps\jobs\admin.py:231
 msgid "Позначити як переглянуті"
 msgstr "Позначити як переглянуті"
 
-#: .\apps\jobs\admin.py:241
+#: .\apps\jobs\admin.py:236
 msgid "Позначити як непереглянуті"
 msgstr "Позначити як непереглянуті"
 
-#: .\apps\jobs\models.py:8
+#: .\apps\jobs\models.py:7
 msgid "Назва вакансії"
 msgstr "Назва вакансії"
 
-#: .\apps\jobs\models.py:10
+#: .\apps\jobs\models.py:9 .\ugc_backend\unfold_config.py:328
 msgid "Вимоги"
 msgstr "Вимоги"
 
-#: .\apps\jobs\models.py:11
+#: .\apps\jobs\models.py:10
 msgid "Обов'язки"
 msgstr "Обов'язки"
 
-#: .\apps\jobs\models.py:12 .\apps\services\models.py:11
+#: .\apps\jobs\models.py:11 .\apps\services\models.py:11
 msgid "Переваги"
 msgstr "Переваги"
 
-#: .\apps\jobs\models.py:15
+#: .\apps\jobs\models.py:13
 msgid "URL"
 msgstr "URL"
 
-#: .\apps\jobs\models.py:18
+#: .\apps\jobs\models.py:16
 msgid "Повна зайнятість"
 msgstr "Повна зайнятість"
 
-#: .\apps\jobs\models.py:19
+#: .\apps\jobs\models.py:17
 msgid "Часткова зайнятість"
 msgstr "Часткова зайнятість"
 
-#: .\apps\jobs\models.py:20
+#: .\apps\jobs\models.py:18
 msgid "Контракт"
 msgstr "Контракт"
 
-#: .\apps\jobs\models.py:23
+#: .\apps\jobs\models.py:21
 msgid "Досвід роботи"
 msgstr "Досвід роботи"
 
-#: .\apps\jobs\models.py:24
+#: .\apps\jobs\models.py:22
 msgid "Зарплата від"
 msgstr "Зарплата від"
 
-#: .\apps\jobs\models.py:25
+#: .\apps\jobs\models.py:23
 msgid "Зарплата до"
 msgstr "Зарплата до"
 
-#: .\apps\jobs\models.py:26
+#: .\apps\jobs\models.py:24
 msgid "Валюта"
 msgstr "Валюта"
 
-#: .\apps\jobs\models.py:27
+#: .\apps\jobs\models.py:25
 msgid "Місце роботи"
 msgstr "Місце роботи"
 
-#: .\apps\jobs\models.py:31 .\apps\jobs\models.py:49
-#: .\apps\partners\models.py:54 .\apps\projects\models.py:44
+#: .\apps\jobs\models.py:29 .\apps\jobs\models.py:47
+#: .\apps\partners\models.py:53 .\apps\projects\models.py:41
 #: .\apps\services\models.py:21
 msgid "Створено"
 msgstr "Створено"
 
-#: .\apps\jobs\models.py:32
+#: .\apps\jobs\models.py:30
 msgid "Термін дії"
 msgstr "Термін дії"
 
-#: .\apps\jobs\models.py:37 .\ugc_backend\settings.py:374
+#: .\apps\jobs\models.py:35 .\ugc_backend\unfold_config.py:141
 msgid "Вакансії"
 msgstr "Вакансії"
 
-#: .\apps\jobs\models.py:44
+#: .\apps\jobs\models.py:42
 msgid "Прізвище"
 msgstr "Прізвище"
 
-#: .\apps\jobs\models.py:47
+#: .\apps\jobs\models.py:45
 msgid "Супровідний лист"
 msgstr "Супровідний лист"
 
-#: .\apps\jobs\models.py:50
+#: .\apps\jobs\models.py:48
 msgid "Переглянуто"
 msgstr "Переглянуто"
 
-#: .\apps\jobs\models.py:54
+#: .\apps\jobs\models.py:52
 msgid "Заявка на вакансію"
 msgstr "Заявка на вакансію"
 
-#: .\apps\jobs\models.py:55
+#: .\apps\jobs\models.py:53
 msgid "Заявки на вакансії"
 msgstr "Заявки на вакансії"
 
-#: .\apps\jobs\models.py:70
+#: .\apps\jobs\models.py:67
 msgid "Фото робочого місця"
 msgstr "Фото робочого місця"
 
-#: .\apps\jobs\models.py:71 .\ugc_backend\settings.py:388
+#: .\apps\jobs\models.py:68 .\ugc_backend\unfold_config.py:171
 msgid "Фото робочих місць"
 msgstr "Фото робочих місць"
 
-#: .\apps\partners\admin.py:46
+#: .\apps\partners\admin.py:44 .\ugc_backend\unfold_config.py:355
 msgid "FAQ"
 msgstr "FAQ"
 
-#: .\apps\partners\admin.py:50
+#: .\apps\partners\admin.py:48
 msgid "Виробничі характеристики"
 msgstr "Виробничі характеристики"
 
-#: .\apps\partners\admin.py:60
+#: .\apps\partners\admin.py:58
 msgid "Мін. замовлення"
 msgstr "Мін. замовлення"
 
-#: .\apps\partners\admin.py:102
+#: .\apps\partners\admin.py:100
 msgid "Візуальне оформлення"
 msgstr "Візуальне оформлення"
 
-#: .\apps\partners\admin.py:112 .\apps\partners\models.py:29
-#: .\apps\services\admin.py:175 .\apps\services\models.py:14
+#: .\apps\partners\admin.py:110 .\apps\partners\models.py:28
+#: .\apps\services\admin.py:169 .\apps\services\models.py:14
 #: .\apps\services\models.py:35
 msgid "Іконка"
 msgstr "Іконка"
 
-#: .\apps\partners\admin.py:155
+#: .\apps\partners\admin.py:153
 msgid "Інформація про компанію"
 msgstr "Інформація про компанію"
 
-#: .\apps\partners\admin.py:159
+#: .\apps\partners\admin.py:157
 msgid "Запит"
 msgstr "Запит"
 
-#: .\apps\partners\models.py:8
+#: .\apps\partners\models.py:7
 msgid "Умови співпраці"
 msgstr "Умови співпраці"
 
-#: .\apps\partners\models.py:9 .\apps\partners\models.py:36
-#: .\ugc_backend\settings.py:404
+#: .\apps\partners\models.py:8 .\apps\partners\models.py:35
+#: .\ugc_backend\unfold_config.py:124
 msgid "Етапи роботи"
 msgstr "Етапи роботи"
 
-#: .\apps\partners\models.py:10
+#: .\apps\partners\models.py:9
 msgid "FAQ для замовників"
 msgstr "FAQ для замовників"
 
-#: .\apps\partners\models.py:11
+#: .\apps\partners\models.py:10
 msgid "Переваги співпраці"
 msgstr "Переваги співпраці"
 
-#: .\apps\partners\models.py:13
+#: .\apps\partners\models.py:12
 msgid "Мін. сума замовлення"
 msgstr "Мін. сума замовлення"
 
-#: .\apps\partners\models.py:14
+#: .\apps\partners\models.py:13
 msgid "Виробнича потужність"
 msgstr "Виробнича потужність"
 
-#: .\apps\partners\models.py:20 .\apps\partners\models.py:21
-#: .\ugc_backend\settings.py:399
+#: .\apps\partners\models.py:19 .\apps\partners\models.py:20
 msgid "Інформація для партнерів"
 msgstr "Інформація для партнерів"
 
-#: .\apps\partners\models.py:31
+#: .\apps\partners\models.py:30
 msgid "Тривалість"
 msgstr "Тривалість"
 
-#: .\apps\partners\models.py:35
+#: .\apps\partners\models.py:34
 msgid "Етап роботи"
 msgstr "Етап роботи"
 
-#: .\apps\partners\models.py:41
+#: .\apps\partners\models.py:40
 msgid "Назва компанії"
 msgstr "Назва компанії"
 
-#: .\apps\partners\models.py:42
+#: .\apps\partners\models.py:41
 msgid "Контактна особа"
 msgstr "Контактна особа"
 
-#: .\apps\partners\models.py:47
+#: .\apps\partners\models.py:46
 msgid "Запит на розрахунок"
 msgstr "Запит на розрахунок"
 
-#: .\apps\partners\models.py:48
+#: .\apps\partners\models.py:47
 msgid "Зразки продукції"
 msgstr "Зразки продукції"
 
-#: .\apps\partners\models.py:49
+#: .\apps\partners\models.py:48
 msgid "Інше"
 msgstr "Інше"
 
-#: .\apps\partners\models.py:52
+#: .\apps\partners\models.py:51
 msgid "Опис проєкту"
 msgstr "Опис проєкту"
 
-#: .\apps\partners\models.py:53
+#: .\apps\partners\models.py:52
 msgid "Орієнтовна кількість"
 msgstr "Орієнтовна кількість"
 
-#: .\apps\partners\models.py:59
+#: .\apps\partners\models.py:58
 msgid "Запит партнера"
 msgstr "Запит партнера"
 
-#: .\apps\partners\models.py:60 .\ugc_backend\settings.py:409
+#: .\apps\partners\models.py:59
 msgid "Запити партнерів"
 msgstr "Запити партнерів"
 
-#: .\apps\projects\admin.py:88 .\apps\projects\models.py:49
-#: .\ugc_backend\settings.py:353
+#: .\apps\projects\admin.py:81 .\apps\projects\models.py:46
 msgid "Проєкти"
 msgstr "Проєкти"
 
-#: .\apps\projects\admin.py:154
+#: .\apps\projects\admin.py:147
 msgid "Додаткові деталі"
 msgstr "Додаткові деталі"
 
-#: .\apps\projects\admin.py:158
+#: .\apps\projects\admin.py:151
 msgid "Клієнт та проєкт"
 msgstr "Клієнт та проєкт"
 
-#: .\apps\projects\admin.py:166
-msgid "SEO"
-msgstr "SEO"
+#: .\apps\projects\admin.py:155 .\apps\services\admin.py:59
+#: .\ugc_backend\unfold_config.py:250 .\ugc_backend\unfold_config.py:284
+#: .\ugc_backend\unfold_config.py:306
+msgid "Медіа"
+msgstr "Медіа"
 
-#: .\apps\projects\admin.py:185 .\apps\projects\models.py:42
+#: .\apps\projects\admin.py:178 .\apps\projects\models.py:39
 msgid "Рекомендований"
 msgstr "Рекомендований"
 
-#: .\apps\projects\admin.py:205
+#: .\apps\projects\admin.py:198
 msgid "Количество изображений"
 msgstr "Количество изображений"
 
-#: .\apps\projects\models.py:13 .\apps\projects\models.py:34
+#: .\apps\projects\models.py:10 .\apps\projects\models.py:31
 #: .\apps\services\models.py:13
 msgid "Слаг"
 msgstr "Слаг"
 
-#: .\apps\projects\models.py:20
+#: .\apps\projects\models.py:17
 msgid "Категорія проєктів"
 msgstr "Категорія проєктів"
 
-#: .\apps\projects\models.py:21 .\ugc_backend\settings.py:357
+#: .\apps\projects\models.py:18
 msgid "Категорії проєктів"
 msgstr "Категорії проєктів"
 
-#: .\apps\projects\models.py:27 .\apps\services\models.py:9
+#: .\apps\projects\models.py:24 .\apps\services\models.py:9
 msgid "Короткий опис"
 msgstr "Короткий опис"
 
-#: .\apps\projects\models.py:28 .\apps\services\models.py:10
+#: .\apps\projects\models.py:25 .\apps\services\models.py:10
 msgid "Детальний опис"
 msgstr "Детальний опис"
 
-#: .\apps\projects\models.py:29
+#: .\apps\projects\models.py:26
 msgid "Завдання"
 msgstr "Завдання"
 
-#: .\apps\projects\models.py:30
+#: .\apps\projects\models.py:27
 msgid "Рішення"
 msgstr "Рішення"
 
-#: .\apps\projects\models.py:31
+#: .\apps\projects\models.py:28
 msgid "Результат"
 msgstr "Результат"
 
-#: .\apps\projects\models.py:33
+#: .\apps\projects\models.py:30
 msgid "Категорія"
 msgstr "Категорія"
 
-#: .\apps\projects\models.py:35
+#: .\apps\projects\models.py:32
 msgid "Клієнт"
 msgstr "Клієнт"
 
-#: .\apps\projects\models.py:36
+#: .\apps\projects\models.py:33
 msgid "Дата проєкту"
 msgstr "Дата проєкту"
 
-#: .\apps\projects\models.py:37
+#: .\apps\projects\models.py:34
 msgid "Кількість виробів"
 msgstr "Кількість виробів"
 
-#: .\apps\projects\models.py:38
+#: .\apps\projects\models.py:35
 msgid "Використані матеріали"
 msgstr "Використані матеріали"
 
-#: .\apps\projects\models.py:39 .\apps\services\models.py:15
+#: .\apps\projects\models.py:36 .\apps\services\models.py:15
 msgid "Головне зображення"
 msgstr "Головне зображення"
 
-#: .\apps\projects\models.py:40
+#: .\apps\projects\models.py:37
 msgid "Мета-заголовок"
 msgstr "Мета-заголовок"
 
-#: .\apps\projects\models.py:41
+#: .\apps\projects\models.py:38
 msgid "Мета-опис"
 msgstr "Мета-опис"
 
-#: .\apps\projects\models.py:48 .\apps\projects\models.py:54
+#: .\apps\projects\models.py:45 .\apps\projects\models.py:51
 msgid "Проєкт"
 msgstr "Проєкт"
 
-#: .\apps\projects\models.py:56
+#: .\apps\projects\models.py:53
 msgid "Підпис"
 msgstr "Підпис"
 
-#: .\apps\projects\models.py:61
+#: .\apps\projects\models.py:58
 msgid "Зображення проєкту"
 msgstr "Зображення проєкту"
 
-#: .\apps\projects\models.py:62 .\ugc_backend\settings.py:367
+#: .\apps\projects\models.py:59
 msgid "Зображення проєктів"
 msgstr "Зображення проєктів"
 
-#: .\apps\services\admin.py:88 .\apps\services\models.py:19
+#: .\apps\services\admin.py:82 .\apps\services\models.py:19
 msgid "Рекомендована"
 msgstr "Рекомендована"
 
-#: .\apps\services\admin.py:108
+#: .\apps\services\admin.py:102
 msgid "Особливості"
 msgstr "Особливості"
 
-#: .\apps\services\admin.py:135
+#: .\apps\services\admin.py:129
 msgid "Зняти рекомендацію"
 msgstr "Зняти рекомендацію"
 
@@ -794,7 +837,7 @@ msgstr "Термін виробництва"
 msgid "Послуга"
 msgstr "Послуга"
 
-#: .\apps\services\models.py:26 .\ugc_backend\settings.py:337
+#: .\apps\services\models.py:26 .\ugc_backend\unfold_config.py:55
 msgid "Послуги"
 msgstr "Послуги"
 
@@ -806,91 +849,178 @@ msgstr "CSS клас для іконки"
 msgid "Особливість послуги"
 msgstr "Особливість послуги"
 
-#: .\apps\services\models.py:41 .\ugc_backend\settings.py:346
+#: .\apps\services\models.py:41
 msgid "Особливості послуг"
 msgstr "Особливості послуг"
 
-#: .\ugc_backend\settings.py:295
-msgid "Навігація"
-msgstr "Навігація"
+#: .\ugc_backend\settings.py:611
+#, fuzzy
+#| msgid "Налаштування"
+msgid "Адміністрування"
+msgstr "Налаштування"
 
-#: .\ugc_backend\settings.py:299
+#: .\ugc_backend\settings.py:615 .\ugc_backend\unfold_config.py:16
 msgid "Головна"
 msgstr "Головна"
 
-#: .\ugc_backend\settings.py:315
+#: .\ugc_backend\unfold_config.py:12
+msgid "Навігація"
+msgstr "Навігація"
+
+#: .\ugc_backend\unfold_config.py:23
+msgid "Контент"
+msgstr "Контент"
+
+#: .\ugc_backend\unfold_config.py:33
 msgid "Про нас"
 msgstr "Про нас"
 
-#: .\ugc_backend\settings.py:341 .\ugc_backend\settings.py:478
+#: .\ugc_backend\unfold_config.py:60
 msgid "Всі послуги"
 msgstr "Всі послуги"
 
-#: .\ugc_backend\settings.py:362 .\ugc_backend\settings.py:497
-msgid "Всі проєкти"
-msgstr "Всі проєкти"
-
-#: .\ugc_backend\settings.py:378
-msgid "Позиції"
-msgstr "Позиції"
-
-#: .\ugc_backend\settings.py:395
-msgid "Партнери"
-msgstr "Партнери"
-
-#: .\ugc_backend\settings.py:420
-msgid "Офіси та фабрики"
-msgstr "Офіси та фабрики"
-
-#: .\ugc_backend\settings.py:440
-msgid "Всі офіси"
-msgstr "Всі офіси"
-
-#: .\ugc_backend\settings.py:444 .\ugc_backend\settings.py:482
-#: .\ugc_backend\settings.py:501 .\ugc_backend\settings.py:520
+#: .\ugc_backend\unfold_config.py:65 .\ugc_backend\unfold_config.py:92
+#: .\ugc_backend\unfold_config.py:151
 msgid "Активні"
 msgstr "Активні"
 
-#: .\ugc_backend\settings.py:448
-msgid "Головні офіси"
-msgstr "Головні офіси"
-
-#: .\ugc_backend\settings.py:459
-msgid "Всі звернення"
-msgstr "Всі звернення"
-
-#: .\ugc_backend\settings.py:463
-msgid "Необроблені"
-msgstr "Необроблені"
-
-#: .\ugc_backend\settings.py:467 .\ugc_backend\settings.py:562
-msgid "Оброблені"
-msgstr "Оброблені"
-
-#: .\ugc_backend\settings.py:486 .\ugc_backend\settings.py:505
+#: .\ugc_backend\unfold_config.py:70 .\ugc_backend\unfold_config.py:97
 msgid "Рекомендовані"
 msgstr "Рекомендовані"
 
-#: .\ugc_backend\settings.py:516
+#: .\ugc_backend\unfold_config.py:75
+#, fuzzy
+#| msgid "Всі послуги"
+msgid "Функції послуг"
+msgstr "Всі послуги"
+
+#: .\ugc_backend\unfold_config.py:82
+msgid "Проекти"
+msgstr ""
+
+#: .\ugc_backend\unfold_config.py:87
+#, fuzzy
+#| msgid "Всі проєкти"
+msgid "Всі проекти"
+msgstr "Всі проєкти"
+
+#: .\ugc_backend\unfold_config.py:102
+#, fuzzy
+#| msgid "Категорія"
+msgid "Категорії"
+msgstr "Категорія"
+
+#: .\ugc_backend\unfold_config.py:107
+#, fuzzy
+#| msgid "Зображення проєктів"
+msgid "Зображення проектів"
+msgstr "Зображення проєктів"
+
+#: .\ugc_backend\unfold_config.py:114
+msgid "Партнери"
+msgstr "Партнери"
+
+#: .\ugc_backend\unfold_config.py:119
+#, fuzzy
+#| msgid "Інформація для партнерів"
+msgid "Інформація про партнерство"
+msgstr "Інформація для партнерів"
+
+#: .\ugc_backend\unfold_config.py:129
+#, fuzzy
+#| msgid "Запити партнерів"
+msgid "Заявки партнерів"
+msgstr "Запити партнерів"
+
+#: .\ugc_backend\unfold_config.py:134 .\ugc_backend\unfold_config.py:166
+#, fuzzy
+#| msgid "Всі заявки"
+msgid "Нові заявки"
+msgstr "Всі заявки"
+
+#: .\ugc_backend\unfold_config.py:146
 msgid "Всі вакансії"
 msgstr "Всі вакансії"
 
-#: .\ugc_backend\settings.py:524
+#: .\ugc_backend\unfold_config.py:156
 msgid "Термінові"
 msgstr "Термінові"
 
-#: .\ugc_backend\settings.py:535
-msgid "Всі заявки"
-msgstr "Всі заявки"
+#: .\ugc_backend\unfold_config.py:188
+#, fuzzy
+#| msgid "Головні офіси"
+msgid "Активні офіси"
+msgstr "Головні офіси"
 
-#: .\ugc_backend\settings.py:539 .\ugc_backend\settings.py:558
-msgid "Нові"
-msgstr "Нові"
+#: .\ugc_backend\unfold_config.py:193
+msgid "Головні офіси"
+msgstr "Головні офіси"
 
-#: .\ugc_backend\settings.py:543
-msgid "Переглянуті"
-msgstr "Переглянуті"
+#: .\ugc_backend\unfold_config.py:203
+#, fuzzy
+#| msgid "Всі звернення"
+msgid "Нові звернення"
+msgstr "Всі звернення"
 
-#: .\ugc_backend\settings.py:554
-msgid "Всі запити"
-msgstr "Всі запити"
+#: .\ugc_backend\unfold_config.py:210
+msgid "Система"
+msgstr ""
+
+#: .\ugc_backend\unfold_config.py:215
+msgid "Користувачі"
+msgstr ""
+
+#: .\ugc_backend\unfold_config.py:220
+msgid "Групи"
+msgstr ""
+
+#: .\ugc_backend\unfold_config.py:225
+#, fuzzy
+#| msgid "Переваги"
+msgid "Переклади"
+msgstr "Переваги"
+
+#: .\ugc_backend\unfold_config.py:262
+#, fuzzy
+#| msgid "Основна інформація"
+msgid "Особиста інформація"
+msgstr "Basic information"
+
+#~ msgid "Короткий опис компанії"
+#~ msgstr "Короткий опис компанії"
+
+#~ msgid "Років досвіду"
+#~ msgstr "Років досвіду"
+
+#~ msgid "Кількість співробітників"
+#~ msgstr "Кількість співробітників"
+
+#~ msgid "Виконано проєктів"
+#~ msgstr "Виконано проєктів"
+
+#~ msgid "Посилання"
+#~ msgstr "Посилання"
+
+#~ msgid "Позиції"
+#~ msgstr "Позиції"
+
+#~ msgid "Офіси та фабрики"
+#~ msgstr "Офіси та фабрики"
+
+#~ msgid "Всі офіси"
+#~ msgstr "Всі офіси"
+
+#~ msgid "Необроблені"
+#~ msgstr "Необроблені"
+
+#~ msgid "Оброблені"
+#~ msgstr "Оброблені"
+
+#~ msgid "Нові"
+#~ msgstr "Нові"
+
+#~ msgid "Переглянуті"
+#~ msgstr "Переглянуті"
+
+#~ msgid "Всі запити"
+#~ msgstr "Всі запити"

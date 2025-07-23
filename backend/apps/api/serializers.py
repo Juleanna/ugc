@@ -11,6 +11,108 @@ from apps.contacts.models import Office, ContactInquiry
 
 
 # ============================================================================
+# TEAM AND ABOUT SERIALIZERS
+# ============================================================================
+
+class TeamMemberSerializer(serializers.ModelSerializer):
+    """Серіалізатор для учасників команди"""
+    
+    # Додаємо поле для показу зв'язку з головною сторінкою
+    is_on_homepage = serializers.SerializerMethodField()
+    homepage_title = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = TeamMember
+        fields = [
+            'id',
+            'name',
+            'position',
+            'bio',
+            'photo',
+            'email',
+            'linkedin',
+            'is_management',
+            'is_on_homepage',  # Додаємо нове поле
+            'homepage_title',  # Додаємо назву головної сторінки
+            'order'
+        ]
+    
+    def get_is_on_homepage(self, obj):
+        """Повертає True, якщо член команди пов'язаний з головною сторінкою"""
+        return obj.homepage is not None
+    
+    def get_homepage_title(self, obj):
+        """Повертає назву головної сторінки, якщо є зв'язок"""
+        if obj.homepage:
+            return obj.homepage.main_title
+        return None
+
+
+class CertificateSerializer(serializers.ModelSerializer):
+    """Серіалізатор для сертифікатів"""
+    
+    # Додаємо поле для показу зв'язку з головною сторінкою
+    is_on_homepage = serializers.SerializerMethodField()
+    homepage_title = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Certificate
+        fields = [
+            'id',
+            'title',
+            'description',
+            'image',
+            'issued_date',
+            'issuing_organization',
+            'certificate_url',
+            'is_active',
+            'is_on_homepage',  # Додаємо нове поле
+            'homepage_title'   # Додаємо назву головної сторінки
+        ]
+    
+    def get_is_on_homepage(self, obj):
+        """Повертає True, якщо сертифікат пов'язаний з головною сторінкою"""
+        return obj.homepage is not None
+    
+    def get_homepage_title(self, obj):
+        """Повертає назву головної сторінки, якщо є зв'язок"""
+        if obj.homepage:
+            return obj.homepage.main_title
+        return None
+
+
+class ProductionPhotoSerializer(serializers.ModelSerializer):
+    """Серіалізатор для фото виробництва"""
+    
+    # Додаємо поле для показу зв'язку з головною сторінкою
+    is_on_homepage = serializers.SerializerMethodField()
+    homepage_title = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = ProductionPhoto
+        fields = [
+            'id',
+            'title',
+            'description',
+            'image',
+            'is_featured',
+            'order',
+            'is_on_homepage',  # Додаємо нове поле
+            'homepage_title'   # Додаємо назву головної сторінки
+        ]
+    
+    def get_is_on_homepage(self, obj):
+        """Повертає True, якщо фото пов'язане з головною сторінкою"""
+        return obj.homepage is not None
+    
+    def get_homepage_title(self, obj):
+        """Повертає назву головної сторінки, якщо є зв'язок"""
+        if obj.homepage:
+            return obj.homepage.main_title
+        return None
+
+
+# ============================================================================
 # HOMEPAGE SERIALIZERS (З ПІДТРИМКОЮ HERO СЕКЦІЇ)
 # ============================================================================
 
@@ -21,6 +123,9 @@ class HomePageSerializer(serializers.ModelSerializer):
     stats = serializers.SerializerMethodField()
     featured_services = serializers.SerializerMethodField()
     featured_projects = serializers.SerializerMethodField()
+    team_members = serializers.SerializerMethodField()  # Додаємо поле для команди
+    certificates = serializers.SerializerMethodField()  # Додаємо поле для сертифікатів
+    production_photos = serializers.SerializerMethodField()  # Додаємо поле для фото виробництва
     
     class Meta:
         model = HomePage
@@ -31,7 +136,6 @@ class HomePageSerializer(serializers.ModelSerializer):
             'sphere_title',
             'subtitle',
             
-                      
             # Кнопки дій
             'primary_button_text',
             'secondary_button_text',
@@ -57,6 +161,9 @@ class HomePageSerializer(serializers.ModelSerializer):
             'stats',
             'featured_services',
             'featured_projects',
+            'team_members',  # Додаємо команду
+            'certificates',  # Додаємо сертифікати
+            'production_photos',  # Додаємо фото виробництва
             
             # Системні поля
             'created_at',
@@ -73,12 +180,61 @@ class HomePageSerializer(serializers.ModelSerializer):
             'support': '24/7'
         }
     
+    def get_team_members(self, obj):
+        """Повертає членів команди, пов'язаних з цією головною сторінкою"""
+        try:
+            # Використовуємо новий зв'язок teammember_set
+            team_members = obj.teammember_set.filter(
+                is_active=True
+            ).order_by('order', 'name')
+            
+            return TeamMemberSerializer(
+                team_members, 
+                many=True, 
+                context=self.context
+            ).data
+        except Exception as e:
+            return []
+    
+    def get_certificates(self, obj):
+        """Повертає сертифікати, пов'язані з цією головною сторінкою"""
+        try:
+            # Використовуємо новий зв'язок certificate_set
+            certificates = obj.certificate_set.filter(
+                is_active=True
+            ).order_by('-issued_date')
+            
+            return CertificateSerializer(
+                certificates, 
+                many=True, 
+                context=self.context
+            ).data
+        except Exception as e:
+            return []
+    
+    def get_production_photos(self, obj):
+        """Повертає фото виробництва, пов'язані з цією головною сторінкою"""
+        try:
+            # Використовуємо новий зв'язок productionphoto_set
+            production_photos = obj.productionphoto_set.filter(
+                is_active=True
+            ).order_by('order')
+            
+            return ProductionPhotoSerializer(
+                production_photos, 
+                many=True, 
+                context=self.context
+            ).data
+        except Exception as e:
+            return []
+    
     def get_featured_services(self, obj):
         """Повертає рекомендовані послуги для Hero секції"""
         if not obj.show_featured_services:
             return []
         
         try:
+            from apps.services.models import Service
             services = Service.objects.filter(
                 is_active=True, 
                 is_featured=True
@@ -95,6 +251,7 @@ class HomePageSerializer(serializers.ModelSerializer):
     def get_featured_projects(self, obj):
         """Повертає рекомендовані проекти для Hero секції"""
         try:
+            from apps.projects.models import Project
             projects = Project.objects.filter(
                 is_active=True, 
                 is_featured=True
@@ -107,60 +264,6 @@ class HomePageSerializer(serializers.ModelSerializer):
             ).data
         except Exception as e:
             return []
-
-
-# ============================================================================
-# TEAM AND ABOUT SERIALIZERS
-# ============================================================================
-
-class TeamMemberSerializer(serializers.ModelSerializer):
-    """Серіалізатор для учасників команди"""
-    
-    class Meta:
-        model = TeamMember
-        fields = [
-            'id',
-            'name',
-            'position',
-            'bio',
-            'photo',
-            'email',
-            'linkedin',
-            'is_management',
-            'order'
-        ]
-
-
-class CertificateSerializer(serializers.ModelSerializer):
-    """Серіалізатор для сертифікатів"""
-    
-    class Meta:
-        model = Certificate
-        fields = [
-            'id',
-            'title',
-            'description',
-            'image',
-            'issued_date',
-            'issuing_organization',
-            'certificate_url',
-            'is_active'
-        ]
-
-
-class ProductionPhotoSerializer(serializers.ModelSerializer):
-    """Серіалізатор для фото виробництва"""
-    
-    class Meta:
-        model = ProductionPhoto
-        fields = [
-            'id',
-            'title',
-            'description',
-            'image',
-            'is_featured',
-            'order'
-        ]
 
 
 class AboutPageSerializer(serializers.ModelSerializer):
@@ -180,7 +283,6 @@ class AboutPageSerializer(serializers.ModelSerializer):
             'team_members',
             'certificates',
             'production_photos',
-            'created_at',
             'updated_at'
         ]
 
@@ -256,7 +358,6 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
 
 class ProjectCategorySerializer(serializers.ModelSerializer):
     """Серіалізатор для категорій проектів"""
-    projects_count = serializers.SerializerMethodField()
     
     class Meta:
         model = ProjectCategory
@@ -267,13 +368,8 @@ class ProjectCategorySerializer(serializers.ModelSerializer):
             'slug',
             'image',
             'order',
-            'is_active',
-            'projects_count'
+            'is_active'
         ]
-    
-    def get_projects_count(self, obj):
-        """Підраховує кількість активних проектів в категорії"""
-        return obj.projects.filter(is_active=True).count()
 
 
 class ProjectImageSerializer(serializers.ModelSerializer):
@@ -292,7 +388,6 @@ class ProjectImageSerializer(serializers.ModelSerializer):
 class ProjectListSerializer(serializers.ModelSerializer):
     """Серіалізатор для списку проектів"""
     category = ProjectCategorySerializer(read_only=True)
-    category_name = serializers.CharField(source='category.name', read_only=True)
     
     class Meta:
         model = Project
@@ -302,7 +397,6 @@ class ProjectListSerializer(serializers.ModelSerializer):
             'short_description',
             'slug',
             'category',
-            'category_name',
             'client_name',
             'project_date',
             'main_image',
@@ -334,13 +428,12 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
             'quantity',
             'materials_used',
             'main_image',
+            'images',
             'meta_title',
             'meta_description',
             'is_featured',
             'is_active',
-            'images',
-            'created_at',
-            'updated_at'
+            'created_at'
         ]
 
 
@@ -350,31 +443,6 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
 
 class JobPositionListSerializer(serializers.ModelSerializer):
     """Серіалізатор для списку вакансій"""
-    applications_count = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = JobPosition
-        fields = [
-            'id',
-            'title',
-            'employment_type',
-            'location',
-            'salary_range',
-            'experience_required',
-            'is_urgent',
-            'is_active',
-            'applications_count',
-            'created_at'
-        ]
-    
-    def get_applications_count(self, obj):
-        """Підраховує кількість заявок на вакансію"""
-        return obj.applications.count()
-
-
-class JobPositionDetailSerializer(serializers.ModelSerializer):
-    """Детальний серіалізатор для вакансій"""
-    applications_count = serializers.SerializerMethodField()
     
     class Meta:
         model = JobPosition
@@ -382,42 +450,62 @@ class JobPositionDetailSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
-            'responsibilities',
-            'requirements',
-            'benefits',
+            'slug',
             'employment_type',
-            'location',
-            'salary_range',
             'experience_required',
-            'deadline',
+            'salary_from',
+            'salary_to',
+            'salary_currency',
+            'location',
             'is_urgent',
             'is_active',
-            'applications_count',
             'created_at',
-            'updated_at'
+            'expires_at'
         ]
+
+
+class JobPositionDetailSerializer(serializers.ModelSerializer):
+    """Детальний серіалізатор для вакансій"""
     
-    def get_applications_count(self, obj):
-        return obj.applications.count()
+    class Meta:
+        model = JobPosition
+        fields = [
+            'id',
+            'title',
+            'description',
+            'requirements',
+            'responsibilities',
+            'benefits',
+            'slug',
+            'employment_type',
+            'experience_required',
+            'salary_from',
+            'salary_to',
+            'salary_currency',
+            'location',
+            'is_active',
+            'is_urgent',
+            'created_at',
+            'expires_at'
+        ]
 
 
 class JobApplicationSerializer(serializers.ModelSerializer):
-    """Серіалізатор для заявок на роботу"""
+    """Серіалізатор для заявок на вакансії"""
     
     class Meta:
         model = JobApplication
         fields = [
-            'name',
+            'first_name',
+            'last_name',
             'email',
             'phone',
-            'position',
-            'experience',
             'cover_letter',
             'resume'
         ]
     
     def create(self, validated_data):
-        """Створює нову заявку"""
+        """Створює нову заявку на вакансію"""
         return JobApplication.objects.create(**validated_data)
 
 
@@ -570,12 +658,16 @@ class APIStatsSerializer(serializers.Serializer):
     services_count = serializers.IntegerField()
     projects_count = serializers.IntegerField()
     jobs_count = serializers.IntegerField()
+    team_members_count = serializers.IntegerField()
+    certificates_count = serializers.IntegerField()  # Додаємо сертифікати
+    production_photos_count = serializers.IntegerField()  # Додаємо фото
     offices_count = serializers.IntegerField()
     last_updated = serializers.DateTimeField()
 
 
 class ErrorResponseSerializer(serializers.Serializer):
     """Серіалізатор для помилок API"""
+    success = serializers.BooleanField(default=False)
     error = serializers.CharField()
     message = serializers.CharField(required=False)
     code = serializers.CharField(required=False)
@@ -587,3 +679,24 @@ class SuccessResponseSerializer(serializers.Serializer):
     success = serializers.BooleanField(default=True)
     message = serializers.CharField()
     data = serializers.DictField(required=False)
+
+
+# ============================================================================
+# СПЕЦИАЛЬНІ СЕРІАЛІЗАТОРИ ДЛЯ HERO СЕКЦІЇ
+# ============================================================================
+
+class HeroDataSerializer(serializers.Serializer):
+    """Спеціальний серіалізатор для Hero секції"""
+    main_title = serializers.CharField()
+    sphere_title = serializers.CharField()
+    subtitle = serializers.CharField()
+    primary_button_text = serializers.CharField()
+    secondary_button_text = serializers.CharField()
+    stats = serializers.DictField()
+    team_members = TeamMemberSerializer(many=True)
+    certificates = CertificateSerializer(many=True)  # Додаємо сертифікати
+    production_photos = ProductionPhotoSerializer(many=True)  # Додаємо фото
+    featured_services = ServiceListSerializer(many=True)
+    featured_projects = ProjectListSerializer(many=True)
+    additional_info = serializers.CharField()
+    show_featured_services = serializers.BooleanField()

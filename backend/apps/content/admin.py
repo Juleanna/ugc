@@ -1,3 +1,4 @@
+# backend/apps/content/admin.py
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
@@ -8,6 +9,7 @@ from unfold.decorators import display
 from apps.common.admin import UnfoldTabbedTranslationAdmin  
 from .models import HomePage, AboutPage, TeamMember, Certificate, ProductionPhoto
 
+
 @admin.register(HomePage)
 class HomePageAdmin(UnfoldTabbedTranslationAdmin):
     """Админка для главной страницы"""
@@ -15,7 +17,8 @@ class HomePageAdmin(UnfoldTabbedTranslationAdmin):
         'main_title',
         'years_experience', 
         'employees_count', 
-        'completed_projects',  # Виправлено назву поля
+        'completed_projects',
+        'team_members_count',  # Додаємо відображення кількості членів команди
         'is_active_display',
         'updated_at'
     ]
@@ -23,6 +26,7 @@ class HomePageAdmin(UnfoldTabbedTranslationAdmin):
         'is_active',
         ('updated_at', RangeDateFilter),
     ]
+    search_fields = ['main_title', 'subtitle']
     
     fieldsets = [
         (_("Основний контент"), {
@@ -55,6 +59,19 @@ class HomePageAdmin(UnfoldTabbedTranslationAdmin):
         }),
     ]
     
+    @display(description=_("Членів команди"))
+    def team_members_count(self, obj):
+        """Показує кількість членів команди, пов'язаних з цією сторінкою"""
+        count = obj.teammember_set.filter(is_active=True).count()
+        if count > 0:
+            return format_html(
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">{}</span>',
+                count
+            )
+        return format_html(
+            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">0</span>'
+        )
+    
     @display(description=_("Статус"), ordering='is_active')
     def is_active_display(self, obj):
         if obj.is_active:
@@ -65,6 +82,9 @@ class HomePageAdmin(UnfoldTabbedTranslationAdmin):
             '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Неактивна</span>'
         )
 
+    def get_queryset(self, request):
+        """Оптимізуємо запити до бази даних"""
+        return super().get_queryset(request).prefetch_related('teammember_set')
 
 
 @admin.register(AboutPage)
@@ -110,12 +130,13 @@ class TeamMemberAdmin(UnfoldTabbedTranslationAdmin):
         'name', 
         'position', 
         'photo_preview',
+        'homepage_display',  # Додаємо відображення зв'язку з головною сторінкою
         'is_management_display',
-        'is_active_display',
+        'is_active',
         'order',
-        'is_active'
     ]
     list_filter = [
+        'homepage',  # Додаємо фільтр по головній сторінці
         'is_management', 
         'is_active',
     ]
@@ -137,21 +158,34 @@ class TeamMemberAdmin(UnfoldTabbedTranslationAdmin):
             'classes': ['tab'],
         }),
         (_("Налаштування"), {
-            'fields': ['order', 'is_management', 'is_active'],
+            'fields': ['homepage', 'order', 'is_management', 'is_active'],  # Додаємо homepage
             'classes': ['tab'],
         }),
     ]
+    
+    actions = ['make_active', 'make_inactive', 'mark_as_management', 'add_to_homepage']
     
     @display(description=_("Фото"))
     def photo_preview(self, obj):
         if obj.photo:
             return format_html(
-                '<img src="{}" width="40" height="40" style="border-radius: 50%; object-fit: cover;" />',
+                '<img src="{}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" />',
                 obj.photo.url
             )
-        return "Немає фото"
+        return format_html('<span class="text-gray-400">Немає фото</span>')
     
-    @display(description=_("Керівництво"), ordering='is_management')
+    @display(description=_("Головна сторінка"), boolean=True)
+    def homepage_display(self, obj):
+        """Показує, чи пов'язаний член команди з головною сторінкою"""
+        if obj.homepage:
+            return format_html(
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">На головній</span>'
+            )
+        return format_html(
+            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Не на головній</span>'
+        )
+    
+    @display(description=_("Керівництво"))
     def is_management_display(self, obj):
         if obj.is_management:
             return format_html(
@@ -161,7 +195,7 @@ class TeamMemberAdmin(UnfoldTabbedTranslationAdmin):
             '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Співробітник</span>'
         )
     
-    @display(description=_("Статус"), ordering='is_active')
+    @display(description=_("Статус"))
     def is_active_display(self, obj):
         if obj.is_active:
             return format_html(
@@ -171,8 +205,11 @@ class TeamMemberAdmin(UnfoldTabbedTranslationAdmin):
             '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Неактивний</span>'
         )
 
-    actions = ['make_active', 'make_inactive', 'mark_as_management']
+    def get_queryset(self, request):
+        """Оптимізуємо запити до бази даних"""
+        return super().get_queryset(request).select_related('homepage')
     
+    # Дії для адміністраторів
     @admin.action(description=_("Позначити як активних"))
     def make_active(self, request, queryset):
         count = queryset.update(is_active=True)
@@ -187,6 +224,20 @@ class TeamMemberAdmin(UnfoldTabbedTranslationAdmin):
     def mark_as_management(self, request, queryset):
         count = queryset.update(is_management=True)
         self.message_user(request, f"{count} членів команди позначено як керівництво.")
+    
+    @admin.action(description=_("Додати на головну сторінку"))
+    def add_to_homepage(self, request, queryset):
+        """Додає вибраних членів команди на активну головну сторінку"""
+        try:
+            # Знаходимо активну головну сторінку
+            active_homepage = HomePage.objects.filter(is_active=True).first()
+            if active_homepage:
+                count = queryset.update(homepage=active_homepage)
+                self.message_user(request, f"{count} членів команди додано на головну сторінку.")
+            else:
+                self.message_user(request, "Не знайдено активної головної сторінки.", level='ERROR')
+        except Exception as e:
+            self.message_user(request, f"Помилка: {str(e)}", level='ERROR')
 
 
 @admin.register(Certificate)
@@ -197,9 +248,11 @@ class CertificateAdmin(UnfoldTabbedTranslationAdmin):
         'issued_date', 
         'issuing_organization',
         'certificate_preview',
+        'homepage_display',  # Додаємо відображення зв'язку з головною сторінкою
         'is_active_display'
     ]
     list_filter = [
+        'homepage',  # Додаємо фільтр по головній сторінці
         'is_active',
         ('issued_date', RangeDateFilter),
         'issuing_organization',
@@ -222,10 +275,12 @@ class CertificateAdmin(UnfoldTabbedTranslationAdmin):
             'classes': ['tab'],
         }),
         (_("Налаштування"), {
-            'fields': ['is_active'],
+            'fields': ['homepage', 'is_active'],  # Додаємо homepage
             'classes': ['tab'],
         }),
     ]
+    
+    actions = ['add_to_homepage', 'remove_from_homepage']
     
     @display(description=_("Зображення"))
     def certificate_preview(self, obj):
@@ -235,6 +290,17 @@ class CertificateAdmin(UnfoldTabbedTranslationAdmin):
                 obj.image.url
             )
         return "Немає зображення"
+    
+    @display(description=_("Головна сторінка"), boolean=True)
+    def homepage_display(self, obj):
+        """Показує, чи пов'язаний сертифікат з головною сторінкою"""
+        if obj.homepage:
+            return format_html(
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">На головній</span>'
+            )
+        return format_html(
+            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Не на головній</span>'
+        )
     
     @display(description=_("Статус"), ordering='is_active')
     def is_active_display(self, obj):
@@ -246,24 +312,47 @@ class CertificateAdmin(UnfoldTabbedTranslationAdmin):
             '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Неактивний</span>'
         )
 
+    def get_queryset(self, request):
+        """Оптимізуємо запити до бази даних"""
+        return super().get_queryset(request).select_related('homepage')
+    
+    @admin.action(description=_("Додати на головну сторінку"))
+    def add_to_homepage(self, request, queryset):
+        """Додає вибрані сертифікати на активну головну сторінку"""
+        try:
+            active_homepage = HomePage.objects.filter(is_active=True).first()
+            if active_homepage:
+                count = queryset.update(homepage=active_homepage)
+                self.message_user(request, f"{count} сертифікатів додано на головну сторінку.")
+            else:
+                self.message_user(request, "Не знайдено активної головної сторінки.", level='ERROR')
+        except Exception as e:
+            self.message_user(request, f"Помилка: {str(e)}", level='ERROR')
+    
+    @admin.action(description=_("Прибрати з головної сторінки"))
+    def remove_from_homepage(self, request, queryset):
+        """Прибирає вибрані сертифікати з головної сторінки"""
+        count = queryset.update(homepage=None)
+        self.message_user(request, f"{count} сертифікатів прибрано з головної сторінки.")
+
 
 @admin.register(ProductionPhoto)
 class ProductionPhotoAdmin(UnfoldTabbedTranslationAdmin):
     """Админка для фото производства"""
     list_display = [
         'title',
-        'photo_preview',
-        'is_featured_display',
-        'is_active_display',
-        'order',
+        'image_preview', 
+        'homepage_display',  # Додаємо відображення зв'язку з головною сторінкою
+        'is_featured',
         'is_active',
-        'is_featured'
+        'order'
     ]
     list_filter = [
+        'homepage',  # Додаємо фільтр по головній сторінці
         'is_featured',
         'is_active',
     ]
-    search_fields = ['title']
+    search_fields = ['title', 'description']
     list_editable = ['order', 'is_active', 'is_featured']
     ordering = ['order']
     
@@ -277,19 +366,32 @@ class ProductionPhotoAdmin(UnfoldTabbedTranslationAdmin):
             'classes': ['tab'],
         }),
         (_("Налаштування"), {
-            'fields': ['order', 'is_featured', 'is_active'],
+            'fields': ['homepage', 'order', 'is_featured', 'is_active'],  # Додаємо homepage
             'classes': ['tab'],
         }),
     ]
     
-    @display(description=_("Фото"))
-    def photo_preview(self, obj):
+    actions = ['make_featured', 'remove_featured', 'make_active', 'make_inactive', 'add_to_homepage', 'remove_from_homepage']
+    
+    @display(description=_("Зображення"))
+    def image_preview(self, obj):
         if obj.image:
             return format_html(
-                '<img src="{}" width="60" height="40" style="object-fit: cover; border-radius: 4px;" />',
+                '<img src="{}" width="80" height="60" style="object-fit: cover; border-radius: 4px;" />',
                 obj.image.url
             )
         return "Немає зображення"
+    
+    @display(description=_("Головна сторінка"), boolean=True)
+    def homepage_display(self, obj):
+        """Показує, чи пов'язане фото з головною сторінкою"""
+        if obj.homepage:
+            return format_html(
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">На головній</span>'
+            )
+        return format_html(
+            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Не на головній</span>'
+        )
     
     @display(description=_("Рекомендоване"), ordering='is_featured')
     def is_featured_display(self, obj):
@@ -305,13 +407,26 @@ class ProductionPhotoAdmin(UnfoldTabbedTranslationAdmin):
     def is_active_display(self, obj):
         if obj.is_active:
             return format_html(
-                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Активне</span>'
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Активний</span>'
             )
         return format_html(
-            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Неактивне</span>'
+            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Неактивний</span>'
         )
 
-    actions = ['make_active', 'make_inactive', 'mark_as_featured']
+    def get_queryset(self, request):
+        """Оптимізуємо запити до бази даних"""
+        return super().get_queryset(request).select_related('homepage')
+    
+    # Дії для адміністраторів
+    @admin.action(description=_("Позначити як рекомендовані"))
+    def make_featured(self, request, queryset):
+        count = queryset.update(is_featured=True)
+        self.message_user(request, f"{count} фото позначено як рекомендовані.")
+    
+    @admin.action(description=_("Прибрати з рекомендованих"))
+    def remove_featured(self, request, queryset):
+        count = queryset.update(is_featured=False)
+        self.message_user(request, f"{count} фото прибрано з рекомендованих.")
     
     @admin.action(description=_("Позначити як активні"))
     def make_active(self, request, queryset):
@@ -323,7 +438,21 @@ class ProductionPhotoAdmin(UnfoldTabbedTranslationAdmin):
         count = queryset.update(is_active=False)
         self.message_user(request, f"{count} фото позначено як неактивні.")
     
-    @admin.action(description=_("Позначити як рекомендовані"))
-    def mark_as_featured(self, request, queryset):
-        count = queryset.update(is_featured=True)
-        self.message_user(request, f"{count} фото позначено як рекомендовані.")
+    @admin.action(description=_("Додати на головну сторінку"))
+    def add_to_homepage(self, request, queryset):
+        """Додає вибрані фото на активну головну сторінку"""
+        try:
+            active_homepage = HomePage.objects.filter(is_active=True).first()
+            if active_homepage:
+                count = queryset.update(homepage=active_homepage)
+                self.message_user(request, f"{count} фото додано на головну сторінку.")
+            else:
+                self.message_user(request, "Не знайдено активної головної сторінки.", level='ERROR')
+        except Exception as e:
+            self.message_user(request, f"Помилка: {str(e)}", level='ERROR')
+    
+    @admin.action(description=_("Прибрати з головної сторінки"))
+    def remove_from_homepage(self, request, queryset):
+        """Прибирає вибрані фото з головної сторінки"""
+        count = queryset.update(homepage=None)
+        self.message_user(request, f"{count} фото прибрано з головної сторінки.")
