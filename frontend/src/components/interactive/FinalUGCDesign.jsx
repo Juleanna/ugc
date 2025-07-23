@@ -1,9 +1,9 @@
 // frontend/src/components/interactive/FinalUGCDesign.jsx
-// Головний компонент без дублювання API викликів
+// Main component without API call duplication
 
 import React, { useState, useEffect, useMemo } from 'react';
 
-// Імпорт унікального API рішення
+// Import unified API solution
 import { 
   APIProvider, 
   useHomepageData, 
@@ -14,26 +14,26 @@ import {
   useCacheManager
 } from '../../hooks/useUnifiedAPI';
 
-// Імпорт компонентів
+// Import components
 import UnifiedBackground from './UnifiedBackground';
 import ModernNavigation from './ModernNavigation';
 import EnhancedHeroSection from './EnhancedHeroSection';
 
-// Імпорт секцій
+// Import sections
 import AboutSection from '../AboutSection';
 import ServicesSection from '../ServicesSection';
 import ProjectsSection from '../ProjectsSection';
 import ContactSection from '../ContactSection';
 import Footer from '../Footer';
 
-// Внутрішній компонент з доступом до API контексту
+// Internal component with API context access
 const FinalUGCDesignContent = () => {
-  // Локальний стан
+  // Local state
   const [activeSection, setActiveSection] = useState('home');
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // API хуки (без дублювання запитів)
+  // API hooks (without request duplication)
   const homepage = useHomepageData();
   const services = useServicesData();
   const projects = useProjectsData();
@@ -41,7 +41,7 @@ const FinalUGCDesignContent = () => {
   const { submitForm, isSubmitting } = useFormSubmission();
   const { preloadCriticalData, getCacheStats } = useCacheManager();
 
-  // Об'єднані дані для компонентів
+  // Combined data for components
   const unifiedData = useMemo(() => ({
     homepage: homepage.data,
     services: services.data,
@@ -51,39 +51,39 @@ const FinalUGCDesignContent = () => {
     hasErrors: !!(homepage.error || services.error || projects.error)
   }), [homepage, services, projects, heroData]);
 
-  // Ініціалізація та попереднє завантаження
+  // Initialization and preloading
   useEffect(() => {
     const initialize = async () => {
       try {
-        console.log('🚀 Ініціалізація FinalUGCDesign...');
+        console.log('🚀 Initializing FinalUGCDesign...');
         
-        // Попереднє завантаження критичних даних
+        // Preload critical data
         const preloadResult = await preloadCriticalData();
-        console.log('📊 Попереднє завантаження:', preloadResult);
+        console.log('📊 Preload result:', preloadResult);
         
         setIsInitialized(true);
         
-        // Логуємо статистику кешу
+        // Log cache statistics
         const cacheStats = getCacheStats();
-        console.log('💾 Статистика кешу:', cacheStats);
+        console.log('💾 Cache stats:', cacheStats);
         
       } catch (error) {
-        console.error('❌ Помилка ініціалізації:', error);
-        setIsInitialized(true); // Все одно дозволяємо продовжити
+        console.error('❌ Initialization error:', error);
+        setIsInitialized(true); // Allow to continue anyway
       }
     };
 
     initialize();
   }, [preloadCriticalData, getCacheStats]);
 
-  // Відстеження скролу
+  // Scroll tracking
   useEffect(() => {
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const currentScroll = window.scrollY;
       setScrollProgress((currentScroll / totalScroll) * 100);
 
-      // Визначення активної секції
+      // Determine active section
       const sections = ['home', 'about', 'services', 'projects', 'contact'];
       const sectionElements = sections.map(id => document.getElementById(id));
       
@@ -104,7 +104,7 @@ const FinalUGCDesignContent = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Функція скролу до секції
+  // Scroll to section function
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -116,25 +116,25 @@ const FinalUGCDesignContent = () => {
     }
   };
 
-  // Обробка форми контактів
+  // Contact form handler
   const handleContactSubmit = async (formData) => {
     try {
       const result = await submitForm('/contact-inquiries/', formData);
       
       if (result.success) {
-        console.log('✅ Контактна форма відправлена успішно');
+        console.log('✅ Contact form submitted successfully');
         return { success: true, message: 'Повідомлення відправлено успішно!' };
       } else {
-        console.error('❌ Помилка відправки форми:', result.error);
+        console.error('❌ Form submission error:', result.error);
         return { success: false, message: result.error || 'Помилка відправки' };
       }
     } catch (error) {
-      console.error('❌ Виняток при відправці форми:', error);
+      console.error('❌ Exception during form submission:', error);
       return { success: false, message: 'Виникла несподівана помилка' };
     }
   };
 
-  // Показуємо завантаження тільки при ініціалізації
+  // Show loading only during initialization
   if (!isInitialized) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
@@ -149,62 +149,63 @@ const FinalUGCDesignContent = () => {
 
   return (
     <div className="relative min-h-screen">
-      {/* Уніфікований фон */}
+      {/* Unified background */}
       <UnifiedBackground />
       
-      {/* Прогрес скролу */}
+      {/* Scroll progress */}
       <div 
         className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 z-50 transition-all duration-300"
         style={{ width: `${scrollProgress}%` }}
       />
       
-      {/* Навігація */}
+      {/* Navigation */}
       <ModernNavigation 
         activeSection={activeSection}
         scrollToSection={scrollToSection}
         isLoading={unifiedData.isLoading}
       />
       
-      {/* Основний контент */}
+      {/* Main content */}
       <main className="relative z-10">
         
-        {/* Hero секція */}
+        {/* Hero section */}
         <EnhancedHeroSection 
           scrollToSection={scrollToSection}
           heroData={unifiedData.hero}
           isLoading={unifiedData.isLoading}
         />
         
-        {/* Про нас */}
+        {/* About us */}
         <AboutSection 
           data={unifiedData.homepage}
           scrollToSection={scrollToSection}
         />
         
-        {/* Послуги */}
+        {/* Services */}
         <ServicesSection 
           data={{ services: unifiedData.services }}
           scrollToSection={scrollToSection}
         />
         
-        {/* Проекти */}
+        {/* Projects */}
         <ProjectsSection 
           data={{ projects: unifiedData.projects }}
           scrollToSection={scrollToSection}
         />
         
-        {/* Контакти */}
+        {/* Contacts */}
         <ContactSection 
           onSubmit={handleContactSubmit}
           isSubmitting={isSubmitting}
           scrollToSection={scrollToSection}
         />
+        
       </main>
       
-      {/* Футер */}
+      {/* Footer */}
       <Footer />
       
-      {/* Індикатор помилок (тільки в dev mode) */}
+      {/* Error indicator (dev mode only) */}
       {process.env.NODE_ENV === 'development' && unifiedData.hasErrors && (
         <div className="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50">
           <div className="flex items-center">
@@ -219,7 +220,7 @@ const FinalUGCDesignContent = () => {
         </div>
       )}
       
-      {/* Debug інформація (тільки в dev mode) */}
+      {/* Debug information (dev mode only) */}
       {process.env.NODE_ENV === 'development' && (
         <div className="fixed bottom-4 left-4 bg-black bg-opacity-75 text-white p-2 rounded text-xs z-50">
           <div>Active: {activeSection}</div>
@@ -233,7 +234,7 @@ const FinalUGCDesignContent = () => {
   );
 };
 
-// Головний компонент з провайдером
+// Main component with provider
 const FinalUGCDesign = () => {
   return (
     <APIProvider>
