@@ -1,71 +1,80 @@
 // frontend/src/components/interactive/FinalUGCDesign.jsx
-import React, { useState, useEffect } from 'react';
+// Головний компонент без дублювання API викликів
 
-// Імпорт об'єднаного фонового компоненту
+import React, { useState, useEffect, useMemo } from 'react';
+
+// Імпорт унікального API рішення
+import { 
+  APIProvider, 
+  useHomepageData, 
+  useServicesData, 
+  useProjectsData,
+  useHeroData,
+  useFormSubmission,
+  useCacheManager
+} from '../../hooks/useUnifiedAPI';
+
+// Імпорт компонентів
 import UnifiedBackground from './UnifiedBackground';
 import ModernNavigation from './ModernNavigation';
 import EnhancedHeroSection from './EnhancedHeroSection';
 
-// Імпорт існуючих секцій
+// Імпорт секцій
 import AboutSection from '../AboutSection';
 import ServicesSection from '../ServicesSection';
 import ProjectsSection from '../ProjectsSection';
 import ContactSection from '../ContactSection';
 import Footer from '../Footer';
 
-// API конфігурація
-const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
-
-const apiCall = async (endpoint) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`);
-    if (!response.ok) throw new Error('Network error');
-    return await response.json();
-  } catch (error) {
-    console.error('API Error:', error);
-    return null;
-  }
-};
-
-const FinalUGCDesign = () => {
+// Внутрішній компонент з доступом до API контексту
+const FinalUGCDesignContent = () => {
+  // Локальний стан
   const [activeSection, setActiveSection] = useState('home');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [data, setData] = useState({
-    services: [],
-    projects: [],
-    translations: {}
-  });
-  const [isLoading, setIsLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  // Завантаження даних з API
+  // API хуки (без дублювання запитів)
+  const homepage = useHomepageData();
+  const services = useServicesData();
+  const projects = useProjectsData();
+  const heroData = useHeroData();
+  const { submitForm, isSubmitting } = useFormSubmission();
+  const { preloadCriticalData, getCacheStats } = useCacheManager();
+
+  // Об'єднані дані для компонентів
+  const unifiedData = useMemo(() => ({
+    homepage: homepage.data,
+    services: services.data,
+    projects: projects.data,
+    hero: heroData.data,
+    isLoading: homepage.isLoading || services.isLoading || projects.isLoading,
+    hasErrors: !!(homepage.error || services.error || projects.error)
+  }), [homepage, services, projects, heroData]);
+
+  // Ініціалізація та попереднє завантаження
   useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
-      
-      // ВИПРАВЛЕНО: Додано відсутній виклик API для translations
-      const [servicesResponse, projectsResponse, translationsResponse] = await Promise.all([
-        apiCall('/services/'),
-        apiCall('/projects/'),
-        apiCall('/translations/uk/all/') // Додано відсутню лінію
-      ]);
-
-      setData({
-        services: servicesResponse?.results || [],
-        projects: projectsResponse?.results || [],
-        translations: translationsResponse?.translations || {}
-      });
-      setIsLoading(false);
+    const initialize = async () => {
+      try {
+        console.log('🚀 Ініціалізація FinalUGCDesign...');
+        
+        // Попереднє завантаження критичних даних
+        const preloadResult = await preloadCriticalData();
+        console.log('📊 Попереднє завантаження:', preloadResult);
+        
+        setIsInitialized(true);
+        
+        // Логуємо статистику кешу
+        const cacheStats = getCacheStats();
+        console.log('💾 Статистика кешу:', cacheStats);
+        
+      } catch (error) {
+        console.error('❌ Помилка ініціалізації:', error);
+        setIsInitialized(true); // Все одно дозволяємо продовжити
+      }
     };
 
-    loadData();
-  }, []);
+    initialize();
+  }, [preloadCriticalData, getCacheStats]);
 
   // Відстеження скролу
   useEffect(() => {
@@ -82,7 +91,7 @@ const FinalUGCDesign = () => {
       sectionElements.forEach((section, index) => {
         if (section) {
           const rect = section.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 3) {
+          if (rect.top <= 100 && rect.bottom >= 100) {
             current = sections[index];
           }
         }
@@ -95,155 +104,141 @@ const FinalUGCDesign = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Плавний скрол до секції
+  // Функція скролу до секції
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      const offsetTop = element.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
       });
-      setActiveSection(sectionId);
     }
   };
 
-  // Обробка форми
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
+  // Обробка форми контактів
+  const handleContactSubmit = async (formData) => {
     try {
-      const response = await apiCall('/contacts/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (response) {
-        // Успішно відправлено
-        setFormData({ name: '', email: '', phone: '', message: '' });
-        alert('Повідомлення надіслано успішно!');
+      const result = await submitForm('/contact-inquiries/', formData);
+      
+      if (result.success) {
+        console.log('✅ Контактна форма відправлена успішно');
+        return { success: true, message: 'Повідомлення відправлено успішно!' };
+      } else {
+        console.error('❌ Помилка відправки форми:', result.error);
+        return { success: false, message: result.error || 'Помилка відправки' };
       }
     } catch (error) {
-      console.error('Помилка відправки:', error);
-      alert('Помилка відправки. Спробуйте пізніше.');
-    } finally {
-      setIsSubmitting(false);
+      console.error('❌ Виняток при відправці форми:', error);
+      return { success: false, message: 'Виникла несподівана помилка' };
     }
   };
 
+  // Показуємо завантаження тільки при ініціалізації
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 text-lg">Ініціалізація додатку...</p>
+          <p className="text-gray-500 text-sm mt-2">Завантаження критичних даних</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Уніфікований фоновий компонент */}
+    <div className="relative min-h-screen">
+      {/* Уніфікований фон */}
       <UnifiedBackground />
       
       {/* Прогрес скролу */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200/30 z-50">
-        <div 
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
-
+      <div 
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 z-50 transition-all duration-300"
+        style={{ width: `${scrollProgress}%` }}
+      />
+      
       {/* Навігація */}
       <ModernNavigation 
         activeSection={activeSection}
         scrollToSection={scrollToSection}
+        isLoading={unifiedData.isLoading}
       />
-
-      {/* Головна секція */}
-      <section id="home" className="relative min-h-screen">
+      
+      {/* Основний контент */}
+      <main className="relative z-10">
+        
+        {/* Hero секція */}
         <EnhancedHeroSection 
-          activeSection={activeSection}
           scrollToSection={scrollToSection}
-          heroData={data.hero}
+          heroData={unifiedData.hero}
+          isLoading={unifiedData.isLoading}
         />
-      </section>
-
-      {/* Про нас */}
-      <section id="about" className="relative bg-white/80 backdrop-blur-sm">
-        <div className="parallax-section">
-          <AboutSection data={data} />
-        </div>
-      </section>
-
-      {/* Послуги */}
-      <section id="services" className="relative bg-gray-50/80 backdrop-blur-sm">
-        <div className="parallax-section">
-          <ServicesSection data={data} />
-        </div>
-      </section>
-
-      {/* Проекти */}
-      <section id="projects" className="relative bg-white/80 backdrop-blur-sm">
-        <div className="parallax-section">
-          <ProjectsSection data={data} />
-        </div>
-      </section>
-
-      {/* Контакти */}
-      <section id="contact" className="relative bg-gray-50/80 backdrop-blur-sm">
-        <div className="parallax-section">
-          <ContactSection 
-            formData={formData}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-            isSubmitting={isSubmitting}
-            translations={data.translations}
-          />
-        </div>
-      </section>
-
+        
+        {/* Про нас */}
+        <AboutSection 
+          data={unifiedData.homepage}
+          scrollToSection={scrollToSection}
+        />
+        
+        {/* Послуги */}
+        <ServicesSection 
+          data={{ services: unifiedData.services }}
+          scrollToSection={scrollToSection}
+        />
+        
+        {/* Проекти */}
+        <ProjectsSection 
+          data={{ projects: unifiedData.projects }}
+          scrollToSection={scrollToSection}
+        />
+        
+        {/* Контакти */}
+        <ContactSection 
+          onSubmit={handleContactSubmit}
+          isSubmitting={isSubmitting}
+          scrollToSection={scrollToSection}
+        />
+      </main>
+      
       {/* Футер */}
-      <Footer translations={data.translations} />
-
-      {/* Лоадер */}
-      {isLoading && (
-        <div className="fixed inset-0 bg-white/95 backdrop-blur-sm z-50 flex items-center justify-center">
-          <div className="text-center">
-            <div className="relative">
-              <div className="w-20 h-20 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-              <div className="absolute inset-0 w-20 h-20 border-4 border-purple-200 border-b-purple-600 rounded-full animate-spin mx-auto" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
-            </div>
-            <p className="text-gray-600 font-medium text-lg">Завантаження UGC...</p>
-            <p className="text-gray-400 text-sm mt-2">Готуємо для вас найкраще</p>
+      <Footer />
+      
+      {/* Індикатор помилок (тільки в dev mode) */}
+      {process.env.NODE_ENV === 'development' && unifiedData.hasErrors && (
+        <div className="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50">
+          <div className="flex items-center">
+            <span className="text-sm">⚠️ Деякі API endpoints недоступні</span>
+            <button 
+              onClick={() => window.location.reload()}
+              className="ml-2 text-xs bg-red-600 px-2 py-1 rounded hover:bg-red-700"
+            >
+              Перезавантажити
+            </button>
           </div>
         </div>
       )}
-
-      {/* Кнопка швидкого повернення наверх */}
-      <button
-        onClick={() => scrollToSection('home')}
-        className={`fixed bottom-8 right-8 z-30 w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-110 ${
-          activeSection === 'home' ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
-        aria-label="Повернутися наверх"
-      >
-        <svg 
-          className="w-6 h-6 mx-auto" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-        >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M5 10l7-7m0 0l7 7m-7-7v18" 
-          />
-        </svg>
-      </button>
+      
+      {/* Debug інформація (тільки в dev mode) */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="fixed bottom-4 left-4 bg-black bg-opacity-75 text-white p-2 rounded text-xs z-50">
+          <div>Active: {activeSection}</div>
+          <div>Progress: {Math.round(scrollProgress)}%</div>
+          <div>Services: {unifiedData.services?.length || 0}</div>
+          <div>Projects: {unifiedData.projects?.length || 0}</div>
+          <div>Loading: {unifiedData.isLoading ? 'Yes' : 'No'}</div>
+        </div>
+      )}
     </div>
+  );
+};
+
+// Головний компонент з провайдером
+const FinalUGCDesign = () => {
+  return (
+    <APIProvider>
+      <FinalUGCDesignContent />
+    </APIProvider>
   );
 };
 

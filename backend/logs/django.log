@@ -3070,3 +3070,10 @@ WARNING 2025-07-23 15:03:41,701 log 11308 11176 Not Found: /api/v1/homepage/stat
 WARNING 2025-07-23 15:03:41,898 basehttp 11308 11176 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
 WARNING 2025-07-23 15:03:41,992 log 11308 11148 Not Found: /api/v1/homepage/stats/
 WARNING 2025-07-23 15:03:42,012 basehttp 11308 11148 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+INFO 2025-07-23 15:27:48,550 autoreload 11308 8972 D:\ugc\backend\apps\api\views.py changed, reloading.
+INFO 2025-07-23 15:27:52,783 autoreload 1564 5240 Watching for file changes with StatReloader
+INFO 2025-07-23 15:28:08,864 autoreload 1564 5240 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-23 15:28:11,608 autoreload 5584 13184 Watching for file changes with StatReloader
+INFO 2025-07-23 15:29:36,062 autoreload 3256 2692 Watching for file changes with StatReloader
+INFO 2025-07-23 15:30:26,253 autoreload 3256 2692 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-23 15:30:35,880 autoreload 16676 12152 Watching for file changes with StatReloader
