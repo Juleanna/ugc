@@ -3037,3 +3037,36 @@ INFO 2025-07-23 15:02:01,199 basehttp 11308 12452 "GET /rosetta/files/project/uk
 INFO 2025-07-23 15:02:20,518 translations 11308 5244 Loaded translations for en from file
 INFO 2025-07-23 15:02:20,767 translations 11308 5244 Loaded dynamic translations for en from models
 INFO 2025-07-23 15:02:20,776 basehttp 11308 5244 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 2729
+INFO 2025-07-23 15:03:35,142 translations 11308 14908 Loaded translations for en from cache
+INFO 2025-07-23 15:03:35,145 translations 11308 14908 Loaded dynamic translations for en from cache
+INFO 2025-07-23 15:03:35,152 basehttp 11308 14908 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 2729
+INFO 2025-07-23 15:03:35,517 views 11308 14908 Cache HIT: api_homepage_hero_uk
+INFO 2025-07-23 15:03:35,519 basehttp 11308 14908 "GET /api/v1/homepage/hero_data/ HTTP/1.1" 200 873
+INFO 2025-07-23 15:03:35,546 translations 11308 14908 Loaded translations for uk from cache
+INFO 2025-07-23 15:03:35,552 views 11308 3256 Cache HIT: api_service_featured_uk
+INFO 2025-07-23 15:03:35,554 translations 11308 14908 Loaded dynamic translations for uk from cache
+INFO 2025-07-23 15:03:35,558 basehttp 11308 3256 "GET /api/v1/services/featured/ HTTP/1.1" 200 113
+INFO 2025-07-23 15:03:35,572 basehttp 11308 14908 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8968
+INFO 2025-07-23 15:03:35,584 views 11308 13196 Cache HIT: api_project_featured_uk
+INFO 2025-07-23 15:03:35,588 translations 11308 14908 Loaded translations for uk from cache
+INFO 2025-07-23 15:03:35,589 basehttp 11308 13196 "GET /api/v1/projects/featured/ HTTP/1.1" 200 113
+INFO 2025-07-23 15:03:35,591 views 11308 3256 Cache HIT: api_service_featured_uk
+INFO 2025-07-23 15:03:35,597 basehttp 11308 3256 "GET /api/v1/services/featured/ HTTP/1.1" 200 113
+INFO 2025-07-23 15:03:35,603 translations 11308 14908 Loaded dynamic translations for uk from cache
+INFO 2025-07-23 15:03:35,610 basehttp 11308 14908 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 8968
+INFO 2025-07-23 15:03:35,611 views 11308 12564 Cache HIT: api_homepage_hero_uk
+INFO 2025-07-23 15:03:35,614 basehttp 11308 12564 "GET /api/v1/homepage/hero_data/ HTTP/1.1" 200 873
+INFO 2025-07-23 15:03:35,624 views 11308 10796 Cache HIT: api_service_list_uk
+INFO 2025-07-23 15:03:35,625 views 11308 13196 Cache HIT: api_project_featured_uk
+INFO 2025-07-23 15:03:35,629 views 11308 16120 Cache HIT: api_project_list_uk
+INFO 2025-07-23 15:03:35,631 basehttp 11308 10796 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-23 15:03:35,633 basehttp 11308 13196 "GET /api/v1/projects/featured/ HTTP/1.1" 200 113
+INFO 2025-07-23 15:03:35,633 basehttp 11308 16120 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-23 15:03:35,643 views 11308 14908 Cache HIT: api_service_list_uk
+INFO 2025-07-23 15:03:35,649 basehttp 11308 14908 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-23 15:03:35,655 views 11308 13196 Cache HIT: api_project_list_uk
+INFO 2025-07-23 15:03:35,658 basehttp 11308 13196 "GET /api/v1/projects/ HTTP/1.1" 200 52
+WARNING 2025-07-23 15:03:41,701 log 11308 11176 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-23 15:03:41,898 basehttp 11308 11176 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+WARNING 2025-07-23 15:03:41,992 log 11308 11148 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-23 15:03:42,012 basehttp 11308 11148 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
