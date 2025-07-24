@@ -3610,3 +3610,520 @@ WARNING 2025-07-23 16:02:47,025 log 16784 17976 Not Found: /api/v1/homepage/
 WARNING 2025-07-23 16:02:47,026 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
 WARNING 2025-07-23 16:02:47,038 log 16784 2924 Not Found: /api/v1/homepage/
 WARNING 2025-07-23 16:02:47,040 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:32:16,278 autoreload 2652 11016 Watching for file changes with StatReloader
+INFO 2025-07-24 10:35:01,473 basehttp 2652 12052 "OPTIONS /api/v1/translations/en/all/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,532 basehttp 2652 12052 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 2619
+INFO 2025-07-24 10:35:01,721 basehttp 2652 12052 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,844 basehttp 2652 12052 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,850 basehttp 2652 12052 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,851 basehttp 2652 12760 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,851 basehttp 2652 14688 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,858 basehttp 2652 12052 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,878 basehttp 2652 12052 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,898 basehttp 2652 12052 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,900 basehttp 2652 12760 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,908 basehttp 2652 14688 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,912 basehttp 2652 12052 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,925 basehttp 2652 7032 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,927 basehttp 2652 14888 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,933 basehttp 2652 12052 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,934 basehttp 2652 14688 "OPTIONS /api/v1/translations/uk/all/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,934 basehttp 2652 12760 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,937 basehttp 2652 8236 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,943 basehttp 2652 7032 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,948 basehttp 2652 14888 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,957 basehttp 2652 14688 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,957 basehttp 2652 12052 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,960 basehttp 2652 12760 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,966 basehttp 2652 8236 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,971 basehttp 2652 7032 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,976 basehttp 2652 14888 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,977 basehttp 2652 14688 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,979 basehttp 2652 12052 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,984 basehttp 2652 12760 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,985 basehttp 2652 8236 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-24 10:35:01,988 basehttp 2652 7032 "OPTIONS /api/v1/translations/uk/all/ HTTP/1.1" 200 0
+WARNING 2025-07-24 10:35:02,087 log 2652 14888 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,088 log 2652 12052 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,094 views 2652 12760 Could not fetch real stats: cannot import name 'Service' from 'apps.api.models' (D:\ugc\backend\apps\api\models.py)
+WARNING 2025-07-24 10:35:02,095 log 2652 14688 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,101 basehttp 2652 12052 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,101 views 2652 8236 Could not fetch projects from DB: cannot import name 'Project' from 'apps.api.models' (D:\ugc\backend\apps\api\models.py)
+INFO 2025-07-24 10:35:02,105 basehttp 2652 12760 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:35:02,110 views 2652 7032 Could not fetch services from DB: cannot import name 'Service' from 'apps.api.models' (D:\ugc\backend\apps\api\models.py)
+INFO 2025-07-24 10:35:02,119 basehttp 2652 8236 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:35:02,123 basehttp 2652 14888 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,124 basehttp 2652 14688 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,155 basehttp 2652 7032 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:35:02,184 log 2652 12760 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,209 log 2652 12052 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,217 basehttp 2652 12052 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,221 basehttp 2652 8236 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:35:02,242 basehttp 2652 12760 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,248 log 2652 7032 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,274 log 2652 8236 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:35:02,276 basehttp 2652 14688 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:35:02,280 basehttp 2652 7032 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,287 basehttp 2652 12052 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:35:02,290 basehttp 2652 8236 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,299 basehttp 2652 14688 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:35:02,323 log 2652 12052 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,347 log 2652 12760 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,355 basehttp 2652 12052 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,375 log 2652 8236 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:35:02,385 basehttp 2652 7032 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:35:02,385 basehttp 2652 14888 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-24 10:35:02,390 basehttp 2652 12760 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,391 basehttp 2652 8236 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,396 basehttp 2652 12052 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:35:02,423 log 2652 7032 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,452 log 2652 12760 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:35:02,459 basehttp 2652 14688 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:35:02,479 log 2652 12052 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,479 basehttp 2652 7032 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,490 basehttp 2652 12052 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,491 basehttp 2652 12760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,496 basehttp 2652 14688 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:35:02,497 basehttp 2652 8236 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:35:02,511 basehttp 2652 14888 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:35:02,526 log 2652 12052 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,546 log 2652 12760 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,559 log 2652 14688 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:35:02,563 basehttp 2652 7032 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:35:02,564 basehttp 2652 12052 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,570 basehttp 2652 12760 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,571 basehttp 2652 8236 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:35:02,576 basehttp 2652 14888 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:35:02,578 basehttp 2652 14688 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,600 log 2652 12052 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,625 log 2652 8236 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,629 log 2652 12760 Not Found: /api/v1/services/
+INFO 2025-07-24 10:35:02,630 basehttp 2652 7032 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:35:02,638 basehttp 2652 12052 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,639 basehttp 2652 8236 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,644 basehttp 2652 12760 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:35:02,646 basehttp 2652 14888 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:35:02,648 basehttp 2652 14688 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:35:02,667 log 2652 7032 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,681 log 2652 12052 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,696 log 2652 12760 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,697 basehttp 2652 7032 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,699 basehttp 2652 12052 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,718 log 2652 14688 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,718 basehttp 2652 12760 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,723 basehttp 2652 14688 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,763 log 2652 7032 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,766 log 2652 12052 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,781 log 2652 12760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,784 basehttp 2652 7032 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,800 log 2652 14688 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,800 basehttp 2652 12052 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,802 basehttp 2652 12760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,811 log 2652 7032 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,816 basehttp 2652 14688 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,827 log 2652 12760 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:35:02,839 log 2652 12052 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,842 basehttp 2652 7032 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,854 log 2652 14688 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:35:02,854 basehttp 2652 12760 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,856 basehttp 2652 12052 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,858 basehttp 2652 14688 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,872 log 2652 12760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,874 basehttp 2652 12760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,890 log 2652 14688 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,891 basehttp 2652 14688 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,903 log 2652 12760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,904 basehttp 2652 12760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,921 log 2652 14688 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,923 basehttp 2652 14688 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,934 log 2652 12760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,935 basehttp 2652 12760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,948 log 2652 14688 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,949 basehttp 2652 14688 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:35:02,967 log 2652 12760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:35:02,968 basehttp 2652 12760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,146 log 2652 13336 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:36:07,159 basehttp 2652 6468 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:07,162 basehttp 2652 13336 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:07,212 basehttp 2652 6468 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:07,220 log 2652 14504 Not Found: /api/v1/services/
+INFO 2025-07-24 10:36:07,221 basehttp 2652 13336 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:07,227 basehttp 2652 14504 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:07,232 basehttp 2652 7528 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:07,287 log 2652 6468 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:07,309 log 2652 7528 Not Found: /api/v1/services/
+INFO 2025-07-24 10:36:07,320 basehttp 2652 14504 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:07,327 basehttp 2652 13336 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:07,360 log 2652 6656 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:07,362 basehttp 2652 6468 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,374 basehttp 2652 7528 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:07,394 basehttp 2652 14504 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:07,406 basehttp 2652 6656 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:07,422 basehttp 2652 6468 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:36:07,427 basehttp 2652 14956 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:36:07,429 basehttp 2652 13336 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:07,489 log 2652 7528 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:07,530 log 2652 14504 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:07,578 log 2652 6468 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:36:07,583 basehttp 2652 6656 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:07,589 basehttp 2652 7528 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,596 basehttp 2652 14504 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:07,600 basehttp 2652 14956 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:36:07,609 basehttp 2652 13336 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:07,622 basehttp 2652 6468 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,677 log 2652 14504 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:36:07,688 basehttp 2652 6656 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:07,697 log 2652 13336 Not Found: /api/v1/services/
+INFO 2025-07-24 10:36:07,702 basehttp 2652 7528 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:36:07,706 basehttp 2652 14956 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:07,721 basehttp 2652 14504 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,736 log 2652 6468 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:07,741 basehttp 2652 13336 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:07,756 basehttp 2652 6656 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:07,774 log 2652 14956 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:36:07,775 basehttp 2652 7528 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:36:07,788 basehttp 2652 14504 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:07,789 basehttp 2652 6468 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:07,825 basehttp 2652 6656 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:07,837 log 2652 13336 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:07,876 basehttp 2652 14956 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,905 log 2652 7528 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:07,910 basehttp 2652 13336 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,929 log 2652 14956 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:07,948 log 2652 6656 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:07,951 basehttp 2652 7528 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,981 log 2652 13336 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:07,992 basehttp 2652 14956 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:07,995 basehttp 2652 6656 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,023 basehttp 2652 13336 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,028 log 2652 7528 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:08,051 log 2652 6656 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:08,068 log 2652 14956 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:08,069 basehttp 2652 7528 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,070 basehttp 2652 6656 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,071 basehttp 2652 14956 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,099 log 2652 13336 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:08,116 log 2652 6656 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:08,117 basehttp 2652 13336 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,118 basehttp 2652 6656 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,143 log 2652 13336 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:08,145 basehttp 2652 13336 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,163 log 2652 6656 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:08,165 basehttp 2652 6656 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,183 log 2652 13336 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:08,184 basehttp 2652 13336 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:08,205 log 2652 6656 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:08,206 basehttp 2652 6656 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:12,890 basehttp 2652 12832 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 2619
+WARNING 2025-07-24 10:36:13,644 log 2652 12832 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:13,652 basehttp 2652 12832 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:13,676 log 2652 12832 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:13,685 basehttp 2652 12832 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:13,692 basehttp 2652 808 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:13,723 log 2652 808 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:13,725 basehttp 2652 808 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:13,728 basehttp 2652 12832 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-24 10:36:13,777 log 2652 12832 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:36:13,780 basehttp 2652 3476 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:13,794 log 2652 7792 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:36:13,806 basehttp 2652 6760 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:13,807 basehttp 2652 12832 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:13,815 basehttp 2652 808 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:13,843 log 2652 17380 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:13,851 basehttp 2652 7792 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:13,859 basehttp 2652 3476 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:36:13,869 basehttp 2652 6760 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:13,877 basehttp 2652 12832 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:13,900 log 2652 808 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:13,900 basehttp 2652 17380 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:13,913 basehttp 2652 7792 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:13,980 log 2652 3476 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:14,002 basehttp 2652 808 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:14,005 basehttp 2652 6760 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:14,009 basehttp 2652 12832 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:14,036 log 2652 17380 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:14,043 basehttp 2652 3476 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:14,047 basehttp 2652 7792 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:14,070 log 2652 808 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:36:14,090 basehttp 2652 6760 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:14,103 basehttp 2652 12832 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:14,145 basehttp 2652 17380 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,165 log 2652 3476 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:14,170 basehttp 2652 808 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:14,185 basehttp 2652 7792 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:36:14,204 basehttp 2652 6760 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:14,226 basehttp 2652 12832 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:14,248 basehttp 2652 3476 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,254 log 2652 17380 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:14,277 log 2652 808 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:36:14,301 basehttp 2652 7792 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:36:14,321 basehttp 2652 6760 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:14,336 basehttp 2652 12832 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:14,356 log 2652 3476 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:14,369 basehttp 2652 17380 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,399 basehttp 2652 3476 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,419 log 2652 12832 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:14,435 log 2652 17380 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:14,436 basehttp 2652 808 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,437 basehttp 2652 12832 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,438 basehttp 2652 17380 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,468 log 2652 3476 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,489 log 2652 6760 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:14,506 log 2652 808 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:14,507 basehttp 2652 3476 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,507 basehttp 2652 6760 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,510 basehttp 2652 808 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,542 log 2652 17380 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,558 log 2652 6760 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:14,559 basehttp 2652 17380 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,563 basehttp 2652 6760 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,589 log 2652 808 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,591 basehttp 2652 808 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,608 log 2652 6760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,611 basehttp 2652 6760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,630 log 2652 808 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,631 basehttp 2652 808 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,655 log 2652 6760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,657 basehttp 2652 6760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,675 log 2652 808 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,676 basehttp 2652 808 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:14,695 log 2652 6760 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:14,696 basehttp 2652 6760 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:42,562 basehttp 2652 14084 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:42,759 log 2652 17044 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:42,779 log 2652 10804 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:36:42,787 basehttp 2652 14084 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-24 10:36:42,823 basehttp 2652 10804 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:42,825 basehttp 2652 17044 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:42,834 basehttp 2652 14176 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:36:42,847 basehttp 2652 14084 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:36:42,866 log 2652 10804 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:42,896 log 2652 16868 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:42,916 log 2652 14176 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:42,918 basehttp 2652 10804 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:42,926 basehttp 2652 17044 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:36:42,928 basehttp 2652 8980 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:42,928 basehttp 2652 16868 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:42,929 basehttp 2652 14176 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:42,937 basehttp 2652 14084 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:42,993 log 2652 8980 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:43,012 log 2652 14084 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:43,027 log 2652 17044 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:43,028 basehttp 2652 8980 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,029 basehttp 2652 14084 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:43,033 basehttp 2652 16868 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:43,037 basehttp 2652 10804 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:36:43,040 basehttp 2652 14176 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:43,043 basehttp 2652 17044 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,065 log 2652 8980 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:43,085 log 2652 14084 Not Found: /api/v1/services/
+INFO 2025-07-24 10:36:43,101 basehttp 2652 16868 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:43,107 basehttp 2652 10804 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:36:43,108 basehttp 2652 14176 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:43,126 log 2652 17044 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:43,126 basehttp 2652 8980 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,131 basehttp 2652 14084 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:43,149 basehttp 2652 16868 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:43,149 basehttp 2652 10804 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:43,149 basehttp 2652 17044 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:43,158 basehttp 2652 14176 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:43,182 log 2652 8980 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:43,205 log 2652 14084 Not Found: /api/v1/services/
+INFO 2025-07-24 10:36:43,216 basehttp 2652 16868 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:36:43,217 basehttp 2652 10804 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:43,224 basehttp 2652 8980 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,225 basehttp 2652 14084 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:43,225 basehttp 2652 17044 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:36:43,246 log 2652 14176 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:43,263 basehttp 2652 14176 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:36:43,263 basehttp 2652 8980 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:36:43,668 log 2652 14176 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:43,701 log 2652 8980 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:43,703 log 2652 14084 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:43,704 basehttp 2652 14176 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,706 basehttp 2652 8980 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,708 basehttp 2652 14084 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,731 log 2652 17044 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:43,750 log 2652 10804 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:36:43,762 log 2652 16868 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:36:43,763 basehttp 2652 17044 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,764 basehttp 2652 10804 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,764 basehttp 2652 16868 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:36:43,779 log 2652 8980 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:36:43,780 basehttp 2652 8980 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:38:13,662 log 2652 360 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:38:13,663 basehttp 2652 360 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:38:14,941 log 2652 360 Not Found: /favicon.ico
+WARNING 2025-07-24 10:38:14,943 basehttp 2652 360 "GET /favicon.ico HTTP/1.1" 404 3005
+WARNING 2025-07-24 10:39:01,580 log 2652 13716 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:39:01,594 basehttp 2652 6944 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:01,596 basehttp 2652 13716 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:01,654 basehttp 2652 6944 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:39:01,658 basehttp 2652 13716 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:39:01,711 basehttp 2652 9512 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:01,768 log 2652 6944 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:39:01,784 basehttp 2652 9512 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:39:01,784 basehttp 2652 13716 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-24 10:39:01,815 log 2652 11772 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:01,846 basehttp 2652 6944 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:01,871 basehttp 2652 9512 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:39:01,921 basehttp 2652 14212 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:39:01,946 basehttp 2652 13716 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:02,030 log 2652 11152 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:02,060 basehttp 2652 11772 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,092 log 2652 6944 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:39:02,100 basehttp 2652 9512 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:39:02,125 basehttp 2652 14212 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:02,143 basehttp 2652 11152 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:02,147 basehttp 2652 13716 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:02,183 log 2652 11772 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:02,196 basehttp 2652 6944 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:02,211 basehttp 2652 9512 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:02,249 basehttp 2652 11772 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,259 log 2652 11152 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:39:02,265 basehttp 2652 14212 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:39:02,269 basehttp 2652 13716 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:02,302 log 2652 6944 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,330 basehttp 2652 11152 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,332 log 2652 11772 Not Found: /api/v1/services/
+INFO 2025-07-24 10:39:02,334 basehttp 2652 9512 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:02,365 log 2652 13716 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:39:02,367 basehttp 2652 14212 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:02,392 basehttp 2652 6944 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,402 basehttp 2652 11772 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:02,405 basehttp 2652 11152 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:39:02,418 basehttp 2652 9512 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:02,425 basehttp 2652 13716 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,478 log 2652 11152 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:02,501 log 2652 14212 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,508 log 2652 6944 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:02,509 basehttp 2652 11152 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:02,513 basehttp 2652 11772 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:02,514 basehttp 2652 14212 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,514 basehttp 2652 6944 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,547 log 2652 13716 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:02,559 log 2652 9512 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,572 basehttp 2652 13716 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,578 basehttp 2652 9512 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,597 log 2652 14212 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:02,614 log 2652 11152 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,626 log 2652 6944 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:02,629 basehttp 2652 14212 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,630 basehttp 2652 11152 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,649 log 2652 9512 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:02,665 log 2652 13716 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,665 basehttp 2652 6944 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,680 basehttp 2652 9512 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,681 basehttp 2652 13716 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,721 log 2652 6944 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:02,735 log 2652 11152 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,737 basehttp 2652 6944 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,738 basehttp 2652 11152 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,780 log 2652 13716 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,801 log 2652 9512 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,819 log 2652 11772 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,821 log 2652 14212 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,830 basehttp 2652 13716 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,882 log 2652 6944 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,882 basehttp 2652 9512 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,883 basehttp 2652 11772 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,894 basehttp 2652 14212 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,926 log 2652 11152 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:02,926 basehttp 2652 6944 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,935 log 2652 13716 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:02,955 basehttp 2652 11152 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:02,957 basehttp 2652 13716 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:07,980 basehttp 2652 12552 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 2619
+WARNING 2025-07-24 10:39:08,726 log 2652 12552 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:08,732 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:08,760 log 2652 12552 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:08,763 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:08,776 basehttp 2652 14096 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:39:08,781 basehttp 2652 12552 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-24 10:39:08,817 log 2652 14096 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:08,846 log 2652 12140 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:08,847 basehttp 2652 14096 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:08,858 basehttp 2652 12552 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:08,859 basehttp 2652 12140 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:08,882 log 2652 10368 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:08,900 log 2652 12552 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:39:08,905 basehttp 2652 14096 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-24 10:39:08,907 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:08,907 basehttp 2652 10368 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:08,928 log 2652 14096 Not Found: /api/v1/services/
+INFO 2025-07-24 10:39:08,933 basehttp 2652 2248 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:39:08,934 basehttp 2652 1496 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:08,964 log 2652 12552 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:08,978 basehttp 2652 14096 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:08,983 log 2652 10368 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:39:08,991 basehttp 2652 12140 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:08,997 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:08,998 basehttp 2652 2248 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:09,001 basehttp 2652 10368 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:09,004 basehttp 2652 1496 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:09,119 log 2652 14096 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:09,155 log 2652 10368 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:09,157 log 2652 12552 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,158 basehttp 2652 14096 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,161 basehttp 2652 10368 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,164 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,180 log 2652 14096 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:09,203 log 2652 10368 Not Found: /api/v1/projects/
+INFO 2025-07-24 10:39:09,203 basehttp 2652 1496 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:09,220 log 2652 12552 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:39:09,220 basehttp 2652 12140 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:09,223 basehttp 2652 14096 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:09,225 basehttp 2652 2248 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:09,225 basehttp 2652 10368 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,229 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:09,241 basehttp 2652 1496 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:09,259 log 2652 14096 Not Found: /api/v1/services/
+INFO 2025-07-24 10:39:09,263 basehttp 2652 12140 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:09,279 log 2652 12552 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,290 log 2652 10368 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:09,292 basehttp 2652 14096 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,298 basehttp 2652 10368 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:09,299 basehttp 2652 2248 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:09,300 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,318 log 2652 14096 Not Found: /api/v1/services/
+INFO 2025-07-24 10:39:09,320 basehttp 2652 12140 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-24 10:39:09,337 log 2652 10368 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:09,348 log 2652 12552 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,348 basehttp 2652 14096 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:09,349 basehttp 2652 1496 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:09,358 log 2652 12140 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:09,360 basehttp 2652 10368 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,362 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,366 basehttp 2652 12140 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:09,367 basehttp 2652 2248 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:09,382 log 2652 10368 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,398 log 2652 12552 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:09,398 basehttp 2652 10368 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,404 basehttp 2652 12552 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:39:09,406 basehttp 2652 14096 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-24 10:39:09,417 log 2652 2248 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,420 basehttp 2652 2248 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,435 log 2652 14096 Not Found: /api/v1/homepage/
+INFO 2025-07-24 10:39:09,436 basehttp 2652 12140 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-24 10:39:09,436 basehttp 2652 14096 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,447 log 2652 2248 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,448 basehttp 2652 2248 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,458 log 2652 14096 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,459 basehttp 2652 14096 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,474 log 2652 2248 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,475 basehttp 2652 2248 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,598 log 2652 2248 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,617 log 2652 14096 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:09,628 log 2652 12140 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:09,628 basehttp 2652 2248 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,629 basehttp 2652 14096 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,631 basehttp 2652 12140 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,648 log 2652 12552 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,663 log 2652 14096 Not Found: /api/v1/projects/
+WARNING 2025-07-24 10:39:09,684 log 2652 2248 Not Found: /api/v1/services/
+WARNING 2025-07-24 10:39:09,685 basehttp 2652 12552 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,687 basehttp 2652 14096 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,691 basehttp 2652 2248 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-24 10:39:09,710 log 2652 12140 Not Found: /api/v1/homepage/
+WARNING 2025-07-24 10:39:09,711 basehttp 2652 12140 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:40:18,488 autoreload 1340 15204 Watching for file changes with StatReloader

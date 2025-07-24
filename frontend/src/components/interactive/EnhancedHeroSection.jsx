@@ -1,6 +1,6 @@
 // frontend/src/components/interactive/EnhancedHeroSection.jsx
 import React, { useState, useEffect, useMemo } from 'react';
-import { Button, Card, CardBody, Spinner } from "@nextui-org/react";
+import { Button, Card, CardBody, Spinner, Chip } from "@nextui-org/react";
 import { 
   ArrowRight, 
   PlayCircle, 
@@ -10,20 +10,18 @@ import {
   Shield,
   TrendingUp,
   Clock,
-  Star
+  Star,
+  AlertCircle
 } from 'lucide-react';
 
 // Хуки
 import { useTranslation } from '../../hooks/useTranslation';
-// Import unified API solution
+// ВИКОРИСТОВУЄМО ТІЛЬКИ UNIFIED API
 import { 
-  APIProvider, 
+  useHeroData,
   useHomepageData, 
   useServicesData, 
-  useProjectsData,
-  useHeroData,
-  useFormSubmission,
-  useCacheManager
+  useProjectsData
 } from '../../hooks/useUnifiedAPI.jsx';
 
 const EnhancedHeroSection = ({ 
@@ -34,40 +32,73 @@ const EnhancedHeroSection = ({
 }) => {
   // Хуки
   const { t } = useTranslation();
+  
+  // ВИКОРИСТОВУЄМО UNIFIED API HOOKS
   const { 
-    data: apiData, 
-    isLoading: apiIsLoading, 
-    error: apiError 
-  } = useEnhancedAPI();
+    data: heroApiData, 
+    isLoading: heroIsLoading, 
+    error: heroError,
+    reload: reloadHero 
+  } = useHeroData();
+
+  const { 
+    data: homepageData, 
+    isLoading: homepageIsLoading 
+  } = useHomepageData();
+
+  const { 
+    data: servicesData, 
+    isLoading: servicesIsLoading 
+  } = useServicesData();
+
+  const { 
+    data: projectsData, 
+    isLoading: projectsIsLoading 
+  } = useProjectsData();
 
   // Стан компонента
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(0);
 
   // Об'єднання даних з різних джерел
   const heroData = useMemo(() => {
-    // Пріоритет: props -> API -> fallback
+    console.log('HeroSection: Объединяем данные', {
+      propHeroData: !!propHeroData,
+      heroApiData: !!heroApiData,
+      homepageData: !!homepageData
+    });
+
+    // Пріоритет: props -> heroAPI -> homepage -> fallback
+    const sourceData = propHeroData || heroApiData || homepageData || {};
+    
     return {
-      main_title: propHeroData?.main_title || apiData?.homepage?.main_title || 'Професійний одяг',
-      sphere_title: propHeroData?.sphere_title || apiData?.homepage?.sphere_title || 'кожної сфери',
-      subtitle: propHeroData?.subtitle || apiData?.homepage?.subtitle || 'Створюємо якісний одяг для різних професій',
-      primary_button_text: propHeroData?.primary_button_text || apiData?.homepage?.primary_button_text || 'Наші проєкти',
-      secondary_button_text: propHeroData?.secondary_button_text || apiData?.homepage?.secondary_button_text || 'Дізнатися більше',
-      featured_services: propHeroData?.featured_services || apiData?.services || [],
-      featured_projects: propHeroData?.featured_projects || apiData?.projects || []
+      main_title: sourceData.main_title || t('hero.main_title') || 'Професійний одяг',
+      sphere_title: sourceData.sphere_title || t('hero.sphere_title') || 'кожної сфери',
+      subtitle: sourceData.subtitle || t('hero.subtitle') || 'Створюємо якісний одяг для різних професій',
+      primary_button_text: sourceData.primary_button_text || t('hero.primary_button') || 'Наші проєкти',
+      secondary_button_text: sourceData.secondary_button_text || t('hero.secondary_button') || 'Дізнатися більше',
+      description: sourceData.description || t('hero.description') || 'Ми пропонуємо повний спектр послуг з виробництва професійного одягу для різних галузей. Від корпоративного стилю до спеціалізованого захисного обладнання.',
+      featured_services: sourceData.featured_services || servicesData?.slice(0, 3) || [],
+      featured_projects: sourceData.featured_projects || projectsData?.slice(0, 4) || []
     };
-  }, [propHeroData, apiData]);
+  }, [propHeroData, heroApiData, homepageData, servicesData, projectsData, t]);
 
   const stats = useMemo(() => {
-    return propStats || apiData?.stats || {
+    const sourceStats = propStats || heroApiData?.stats || homepageData?.stats;
+    
+    return sourceStats || {
       experience: '5+',
       projects: '100+',
       clients: '50+',
       support: '24/7'
     };
-  }, [propStats, apiData]);
+  }, [propStats, heroApiData, homepageData]);
 
-  const isLoading = propIsLoading !== undefined ? propIsLoading : apiIsLoading;
+  // Визначаємо стан завантаження
+  const isLoading = propIsLoading !== undefined 
+    ? propIsLoading 
+    : (heroIsLoading || homepageIsLoading || servicesIsLoading || projectsIsLoading);
 
   // Функція отримання перекладу з fallback
   const getTranslation = (key, fallback) => {
@@ -75,18 +106,15 @@ const EnhancedHeroSection = ({
     return translation !== key ? translation : fallback;
   };
 
-  // Функція отримання контенту (пріоритет: API -> переклади -> fallback)
-  const getContent = (apiValue, translationKey, fallback) => {
-    if (apiValue && apiValue.trim()) return apiValue;
-    return getTranslation(translationKey, fallback);
-  };
-
-  // Відстеження руху миші для інтерактивності
+  // Обробка руху миші для паралакс ефекту
   useEffect(() => {
     const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      
       setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100
+        x: (clientX / innerWidth - 0.5) * 20,
+        y: (clientY / innerHeight - 0.5) * 20
       });
     };
 
@@ -100,240 +128,365 @@ const EnhancedHeroSection = ({
     return () => clearTimeout(timer);
   }, []);
 
-  // Компонент завантаження
-  const LoadingContent = () => (
-    <div className="min-h-screen flex items-center justify-center">
-      <Card className="glass border border-white/20">
-        <CardBody className="p-8 text-center">
-          <Spinner size="lg" className="mb-4" />
-          <p className="text-gray-600">
-            {getTranslation('hero.loading', 'Завантаження контенту...')}
-          </p>
-        </CardBody>
-      </Card>
-    </div>
-  );
+  // Автоматична зміна активної особливості
+  useEffect(() => {
+    if (heroData.featured_services.length > 0) {
+      const interval = setInterval(() => {
+        setActiveFeature((prev) => (prev + 1) % heroData.featured_services.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [heroData.featured_services.length]);
 
-  // Компонент помилки
-  const ErrorContent = () => (
-    <div className="min-h-screen flex items-center justify-center">
-      <Card className="glass border border-red-200">
-        <CardBody className="p-8 text-center">
-          <div className="text-red-500 text-5xl mb-4">⚠️</div>
-          <h3 className="text-xl font-semibold text-red-700 mb-2">
-            {getTranslation('hero.error', 'Помилка завантаження')}
-          </h3>
-          <p className="text-red-600 mb-4">
-            {apiError?.message || getTranslation('hero.error_message', 'Не вдалося завантажити дані Hero секції')}
-          </p>
-          <Button
-            color="danger"
-            variant="bordered"
-            onPress={() => window.location.reload()}
-          >
-            {getTranslation('common.retry', 'Спробувати знову')}
-          </Button>
-        </CardBody>
-      </Card>
-    </div>
-  );
+  // Ключові переваги для анімації
+  const keyFeatures = [
+    {
+      icon: Shield,
+      title: getTranslation('hero.features.quality', 'Висока якість'),
+      description: 'Використовуємо тільки сертифіковані матеріали'
+    },
+    {
+      icon: Clock,
+      title: getTranslation('hero.features.speed', 'Швидке виконання'),
+      description: 'Дотримуємося встановлених термінів'
+    },
+    {
+      icon: Award,
+      title: getTranslation('hero.features.experience', 'Досвід роботи'),
+      description: 'Понад 5 років успішної діяльності'
+    },
+    {
+      icon: Users,
+      title: getTranslation('hero.features.service', 'Індивідуальний підхід'),
+      description: 'Персональні рішення для кожного клієнта'
+    }
+  ];
 
-  // Статистичні іконки
-  const statsIcons = {
-    experience: Award,
-    projects: TrendingUp,
-    clients: Users,
-    support: Shield
-  };
-
-  // Якщо завантаження
-  if (isLoading) {
-    return <LoadingContent />;
-  }
-
-  // Якщо помилка і немає даних
-  if (apiError && !heroData.main_title) {
-    return <ErrorContent />;
+  // Обробка помилок API
+  if (heroError && !propHeroData) {
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="text-center">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+            <AlertCircle className="w-12 h-12 text-red-600 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-red-800 mb-2">Помилка завантаження</h3>
+            <p className="text-red-600 mb-4">{heroError}</p>
+            <Button 
+              color="danger" 
+              variant="flat" 
+              onPress={reloadHero}
+            >
+              Спробувати знову
+            </Button>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
-    <section 
-      id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)`
-      }}
-    >
-      {/* Фоновий градієнт */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-purple-50/30" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
       
-      {/* Декоративні елементи */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+      {/* Анімований фон */}
+      <div className="absolute inset-0">
+        {/* Геометричні фігури з паралакс ефектом */}
+        <div 
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
+          style={{
+            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`
+          }}
+        />
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
+          style={{
+            transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`
+          }}
+        />
+        
+        {/* Анімовані точки */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-blue-400/30 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                animationDuration: `${2 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Основний контент */}
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Лівий блок - Основний контент */}
-          <div className={`space-y-8 transform transition-all duration-1000 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          {/* Лівий блок - основний контент */}
+          <div className={`transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
           }`}>
             
             {/* Заголовок */}
-            <div className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl font-bold">
+            <div className="mb-8">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">
                 <span className="block text-gray-900">
-                  {getContent(heroData.main_title, 'hero.title', 'Професійний одяг')}
+                  {heroData.main_title}
                 </span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mt-2">
-                  {getContent(heroData.sphere_title, 'hero.subtitle', 'кожної сфери')}
+                <span className="block text-gradient-blue">
+                  {heroData.sphere_title}
                 </span>
               </h1>
               
-              {heroData.subtitle && (
-                <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
-                  {heroData.subtitle}
+              <p className="text-xl md:text-2xl text-gray-600 mb-6 leading-relaxed">
+                {heroData.subtitle}
+              </p>
+
+              {heroData.description && (
+                <p className="text-lg text-gray-500 mb-8 leading-relaxed max-w-2xl">
+                  {heroData.description}
                 </p>
               )}
             </div>
 
             {/* Кнопки дій */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Button
                 size="lg"
                 color="primary"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 text-lg font-semibold hover:shadow-2xl transition-all duration-300"
                 endContent={<ArrowRight className="w-5 h-5" />}
                 onPress={() => scrollToSection?.('projects')}
               >
-                {getContent(heroData.primary_button_text, 'hero.primary_button', 'Наші проєкти')}
+                {heroData.primary_button_text}
               </Button>
               
               <Button
                 size="lg"
                 variant="bordered"
-                className="border-2 border-gray-300 hover:border-blue-500 transition-colors duration-300"
+                className="border-2 border-blue-600 text-blue-600 px-8 py-4 text-lg font-semibold hover:bg-blue-50 transition-all duration-300"
                 startContent={<PlayCircle className="w-5 h-5" />}
                 onPress={() => scrollToSection?.('about')}
               >
-                {getContent(heroData.secondary_button_text, 'hero.secondary_button', 'Дізнатися більше')}
+                {heroData.secondary_button_text}
               </Button>
             </div>
 
             {/* Статистика */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-gray-200">
-              {Object.entries(stats).map(([key, value], index) => {
-                const IconComponent = statsIcons[key] || Star;
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-1">
+                  {stats.experience}
+                </div>
+                <div className="text-sm text-gray-600">
+                  {getTranslation('hero.stats.experience', 'років досвіду')}
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-green-600 mb-1">
+                  {stats.projects}
+                </div>
+                <div className="text-sm text-gray-600">
+                  {getTranslation('hero.stats.projects', 'проєктів')}
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-1">
+                  {stats.clients}
+                </div>
+                <div className="text-sm text-gray-600">
+                  {getTranslation('hero.stats.clients', 'клієнтів')}
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-1">
+                  {stats.support}
+                </div>
+                <div className="text-sm text-gray-600">
+                  {getTranslation('hero.stats.support', 'підтримка')}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Правий блок - інтерактивний контент */}
+          <div className={`transition-all duration-1000 delay-300 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+          }`}>
+            
+            {/* Індикатор завантаження */}
+            {isLoading && (
+              <div className="text-center py-12">
+                <Spinner size="lg" color="primary" />
+                <p className="text-gray-600 mt-4">Завантаження даних...</p>
+              </div>
+            )}
+
+            {/* Ключові переваги */}
+            <div className="space-y-6 mb-8">
+              {keyFeatures.map((feature, index) => {
+                const IconComponent = feature.icon;
+                const isActive = index === activeFeature;
+                
                 return (
-                  <div 
-                    key={key}
-                    className={`text-center transform transition-all duration-500 delay-${index * 100}`}
-                    style={{ animationDelay: `${index * 100}ms` }}
+                  <Card 
+                    key={index}
+                    className={`transition-all duration-500 cursor-pointer ${
+                      isActive 
+                        ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 shadow-lg scale-105' 
+                        : 'hover:shadow-md'
+                    }`}
+                    isPressable
+                    onPress={() => setActiveFeature(index)}
                   >
-                    <div className="flex justify-center mb-2">
-                      <IconComponent className="w-8 h-8 text-blue-600" />
-                    </div>
-                    <div className="text-2xl font-bold text-gray-900">{value}</div>
-                    <div className="text-sm text-gray-600 capitalize">
-                      {getTranslation(`stats.${key}`, key)}
-                    </div>
-                  </div>
+                    <CardBody className="p-4 flex flex-row items-center gap-4">
+                      <div className={`p-3 rounded-lg ${
+                        isActive 
+                          ? 'bg-gradient-to-r from-blue-600 to-purple-600' 
+                          : 'bg-gray-100'
+                      }`}>
+                        <IconComponent className={`w-6 h-6 ${
+                          isActive ? 'text-white' : 'text-gray-600'
+                        }`} />
+                      </div>
+                      <div>
+                        <h4 className={`font-semibold ${
+                          isActive ? 'text-blue-900' : 'text-gray-900'
+                        }`}>
+                          {feature.title}
+                        </h4>
+                        <p className={`text-sm ${
+                          isActive ? 'text-blue-700' : 'text-gray-600'
+                        }`}>
+                          {feature.description}
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
                 );
               })}
             </div>
-          </div>
 
-          {/* Правий блок - Візуальний контент */}
-          <div className={`relative transform transition-all duration-1000 delay-300 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
-            
-            {/* Основне зображення/контент */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl" />
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/50">
-                
-                {/* Рекомендовані послуги */}
-                {heroData.featured_services?.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                      <Zap className="w-5 h-5 text-blue-600 mr-2" />
-                      {getTranslation('hero.featured_services', 'Популярні послуги')}
-                    </h3>
-                    <div className="space-y-3">
-                      {heroData.featured_services.slice(0, 3).map((service, index) => (
-                        <div 
-                          key={service.id || index}
-                          className="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors duration-200"
-                        >
-                          <div className="w-2 h-2 bg-blue-600 rounded-full mr-3" />
-                          <span className="text-gray-700">{service.title || service.name}</span>
+            {/* Рекомендовані послуги */}
+            {heroData.featured_services && heroData.featured_services.length > 0 && (
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  {getTranslation('hero.featured_services', 'Популярні послуги')}
+                </h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {heroData.featured_services.map((service, index) => (
+                    <Card 
+                      key={service.id || index}
+                      className="hover:shadow-md transition-all duration-300 cursor-pointer"
+                      isPressable
+                      onPress={() => scrollToSection?.('services')}
+                    >
+                      <CardBody className="p-4 flex flex-row items-center justify-between">
+                        <div>
+                          <h4 className="font-medium text-gray-900">
+                            {service.title || service.name}
+                          </h4>
+                          <p className="text-sm text-gray-600">
+                            {service.description?.slice(0, 60)}...
+                          </p>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Рекомендовані проекти */}
-                {heroData.featured_projects?.length > 0 && (
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                      <TrendingUp className="w-5 h-5 text-purple-600 mr-2" />
-                      {getTranslation('hero.featured_projects', 'Останні проекти')}
-                    </h3>
-                    <div className="grid grid-cols-2 gap-3">
-                      {heroData.featured_projects.slice(0, 4).map((project, index) => (
-                        <div 
-                          key={project.id || index}
-                          className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-lg border border-gray-200 hover:shadow-md transition-all duration-200"
-                        >
-                          <div className="text-sm font-medium text-gray-900 line-clamp-2">
-                            {project.title || project.name}
-                          </div>
-                          {project.category && (
-                            <div className="text-xs text-gray-500 mt-1">
-                              {project.category}
-                            </div>
+                        <div className="flex items-center gap-2">
+                          {service.price_range && (
+                            <Chip size="sm" variant="flat" color="primary">
+                              {service.price_range}
+                            </Chip>
                           )}
+                          <ArrowRight className="w-4 h-4 text-gray-400" />
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Fallback контент якщо немає даних */}
-                {(!heroData.featured_services?.length && !heroData.featured_projects?.length) && (
-                  <div className="text-center py-12">
-                    <div className="text-6xl mb-4">👔</div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      {getTranslation('hero.welcome', 'Ласкаво просимо')}
-                    </h3>
-                    <p className="text-gray-600">
-                      {getTranslation('hero.welcome_message', 'Професійний підхід до кожного замовлення')}
-                    </p>
-                  </div>
-                )}
+                      </CardBody>
+                    </Card>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* Плаваючі елементи */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/10 rounded-full animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }} />
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-purple-500/10 rounded-full animate-bounce" style={{ animationDelay: '1s', animationDuration: '3s' }} />
+            {/* Останні проєкти */}
+            {heroData.featured_projects && heroData.featured_projects.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  {getTranslation('hero.recent_projects', 'Останні проєкти')}
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {heroData.featured_projects.map((project, index) => (
+                    <Card 
+                      key={project.id || index}
+                      className="hover:shadow-md transition-all duration-300 cursor-pointer"
+                      isPressable
+                      onPress={() => scrollToSection?.('projects')}
+                    >
+                      <CardBody className="p-3 text-center">
+                        <div className="bg-gradient-to-r from-green-100 to-blue-100 p-2 rounded-lg mb-2">
+                          <TrendingUp className="w-5 h-5 text-green-600 mx-auto" />
+                        </div>
+                        <h4 className="font-medium text-gray-900 text-sm mb-1">
+                          {project.title?.slice(0, 25) || project.name?.slice(0, 25)}
+                          {(project.title?.length > 25 || project.name?.length > 25) && '...'}
+                        </h4>
+                        <p className="text-xs text-gray-600">
+                          {project.client || project.subtitle}
+                        </p>
+                        {project.status && (
+                          <Chip 
+                            size="sm" 
+                            variant="flat" 
+                            color={project.status === 'completed' ? 'success' : 'warning'}
+                            className="mt-2"
+                          >
+                            {project.status === 'completed' ? 'Завершено' : 'В процесі'}
+                          </Chip>
+                        )}
+                      </CardBody>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Додаткові елементи UI */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="flex items-center gap-2 text-gray-400">
+            <div className="w-8 h-0.5 bg-gray-300"></div>
+            <span className="text-sm">
+              {getTranslation('hero.scroll_down', 'Прокрутіть вниз')}
+            </span>
+            <div className="w-8 h-0.5 bg-gray-300"></div>
           </div>
         </div>
       </div>
 
-      {/* Індикатор скролу */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="flex flex-col items-center text-gray-400">
-          <span className="text-sm mb-2">{getTranslation('hero.scroll_down', 'Прокрутіть вниз')}</span>
-          <div className="w-6 h-10 border-2 border-gray-300 rounded-full relative">
-            <div className="w-1 h-3 bg-gray-400 rounded-full absolute top-2 left-1/2 transform -translate-x-1/2 animate-pulse" />
-          </div>
-        </div>
+      {/* Плаваючі елементи дизайну */}
+      <div className="absolute top-20 right-20 animate-bounce">
+        <div className="w-4 h-4 bg-blue-400 rounded-full opacity-60"></div>
       </div>
+      <div className="absolute bottom-40 left-20 animate-pulse">
+        <div className="w-6 h-6 bg-purple-400 rounded-full opacity-40"></div>
+      </div>
+      <div className="absolute top-1/2 right-10 animate-ping">
+        <div className="w-3 h-3 bg-pink-400 rounded-full opacity-50"></div>
+      </div>
+
+      {/* Статистика API (тільки в режимі розробки) */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute bottom-4 right-4 bg-black/80 text-white p-2 rounded text-xs">
+          <div>API Status: {isLoading ? 'Loading...' : 'Ready'}</div>
+          <div>Hero Data: {propHeroData ? 'Props' : heroApiData ? 'Hero API' : homepageData ? 'Homepage API' : 'Fallback'}</div>
+          <div>Services: {heroData.featured_services.length}</div>
+          <div>Projects: {heroData.featured_projects.length}</div>
+          {heroError && <div className="text-red-400">Error: {heroError}</div>}
+        </div>
+      )}
     </section>
   );
 };
