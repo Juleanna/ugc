@@ -15,7 +15,16 @@ import {
 
 // Хуки
 import { useTranslation } from '../../hooks/useTranslation';
-import { useEnhancedAPI } from '../../hooks/useEnhancedAPI';
+// Import unified API solution
+import { 
+  APIProvider, 
+  useHomepageData, 
+  useServicesData, 
+  useProjectsData,
+  useHeroData,
+  useFormSubmission,
+  useCacheManager
+} from '../../hooks/useUnifiedAPI.jsx';
 
 const EnhancedHeroSection = ({ 
   scrollToSection, 

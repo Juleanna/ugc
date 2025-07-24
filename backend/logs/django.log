@@ -3077,3 +3077,536 @@ INFO 2025-07-23 15:28:11,608 autoreload 5584 13184 Watching for file changes wit
 INFO 2025-07-23 15:29:36,062 autoreload 3256 2692 Watching for file changes with StatReloader
 INFO 2025-07-23 15:30:26,253 autoreload 3256 2692 D:\ugc\backend\apps\api\urls.py changed, reloading.
 INFO 2025-07-23 15:30:35,880 autoreload 16676 12152 Watching for file changes with StatReloader
+INFO 2025-07-23 15:49:30,132 basehttp 16676 14000 "GET /admin/content/ HTTP/1.1" 200 74496
+WARNING 2025-07-23 15:49:30,259 basehttp 16676 18268 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:49:30,260 basehttp 16676 14000 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:49:30,286 basehttp 16676 12476 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:49:32,536 basehttp 16676 13000 "GET /admin/content/homepage/ HTTP/1.1" 200 96205
+WARNING 2025-07-23 15:49:32,637 basehttp 16676 13000 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:49:32,656 basehttp 16676 208 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:49:32,698 basehttp 16676 10036 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:49:32,872 basehttp 16676 1340 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:49:35,174 basehttp 16676 1340 "GET /admin/content/aboutpage/ HTTP/1.1" 200 83866
+WARNING 2025-07-23 15:49:35,257 basehttp 16676 1340 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:49:35,278 basehttp 16676 7456 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:49:35,297 basehttp 16676 768 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:49:35,393 basehttp 16676 5892 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:49:37,109 basehttp 16676 5892 "GET /admin/content/aboutpage/add/ HTTP/1.1" 200 114653
+WARNING 2025-07-23 15:49:37,207 basehttp 16676 5892 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:49:37,228 basehttp 16676 2828 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-23 15:49:37,234 basehttp 16676 10896 "GET /static/ckeditor/fixups.js HTTP/1.1" 304 0
+INFO 2025-07-23 15:49:37,240 basehttp 16676 4124 "GET /static/ckeditor/ckeditor.css HTTP/1.1" 304 0
+WARNING 2025-07-23 15:49:37,266 basehttp 16676 10896 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:49:37,266 basehttp 16676 16852 "GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 304 0
+INFO 2025-07-23 15:49:37,278 basehttp 16676 17720 "GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 304 0
+INFO 2025-07-23 15:49:37,396 basehttp 16676 17540 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:49:37,608 basehttp 16676 17540 "GET /static/ckeditor/ckeditor/config.js?t=N5UC HTTP/1.1" 304 0
+INFO 2025-07-23 15:49:37,774 basehttp 16676 17540 "GET /static/ckeditor/ckeditor/skins/office2013/skin.js?t=N5UC HTTP/1.1" 304 0
+INFO 2025-07-23 15:49:50,548 signals 16676 17784 Очищено кеш всіх перекладів
+INFO 2025-07-23 15:49:50,549 signals 16676 17784 Очищено кеш перекладів через створення AboutPage
+INFO 2025-07-23 15:49:50,552 signals 16676 17784 Переклади перезавантажено в кеш
+INFO 2025-07-23 15:49:50,573 basehttp 16676 17784 "POST /admin/content/aboutpage/add/ HTTP/1.1" 302 0
+INFO 2025-07-23 15:49:50,706 basehttp 16676 17784 "GET /admin/content/aboutpage/ HTTP/1.1" 200 89878
+WARNING 2025-07-23 15:49:50,829 basehttp 16676 17784 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:49:50,830 basehttp 16676 2684 "GET /static/icon.svg HTTP/1.1" 404 1951
+WARNING 2025-07-23 15:49:50,852 basehttp 16676 12864 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-23 15:49:50,925 basehttp 16676 14156 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:49:57,128 basehttp 16676 14156 "GET /admin/content/aboutpage/1/change/ HTTP/1.1" 200 116100
+WARNING 2025-07-23 15:49:57,239 basehttp 16676 14156 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:49:57,255 basehttp 16676 17592 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:49:57,274 basehttp 16676 5396 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:49:57,365 basehttp 16676 4264 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:00,528 basehttp 16676 5312 "GET /admin/content/teammember/ HTTP/1.1" 200 85840
+WARNING 2025-07-23 15:50:00,619 basehttp 16676 5312 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:00,638 basehttp 16676 3864 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:00,653 basehttp 16676 5684 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:00,732 basehttp 16676 15720 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:02,306 basehttp 16676 15720 "GET /admin/content/teammember/add/ HTTP/1.1" 200 103192
+WARNING 2025-07-23 15:50:02,388 basehttp 16676 15720 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:02,414 basehttp 16676 3044 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:02,430 basehttp 16676 7788 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:02,527 basehttp 16676 17996 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:10,497 basehttp 16676 9488 "POST /admin/content/teammember/add/ HTTP/1.1" 200 103753
+WARNING 2025-07-23 15:50:10,601 basehttp 16676 9488 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:10,602 basehttp 16676 18384 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:10,623 basehttp 16676 3296 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:10,705 basehttp 16676 9484 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:25,442 signals 16676 9484 Очищено кеш всіх перекладів
+INFO 2025-07-23 15:50:25,442 signals 16676 9484 Очищено кеш перекладів через створення TeamMember
+INFO 2025-07-23 15:50:25,444 signals 16676 9484 Переклади перезавантажено в кеш
+INFO 2025-07-23 15:50:25,450 basehttp 16676 9484 "POST /admin/content/teammember/add/ HTTP/1.1" 302 0
+INFO 2025-07-23 15:50:25,717 basehttp 16676 9484 "GET /admin/content/teammember/ HTTP/1.1" 200 103167
+WARNING 2025-07-23 15:50:25,804 basehttp 16676 9484 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:25,829 basehttp 16676 17956 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:25,847 basehttp 16676 8724 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:25,944 basehttp 16676 8796 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:25,998 basehttp 16676 8156 "GET /media/team/%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_viber_2025-07-22_13-03-34-656.jpg HTTP/1.1" 200 629408
+INFO 2025-07-23 15:50:29,699 basehttp 16676 8156 "GET /admin/content/teammember/1/change/ HTTP/1.1" 200 105387
+WARNING 2025-07-23 15:50:29,780 basehttp 16676 8156 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:29,806 basehttp 16676 8796 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-23 15:50:29,808 basehttp 16676 8100 "GET /media/team/%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_viber_2025-07-22_13-03-34-656.jpg HTTP/1.1" 304 0
+WARNING 2025-07-23 15:50:29,828 basehttp 16676 3736 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:29,916 basehttp 16676 10416 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:35,483 signals 16676 10416 Очищено кеш всіх перекладів
+INFO 2025-07-23 15:50:35,483 signals 16676 10416 Очищено кеш перекладів через оновлення TeamMember
+INFO 2025-07-23 15:50:35,486 signals 16676 10416 Переклади перезавантажено в кеш
+INFO 2025-07-23 15:50:35,493 basehttp 16676 10416 "POST /admin/content/teammember/1/change/ HTTP/1.1" 302 0
+INFO 2025-07-23 15:50:35,630 basehttp 16676 10416 "GET /admin/content/teammember/ HTTP/1.1" 200 103169
+WARNING 2025-07-23 15:50:35,718 basehttp 16676 10416 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:35,740 basehttp 16676 8100 "GET /static/js/script.js HTTP/1.1" 404 1963
+INFO 2025-07-23 15:50:35,745 basehttp 16676 2976 "GET /media/team/%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_viber_2025-07-22_13-03-34-656.jpg HTTP/1.1" 304 0
+WARNING 2025-07-23 15:50:35,764 basehttp 16676 15992 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:35,857 basehttp 16676 18244 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:38,179 basehttp 16676 18244 "GET /admin/content/homepage/ HTTP/1.1" 200 96205
+WARNING 2025-07-23 15:50:38,257 basehttp 16676 18244 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:38,275 basehttp 16676 2976 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:38,294 basehttp 16676 17560 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:38,380 basehttp 16676 9032 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:39,678 basehttp 16676 9032 "GET /admin/content/homepage/1/change/ HTTP/1.1" 200 111687
+WARNING 2025-07-23 15:50:39,763 basehttp 16676 9032 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:39,779 basehttp 16676 11412 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:39,795 basehttp 16676 13328 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:39,871 basehttp 16676 5292 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:45,201 basehttp 16676 5292 "GET /admin/content/aboutpage/ HTTP/1.1" 200 89383
+WARNING 2025-07-23 15:50:45,292 basehttp 16676 11552 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:45,292 basehttp 16676 5292 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:45,316 basehttp 16676 13624 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:45,418 basehttp 16676 9884 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 15:50:46,718 basehttp 16676 9884 "GET /admin/content/aboutpage/1/change/ HTTP/1.1" 200 116100
+WARNING 2025-07-23 15:50:46,803 basehttp 16676 9884 "GET /static/css/styles.css HTTP/1.1" 404 1969
+WARNING 2025-07-23 15:50:46,822 basehttp 16676 12348 "GET /static/js/script.js HTTP/1.1" 404 1963
+WARNING 2025-07-23 15:50:46,841 basehttp 16676 12340 "GET /static/icon.svg HTTP/1.1" 404 1951
+INFO 2025-07-23 15:50:46,913 basehttp 16676 7564 "GET /admin/jsi18n/ HTTP/1.1" 200 10649
+INFO 2025-07-23 16:02:39,331 autoreload 16784 11552 Watching for file changes with StatReloader
+INFO 2025-07-23 16:02:40,228 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,232 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,235 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,239 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,243 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,246 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,265 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,268 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,270 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,285 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,364 basehttp 16784 12376 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-23 16:02:40,373 views 16784 3608 Could not fetch services from DB: cannot import name 'Service' from 'apps.api.models' (D:\ugc\backend\apps\api\models.py)
+INFO 2025-07-23 16:02:40,380 basehttp 16784 3608 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:40,385 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,390 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,391 basehttp 16784 12376 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:40,397 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,398 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,402 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,403 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,406 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,409 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,414 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,415 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,419 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,420 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,426 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,426 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,432 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,432 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,438 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,438 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,446 basehttp 16784 3608 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,447 basehttp 16784 12376 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,452 basehttp 16784 12376 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,452 basehttp 16784 3608 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,459 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,461 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,464 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,469 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,474 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,479 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,484 basehttp 16784 12376 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,488 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,490 basehttp 16784 12376 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,490 basehttp 16784 15268 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:40,489 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,506 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,509 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,510 basehttp 16784 3608 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,511 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,518 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,519 basehttp 16784 17024 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,520 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,523 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,530 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,531 basehttp 16784 8160 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,535 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,536 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,542 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,548 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,550 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,552 basehttp 16784 8160 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,555 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,562 basehttp 16784 17024 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,564 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,565 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,568 basehttp 16784 8160 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,575 basehttp 16784 12376 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,576 basehttp 16784 15268 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,580 basehttp 16784 17024 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,587 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,587 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,588 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,598 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,604 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,604 basehttp 16784 3608 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,611 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,616 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,617 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,619 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,624 basehttp 16784 8160 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,624 basehttp 16784 3608 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,629 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,633 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,642 basehttp 16784 12424 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,645 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,648 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,651 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,654 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,654 basehttp 16784 8160 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,658 basehttp 16784 12424 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,664 basehttp 16784 17024 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,669 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,671 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,677 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,682 basehttp 16784 8160 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,686 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,689 basehttp 16784 12424 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,695 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,697 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,702 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,710 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,712 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,716 basehttp 16784 12424 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,725 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,726 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,726 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,728 basehttp 16784 8160 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,731 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,751 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,761 basehttp 16784 8160 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,763 basehttp 16784 12424 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:40,765 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,766 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,768 basehttp 16784 12376 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:40,775 basehttp 16784 12424 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,780 basehttp 16784 3608 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:40,783 basehttp 16784 12424 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,783 basehttp 16784 8160 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,792 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,793 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,798 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,800 basehttp 16784 12424 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,801 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,807 basehttp 16784 8160 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,811 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,813 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,814 basehttp 16784 12424 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,814 basehttp 16784 17024 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,817 basehttp 16784 15268 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,826 basehttp 16784 3608 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,827 basehttp 16784 8160 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,828 basehttp 16784 12424 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,828 basehttp 16784 12376 "OPTIONS /api/v1/homepage/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,835 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,835 basehttp 16784 17024 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,838 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,841 basehttp 16784 12424 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,842 basehttp 16784 8160 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,851 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,854 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,856 basehttp 16784 3608 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,859 basehttp 16784 17024 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,860 basehttp 16784 12424 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,865 basehttp 16784 8160 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,872 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,874 basehttp 16784 12376 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,875 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,882 basehttp 16784 17024 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,886 basehttp 16784 12424 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,886 basehttp 16784 8160 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,892 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,895 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,900 basehttp 16784 17024 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,901 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,907 basehttp 16784 12424 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,911 basehttp 16784 8160 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,917 basehttp 16784 3608 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,918 basehttp 16784 15268 "OPTIONS /api/v1/services/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,919 basehttp 16784 17024 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,924 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,925 basehttp 16784 12424 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,929 basehttp 16784 8160 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,934 basehttp 16784 15268 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,937 basehttp 16784 3608 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,939 basehttp 16784 17024 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,946 basehttp 16784 12376 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,947 basehttp 16784 12424 "OPTIONS /api/v1/homepage/stats/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,953 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,954 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,962 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,964 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,970 basehttp 16784 12424 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,979 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,983 basehttp 16784 17024 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-23 16:02:40,984 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,993 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,999 basehttp 16784 12424 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,999 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,994 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:40,999 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,009 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,011 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,020 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,020 basehttp 16784 12424 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,021 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,031 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,031 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,032 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,035 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,039 basehttp 16784 12424 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,042 basehttp 16784 3608 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,045 basehttp 16784 12376 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,049 basehttp 16784 8160 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,055 basehttp 16784 17024 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,058 basehttp 16784 15268 "OPTIONS /api/v1/projects/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,064 basehttp 16784 12424 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,067 basehttp 16784 12376 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,068 basehttp 16784 3608 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,079 basehttp 16784 17024 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,079 basehttp 16784 8160 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,087 basehttp 16784 3608 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,088 basehttp 16784 15268 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:41,089 basehttp 16784 12424 "OPTIONS /api/v1/projects/ HTTP/1.1" 200 0
+WARNING 2025-07-23 16:02:41,122 views 16784 12376 Could not fetch real stats: cannot import name 'Service' from 'apps.api.models' (D:\ugc\backend\apps\api\models.py)
+WARNING 2025-07-23 16:02:41,131 log 16784 17024 Not Found: /api/v1/homepage/
+INFO 2025-07-23 16:02:41,133 basehttp 16784 12376 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,144 basehttp 16784 17024 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,163 log 16784 15268 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,178 log 16784 12424 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,180 views 16784 8160 Could not fetch projects from DB: cannot import name 'Project' from 'apps.api.models' (D:\ugc\backend\apps\api\models.py)
+WARNING 2025-07-23 16:02:41,194 log 16784 12376 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,195 basehttp 16784 15268 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,198 basehttp 16784 12424 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,201 basehttp 16784 3608 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,202 basehttp 16784 12376 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,207 basehttp 16784 8160 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:41,231 log 16784 17024 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,250 log 16784 12424 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,254 basehttp 16784 17024 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,269 log 16784 3608 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,288 log 16784 12376 Not Found: /api/v1/services/
+INFO 2025-07-23 16:02:41,292 basehttp 16784 8160 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:41,294 basehttp 16784 15268 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,295 basehttp 16784 12424 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,297 basehttp 16784 12376 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,299 basehttp 16784 3608 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,312 basehttp 16784 17024 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:41,321 basehttp 16784 8160 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,345 log 16784 15268 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,369 log 16784 12376 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,372 basehttp 16784 15268 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,392 log 16784 12424 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,410 log 16784 8160 Not Found: /api/v1/projects/
+INFO 2025-07-23 16:02:41,414 basehttp 16784 3608 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:41,415 basehttp 16784 17024 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,416 basehttp 16784 12376 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,417 basehttp 16784 12424 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,418 basehttp 16784 8160 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,443 basehttp 16784 15268 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:41,475 log 16784 3608 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,495 log 16784 12376 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,503 basehttp 16784 3608 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,510 log 16784 12424 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,530 log 16784 15268 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,532 basehttp 16784 12376 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,535 basehttp 16784 17024 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,555 log 16784 3608 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,560 basehttp 16784 12424 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,561 basehttp 16784 15268 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,562 basehttp 16784 8160 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:41,573 basehttp 16784 12376 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,592 log 16784 17024 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,611 log 16784 12424 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,613 basehttp 16784 3608 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,625 basehttp 16784 15268 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:41,628 basehttp 16784 12424 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,630 basehttp 16784 17024 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,652 log 16784 12376 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,660 log 16784 3608 Not Found: /api/v1/projects/
+INFO 2025-07-23 16:02:41,666 basehttp 16784 8160 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,696 log 16784 17024 Not Found: /api/v1/homepage/
+INFO 2025-07-23 16:02:41,698 basehttp 16784 15268 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,698 basehttp 16784 3608 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,698 basehttp 16784 12376 "GET /api/v1/services/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,704 basehttp 16784 12424 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:41,727 log 16784 8160 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,729 basehttp 16784 17024 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,739 basehttp 16784 8160 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,761 log 16784 3608 Not Found: /api/v1/homepage/
+INFO 2025-07-23 16:02:41,762 basehttp 16784 15268 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,779 log 16784 12376 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,803 log 16784 15268 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,807 basehttp 16784 3608 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,820 log 16784 17024 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,821 basehttp 16784 12376 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,823 basehttp 16784 15268 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,824 basehttp 16784 12424 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:41,841 basehttp 16784 8160 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,852 log 16784 3608 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,869 log 16784 15268 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,871 basehttp 16784 17024 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,881 basehttp 16784 3608 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,896 log 16784 8160 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:41,897 basehttp 16784 15268 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,904 basehttp 16784 12424 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-23 16:02:41,906 basehttp 16784 12376 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:41,907 basehttp 16784 8160 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:41,932 log 16784 3608 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:41,948 log 16784 17024 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:41,974 log 16784 12424 Not Found: /api/v1/services/
+INFO 2025-07-23 16:02:41,981 basehttp 16784 15268 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:41,975 basehttp 16784 3608 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:41,989 basehttp 16784 8160 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:42,028 log 16784 12376 Not Found: /api/v1/services/
+INFO 2025-07-23 16:02:42,046 basehttp 16784 17024 - Broken pipe from ('127.0.0.1', 15470)
+INFO 2025-07-23 16:02:42,060 basehttp 16784 12424 - Broken pipe from ('127.0.0.1', 15475)
+INFO 2025-07-23 16:02:42,068 basehttp 16784 15792 - Broken pipe from ('127.0.0.1', 15484)
+INFO 2025-07-23 16:02:42,104 basehttp 16784 12376 - Broken pipe from ('127.0.0.1', 15473)
+WARNING 2025-07-23 16:02:42,114 log 16784 8160 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:42,136 log 16784 4132 Not Found: /api/v1/projects/
+INFO 2025-07-23 16:02:42,140 basehttp 16784 3608 - Broken pipe from ('127.0.0.1', 15477)
+INFO 2025-07-23 16:02:42,157 basehttp 16784 8160 - Broken pipe from ('127.0.0.1', 15471)
+INFO 2025-07-23 16:02:42,159 basehttp 16784 4132 - Broken pipe from ('127.0.0.1', 15485)
+INFO 2025-07-23 16:02:42,164 basehttp 16784 692 - Broken pipe from ('127.0.0.1', 15486)
+INFO 2025-07-23 16:02:45,151 basehttp 16784 15268 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 2619
+INFO 2025-07-23 16:02:45,769 basehttp 16784 15268 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:45,782 basehttp 16784 2976 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+WARNING 2025-07-23 16:02:45,802 log 16784 15268 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:45,821 log 16784 2976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:45,822 basehttp 16784 15268 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:45,823 basehttp 16784 2976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:45,841 basehttp 16784 5240 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:45,869 basehttp 16784 15268 "OPTIONS /api/v1/translations/uk/all/ HTTP/1.1" 200 0
+INFO 2025-07-23 16:02:45,878 basehttp 16784 2976 "OPTIONS /api/v1/translations/uk/all/ HTTP/1.1" 200 0
+WARNING 2025-07-23 16:02:45,901 log 16784 5240 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:45,903 basehttp 16784 5240 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:45,925 log 16784 2976 Not Found: /api/v1/homepage/
+INFO 2025-07-23 16:02:45,928 basehttp 16784 15268 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-23 16:02:45,968 basehttp 16784 2976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,012 log 16784 17976 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,030 log 16784 2976 Not Found: /api/v1/services/
+INFO 2025-07-23 16:02:46,030 basehttp 16784 5240 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:46,031 basehttp 16784 15268 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-23 16:02:46,037 basehttp 16784 15036 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-23 16:02:46,044 basehttp 16784 2924 "OPTIONS /api/v1/services/featured/ HTTP/1.1" 200 0
+WARNING 2025-07-23 16:02:46,045 basehttp 16784 17976 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,075 log 16784 15268 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,085 basehttp 16784 2976 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,094 basehttp 16784 15268 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:46,099 basehttp 16784 15036 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:46,100 basehttp 16784 5240 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+WARNING 2025-07-23 16:02:46,145 log 16784 15268 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,168 log 16784 15036 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,192 basehttp 16784 15268 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,201 log 16784 2976 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,215 basehttp 16784 15036 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:46,217 basehttp 16784 2924 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:46,224 basehttp 16784 5240 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:46,218 basehttp 16784 2976 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:46,253 basehttp 16784 17976 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:46,262 log 16784 15268 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,284 log 16784 15036 Not Found: /api/v1/homepage/
+INFO 2025-07-23 16:02:46,292 basehttp 16784 2924 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-23 16:02:46,301 basehttp 16784 17976 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:46,328 log 16784 2976 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,329 basehttp 16784 15268 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,333 basehttp 16784 15036 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:46,335 basehttp 16784 5240 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+WARNING 2025-07-23 16:02:46,349 basehttp 16784 2976 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:46,351 basehttp 16784 2924 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-23 16:02:46,376 log 16784 15268 Not Found: /api/v1/services/
+INFO 2025-07-23 16:02:46,387 basehttp 16784 17976 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:46,417 log 16784 15036 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,427 log 16784 2976 Not Found: /api/v1/projects/
+INFO 2025-07-23 16:02:46,434 basehttp 16784 5240 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-23 16:02:46,439 basehttp 16784 2924 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-23 16:02:46,440 basehttp 16784 15268 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,441 basehttp 16784 15036 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,473 log 16784 2924 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,474 basehttp 16784 2976 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:46,480 basehttp 16784 5240 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+WARNING 2025-07-23 16:02:46,516 log 16784 15268 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,518 log 16784 15036 Not Found: /api/v1/projects/
+INFO 2025-07-23 16:02:46,519 basehttp 16784 17976 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:46,522 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,535 basehttp 16784 15268 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,550 log 16784 17976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,550 basehttp 16784 15036 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+INFO 2025-07-23 16:02:46,551 basehttp 16784 5240 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+WARNING 2025-07-23 16:02:46,558 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,581 log 16784 2924 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,597 log 16784 5240 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,618 log 16784 15268 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,619 basehttp 16784 5240 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,619 basehttp 16784 2924 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,623 basehttp 16784 15268 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,654 log 16784 15036 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,665 log 16784 17976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,676 basehttp 16784 15036 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,684 log 16784 2924 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,696 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,705 log 16784 15268 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,724 log 16784 15036 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,726 basehttp 16784 2924 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,744 log 16784 17976 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,746 basehttp 16784 15268 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,746 basehttp 16784 15036 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,747 basehttp 16784 17976 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,768 log 16784 2924 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,782 log 16784 15268 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,795 log 16784 15036 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,796 basehttp 16784 2924 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,797 basehttp 16784 15268 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,815 log 16784 17976 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,815 basehttp 16784 15036 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,832 log 16784 2924 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,833 basehttp 16784 17976 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,844 log 16784 15036 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,851 log 16784 15268 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,852 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,854 basehttp 16784 15036 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,865 basehttp 16784 15268 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,868 log 16784 17976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,879 log 16784 15036 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,889 log 16784 2924 Not Found: /api/v1/services/
+WARNING 2025-07-23 16:02:46,890 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,890 basehttp 16784 15036 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,891 basehttp 16784 2924 "GET /api/v1/services/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,906 log 16784 15268 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,914 log 16784 17976 Not Found: /api/v1/projects/
+WARNING 2025-07-23 16:02:46,914 basehttp 16784 15268 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,915 basehttp 16784 17976 "GET /api/v1/projects/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,927 log 16784 2924 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,929 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,942 log 16784 17976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,943 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,956 log 16784 2924 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,957 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,969 log 16784 17976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,971 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,983 log 16784 2924 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,984 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:46,997 log 16784 17976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:46,998 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:47,012 log 16784 2924 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:47,012 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:47,025 log 16784 17976 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:47,026 basehttp 16784 17976 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+WARNING 2025-07-23 16:02:47,038 log 16784 2924 Not Found: /api/v1/homepage/
+WARNING 2025-07-23 16:02:47,040 basehttp 16784 2924 "GET /api/v1/homepage/ HTTP/1.1" 404 5626

@@ -12,7 +12,7 @@ import {
   useHeroData,
   useFormSubmission,
   useCacheManager
-} from '../../hooks/useUnifiedAPI';
+} from '../../hooks/useUnifiedAPI.jsx';
 
 // Import components
 import UnifiedBackground from './UnifiedBackground';
