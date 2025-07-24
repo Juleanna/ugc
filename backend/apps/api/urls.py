@@ -1,180 +1,311 @@
 # backend/apps/api/urls.py
-# Повна конфігурація URL з усіма необхідними endpoints
+# Повна конфігурація URL з ViewSets
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-# Імпорт всіх views
-from .views import (
-    # API Root
-    api_root,
+# Імпорт ViewSets
+from .viewsets import (
+    # Content ViewSets
+    HomePageViewSet,
+    AboutPageViewSet,
+    TeamMemberViewSet,
     
-    # Homepage endpoints
-    HomepageAPIView,
-    HomepageStatsAPIView,
+    # Service ViewSets
+    ServiceViewSet,
     
-    # Services endpoints
-    ServicesAPIView,
-    FeaturedServicesAPIView,
+    # Project ViewSets
+    ProjectCategoryViewSet,
+    ProjectViewSet,
     
-    # Projects endpoints
-    ProjectsAPIView,
-    FeaturedProjectsAPIView,
+    # Job ViewSets
+    JobPositionViewSet,
+    JobApplicationViewSet,
+    WorkplacePhotoViewSet,
     
-    # Translations endpoints
-    TranslationsAPIView,
-    AllTranslationsAPIView,
+    # Partner ViewSets
+    PartnershipInfoViewSet,
+    PartnerInquiryViewSet,
     
-    # Utility endpoints
-    APIHealthCheckView,
-    CacheManagementView
+    # Contact ViewSets
+    OfficeViewSet,
+    ContactInquiryViewSet,
+    
+    # Utility ViewSets
+    APIStatsViewSet
 )
 
-# Імпорт існуючих ViewSets (якщо є)
-try:
-    from .views import (
-        HomePageViewSet, 
-        AboutPageViewSet, 
-        ServiceViewSet, 
-        JobPositionViewSet, 
-        JobApplicationViewSet,
-        OfficeViewSet, 
-        ContactInquiryViewSet, 
-        PartnershipInfoViewSet, 
-        PartnerInquiryViewSet,
-        WorkplacePhotoViewSet,
-        ProjectCategoryViewSet, 
-        ProjectViewSet
-    )
-    VIEWSETS_AVAILABLE = True
-    print("✅ ViewSets імпортовано успішно")
-except ImportError:
-    VIEWSETS_AVAILABLE = False
-    print("⚠️ ViewSets не доступні, використовуємо тільки API views")
+# Імпорт додаткових API Views (якщо потрібні)
+from .views import (
+    # Utility endpoints
+    APIHealthCheckView,
+    CacheManagementView,
+    TranslationsAPIView,
+    AllTranslationsAPIView
+)
 
 # ============================= РОУТЕР =============================
+
+# Створюємо роутер для автоматичної генерації URL
 router = DefaultRouter()
 
-# Реєструємо ViewSets тільки якщо вони доступні
-if VIEWSETS_AVAILABLE:
-    # Контент
-    router.register(r'homepage-viewset', HomePageViewSet, basename='homepage-viewset')
-    router.register(r'about-viewset', AboutPageViewSet, basename='about-viewset')
+# =============== CONTENT ROUTES ===============
+# Реєструємо ViewSets для контенту
+router.register(r'homepage', HomePageViewSet, basename='homepage')
+router.register(r'about', AboutPageViewSet, basename='about')
+router.register(r'team-members', TeamMemberViewSet, basename='teammember')
+
+# =============== SERVICE ROUTES ===============
+# Реєструємо ViewSets для послуг
+router.register(r'services', ServiceViewSet, basename='service')
+
+# =============== PROJECT ROUTES ===============
+# Реєструємо ViewSets для проєктів
+router.register(r'project-categories', ProjectCategoryViewSet, basename='projectcategory')
+router.register(r'projects', ProjectViewSet, basename='project')
+
+# =============== JOB ROUTES ===============
+# Реєструємо ViewSets для вакансій
+router.register(r'jobs', JobPositionViewSet, basename='jobposition')
+router.register(r'job-applications', JobApplicationViewSet, basename='jobapplication')
+router.register(r'workplace-photos', WorkplacePhotoViewSet, basename='workplacephoto')
+
+# =============== PARTNER ROUTES ===============
+# Реєструємо ViewSets для партнерів
+router.register(r'partnership-info', PartnershipInfoViewSet, basename='partnershipinfo')
+router.register(r'partner-inquiries', PartnerInquiryViewSet, basename='partnerinquiry')
+
+# =============== CONTACT ROUTES ===============
+# Реєструємо ViewSets для контактів
+router.register(r'offices', OfficeViewSet, basename='office')
+router.register(r'contact-inquiries', ContactInquiryViewSet, basename='contactinquiry')
+
+# =============== UTILITY ROUTES ===============
+# Реєструємо ViewSets для утиліт
+router.register(r'stats', APIStatsViewSet, basename='apistats')
+
+# ============================= API ROOT =============================
+
+@api_view(['GET'])
+def api_root(request):
+    """
+    API корінь з повною інформацією про доступні endpoints
+    """
+    base_url = request.build_absolute_uri('/api/v1/')
     
-    # Послуги  
-    router.register(r'services-viewset', ServiceViewSet, basename='services-viewset')
+    # ViewSets endpoints (автоматично згенеровані роутером)
+    viewsets_endpoints = {
+        'content': {
+            'homepage': f'{base_url}homepage/',
+            'homepage_detail': f'{base_url}homepage/{{id}}/',
+            'homepage_stats': f'{base_url}homepage/{{id}}/stats/',
+            'homepage_featured_content': f'{base_url}homepage/{{id}}/featured_content/',
+            'about': f'{base_url}about/',
+            'team_members': f'{base_url}team-members/',
+        },
+        'services': {
+            'services_list': f'{base_url}services/',
+            'service_detail': f'{base_url}services/{{id}}/',
+            'featured_services': f'{base_url}services/featured/',
+            'service_features': f'{base_url}services/{{id}}/features/',
+        },
+        'projects': {
+            'project_categories': f'{base_url}project-categories/',
+            'category_projects': f'{base_url}project-categories/{{id}}/projects/',
+            'projects_list': f'{base_url}projects/',
+            'project_detail': f'{base_url}projects/{{slug}}/',
+            'featured_projects': f'{base_url}projects/featured/',
+            'project_images': f'{base_url}projects/{{slug}}/images/',
+        },
+        'jobs': {
+            'jobs_list': f'{base_url}jobs/',
+            'job_detail': f'{base_url}jobs/{{slug}}/',
+            'urgent_jobs': f'{base_url}jobs/urgent/',
+            'job_applications': f'{base_url}job-applications/',
+            'workplace_photos': f'{base_url}workplace-photos/',
+        },
+        'partners': {
+            'partnership_info': f'{base_url}partnership-info/',
+            'partner_inquiries': f'{base_url}partner-inquiries/',
+        },
+        'contacts': {
+            'offices': f'{base_url}offices/',
+            'contact_inquiries': f'{base_url}contact-inquiries/',
+        },
+        'utilities': {
+            'general_stats': f'{base_url}stats/',
+            'health_check': f'{base_url}health/',
+            'cache_management': f'{base_url}cache/',
+            'translations': f'{base_url}translations/{{lang}}/',
+            'all_translations': f'{base_url}translations/{{lang}}/all/',
+        }
+    }
     
-    # Проекти
-    router.register(r'project-categories', ProjectCategoryViewSet, basename='projectcategory')
-    router.register(r'projects-viewset', ProjectViewSet, basename='projects-viewset')
+    # Підрахунок загальної кількості endpoints
+    total_endpoints = sum(len(section) for section in viewsets_endpoints.values())
     
-    # Вакансії
-    router.register(r'jobs', JobPositionViewSet, basename='jobs')
-    router.register(r'job-applications', JobApplicationViewSet, basename='jobapplications')
-    
-    # Офіси та контакти
-    router.register(r'offices', OfficeViewSet, basename='offices')
-    router.register(r'contact-inquiries', ContactInquiryViewSet, basename='contactinquiries')
-    
-    # Партнерство
-    router.register(r'partnership-info', PartnershipInfoViewSet, basename='partnershipinfo')
-    router.register(r'partner-inquiries', PartnerInquiryViewSet, basename='partnerinquiries')
-    
-    # Фото
-    router.register(r'workplace-photos', WorkplacePhotoViewSet, basename='workplacephotos')
+    return Response({
+        'success': True,
+        'message': 'Django REST API з ViewSets',
+        'version': '1.0',
+        'architecture': 'ViewSets + DRF Router',
+        'endpoints': viewsets_endpoints,
+        'meta': {
+            'total_endpoints': total_endpoints,
+            'viewsets_count': len([
+                'HomePageViewSet', 'AboutPageViewSet', 'TeamMemberViewSet',
+                'ServiceViewSet', 'ProjectCategoryViewSet', 'ProjectViewSet',
+                'JobPositionViewSet', 'JobApplicationViewSet', 'WorkplacePhotoViewSet',
+                'PartnershipInfoViewSet', 'PartnerInquiryViewSet',
+                'OfficeViewSet', 'ContactInquiryViewSet', 'APIStatsViewSet'
+            ]),
+            'features': [
+                'Автоматична генерація CRUD endpoints',
+                'Пагінація',  
+                'Фільтрація та пошук',
+                'Кешування відповідей',
+                'Валідація даних',
+                'Дозволи доступу',
+                'Кастомні дії (@action)',
+                'Оптимізовані запити до БД'
+            ]
+        }
+    })
 
 # ============================= URL PATTERNS =============================
+
 urlpatterns = [
-    # =============== API ROOT ===============
+    # API Root
     path('', api_root, name='api-root'),
     
-    # =============== HOMEPAGE ENDPOINTS ===============
-    # НОВИЙ: Основні дані головної сторінки
-    path('homepage/', HomepageAPIView.as_view(), name='homepage'),
-    # ІСНУЮЧИЙ: Статистика головної сторінки
-    path('homepage/stats/', HomepageStatsAPIView.as_view(), name='homepage-stats'),
+    # Включаємо всі маршрути роутера (ViewSets)
+    path('', include(router.urls)),
     
-    # =============== SERVICES ENDPOINTS ===============
-    # НОВИЙ: Всі послуги
-    path('services/', ServicesAPIView.as_view(), name='services'),
-    # ІСНУЮЧИЙ: Рекомендовані послуги
-    path('services/featured/', FeaturedServicesAPIView.as_view(), name='services-featured'),
+    # =============== ДОДАТКОВІ API VIEWS ===============
+    # Endpoints які не підходять для ViewSets архітектури
     
-    # =============== PROJECTS ENDPOINTS ===============
-    # НОВИЙ: Всі проєкти
-    path('projects/', ProjectsAPIView.as_view(), name='projects'),
-    # ІСНУЮЧИЙ: Рекомендовані проєкти
-    path('projects/featured/', FeaturedProjectsAPIView.as_view(), name='projects-featured'),
-    
-    # =============== TRANSLATIONS ENDPOINTS ===============
-    # Основні переклади для мови
+    # Переклади (окремі API views для гнучкості)
     path('translations/<str:lang>/', TranslationsAPIView.as_view(), name='translations'),
-    # Всі переклади для мови (розширений формат)
     path('translations/<str:lang>/all/', AllTranslationsAPIView.as_view(), name='translations-all'),
     
-    # =============== UTILITY ENDPOINTS ===============
-    # Перевірка здоров'я API
+    # Утилітарні endpoints
     path('health/', APIHealthCheckView.as_view(), name='api-health'),
-    # Управління кешем
     path('cache/', CacheManagementView.as_view(), name='cache-management'),
-    
-    # =============== VIEWSETS (якщо доступні) ===============
-    # Включаємо роутер якщо ViewSets доступні
-    path('', include(router.urls)) if VIEWSETS_AVAILABLE else path('', api_root),
 ]
 
-# =============== ДОДАТКОВІ МАРШРУТИ ===============
+# =============== ДОДАТКОВІ АЛЬТЕРНАТИВНІ МАРШРУТИ ===============
+# Для зворотної сумісності та зручності
 
-# Альтернативні шляхи для сумісності
 urlpatterns += [
-    # Альтернативний шлях для статистики
-    path('stats/', HomepageStatsAPIView.as_view(), name='stats-alt'),
+    # Альтернативні шляхи для популярних endpoints
+    path('homepage/stats/', api_root, name='homepage-stats-alt'),  # Перенаправлення на root
+    path('services/featured/', api_root, name='services-featured-alt'),
+    path('projects/featured/', api_root, name='projects-featured-alt'),
     
-    # Альтернативні шляхи для перекладів
-    path('translations/stats/', APIHealthCheckView.as_view(), name='translations-stats'),
-    
-    # Швидкий доступ до здоров'я API
+    # Швидкий доступ
     path('ping/', APIHealthCheckView.as_view(), name='api-ping'),
 ]
 
 # =============== DEBUG INFO ===============
-if VIEWSETS_AVAILABLE:
-    print("🔗 URL Configuration loaded with ViewSets support")
-    print(f"📊 Total URL patterns: {len(urlpatterns)}")
-else:
-    print("🔗 URL Configuration loaded with API Views only")
-    print(f"📊 Total URL patterns: {len(urlpatterns)}")
 
-# =============== ENDPOINT SUMMARY ===============
+print("🚀 ViewSets URL Configuration успішно завантажена!")
+print(f"📊 Загальна кількість ViewSets: {len(router.registry)}")
+print(f"🔗 Загальна кількість URL patterns: {len(urlpatterns)}")
+print("✅ Архітектура: ViewSets + DRF Router")
+
+# Виводимо список зареєстрованих ViewSets
+print("\n📋 ЗАРЕЄСТРОВАНІ VIEWSETS:")
+for prefix, viewset, basename in router.registry:
+    print(f"  • {prefix:20} -> {viewset.__name__:25} (basename: {basename})")
+
+# =============== ENDPOINT DOCUMENTATION ===============
 """
-📋 ДОСТУПНІ ENDPOINTS:
+📚 ПОВНА ДОКУМЕНТАЦІЯ ENDPOINTS:
 
-✅ ПРАЦЮЮЧІ (існуючі):
-- GET /api/v1/homepage/stats/          # Статистика головної сторінки
-- GET /api/v1/services/featured/       # Рекомендовані послуги  
-- GET /api/v1/projects/featured/       # Рекомендовані проєкти
+🏠 CONTENT ENDPOINTS:
+- GET    /api/v1/homepage/                    # Список головних сторінок
+- GET    /api/v1/homepage/{id}/               # Детальна головна сторінка
+- GET    /api/v1/homepage/{id}/stats/         # Статистика головної сторінки
+- GET    /api/v1/homepage/{id}/featured_content/ # Рекомендований контент
+- GET    /api/v1/about/                       # Сторінки "Про нас"
+- GET    /api/v1/team-members/                # Члени команди
+- GET    /api/v1/team-members/?is_management=true # Тільки керівництво
 
-🆕 НОВІ (додані):
-- GET /api/v1/                         # API root з інформацією
-- GET /api/v1/homepage/                # Основні дані головної сторінки
-- GET /api/v1/services/                # Всі послуги
-- GET /api/v1/projects/                # Всі проєкти
-- GET /api/v1/translations/{lang}/     # Переклади для мови
-- GET /api/v1/translations/{lang}/all/ # Всі переклади для мови
-- GET /api/v1/health/                  # Перевірка здоров'я API
-- GET /api/v1/cache/                   # Статистика кешу
-- DELETE /api/v1/cache/                # Очищення кешу
+🛠 SERVICE ENDPOINTS:
+- GET    /api/v1/services/                    # Список всіх послуг
+- GET    /api/v1/services/{id}/               # Деталі послуги
+- GET    /api/v1/services/featured/           # Рекомендовані послуги  
+- GET    /api/v1/services/{id}/features/      # Особливості послуги
+- GET    /api/v1/services/?search=медичний    # Пошук послуг
+- GET    /api/v1/services/?is_featured=true   # Фільтр по рекомендованим
 
-🔧 УТИЛІТАРНІ:
-- GET /api/v1/stats/                   # Альтернативний шлях для статистики
-- GET /api/v1/ping/                    # Швидка перевірка API
-- GET /api/v1/translations/stats/      # Статистика перекладів
+📁 PROJECT ENDPOINTS:
+- GET    /api/v1/project-categories/          # Категорії проєктів
+- GET    /api/v1/project-categories/{id}/projects/ # Проєкти в категорії
+- GET    /api/v1/projects/                    # Список всіх проєктів
+- GET    /api/v1/projects/{slug}/             # Деталі проєкту
+- GET    /api/v1/projects/featured/           # Рекомендовані проєкти
+- GET    /api/v1/projects/{slug}/images/      # Зображення проєкту
+- GET    /api/v1/projects/?category=1         # Фільтр по категорії
+- GET    /api/v1/projects/?search=лікарня     # Пошук проєктів
 
-📦 VIEWSETS (якщо доступні):
-- /api/v1/homepage-viewset/            # ViewSet для головної сторінки
-- /api/v1/services-viewset/            # ViewSet для послуг
-- /api/v1/projects-viewset/            # ViewSet для проєктів
-- /api/v1/jobs/                        # Вакансії
-- /api/v1/offices/                     # Офіси
-- /api/v1/contact-inquiries/           # Звернення
+💼 JOB ENDPOINTS:
+- GET    /api/v1/jobs/                        # Активні вакансії
+- GET    /api/v1/jobs/{slug}/                 # Деталі вакансії
+- GET    /api/v1/jobs/urgent/                 # Термінові вакансії
+- POST   /api/v1/job-applications/            # Подача заявки на вакансію
+- GET    /api/v1/job-applications/            # Список заявок (auth required)
+- GET    /api/v1/workplace-photos/            # Фото робочих місць
+- GET    /api/v1/jobs/?employment_type=full_time # Фільтр по типу зайнятості
+
+🤝 PARTNER ENDPOINTS:
+- GET    /api/v1/partnership-info/            # Інформація про партнерство  
+- POST   /api/v1/partner-inquiries/           # Створення запиту партнера
+- GET    /api/v1/partner-inquiries/           # Список запитів (auth required)
+
+📞 CONTACT ENDPOINTS:
+- GET    /api/v1/offices/                     # Список офісів
+- GET    /api/v1/offices/?city=Київ           # Офіси в місті
+- GET    /api/v1/offices/?is_main=true        # Головні офіси
+- POST   /api/v1/contact-inquiries/           # Створення звернення
+- GET    /api/v1/contact-inquiries/           # Список звернень (auth required)
+
+📊 UTILITY ENDPOINTS:
+- GET    /api/v1/stats/                       # Загальна статистика сайту
+- GET    /api/v1/health/                      # Перевірка здоров'я API
+- GET    /api/v1/cache/                       # Статистика кешу
+- DELETE /api/v1/cache/                       # Очищення кешу
+- GET    /api/v1/translations/{lang}/         # Переклади для мови
+- GET    /api/v1/translations/{lang}/all/     # Всі переклади для мови
+
+🔍 ОСОБЛИВОСТІ VIEWSETS:
+- Автоматична пагінація для списків
+- Підтримка фільтрації (?field=value)
+- Підтримка пошуку (?search=query)
+- Підтримка сортування (?ordering=field)
+- Кешування відповідей для продуктивності
+- Валідація даних через серіалізатори
+- Кастомні дії через @action декоратор
+- Оптимізовані запити з select_related/prefetch_related
+
+📝 ПРИКЛАДИ ЗАПИТІВ:
+- GET /api/v1/services/?is_featured=true&ordering=name
+- GET /api/v1/projects/?search=медичний&category=1
+- GET /api/v1/jobs/?employment_type=full_time&is_urgent=true
+- GET /api/v1/team-members/?is_management=true&ordering=order
+- POST /api/v1/contact-inquiries/ (з JSON body)
+
+🔐 ДОЗВОЛИ:
+- Більшість GET endpoints: AllowAny (публічний доступ)
+- POST endpoints для заявок/звернень: AllowAny
+- GET endpoints для заявок/звернень: IsAuthenticated
+- Адміністративні функції: IsAuthenticated
+
+⚡ ПРОДУКТИВНІСТЬ:
+- Кешування для статичних даних (статистика, переклади)
+- Оптимізовані запити до БД
+- Пагінація для великих списків
+- Compression для API відповідей
 """

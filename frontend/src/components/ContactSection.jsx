@@ -1,5 +1,7 @@
 // frontend/src/components/ContactSection.jsx
-import React, { useState } from 'react';
+// Адаптовано для ViewSets архітектури
+
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Card, 
   CardBody, 
@@ -9,7 +11,14 @@ import {
   Button, 
   Select,
   SelectItem,
-  Checkbox
+  Checkbox,
+  Spinner,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure
 } from "@nextui-org/react";
 import { 
   Mail, 
@@ -19,19 +28,36 @@ import {
   CheckCircle, 
   AlertCircle,
   Clock,
-  MessageCircle
+  MessageCircle,
+  Building,
+  Users,
+  Star,
+  Loader
 } from 'lucide-react';
 
-// Хуки
+// Хуки для ViewSets API
 import { useTranslation } from '../hooks/useTranslation';
-// ВИКОРИСТОВУЄМО UNIFIED API для відправки форм
-import { useFormSubmission } from '../hooks/useUnifiedAPI.jsx';
+import { useContactData, useFormSubmission } from '../hooks/useUnifiedAPI.jsx';
 
-const ContactSection = ({ onSubmit, isSubmitting: propIsSubmitting, scrollToSection }) => {
+const ContactSection = ({ scrollToSection }) => {
   const { t } = useTranslation();
   
-  // ВИКОРИСТОВУЄМО UNIFIED API HOOK для форм
-  const { submitForm, isSubmitting: apiIsSubmitting } = useFormSubmission();
+  // ViewSets API хуки
+  const { 
+    offices, 
+    partnershipInfo, 
+    isLoading: contactDataLoading, 
+    error: contactDataError,
+    reload: reloadContactData 
+  } = useContactData();
+  
+  const { 
+    submitContactForm, 
+    isSubmitting 
+  } = useFormSubmission();
+
+  // Modal для підтвердження
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // Стан форми
   const [formData, setFormData] = useState({
@@ -52,15 +78,117 @@ const ContactSection = ({ onSubmit, isSubmitting: propIsSubmitting, scrollToSect
   const [formErrors, setFormErrors] = useState({});
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
   const [submitMessage, setSubmitMessage] = useState('');
+  const [selectedOffice, setSelectedOffice] = useState(null);
 
-  // Визначаємо стан завантаження
-  const isSubmitting = propIsSubmitting || apiIsSubmitting;
+  // Обробка зміни полів форми
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    
+    // Очищення помилки при зміні поля
+    if (formErrors[field]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [field]: null
+      }));
+    }
+  };
+
+  // Валідація форми
+  const validateForm = () => {
+    const errors = {};
+    
+    if (!formData.name.trim()) {
+      errors.name = t('contact.errors.name_required') || 'Ім\'я обов\'язкове';
+    }
+    
+    if (!formData.email.trim()) {
+      errors.email = t('contact.errors.email_required') || 'Email обов\'язковий';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = t('contact.errors.email_invalid') || 'Некоректний email';
+    }
+    
+    if (!formData.message.trim()) {
+      errors.message = t('contact.errors.message_required') || 'Повідомлення обов\'язкове';
+    } else if (formData.message.trim().length < 10) {
+      errors.message = t('contact.errors.message_too_short') || 'Повідомлення занадто коротке';
+    }
+    
+    if (formData.phone && !/^[\+]?[0-9\s\-\(\)]{10,}$/.test(formData.phone)) {
+      errors.phone = t('contact.errors.phone_invalid') || 'Некоректний номер телефону';
+    }
+    
+    return errors;
+  };
+
+  // Обробка відправки форми
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    try {
+      setSubmitStatus(null);
+      setSubmitMessage('');
+
+      // Відправка через ViewSets API
+      const result = await submitContactForm(formData);
+
+      if (result.success) {
+        setSubmitStatus('success');
+        setSubmitMessage(
+          result.data?.message || 
+          t('contact.success.message') || 
+          'Ваше звернення успішно надіслано. Ми зв\'яжемося з вами найближчим часом.'
+        );
+        
+        // Очищення форми
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service_type: '',
+          message: '',
+          quantity: '',
+          deadline: '',
+          budget_range: '',
+          contact_method: 'email',
+          newsletter_subscription: false
+        });
+        
+        // Показати modal підтвердження
+        onOpen();
+        
+      } else {
+        setSubmitStatus('error');
+        setSubmitMessage(
+          result.error || 
+          t('contact.error.message') || 
+          'Помилка при надсиланні звернення. Спробуйте пізніше.'
+        );
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+      setSubmitMessage(
+        t('contact.error.network') || 
+        'Помилка мережі. Перевірте з\'єднання та спробуйте знову.'
+      );
+    }
+  };
 
   // Типи послуг для селекту
   const serviceTypes = [
     { key: 'corporate', label: t('contact.services.corporate') || 'Корпоративний одяг' },
-    { key: 'safety', label: t('contact.services.safety') || 'Спецодяг і захист' },
     { key: 'medical', label: t('contact.services.medical') || 'Медичний одяг' },
+    { key: 'safety', label: t('contact.services.safety') || 'Спецодяг і захист' },
     { key: 'education', label: t('contact.services.education') || 'Шкільна форма' },
     { key: 'horeca', label: t('contact.services.horeca') || 'Одяг для HoReCa' },
     { key: 'security', label: t('contact.services.security') || 'Форма охорони' },
@@ -69,409 +197,413 @@ const ContactSection = ({ onSubmit, isSubmitting: propIsSubmitting, scrollToSect
 
   // Діапазони бюджету
   const budgetRanges = [
-    { key: 'under_10k', label: 'До 10 000 грн' },
-    { key: '10k_50k', label: '10 000 - 50 000 грн' },
-    { key: '50k_100k', label: '50 000 - 100 000 грн' },
-    { key: '100k_500k', label: '100 000 - 500 000 грн' },
-    { key: 'over_500k', label: 'Понад 500 000 грн' }
+    { key: 'under_50k', label: t('contact.budget.under_50k') || 'До 50 000 грн' },
+    { key: '50k_100k', label: t('contact.budget.50k_100k') || '50 000 - 100 000 грн' },
+    { key: '100k_500k', label: t('contact.budget.100k_500k') || '100 000 - 500 000 грн' },
+    { key: 'over_500k', label: t('contact.budget.over_500k') || 'Понад 500 000 грн' },
+    { key: 'discuss', label: t('contact.budget.discuss') || 'Обговоримо індивідуально' }
   ];
 
   // Методи зв'язку
   const contactMethods = [
-    { key: 'email', label: 'Email' },
-    { key: 'phone', label: 'Телефон' },
-    { key: 'telegram', label: 'Telegram' },
-    { key: 'viber', label: 'Viber' }
+    { key: 'email', label: t('contact.methods.email') || 'Email' },
+    { key: 'phone', label: t('contact.methods.phone') || 'Телефон' },
+    { key: 'telegram', label: t('contact.methods.telegram') || 'Telegram' },
+    { key: 'viber', label: t('contact.methods.viber') || 'Viber' }
   ];
 
-  // Контактна інформація
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: t('contact.info.phone') || 'Телефон',
-      value: '+38 (067) 123-45-67',
-      subtitle: 'Пн-Пт: 9:00-18:00'
-    },
-    {
-      icon: Mail,
-      title: t('contact.info.email') || 'Email',
-      value: 'info@ugc.ua',
-      subtitle: 'Відповідаємо протягом 2 годин'
-    },
-    {
-      icon: MapPin,
-      title: t('contact.info.address') || 'Адреса',
-      value: 'м. Київ, вул. Промислова, 15',
-      subtitle: 'Офіс та виробництво'
-    }
-  ];
-
-  // Валідація форми
-  const validateForm = () => {
-    const errors = {};
-
-    if (!formData.name.trim()) {
-      errors.name = t('contact.errors.name_required') || 'Ім\'я обов\'язкове';
-    }
-
-    if (!formData.email.trim()) {
-      errors.email = t('contact.errors.email_required') || 'Email обов\'язковий';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = t('contact.errors.email_invalid') || 'Невірний формат email';
-    }
-
-    if (!formData.phone.trim()) {
-      errors.phone = t('contact.errors.phone_required') || 'Телефон обов\'язковий';
-    }
-
-    if (!formData.message.trim()) {
-      errors.message = t('contact.errors.message_required') || 'Повідомлення обов\'язкове';
-    } else if (formData.message.trim().length < 10) {
-      errors.message = t('contact.errors.message_too_short') || 'Повідомлення занадто коротке';
-    }
-
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
-  // Обробник зміни полів
-  const handleInputChange = (field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-
-    // Очищуємо помилку для поля при введенні
-    if (formErrors[field]) {
-      setFormErrors(prev => ({
-        ...prev,
-        [field]: undefined
-      }));
-    }
-  };
-
-  // Відправка форми
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      setSubmitStatus('error');
-      setSubmitMessage(t('contact.form.validation_error') || 'Будь ласка, виправте помилки у формі');
-      return;
-    }
-
-    try {
-      // Використовуємо зовнішню функцію якщо передана
-      if (onSubmit && typeof onSubmit === 'function') {
-        const result = await onSubmit(formData);
-        
-        if (result?.success) {
-          setSubmitStatus('success');
-          setSubmitMessage(t('contact.form.success') || 'Дякуємо! Ваше повідомлення відправлено.');
-          resetForm();
-        } else {
-          throw new Error(result?.message || 'Помилка відправки');
+  // Обробка даних офісів з ViewSets API
+  const processedOffices = useMemo(() => {
+    if (!offices || offices.length === 0) {
+      // Fallback офіси
+      return [
+        {
+          id: 1,
+          city: 'Київ',
+          address: 'вул. Хрещатик, 1',
+          phone: '+380 44 123 45 67',
+          email: 'kyiv@company.com',
+          working_hours: 'Пн-Пт: 9:00-18:00',
+          is_main: true
+        },
+        {
+          id: 2,
+          city: 'Львів',
+          address: 'пр. Свободи, 15',
+          phone: '+380 32 123 45 67',
+          email: 'lviv@company.com',
+          working_hours: 'Пн-Пт: 9:00-17:00',
+          is_main: false
         }
-      } else {
-        // Використовуємо Unified API
-        const result = await submitForm('/contact/', formData);
-        
-        if (result.success) {
-          setSubmitStatus('success');
-          setSubmitMessage(t('contact.form.success') || 'Дякуємо! Ваше повідомлення відправлено.');
-          resetForm();
-        } else {
-          throw new Error(result.error || 'Помилка відправки');
-        }
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitStatus('error');
-      setSubmitMessage(error.message || t('contact.form.error') || 'Виникла помилка при відправці');
+      ];
     }
-  };
-
-  // Скидання форми
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      service_type: '',
-      message: '',
-      quantity: '',
-      deadline: '',
-      budget_range: '',
-      contact_method: 'email',
-      newsletter_subscription: false
-    });
-    setFormErrors({});
-  };
-
-  // Закриття повідомлення про статус
-  const closeStatusMessage = () => {
-    setSubmitStatus(null);
-    setSubmitMessage('');
-  };
+    
+    return offices.sort((a, b) => b.is_main - a.is_main); // Головні офіси спочатку
+  }, [offices]);
 
   return (
-    <section id="contact" className="section-padding bg-gray-50">
-      <div className="container-custom">
+    <section id="contact" className="py-20 px-6 bg-gradient-to-br from-blue-50 to-white">
+      <div className="max-w-7xl mx-auto">
         
-        {/* Заголовок секції */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             {t('contact.title') || 'Зв\'яжіться з нами'}
-            <br />
-            <span className="text-gradient-blue">
-              {t('contact.subtitle') || 'прямо зараз'}
-            </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            {t('contact.description') || 'Готові допомогти вам з будь-якими питаннями та замовленнями. Наші експерти нададуть професійну консультацію.'}
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            {t('contact.subtitle') || 'Готові обговорити ваш проект? Заповніть форму або зв\'яжіться з нами зручним способом'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
-          {/* Контактна інформація */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              {t('contact.info.title') || 'Контактна інформація'}
-            </h3>
-            
-            {contactInfo.map((info, index) => (
-              <Card key={index} className="shadow-sm hover:shadow-md transition-shadow">
-                <CardBody className="p-4">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-gradient-blue p-3 rounded-lg flex-shrink-0">
-                      <info.icon className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{info.title}</h4>
-                      <p className="text-blue-600 font-medium">{info.value}</p>
-                      <p className="text-gray-500 text-sm">{info.subtitle}</p>
-                    </div>
-                  </div>
-                </CardBody>
-              </Card>
-            ))}
+          {/* Контактна форма */}
+          <Card className="shadow-xl">
+            <CardBody className="p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <MessageCircle className="w-6 h-6 mr-3 text-blue-600" />
+                {t('contact.form.title') || 'Надіслати запит'}
+              </h3>
 
-            {/* Додаткова інформація */}
-            <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100">
-              <CardBody className="p-6 text-center">
-                <Clock className="w-8 h-8 text-blue-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-gray-900 mb-2">
-                  {t('contact.working_hours') || 'Робочі години'}
-                </h4>
-                <p className="text-gray-600 text-sm">
-                  Пн-Пт: 9:00-18:00<br />
-                  Сб: 10:00-15:00<br />
-                  Нд: Вихідний
-                </p>
-              </CardBody>
-            </Card>
-          </div>
-
-          {/* Форма зв'язку */}
-          <div className="lg:col-span-2">
-            <Card className="shadow-lg">
-              <CardBody className="p-6 md:p-8">
-                
-                {/* Заголовок форми */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-gradient-blue p-2 rounded-lg">
-                    <MessageCircle className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900">
-                    {t('contact.form.title') || 'Надішліть нам повідомлення'}
-                  </h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Основна інформація */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    label={t('contact.form.name') || 'Ім\'я *'}
+                    placeholder={t('contact.form.name_placeholder') || 'Ваше ім\'я'}
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    isInvalid={!!formErrors.name}
+                    errorMessage={formErrors.name}
+                    startContent={<Users className="w-4 h-4 text-gray-400" />}
+                  />
+                  
+                  <Input
+                    label={t('contact.form.company') || 'Компанія'}
+                    placeholder={t('contact.form.company_placeholder') || 'Назва компанії'}
+                    value={formData.company}
+                    onChange={(e) => handleInputChange('company', e.target.value)}
+                    startContent={<Building className="w-4 h-4 text-gray-400" />}
+                  />
                 </div>
 
-                {/* Повідомлення про статус */}
-                {submitStatus && (
-                  <div className={`mb-6 p-4 rounded-lg flex items-center gap-3 ${
-                    submitStatus === 'success' 
-                      ? 'bg-green-50 border border-green-200' 
-                      : 'bg-red-50 border border-red-200'
-                  }`}>
-                    {submitStatus === 'success' ? (
-                      <CheckCircle className="w-5 h-5 text-green-600" />
-                    ) : (
-                      <AlertCircle className="w-5 h-5 text-red-600" />
-                    )}
-                    <p className={`flex-1 text-sm ${
-                      submitStatus === 'success' ? 'text-green-800' : 'text-red-800'
-                    }`}>
-                      {submitMessage}
-                    </p>
-                    <Button
-                      isIconOnly
-                      size="sm"
-                      variant="light"
-                      onPress={closeStatusMessage}
-                    >
-                      ✕
-                    </Button>
-                  </div>
-                )}
-
-                {/* Форма */}
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  
-                  {/* Особиста інформація */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input
-                      label={t('contact.form.name') || 'Ім\'я *'}
-                      placeholder="Введіть ваше ім'я"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      isInvalid={!!formErrors.name}
-                      errorMessage={formErrors.name}
-                      isRequired
-                    />
-                    
-                    <Input
-                      label={t('contact.form.company') || 'Компанія'}
-                      placeholder="Назва організації"
-                      value={formData.company}
-                      onChange={(e) => handleInputChange('company', e.target.value)}
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input
-                      type="email"
-                      label={t('contact.form.email') || 'Email *'}
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      isInvalid={!!formErrors.email}
-                      errorMessage={formErrors.email}
-                      isRequired
-                    />
-                    
-                    <Input
-                      type="tel"
-                      label={t('contact.form.phone') || 'Телефон *'}
-                      placeholder="+38 (067) 123-45-67"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      isInvalid={!!formErrors.phone}
-                      errorMessage={formErrors.phone}
-                      isRequired
-                    />
-                  </div>
-
-                  {/* Деталі замовлення */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Select
-                      label={t('contact.form.service_type') || 'Тип послуги'}
-                      placeholder="Оберіть тип послуги"
-                      value={formData.service_type}
-                      onChange={(e) => handleInputChange('service_type', e.target.value)}
-                    >
-                      {serviceTypes.map((service) => (
-                        <SelectItem key={service.key} value={service.key}>
-                          {service.label}
-                        </SelectItem>
-                      ))}
-                    </Select>
-
-                    <Input
-                      label={t('contact.form.quantity') || 'Кількість'}
-                      placeholder="Наприклад: 50 штук"
-                      value={formData.quantity}
-                      onChange={(e) => handleInputChange('quantity', e.target.value)}
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input
-                      label={t('contact.form.deadline') || 'Термін виконання'}
-                      placeholder="Наприклад: до кінця місяця"
-                      value={formData.deadline}
-                      onChange={(e) => handleInputChange('deadline', e.target.value)}
-                    />
-
-                    <Select
-                      label={t('contact.form.budget') || 'Бюджет'}
-                      placeholder="Орієнтовний бюджет"
-                      value={formData.budget_range}
-                      onChange={(e) => handleInputChange('budget_range', e.target.value)}
-                    >
-                      {budgetRanges.map((budget) => (
-                        <SelectItem key={budget.key} value={budget.key}>
-                          {budget.label}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  </div>
-
-                  {/* Повідомлення */}
-                  <Textarea
-                    label={t('contact.form.message') || 'Повідомлення *'}
-                    placeholder="Розкажіть детальніше про ваші потреби..."
-                    value={formData.message}
-                    onChange={(e) => handleInputChange('message', e.target.value)}
-                    isInvalid={!!formErrors.message}
-                    errorMessage={formErrors.message}
-                    minRows={4}
-                    isRequired
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    type="email"
+                    label={t('contact.form.email') || 'Email *'}
+                    placeholder={t('contact.form.email_placeholder') || 'your@email.com'}
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    isInvalid={!!formErrors.email}
+                    errorMessage={formErrors.email}
+                    startContent={<Mail className="w-4 h-4 text-gray-400" />}
                   />
+                  
+                  <Input
+                    type="tel"
+                    label={t('contact.form.phone') || 'Телефон'}
+                    placeholder={t('contact.form.phone_placeholder') || '+380 XX XXX XX XX'}
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    isInvalid={!!formErrors.phone}
+                    errorMessage={formErrors.phone}
+                    startContent={<Phone className="w-4 h-4 text-gray-400" />}
+                  />
+                </div>
 
-                  {/* Метод зв'язку */}
+                {/* Деталі проекту */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Select
-                    label={t('contact.form.contact_method') || 'Зручний спосіб зв\'язку'}
-                    value={formData.contact_method}
-                    onChange={(e) => handleInputChange('contact_method', e.target.value)}
-                    defaultSelectedKeys={['email']}
+                    label={t('contact.form.service_type') || 'Тип послуги'}
+                    placeholder={t('contact.form.service_type_placeholder') || 'Оберіть послугу'}
+                    value={formData.service_type}
+                    onChange={(value) => handleInputChange('service_type', value)}
                   >
-                    {contactMethods.map((method) => (
-                      <SelectItem key={method.key} value={method.key}>
-                        {method.label}
+                    {serviceTypes.map((service) => (
+                      <SelectItem key={service.key} value={service.key}>
+                        {service.label}
                       </SelectItem>
                     ))}
                   </Select>
 
-                  {/* Підписка на новини */}
-                  <Checkbox
-                    isSelected={formData.newsletter_subscription}
-                    onValueChange={(value) => handleInputChange('newsletter_subscription', value)}
-                  >
-                    {t('contact.form.newsletter') || 'Хочу отримувати новини та спеціальні пропозиції'}
-                  </Checkbox>
+                  <Input
+                    label={t('contact.form.quantity') || 'Кількість'}
+                    placeholder={t('contact.form.quantity_placeholder') || 'Приблизна кількість'}
+                    value={formData.quantity}
+                    onChange={(e) => handleInputChange('quantity', e.target.value)}
+                  />
+                </div>
 
-                  {/* Кнопка відправки */}
-                  <Button
-                    type="submit"
-                    color="primary"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 mt-6"
-                    startContent={isSubmitting ? null : <Send className="w-5 h-5" />}
-                    isLoading={isSubmitting}
-                    isDisabled={isSubmitting}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    label={t('contact.form.deadline') || 'Термін виконання'}
+                    placeholder={t('contact.form.deadline_placeholder') || 'Коли потрібно виконати'}
+                    value={formData.deadline}
+                    onChange={(e) => handleInputChange('deadline', e.target.value)}
+                    startContent={<Clock className="w-4 h-4 text-gray-400" />}
+                  />
+
+                  <Select
+                    label={t('contact.form.budget') || 'Бюджет'}
+                    placeholder={t('contact.form.budget_placeholder') || 'Оберіть діапазон'}
+                    value={formData.budget_range}
+                    onChange={(value) => handleInputChange('budget_range', value)}
                   >
-                    {isSubmitting 
-                      ? (t('contact.form.sending') || 'Відправляємо...') 
-                      : (t('contact.form.send') || 'Відправити повідомлення')
-                    }
-                  </Button>
-                </form>
+                    {budgetRanges.map((range) => (
+                      <SelectItem key={range.key} value={range.key}>
+                        {range.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+
+                {/* Повідомлення */}
+                <Textarea
+                  label={t('contact.form.message') || 'Повідомлення *'}
+                  placeholder={t('contact.form.message_placeholder') || 'Опишіть деталі вашого проекту...'}
+                  value={formData.message}
+                  onChange={(e) => handleInputChange('message', e.target.value)}
+                  minRows={4}
+                  maxRows={8}
+                  isInvalid={!!formErrors.message}
+                  errorMessage={formErrors.message}
+                />
+
+                {/* Спосіб зв'язку */}
+                <Select
+                  label={t('contact.form.contact_method') || 'Бажаний спосіб зв\'язку'}
+                  placeholder={t('contact.form.contact_method_placeholder') || 'Як з вами зв\'язатися'}
+                  value={formData.contact_method}
+                  onChange={(value) => handleInputChange('contact_method', value)}
+                >
+                  {contactMethods.map((method) => (
+                    <SelectItem key={method.key} value={method.key}>
+                      {method.label}
+                    </SelectItem>
+                  ))}
+                </Select>
+
+                {/* Підписка на новини */}
+                <Checkbox
+                  isSelected={formData.newsletter_subscription}
+                  onValueChange={(checked) => handleInputChange('newsletter_subscription', checked)}
+                >
+                  <span className="text-sm text-gray-600">
+                    {t('contact.form.newsletter') || 'Хочу отримувати новини та спеціальні пропозиції'}
+                  </span>
+                </Checkbox>
+
+                {/* Статус відправки */}
+                {submitStatus === 'success' && (
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-center">
+                    <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
+                    <span className="text-green-800">{submitMessage}</span>
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-center">
+                    <AlertCircle className="w-5 h-5 text-red-600 mr-3" />
+                    <span className="text-red-800">{submitMessage}</span>
+                  </div>
+                )}
+
+                {/* Кнопка відправки */}
+                <Button
+                  type="submit"
+                  color="primary"
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-[1.02] transition-transform"
+                  isLoading={isSubmitting}
+                  startContent={!isSubmitting && <Send className="w-5 h-5" />}
+                  loadingContent={
+                    <div className="flex items-center">
+                      <Loader className="w-4 h-4 mr-2 animate-spin" />
+                      {t('contact.form.sending') || 'Надсилання...'}
+                    </div>
+                  }
+                >
+                  {!isSubmitting && (t('contact.form.submit') || 'Надіслати запит')}
+                </Button>
+              </form>
+            </CardBody>
+          </Card>
+
+          {/* Контактна інформація та офіси */}
+          <div className="space-y-8">
+            
+            {/* Офіси */}
+            <Card className="shadow-xl">
+              <CardBody className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                  <MapPin className="w-6 h-6 mr-3 text-blue-600" />
+                  {t('contact.offices.title') || 'Наші офіси'}
+                </h3>
+
+                {contactDataLoading && (
+                  <div className="flex items-center justify-center py-8">
+                    <Spinner size="md" color="primary" />
+                    <span className="ml-3 text-gray-600">
+                      {t('contact.offices.loading') || 'Завантаження офісів...'}
+                    </span>
+                  </div>
+                )}
+
+                {contactDataError && (
+                  <div className="text-center py-6">
+                    <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
+                    <p className="text-red-600 text-sm mb-3">
+                      {t('contact.offices.error') || 'Помилка завантаження офісів'}
+                    </p>
+                    <Button 
+                      size="sm" 
+                      variant="bordered" 
+                      onClick={reloadContactData}
+                    >
+                      {t('common.retry') || 'Спробувати знову'}
+                    </Button>
+                  </div>
+                )}
+
+                {!contactDataLoading && !contactDataError && (
+                  <div className="space-y-6">
+                    {processedOffices.map((office) => (
+                      <div 
+                        key={office.id} 
+                        className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer"
+                        onClick={() => setSelectedOffice(office)}
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center mb-2">
+                              <h4 className="text-lg font-semibold text-gray-900">
+                                {office.city}
+                              </h4>
+                              {office.is_main && (
+                                <Chip size="sm" color="primary" variant="flat" className="ml-2">
+                                  <Star className="w-3 h-3 mr-1" />
+                                  {t('contact.offices.main') || 'Головний'}
+                                </Chip>
+                              )}
+                            </div>
+                            
+                            <div className="space-y-1 text-sm text-gray-600">
+                              <div className="flex items-center">
+                                <MapPin className="w-4 h-4 mr-2" />
+                                {office.address}
+                              </div>
+                              
+                              <div className="flex items-center">
+                                <Phone className="w-4 h-4 mr-2" />
+                                <a 
+                                  href={`tel:${office.phone}`}
+                                  className="hover:text-blue-600 transition-colors"
+                                >
+                                  {office.phone}
+                                </a>
+                              </div>
+                              
+                              <div className="flex items-center">
+                                <Mail className="w-4 h-4 mr-2" />
+                                <a 
+                                  href={`mailto:${office.email}`}
+                                  className="hover:text-blue-600 transition-colors"
+                                >
+                                  {office.email}
+                                </a>
+                              </div>
+                              
+                              <div className="flex items-center">
+                                <Clock className="w-4 h-4 mr-2" />
+                                {office.working_hours}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardBody>
+            </Card>
+
+            {/* Додаткова інформація */}
+            <Card className="shadow-xl bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+              <CardBody className="p-8">
+                <h3 className="text-2xl font-bold mb-4">
+                  {t('contact.info.title') || 'Чому обрати нас?'}
+                </h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 mr-3" />
+                    <span>{t('contact.info.benefit1') || 'Безкоштовна консультація та розрахунок'}</span>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 mr-3" />
+                    <span>{t('contact.info.benefit2') || 'Індивідуальний підхід до кожного проекту'}</span>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 mr-3" />
+                    <span>{t('contact.info.benefit3') || 'Швидкі терміни виконання замовлень'}</span>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 mr-3" />
+                    <span>{t('contact.info.benefit4') || 'Гарантія якості та післяпродажна підтримка'}</span>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-white/20">
+                  <p className="text-sm opacity-90">
+                    {t('contact.info.response_time') || 
+                    'Зазвичай ми відповідаємо протягом 2-х годин у робочий час'}
+                  </p>
+                </div>
               </CardBody>
             </Card>
           </div>
         </div>
 
-        {/* Статистика API (тільки в режимі розробки) */}
+        {/* Modal підтвердження */}
+        <Modal isOpen={isOpen} onClose={onClose} size="md">
+          <ModalContent>
+            <ModalHeader className="flex items-center">
+              <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
+              {t('contact.modal.title') || 'Запит надіслано!'}
+            </ModalHeader>
+            <ModalBody>
+              <p className="text-gray-600">
+                {submitMessage || t('contact.modal.message') || 
+                'Дякуємо за ваш запит! Наш менеджер зв\'яжеться з вами найближчим часом для обговорення деталей проекту.'}
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onPress={onClose}>
+                {t('contact.modal.close') || 'Зрозуміло'}
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+        {/* Debug Info (тільки в режимі розробки) */}
         {process.env.NODE_ENV === 'development' && (
-          <div className="mt-8 text-center text-sm text-gray-500">
-            <p>
-              📊 Form Status: {isSubmitting ? 'Submitting...' : 'Ready'} | 
-              Using: {onSubmit ? 'External Handler' : 'Unified API'} |
-              Status: {submitStatus || 'None'}
-            </p>
+          <div className="mt-8 p-4 bg-gray-100 rounded-lg text-sm text-gray-600">
+            <h4 className="font-semibold mb-2">🔧 Debug Info (ViewSets API):</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <strong>Contact Data Loading:</strong> {contactDataLoading ? 'Yes' : 'No'}<br/>
+                <strong>Offices Count:</strong> {processedOffices.length}<br/>
+                <strong>Form Submitting:</strong> {isSubmitting ? 'Yes' : 'No'}
+              </div>
+              <div>
+                <strong>Submit Status:</strong> {submitStatus || 'None'}<br/>
+                <strong>Form Errors:</strong> {Object.keys(formErrors).length}<br/>
+                {contactDataError && <span className="text-red-600"><strong>API Error:</strong> {contactDataError}</span>}
+              </div>
+            </div>
           </div>
         )}
       </div>

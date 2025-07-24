@@ -4340,3 +4340,90 @@ INFO 2025-07-24 10:52:11,893 basehttp 7960 4032 "GET /api/v1/services/featured/ 
 INFO 2025-07-24 10:52:11,910 basehttp 7960 11772 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
 INFO 2025-07-24 10:52:11,928 basehttp 7960 4032 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
 INFO 2025-07-24 10:52:43,510 autoreload 15384 17392 Watching for file changes with StatReloader
+INFO 2025-07-24 10:57:55,337 autoreload 15384 17392 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-24 10:57:57,817 autoreload 7972 17340 Watching for file changes with StatReloader
+INFO 2025-07-24 11:05:09,229 autoreload 7972 17340 D:\ugc\backend\apps\api\urls.py changed, reloading.
+INFO 2025-07-24 11:05:11,221 autoreload 5728 1448 Watching for file changes with StatReloader
+INFO 2025-07-24 11:05:21,662 autoreload 5728 1448 D:\ugc\backend\apps\api\views.py changed, reloading.
+INFO 2025-07-24 11:05:23,884 autoreload 15912 8372 Watching for file changes with StatReloader
+INFO 2025-07-24 11:08:22,897 autoreload 10604 12580 Watching for file changes with StatReloader
+INFO 2025-07-24 11:08:48,645 basehttp 10604 14128 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 5796
+WARNING 2025-07-24 11:08:49,330 log 10604 14128 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:49,332 basehttp 10604 14128 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+WARNING 2025-07-24 11:08:49,350 log 10604 1040 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:49,352 basehttp 10604 1040 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+WARNING 2025-07-24 11:08:49,382 log 10604 1040 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:49,383 basehttp 10604 1040 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+INFO 2025-07-24 11:08:49,399 basehttp 10604 14128 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 7926
+WARNING 2025-07-24 11:08:49,435 log 10604 14128 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:49,436 basehttp 10604 14128 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+WARNING 2025-07-24 11:08:49,464 log 10604 14128 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:49,465 basehttp 10604 14128 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+INFO 2025-07-24 11:08:49,486 basehttp 10604 17388 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:49,487 basehttp 10604 1356 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+WARNING 2025-07-24 11:08:49,507 log 10604 1040 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:49,509 basehttp 10604 1040 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+INFO 2025-07-24 11:08:49,513 basehttp 10604 14128 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 7926
+INFO 2025-07-24 11:08:49,642 basehttp 10604 1356 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:49,653 basehttp 10604 5700 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:49,780 basehttp 10604 14128 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:49,790 basehttp 10604 1356 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:49,911 basehttp 10604 14128 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:49,921 basehttp 10604 5700 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:50,038 basehttp 10604 14128 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:50,048 basehttp 10604 1356 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:50,168 basehttp 10604 5700 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:08:50,178 basehttp 10604 14128 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+WARNING 2025-07-24 11:08:50,209 log 10604 14128 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:50,210 basehttp 10604 14128 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+WARNING 2025-07-24 11:08:50,222 log 10604 5700 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:50,223 basehttp 10604 5700 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+WARNING 2025-07-24 11:08:50,235 log 10604 14128 Not Found: /api/v1/homepage/stats/
+WARNING 2025-07-24 11:08:50,236 basehttp 10604 14128 "GET /api/v1/homepage/stats/ HTTP/1.1" 404 35
+INFO 2025-07-24 11:11:55,097 basehttp 10604 14128 "OPTIONS /api/v1/homepage/1/ HTTP/1.1" 200 0
+INFO 2025-07-24 11:11:55,113 basehttp 10604 5700 "OPTIONS /api/v1/homepage/1/stats/ HTTP/1.1" 200 0
+INFO 2025-07-24 11:11:55,116 basehttp 10604 1356 "OPTIONS /api/v1/homepage/1/featured_content/ HTTP/1.1" 200 0
+INFO 2025-07-24 11:11:55,337 basehttp 10604 1356 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 200 213
+INFO 2025-07-24 11:11:55,347 basehttp 10604 14128 "GET /api/v1/homepage/1/ HTTP/1.1" 200 1114
+INFO 2025-07-24 11:11:55,390 basehttp 10604 5700 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 200 162
+INFO 2025-07-24 11:11:55,417 basehttp 10604 1040 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:55,538 basehttp 10604 1356 "OPTIONS /api/v1/project-categories/ HTTP/1.1" 200 0
+INFO 2025-07-24 11:11:55,717 basehttp 10604 1040 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:55,763 basehttp 10604 17388 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 200 213
+INFO 2025-07-24 11:11:55,763 basehttp 10604 14128 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:55,774 basehttp 10604 5700 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:55,851 basehttp 10604 7840 "GET /api/v1/project-categories/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:55,893 basehttp 10604 1356 "GET /api/v1/homepage/1/ HTTP/1.1" 200 1114
+INFO 2025-07-24 11:11:55,997 basehttp 10604 17388 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,017 basehttp 10604 1040 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 200 162
+INFO 2025-07-24 11:11:56,055 basehttp 10604 7840 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,140 basehttp 10604 5700 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,163 basehttp 10604 14128 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,314 basehttp 10604 7840 "GET /api/v1/project-categories/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,338 basehttp 10604 1040 "GET /api/v1/homepage/1/ HTTP/1.1" 200 1114
+INFO 2025-07-24 11:11:56,358 basehttp 10604 1040 "OPTIONS /api/v1/translations/uk/ HTTP/1.1" 200 0
+INFO 2025-07-24 11:11:56,365 basehttp 10604 14128 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 200 213
+INFO 2025-07-24 11:11:56,391 basehttp 10604 1040 "GET /api/v1/translations/uk/ HTTP/1.1" 200 6676
+INFO 2025-07-24 11:11:56,538 basehttp 10604 7840 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,555 basehttp 10604 5700 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,566 basehttp 10604 1356 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 200 213
+INFO 2025-07-24 11:11:56,629 basehttp 10604 17388 "GET /api/v1/homepage/1/ HTTP/1.1" 200 1114
+INFO 2025-07-24 11:11:56,803 basehttp 10604 7840 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,850 basehttp 10604 1040 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,879 basehttp 10604 5700 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,893 basehttp 10604 17388 "GET /api/v1/project-categories/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,934 basehttp 10604 14128 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:56,984 basehttp 10604 1356 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 200 162
+INFO 2025-07-24 11:11:57,120 basehttp 10604 7840 "GET /api/v1/homepage/1/ HTTP/1.1" 200 1114
+INFO 2025-07-24 11:11:57,123 basehttp 10604 1040 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 200 213
+INFO 2025-07-24 11:11:57,160 basehttp 10604 14128 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 200 162
+INFO 2025-07-24 11:11:57,319 basehttp 10604 1356 "GET /api/v1/services/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:57,370 basehttp 10604 14128 "GET /api/v1/services/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:57,387 basehttp 10604 17388 "GET /api/v1/project-categories/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:57,422 basehttp 10604 1040 "GET /api/v1/projects/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:57,438 basehttp 10604 7840 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:57,488 basehttp 10604 5700 "GET /api/v1/homepage/1/ HTTP/1.1" 200 1114
+INFO 2025-07-24 11:11:57,495 basehttp 10604 17388 "GET /api/v1/translations/uk/ HTTP/1.1" 200 6676
+INFO 2025-07-24 11:11:57,516 basehttp 10604 1356 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 200 213
+INFO 2025-07-24 11:11:57,641 basehttp 10604 1040 "GET /api/v1/projects/featured/ HTTP/1.1" 200 52
+INFO 2025-07-24 11:11:57,642 basehttp 10604 7840 "GET /api/v1/services/featured/ HTTP/1.1" 200 52

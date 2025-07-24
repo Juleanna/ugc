@@ -1,12 +1,12 @@
 // frontend/src/hooks/useUnifiedAPI.jsx
-// Виправлена версія для існуючої структури бекенду
+// Адаптовано для нової ViewSets архітектури бекенду
 
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 
-// Context for global API state
+// Context для глобального стану API
 const APIContext = createContext(null);
 
-// Provider for global state
+// Provider для глобального стану
 export const APIProvider = ({ children }) => {
   const [globalState, setGlobalState] = useState({
     data: {},
@@ -23,11 +23,11 @@ export const APIProvider = ({ children }) => {
   );
 };
 
-// Main class for API operations
+// Основний клас для API операцій з підтримкою ViewSets
 class UnifiedAPIManager {
   constructor() {
     this.baseURL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1';
-    this.cacheTimeout = 5 * 60 * 1000;
+    this.cacheTimeout = 5 * 60 * 1000; // 5 хвилин
     this.requestTimeouts = new Map();
   }
 
@@ -35,25 +35,25 @@ class UnifiedAPIManager {
     const cacheKey = `${endpoint}_${JSON.stringify(options)}`;
     const now = Date.now();
 
-    // Check cache
+    // Перевірка кешу
     if (globalState.cache.has(cacheKey)) {
       const cached = globalState.cache.get(cacheKey);
       if (now - cached.timestamp < this.cacheTimeout) {
-        console.log(`Cache hit: ${endpoint}`);
+        console.log(`✅ Cache hit: ${endpoint}`);
         return cached.data;
       }
     }
 
-    // Check if request is already in progress
+    // Перевірка чи запит вже виконується
     if (globalState.requestQueue.has(cacheKey)) {
-      console.log(`Request in progress: ${endpoint}`);
+      console.log(`⏳ Request in progress: ${endpoint}`);
       return globalState.requestQueue.get(cacheKey);
     }
 
-    // Create new request
+    // Створення нового запиту
     const requestPromise = this.executeRequest(endpoint, options);
     
-    // Add to queue
+    // Додавання до черги
     setGlobalState(prev => ({
       ...prev,
       requestQueue: new Map(prev.requestQueue).set(cacheKey, requestPromise),
@@ -63,7 +63,7 @@ class UnifiedAPIManager {
     try {
       const result = await requestPromise;
 
-      // Cache result
+      // Кешування результату
       setGlobalState(prev => {
         const newCache = new Map(prev.cache);
         newCache.set(cacheKey, { data: result, timestamp: now });
@@ -81,11 +81,11 @@ class UnifiedAPIManager {
         };
       });
 
-      console.log(`API Success: ${endpoint}`);
+      console.log(`✅ API Success: ${endpoint}`, result);
       return result;
 
     } catch (error) {
-      // Handle error
+      // Обробка помилки
       setGlobalState(prev => {
         const newQueue = new Map(prev.requestQueue);
         newQueue.delete(cacheKey);
@@ -98,7 +98,7 @@ class UnifiedAPIManager {
         };
       });
 
-      console.error(`API Error ${endpoint}:`, error);
+      console.error(`❌ API Error ${endpoint}:`, error);
       throw error;
     }
   }
@@ -123,28 +123,33 @@ class UnifiedAPIManager {
 
     const result = await response.json();
     
-    // Обробляємо різні формати відповідей
-    if (result.success) {
-      return result.data;
+    // Обробляємо різні формати відповідей від ViewSets
+    if (result.success !== undefined) {
+      // Стандартний формат API
+      return result.success ? result.data : result;
     } else if (result.results) {
+      // Пагінована відповідь від ViewSets
       return result.results;
     } else if (Array.isArray(result)) {
+      // Масив даних
       return result;
     } else {
+      // Інші типи відповідей
       return result;
     }
   }
 
   async preloadCriticalData(globalState, setGlobalState) {
-    // ВИПРАВЛЕНО: Використовуємо тільки існуючі endpoints
+    // ViewSets endpoints для критичних даних
     const criticalEndpoints = [
-      '/homepage/stats/',        // ✅ Працює
-      '/services/featured/',     // ✅ Працює
-      '/projects/featured/',     // ✅ Працює
-      '/translations/uk/all/'    // ⚠️ Потрібно перевірити
+      '/homepage/1/',                    // ViewSets endpoint для головної сторінки
+      '/homepage/1/stats/',              // Статистика головної сторінки
+      '/services/featured/',             // Рекомендовані послуги
+      '/projects/featured/',             // Рекомендовані проєкти
+      '/translations/uk/',               // Переклади
     ];
 
-    console.log('Preloading critical data...');
+    console.log('🔄 Preloading critical data for ViewSets...');
 
     const results = await Promise.allSettled(
       criticalEndpoints.map(endpoint => 
@@ -153,16 +158,16 @@ class UnifiedAPIManager {
     );
 
     const successful = results.filter(r => r.status === 'fulfilled').length;
-    console.log(`Preloaded ${successful}/${criticalEndpoints.length} endpoints`);
+    console.log(`✅ Preloaded ${successful}/${criticalEndpoints.length} ViewSets endpoints`);
 
     return { successful, total: criticalEndpoints.length };
   }
 }
 
-// Create singleton instance
+// Створення singleton instance
 const apiManager = new UnifiedAPIManager();
 
-// Main hook for API operations
+// Основний хук для API операцій
 export const useUnifiedAPI = (endpoint, options = {}) => {
   const context = useContext(APIContext);
   
@@ -191,7 +196,7 @@ export const useUnifiedAPI = (endpoint, options = {}) => {
     if (endpoint && !globalState.data[endpoint]) {
       loadData();
     }
-  }, [endpoint, loadData]);
+  }, [endpoint, globalState.data, loadData]);
 
   return {
     data: globalState.data[endpoint] || null,
@@ -212,98 +217,208 @@ export const useUnifiedAPI = (endpoint, options = {}) => {
   };
 };
 
-// ВИПРАВЛЕНІ спеціалізовані хуки
+// =================== СПЕЦІАЛІЗОВАНІ ХУКИ ДЛЯ VIEWSETS ===================
 
 export const useHomepageData = () => {
-  // Використовуємо тільки існуючий endpoint
-  const stats = useUnifiedAPI('/homepage/stats/');
-  
+  // ViewSets endpoints для головної сторінки
+  const homepageDetails = useUnifiedAPI('/homepage/1/');
+  const homepageStats = useUnifiedAPI('/homepage/1/stats/');
+  const featuredContent = useUnifiedAPI('/homepage/1/featured_content/');
+
   const combinedData = {
-    // Базові дані зі статистики
-    main_title: 'Професійний одяг',
-    sphere_title: 'кожної сфери', 
-    subtitle: 'Створюємо якісний одяг для різних професій',
-    primary_button_text: 'Наші проєкти',
-    secondary_button_text: 'Дізнатися більше',
-    // Статистика з API
-    stats: stats.data || {
-      experience: '5+',
-      projects: '100+',
-      clients: '50+',
-      support: '24/7'
-    }
+    // Дані з ViewSets
+    ...homepageDetails.data,
+    stats: homepageStats.data || {
+      total_projects: 150,
+      satisfied_clients: 95,
+      years_experience: 10,
+      team_members: 25
+    },
+    featured_services: featuredContent.data?.featured_services || [],
+    featured_projects: featuredContent.data?.featured_projects || []
   };
 
   return {
     data: combinedData,
-    isLoading: stats.isLoading,
-    error: stats.error,
-    reload: stats.reload
+    isLoading: homepageDetails.isLoading || homepageStats.isLoading || featuredContent.isLoading,
+    error: homepageDetails.error || homepageStats.error || featuredContent.error,
+    reload: () => {
+      homepageDetails.reload();
+      homepageStats.reload();
+      featuredContent.reload();
+    }
   };
 };
 
 export const useServicesData = () => {
-  // Використовуємо тільки featured endpoint (працює)
-  const featured = useUnifiedAPI('/services/featured/');
-  
-  // Не робимо запит до /services/ оскільки він не існує
-  const services = featured.data || [];
+  // ViewSets endpoints для послуг
+  const allServices = useUnifiedAPI('/services/');
+  const featuredServices = useUnifiedAPI('/services/featured/');
 
   return {
-    data: Array.isArray(services) ? services : [],
-    isLoading: featured.isLoading,
-    error: featured.error,
-    reload: featured.reload
+    data: allServices.data || featuredServices.data || [],
+    featuredData: featuredServices.data || [],
+    isLoading: allServices.isLoading || featuredServices.isLoading,
+    error: allServices.error || featuredServices.error,
+    reload: () => {
+      allServices.reload();
+      featuredServices.reload();
+    }
+  };
+};
+
+export const useServiceDetails = (serviceId) => {
+  // ViewSets endpoint для деталей послуги
+  const serviceDetails = useUnifiedAPI(`/services/${serviceId}/`);
+  const serviceFeatures = useUnifiedAPI(`/services/${serviceId}/features/`);
+
+  return {
+    data: {
+      ...serviceDetails.data,
+      features: serviceFeatures.data || []
+    },
+    isLoading: serviceDetails.isLoading || serviceFeatures.isLoading,
+    error: serviceDetails.error || serviceFeatures.error,
+    reload: () => {
+      serviceDetails.reload();
+      serviceFeatures.reload();
+    }
   };
 };
 
 export const useProjectsData = () => {
-  // Використовуємо тільки featured endpoint (працює)
-  const featured = useUnifiedAPI('/projects/featured/');
-  
-  // Не робимо запит до /projects/ оскільки він не існує
-  const projects = featured.data || [];
+  // ViewSets endpoints для проєктів
+  const allProjects = useUnifiedAPI('/projects/');
+  const featuredProjects = useUnifiedAPI('/projects/featured/');
+  const projectCategories = useUnifiedAPI('/project-categories/');
 
   return {
-    data: Array.isArray(projects) ? projects : [],
-    isLoading: featured.isLoading,
-    error: featured.error,
-    reload: featured.reload
+    data: allProjects.data || featuredProjects.data || [],
+    featuredData: featuredProjects.data || [],
+    categories: projectCategories.data || [],
+    isLoading: allProjects.isLoading || featuredProjects.isLoading || projectCategories.isLoading,
+    error: allProjects.error || featuredProjects.error || projectCategories.error,
+    reload: () => {
+      allProjects.reload();
+      featuredProjects.reload();
+      projectCategories.reload();
+    }
+  };
+};
+
+export const useProjectDetails = (projectSlug) => {
+  // ViewSets endpoint для деталей проєкту
+  const projectDetails = useUnifiedAPI(`/projects/${projectSlug}/`);
+  const projectImages = useUnifiedAPI(`/projects/${projectSlug}/images/`);
+
+  return {
+    data: {
+      ...projectDetails.data,
+      images: projectImages.data || []
+    },
+    isLoading: projectDetails.isLoading || projectImages.isLoading,
+    error: projectDetails.error || projectImages.error,
+    reload: () => {
+      projectDetails.reload();
+      projectImages.reload();
+    }
+  };
+};
+
+export const useJobsData = () => {
+  // ViewSets endpoints для вакансій
+  const allJobs = useUnifiedAPI('/jobs/');
+  const urgentJobs = useUnifiedAPI('/jobs/urgent/');
+  const workplacePhotos = useUnifiedAPI('/workplace-photos/');
+
+  return {
+    data: allJobs.data || [],
+    urgentData: urgentJobs.data || [],
+    workplacePhotos: workplacePhotos.data || [],
+    isLoading: allJobs.isLoading || urgentJobs.isLoading,
+    error: allJobs.error || urgentJobs.error,
+    reload: () => {
+      allJobs.reload();
+      urgentJobs.reload();
+      workplacePhotos.reload();
+    }
+  };
+};
+
+export const useJobDetails = (jobSlug) => {
+  // ViewSets endpoint для деталей вакансії
+  return useUnifiedAPI(`/jobs/${jobSlug}/`);
+};
+
+export const useContactData = () => {
+  // ViewSets endpoints для контактів
+  const offices = useUnifiedAPI('/offices/');
+  const partnershipInfo = useUnifiedAPI('/partnership-info/');
+
+  return {
+    offices: offices.data || [],
+    partnershipInfo: partnershipInfo.data || [],
+    isLoading: offices.isLoading || partnershipInfo.isLoading,
+    error: offices.error || partnershipInfo.error,
+    reload: () => {
+      offices.reload();
+      partnershipInfo.reload();
+    }
+  };
+};
+
+export const useTeamData = () => {
+  // ViewSets endpoint для команди
+  const teamMembers = useUnifiedAPI('/team-members/');
+  const managementTeam = useUnifiedAPI('/team-members/?is_management=true');
+
+  return {
+    data: teamMembers.data || [],
+    managementData: managementTeam.data || [],
+    isLoading: teamMembers.isLoading || managementTeam.isLoading,
+    error: teamMembers.error || managementTeam.error,
+    reload: () => {
+      teamMembers.reload();
+      managementTeam.reload();
+    }
   };
 };
 
 export const useTranslationsData = (lang = 'uk') => {
-  // Спробуємо endpoint перекладів
-  return useUnifiedAPI(`/translations/${lang}/all/`);
-};
-
-export const useHeroData = () => {
-  const homepage = useHomepageData();
-  const services = useServicesData();
-  const projects = useProjectsData();
-
-  const heroData = {
-    main_title: homepage.data?.main_title || 'Професійний одяг',
-    sphere_title: homepage.data?.sphere_title || 'кожної сфери',
-    subtitle: homepage.data?.subtitle || 'Створюємо якісний одяг для різних професій',
-    primary_button_text: homepage.data?.primary_button_text || 'Наші проєкти',
-    secondary_button_text: homepage.data?.secondary_button_text || 'Дізнатися більше',
-    stats: homepage.data?.stats,
-    featured_services: services.data.slice(0, 3),
-    featured_projects: projects.data.slice(0, 4)
-  };
+  // API views endpoints для перекладів (не ViewSets)
+  const translations = useUnifiedAPI(`/translations/${lang}/`);
+  const allTranslations = useUnifiedAPI(`/translations/${lang}/all/`);
 
   return {
-    data: heroData,
-    isLoading: homepage.isLoading || services.isLoading || projects.isLoading,
-    error: homepage.error || services.error || projects.error,
+    data: translations.data || {},
+    extendedData: allTranslations.data || {},
+    isLoading: translations.isLoading || allTranslations.isLoading,
+    error: translations.error || allTranslations.error,
     reload: () => {
-      homepage.reload();
-      services.reload(); 
-      projects.reload();
+      translations.reload();
+      allTranslations.reload();
     }
   };
 };
+
+export const useAPIStats = () => {
+  // ViewSets endpoint для статистики
+  const apiStats = useUnifiedAPI('/stats/');
+  const healthCheck = useUnifiedAPI('/health/');
+
+  return {
+    data: apiStats.data || {},
+    health: healthCheck.data || {},
+    isLoading: apiStats.isLoading || healthCheck.isLoading,
+    error: apiStats.error || healthCheck.error,
+    reload: () => {
+      apiStats.reload();
+      healthCheck.reload();
+    }
+  };
+};
+
+// =================== ФОРМИ ТА SUBMISSION ===================
 
 export const useFormSubmission = () => {
   const context = useContext(APIContext);
@@ -319,22 +434,40 @@ export const useFormSubmission = () => {
         body: JSON.stringify(formData)
       }, globalState, setGlobalState);
       
-      console.log('Form submitted successfully');
+      console.log('✅ Form submitted successfully');
       return { success: true, data: result };
       
     } catch (error) {
-      console.error('Form submission failed:', error);
+      console.error('❌ Form submission failed:', error);
       return { success: false, error: error.message };
     } finally {
       setIsSubmitting(false);
     }
   }, [globalState, setGlobalState]);
 
+  // Спеціалізовані методи для різних форм
+  const submitContactForm = useCallback((formData) => {
+    return submitForm('/contact-inquiries/', formData);
+  }, [submitForm]);
+
+  const submitJobApplication = useCallback((formData) => {
+    return submitForm('/job-applications/', formData);
+  }, [submitForm]);
+
+  const submitPartnerInquiry = useCallback((formData) => {
+    return submitForm('/partner-inquiries/', formData);
+  }, [submitForm]);
+
   return {
     submitForm,
+    submitContactForm,
+    submitJobApplication,
+    submitPartnerInquiry,
     isSubmitting
   };
 };
+
+// =================== КЕШ-МЕНЕДЖЕР ===================
 
 export const useCacheManager = () => {
   const context = useContext(APIContext);
@@ -347,7 +480,7 @@ export const useCacheManager = () => {
       data: {},
       errors: {}
     }));
-    console.log('All cache cleared');
+    console.log('🗑️ All cache cleared');
   }, [setGlobalState]);
 
   const clearCachePattern = useCallback((pattern) => {
@@ -367,21 +500,17 @@ export const useCacheManager = () => {
         }
       }
       
-      return {
-        ...prev,
-        cache: newCache,
-        data: newData
-      };
+      return { ...prev, cache: newCache, data: newData };
     });
-    console.log(`Cache cleared for pattern: ${pattern}`);
+    console.log(`🗑️ Cache cleared for pattern: ${pattern}`);
   }, [setGlobalState]);
 
   const getCacheStats = useCallback(() => {
     return {
-      cacheSize: globalState.cache.size,
-      dataKeys: Object.keys(globalState.data).length,
+      totalEntries: globalState.cache.size,
+      dataKeys: Object.keys(globalState.data),
       activeRequests: globalState.requestQueue.size,
-      errors: Object.keys(globalState.errors).filter(key => globalState.errors[key]).length
+      errorCount: Object.keys(globalState.errors).filter(key => globalState.errors[key]).length
     };
   }, [globalState]);
 
@@ -397,4 +526,37 @@ export const useCacheManager = () => {
   };
 };
 
-export default useUnifiedAPI;
+// =================== ЗРУЧНИЙ КОМПОЗИТНИЙ ХУК ===================
+
+export const useHeroData = () => {
+  const homepage = useHomepageData();
+  const services = useServicesData();
+  const projects = useProjectsData();
+
+  const heroData = {
+    main_title: homepage.data?.main_title || 'Професійний одяг',
+    sphere_title: homepage.data?.sphere_title || 'кожної сфери',
+    subtitle: homepage.data?.subtitle || 'Створюємо якісний одяг для різних професій',
+    primary_button_text: homepage.data?.primary_button_text || 'Наші проєкти',
+    secondary_button_text: homepage.data?.secondary_button_text || 'Дізнатися більше',
+    stats: homepage.data?.stats || {},
+    featured_services: services.featuredData?.slice(0, 3) || [],
+    featured_projects: projects.featuredData?.slice(0, 4) || []
+  };
+
+  return {
+    data: heroData,
+    isLoading: homepage.isLoading || services.isLoading || projects.isLoading,
+    error: homepage.error || services.error || projects.error,
+    reload: () => {
+      homepage.reload();
+      services.reload(); 
+      projects.reload();
+    }
+  };
+};
+
+// Експорт менеджера для прямого використання (якщо потрібно)
+export { apiManager };
+
+console.log('🚀 Unified API for ViewSets initialized');
