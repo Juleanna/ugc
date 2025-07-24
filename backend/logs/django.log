@@ -4293,3 +4293,50 @@ WARNING 2025-07-24 10:42:18,970 log 1340 14572 Not Found: /api/v1/homepage/
 WARNING 2025-07-24 10:42:18,988 basehttp 1340 14572 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
 WARNING 2025-07-24 10:42:19,016 log 1340 9448 Not Found: /api/v1/homepage/
 WARNING 2025-07-24 10:42:19,018 basehttp 1340 9448 "GET /api/v1/homepage/ HTTP/1.1" 404 5626
+INFO 2025-07-24 10:46:26,262 basehttp 1340 3476 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:46:26,262 basehttp 1340 12448 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:46:26,264 basehttp 1340 4088 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:46:26,286 basehttp 1340 3476 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:46:26,287 basehttp 1340 12448 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:46:26,290 basehttp 1340 808 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:46:26,309 basehttp 1340 4088 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:46:26,312 basehttp 1340 12448 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:46:26,314 basehttp 1340 3476 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:46:26,361 basehttp 1340 3476 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:46:26,382 basehttp 1340 3476 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:46:26,385 basehttp 1340 12448 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:46:26,388 basehttp 1340 4088 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:46:26,409 basehttp 1340 16504 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:46:26,410 basehttp 1340 808 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:46:26,413 basehttp 1340 3476 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:46:26,426 basehttp 1340 4088 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:46:26,444 basehttp 1340 4088 "GET /api/v1/services/featured/ HTTP/1.1" 200 1234
+INFO 2025-07-24 10:46:26,507 basehttp 1340 4088 "GET /api/v1/projects/featured/ HTTP/1.1" 200 807
+INFO 2025-07-24 10:46:26,507 basehttp 1340 3476 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 3916
+INFO 2025-07-24 10:49:17,729 autoreload 1340 15204 D:\ugc\backend\apps\api\views.py changed, reloading.
+INFO 2025-07-24 10:49:21,263 autoreload 5248 13448 Watching for file changes with StatReloader
+INFO 2025-07-24 10:49:36,406 autoreload 5248 13448 D:\ugc\backend\apps\api\views.py changed, reloading.
+INFO 2025-07-24 10:49:39,316 autoreload 8060 12140 Watching for file changes with StatReloader
+INFO 2025-07-24 10:50:15,376 autoreload 7960 11964 Watching for file changes with StatReloader
+INFO 2025-07-24 10:52:10,784 basehttp 7960 11772 "GET /api/v1/translations/en/all/ HTTP/1.1" 200 503
+INFO 2025-07-24 10:52:11,215 basehttp 7960 11772 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:52:11,237 basehttp 7960 4032 "GET /api/v1/services/featured/ HTTP/1.1" 200 1204
+INFO 2025-07-24 10:52:11,265 basehttp 7960 11772 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 1031
+INFO 2025-07-24 10:52:11,294 basehttp 7960 8016 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:52:11,344 basehttp 7960 4032 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:52:11,436 basehttp 7960 8016 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:52:11,700 basehttp 7960 8016 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:52:11,708 basehttp 7960 14688 "GET /api/v1/services/featured/ HTTP/1.1" 200 1204
+INFO 2025-07-24 10:52:11,715 basehttp 7960 11772 "GET /api/v1/translations/uk/all/ HTTP/1.1" 200 1031
+INFO 2025-07-24 10:52:11,812 basehttp 7960 14736 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
+INFO 2025-07-24 10:52:11,824 basehttp 7960 8016 "GET /api/v1/homepage/stats/ HTTP/1.1" 200 144
+INFO 2025-07-24 10:52:11,824 basehttp 7960 4032 "GET /api/v1/services/featured/ HTTP/1.1" 200 1204
+INFO 2025-07-24 10:52:11,843 basehttp 7960 11772 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
+INFO 2025-07-24 10:52:11,847 basehttp 7960 14736 "GET /api/v1/services/featured/ HTTP/1.1" 200 1204
+INFO 2025-07-24 10:52:11,865 basehttp 7960 4032 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
+INFO 2025-07-24 10:52:11,872 basehttp 7960 11772 "GET /api/v1/services/featured/ HTTP/1.1" 200 1204
+INFO 2025-07-24 10:52:11,886 basehttp 7960 14736 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
+INFO 2025-07-24 10:52:11,893 basehttp 7960 4032 "GET /api/v1/services/featured/ HTTP/1.1" 200 1204
+INFO 2025-07-24 10:52:11,910 basehttp 7960 11772 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
+INFO 2025-07-24 10:52:11,928 basehttp 7960 4032 "GET /api/v1/projects/featured/ HTTP/1.1" 200 2746
+INFO 2025-07-24 10:52:43,510 autoreload 15384 17392 Watching for file changes with StatReloader

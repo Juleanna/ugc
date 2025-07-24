@@ -1,4 +1,6 @@
-// frontend/src/hooks/useUnifiedAPI.js
+// frontend/src/hooks/useUnifiedAPI.jsx
+// Виправлена версія для існуючої структури бекенду
+
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 
 // Context for global API state
@@ -121,6 +123,7 @@ class UnifiedAPIManager {
 
     const result = await response.json();
     
+    // Обробляємо різні формати відповідей
     if (result.success) {
       return result.data;
     } else if (result.results) {
@@ -133,12 +136,12 @@ class UnifiedAPIManager {
   }
 
   async preloadCriticalData(globalState, setGlobalState) {
+    // ВИПРАВЛЕНО: Використовуємо тільки існуючі endpoints
     const criticalEndpoints = [
-      '/homepage/',
-      '/homepage/stats/',
-      '/services/featured/',
-      '/projects/featured/',
-      '/translations/uk/all/'
+      '/homepage/stats/',        // ✅ Працює
+      '/services/featured/',     // ✅ Працює
+      '/projects/featured/',     // ✅ Працює
+      '/translations/uk/all/'    // ⚠️ Потрібно перевірити
     ];
 
     console.log('Preloading critical data...');
@@ -209,13 +212,20 @@ export const useUnifiedAPI = (endpoint, options = {}) => {
   };
 };
 
-// Specialized hooks
+// ВИПРАВЛЕНІ спеціалізовані хуки
+
 export const useHomepageData = () => {
-  const homepage = useUnifiedAPI('/homepage/');
+  // Використовуємо тільки існуючий endpoint
   const stats = useUnifiedAPI('/homepage/stats/');
   
   const combinedData = {
-    ...homepage.data,
+    // Базові дані зі статистики
+    main_title: 'Професійний одяг',
+    sphere_title: 'кожної сфери', 
+    subtitle: 'Створюємо якісний одяг для різних професій',
+    primary_button_text: 'Наші проєкти',
+    secondary_button_text: 'Дізнатися більше',
+    // Статистика з API
     stats: stats.data || {
       experience: '5+',
       projects: '100+',
@@ -226,50 +236,44 @@ export const useHomepageData = () => {
 
   return {
     data: combinedData,
-    isLoading: homepage.isLoading || stats.isLoading,
-    error: homepage.error || stats.error,
-    reload: () => {
-      homepage.reload();
-      stats.reload();
-    }
+    isLoading: stats.isLoading,
+    error: stats.error,
+    reload: stats.reload
   };
 };
 
 export const useServicesData = () => {
+  // Використовуємо тільки featured endpoint (працює)
   const featured = useUnifiedAPI('/services/featured/');
-  const all = useUnifiedAPI('/services/');
-
-  const services = featured.data || all.data || [];
+  
+  // Не робимо запит до /services/ оскільки він не існує
+  const services = featured.data || [];
 
   return {
     data: Array.isArray(services) ? services : [],
-    isLoading: featured.isLoading || all.isLoading,
-    error: featured.error || all.error,
-    reload: () => {
-      featured.reload();
-      all.reload();
-    }
+    isLoading: featured.isLoading,
+    error: featured.error,
+    reload: featured.reload
   };
 };
 
 export const useProjectsData = () => {
+  // Використовуємо тільки featured endpoint (працює)
   const featured = useUnifiedAPI('/projects/featured/');
-  const all = useUnifiedAPI('/projects/');
-
-  const projects = featured.data || all.data || [];
+  
+  // Не робимо запит до /projects/ оскільки він не існує
+  const projects = featured.data || [];
 
   return {
     data: Array.isArray(projects) ? projects : [],
-    isLoading: featured.isLoading || all.isLoading,
-    error: featured.error || all.error,
-    reload: () => {
-      featured.reload();
-      all.reload();
-    }
+    isLoading: featured.isLoading,
+    error: featured.error,
+    reload: featured.reload
   };
 };
 
 export const useTranslationsData = (lang = 'uk') => {
+  // Спробуємо endpoint перекладів
   return useUnifiedAPI(`/translations/${lang}/all/`);
 };
 
@@ -295,7 +299,7 @@ export const useHeroData = () => {
     error: homepage.error || services.error || projects.error,
     reload: () => {
       homepage.reload();
-      services.reload();
+      services.reload(); 
       projects.reload();
     }
   };
