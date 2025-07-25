@@ -4,9 +4,10 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Office(models.Model):
     """Офіси та фабрики"""
-    name=models.CharField(max_length=100, verbose_name=_("Назва"))
-    address=RichTextUploadingField(verbose_name=_("Адреса"))
-    description=RichTextUploadingField(blank=True, verbose_name=_("Опис"))
+    name = models.CharField(max_length=100, verbose_name=_("Назва"))
+    address = RichTextUploadingField(verbose_name=_("Адреса"))
+    city = models.CharField(max_length=100, verbose_name=_("Місто"))  # Додано поле city
+    description = RichTextUploadingField(blank=True, verbose_name=_("Опис"))
     
     office_type = models.CharField(
         max_length=50,
@@ -29,11 +30,13 @@ class Office(models.Model):
     is_main = models.BooleanField(default=False, verbose_name=_("Головний офіс"))
     is_active = models.BooleanField(default=True, verbose_name=_("Активний"))
 
+    def __str__(self):
+        return f"{self.name} ({self.city})"
+
     class Meta:
-        ordering = ['order']
+        ordering = ['order', 'city']
         verbose_name = _("Офіс/Фабрика")
         verbose_name_plural = _("Офіси/Фабрики")
-
 
 class ContactInquiry(models.Model):
     """Звернення через форму зворотного зв'язку"""

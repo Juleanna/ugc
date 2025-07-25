@@ -131,19 +131,22 @@ class HomePageViewSet(viewsets.ReadOnlyModelViewSet):
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+
 class AboutPageViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet для сторінки 'Про нас'"""
     
-    queryset = AboutPage.objects.all()
+    queryset = AboutPage.objects.filter(is_active=True)
     serializer_class = AboutPageSerializer
     permission_classes = [AllowAny]
+    ordering = ['-updated_at', 'id']  # Додано упорядкування
     
     def get_queryset(self):
-        return AboutPage.objects.prefetch_related(
+        """Оптимізований queryset з упорядкуванням"""
+        return AboutPage.objects.filter(is_active=True).prefetch_related(
             'teammember_set',
             'certificate_set',
             'productionphoto_set'
-        ).all()
+        ).order_by('-updated_at', 'id')  # Явне упорядкування
 
 
 class TeamMemberViewSet(viewsets.ReadOnlyModelViewSet):
@@ -406,12 +409,25 @@ class WorkplacePhotoViewSet(viewsets.ReadOnlyModelViewSet):
 class PartnershipInfoViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet для інформації про партнерство"""
     
-    queryset = PartnershipInfo.objects.all()
+    queryset = PartnershipInfo.objects.filter(is_active=True)
     serializer_class = PartnershipInfoSerializer
     permission_classes = [AllowAny]
+    ordering = ['-updated_at', 'id']  # Додано явне упорядкування
     
     def get_queryset(self):
-        return PartnershipInfo.objects.prefetch_related('workstage_set').all()
+        """Оптимізований queryset з упорядкуванням"""
+        return PartnershipInfo.objects.filter(is_active=True).prefetch_related(
+            'workstage_set'
+        ).order_by('-updated_at', 'id')  # Явне упорядкування в queryset
+
+
+class WorkStageViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet для етапів роботи"""
+    
+    queryset = WorkStage.objects.all()
+    serializer_class = WorkStageSerializer
+    permission_classes = [AllowAny]
+    ordering = ['order', 'id']  # Додано упорядкування
 
 
 class PartnerInquiryViewSet(viewsets.ModelViewSet):
@@ -421,11 +437,16 @@ class PartnerInquiryViewSet(viewsets.ModelViewSet):
     serializer_class = PartnerInquirySerializer
     permission_classes = [AllowAny]  # Для створення запитів
     http_method_names = ['post', 'get']
+    ordering = ['-created_at', 'id']  # Додано упорядкування
     
     def get_permissions(self):
         if self.action == 'create':
             return [AllowAny()]
         return [IsAuthenticated()]
+    
+    def get_queryset(self):
+        """Queryset з явним упорядкуванням"""
+        return PartnerInquiry.objects.all().order_by('-created_at', 'id')
     
     def create(self, request, *args, **kwargs):
         """Створення нового запиту партнера"""
@@ -447,7 +468,6 @@ class PartnerInquiryViewSet(viewsets.ModelViewSet):
             'message': 'Помилка при надсиланні запиту',
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-
 
 # ============================================================================
 # CONTACT VIEWSETS

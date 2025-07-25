@@ -4,10 +4,10 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class PartnershipInfo(models.Model):
     """Информация для партнеров"""
-    cooperation_terms=RichTextUploadingField(verbose_name=_("Умови співпраці"))
-    work_stages=RichTextUploadingField(verbose_name=_("Етапи роботи"))
-    faq_content=RichTextUploadingField(verbose_name=_("FAQ для замовників"))
-    benefits=RichTextUploadingField(verbose_name=_("Переваги співпраці"), blank=True)
+    cooperation_terms = RichTextUploadingField(verbose_name=_("Умови співпраці"))
+    work_stages = RichTextUploadingField(verbose_name=_("Етапи роботи"))
+    faq_content = RichTextUploadingField(verbose_name=_("FAQ для замовників"))
+    benefits = RichTextUploadingField(verbose_name=_("Переваги співпраці"), blank=True)
     
     min_order_amount = models.PositiveIntegerField(null=True, blank=True, verbose_name=_("Мін. сума замовлення"))
     production_capacity = models.CharField(max_length=200, blank=True, verbose_name=_("Виробнича потужність"))
@@ -15,22 +15,29 @@ class PartnershipInfo(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Оновлено"))
     work_stages_info = models.TextField()
 
+    def __str__(self):
+        return "Інформація для партнерів"
+
     class Meta:
+        ordering = ['-updated_at', 'id']  # Додано упорядкування
         verbose_name = _("Інформація для партнерів")
         verbose_name_plural = _("Інформація для партнерів")
 
 
 class WorkStage(models.Model):
     """Этапы работы с клиентами"""
-    title=models.CharField(max_length=100, verbose_name=_("Назва"))
-    description=models.TextField(verbose_name=_("Опис"))
+    title = models.CharField(max_length=100, verbose_name=_("Назва"))
+    description = models.TextField(verbose_name=_("Опис"))
    
     icon = models.CharField(max_length=50, blank=True, verbose_name=_("Іконка"))
     order = models.PositiveIntegerField(default=0, verbose_name=_("Порядок"))
     duration = models.CharField(max_length=50, blank=True, verbose_name=_("Тривалість"))
 
+    def __str__(self):
+        return self.title
+
     class Meta:
-        ordering = ['order']
+        ordering = ['order', 'id']  # Покращено упорядкування
         verbose_name = _("Етап роботи")
         verbose_name_plural = _("Етапи роботи")
 
@@ -53,7 +60,10 @@ class PartnerInquiry(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Створено"))
     is_processed = models.BooleanField(default=False, verbose_name=_("Оброблено"))
 
+    def __str__(self):
+        return f"{self.company_name} - {self.get_inquiry_type_display()}"
+
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_at', 'id']  # Покращено упорядкування
         verbose_name = _("Запит партнера")
         verbose_name_plural = _("Запити партнерів")

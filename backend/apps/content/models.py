@@ -149,6 +149,7 @@ class HomePage(models.Model):
         ).order_by('order', 'name')[:self.featured_services_count]
 
 
+
 class AboutPage(models.Model):
     """Страница О нас"""
     history_text = RichTextUploadingField(verbose_name=_("Історія компанії"))
@@ -159,12 +160,13 @@ class AboutPage(models.Model):
     is_active = models.BooleanField(default=True, verbose_name=_("Активна"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Оновлено"))
 
-    class Meta:
-        verbose_name = _("Сторінка 'Про нас'")
-        verbose_name_plural = _("Сторінка 'Про нас'")
-
     def __str__(self):
         return "Сторінка 'Про нас'"
+
+    class Meta:
+        ordering = ['-updated_at', 'id']  # Додано упорядкування
+        verbose_name = _("Сторінка 'Про нас'")
+        verbose_name_plural = _("Сторінка 'Про нас'")
 
 
 class TeamMember(models.Model):

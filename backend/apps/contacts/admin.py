@@ -14,6 +14,7 @@ class OfficeAdmin(UnfoldTabbedTranslationAdmin):
     """Админка для офисов и фабрик"""
     list_display = [
         'name', 
+        'city',  # Додано city
         'office_type_display', 
         'phone', 
         'email', 
@@ -24,17 +25,18 @@ class OfficeAdmin(UnfoldTabbedTranslationAdmin):
     ]
     list_display_links = ['name']
     list_filter = [
+        'city',  # Додано city в фільтри
         'office_type',
         'is_main',
         'is_active',
     ]
     list_editable = ['order', 'is_active']
-    search_fields = ['name', 'address', 'phone', 'email']
-    ordering = ['order', 'name']
+    search_fields = ['name', 'city', 'address', 'phone', 'email']  # Додано city в пошук
+    ordering = ['order', 'city', 'name']
     
     fieldsets = [
         (_("Основна інформація"), {
-            'fields': ['name', 'office_type', 'description'],
+            'fields': ['name', 'city', 'office_type', 'description'],  # Додано city
             'classes': ['tab'],
         }),
         (_("Контактна інформація"), {
@@ -68,59 +70,34 @@ class OfficeAdmin(UnfoldTabbedTranslationAdmin):
     def is_main_display(self, obj):
         if obj.is_main:
             return format_html(
-                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Головний</span>'
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ Головний</span>'
             )
         return format_html(
             '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Звичайний</span>'
         )
     
-    @display(description=_("Статус"), ordering='is_active')
+    @display(description=_("Активний"), ordering='is_active')
     def is_active_display(self, obj):
         if obj.is_active:
             return format_html(
-                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Активний</span>'
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ Активний</span>'
             )
         return format_html(
-            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Неактивний</span>'
+            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">✗ Неактивний</span>'
         )
-    
-  
-    
-    actions = ['make_active', 'make_inactive', 'mark_as_main']
-    
-    @admin.action(description=_("Позначити як активні"))
-    def make_active(self, request, queryset):
-        count = queryset.update(is_active=True)
-        self.message_user(request, f"{count} офісів позначено як активні.")
-    
-    @admin.action(description=_("Позначити як неактивні"))
-    def make_inactive(self, request, queryset):
-        count = queryset.update(is_active=False)
-        self.message_user(request, f"{count} офісів позначено як неактивні.")
-    
-    @admin.action(description=_("Позначити як головний офіс"))
-    def mark_as_main(self, request, queryset):
-        # Сначала убираем отметку "главный" со всех офисов
-        Office.objects.update(is_main=False)
-        # Затем отмечаем выбранный офис как главный
-        if queryset.exists():
-            queryset.first().is_main = True
-            queryset.first().save()
-            self.message_user(request, "Головний офіс змінено.")
 
 
-@admin.register(ContactInquiry)
+@admin.register(ContactInquiry) 
 class ContactInquiryAdmin(UnfoldTabbedTranslationAdmin):
-    """Админка для обращений через форму обратной связи"""
+    """Админка для звернень"""
     list_display = [
-        'name',
+        'name', 
         'email', 
+        'company',
         'inquiry_type_display',
         'subject',
-        'company',
-        'created_at',
-        'is_processed_display',
-        'is_processed'
+        'is_processed',
+        'created_at'
     ]
     list_display_links = ['name', 'subject']
     list_filter = [
@@ -132,26 +109,20 @@ class ContactInquiryAdmin(UnfoldTabbedTranslationAdmin):
     list_editable = ['is_processed']
     search_fields = ['name', 'email', 'company', 'subject', 'message']
     ordering = ['-created_at']
-    date_hierarchy = 'created_at'
-    
-    readonly_fields = ['created_at', 'processed_at']
+    readonly_fields = ['created_at']
     
     fieldsets = [
-        (_("Інформація про відправника"), {
+        (_("Контактна інформація"), {
             'fields': ['name', 'email', 'phone', 'company'],
             'classes': ['tab'],
         }),
-        (_("Звернення"), {
+        (_("Запит"), {
             'fields': ['inquiry_type', 'subject', 'message'],
             'classes': ['tab'],
         }),
         (_("Обробка"), {
-            'fields': ['is_processed', 'response', 'processed_at'],
+            'fields': ['is_processed', 'response', 'processed_at', 'created_at'],
             'classes': ['tab'],
-        }),
-        (_("Системна інформація"), {
-            'fields': ['created_at'],
-            'classes': ['tab', 'collapse'],
         }),
     ]
     
@@ -174,32 +145,8 @@ class ContactInquiryAdmin(UnfoldTabbedTranslationAdmin):
     def is_processed_display(self, obj):
         if obj.is_processed:
             return format_html(
-                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Оброблено</span>'
+                '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ Оброблено</span>'
             )
         return format_html(
-            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Нове</span>'
+            '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">⏳ В обробці</span>'
         )
-    
-   
-    
-    actions = ['mark_processed', 'mark_unprocessed']
-    
-    @admin.action(description=_("Позначити як оброблені"))
-    def mark_processed(self, request, queryset):
-        from django.utils import timezone
-        count = queryset.update(is_processed=True, processed_at=timezone.now())
-        self.message_user(request, f"{count} звернень позначено як оброблені.")
-    
-    @admin.action(description=_("Позначити як необроблені"))
-    def mark_unprocessed(self, request, queryset):
-        count = queryset.update(is_processed=False, processed_at=None)
-        self.message_user(request, f"{count} звернень позначено як необроблені.")
-    
-    def save_model(self, request, obj, form, change):
-        """Автоматически устанавливаем дату обработки"""
-        if 'is_processed' in form.changed_data and obj.is_processed:
-            from django.utils import timezone
-            obj.processed_at = timezone.now()
-        elif 'is_processed' in form.changed_data and not obj.is_processed:
-            obj.processed_at = None
-        super().save_model(request, obj, form, change)
