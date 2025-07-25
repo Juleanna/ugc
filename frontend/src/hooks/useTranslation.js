@@ -1,187 +1,92 @@
 // frontend/src/hooks/useTranslation.js
-import { useState, useEffect, useCallback } from 'react';
-import ugcTranslationService from '../services/translationService';
+// Виправлений хук з кращою обробкою fallback-перекладів
 
-/**
- * React хук для роботи з перекладами в UGC проекті
- */
-export const useTranslation = () => {
-  const [currentLanguage, setCurrentLanguage] = useState(ugcTranslationService.getCurrentLanguage());
-  const [isLoading, setIsLoading] = useState(true);
-  const [isReady, setIsReady] = useState(ugcTranslationService.isTranslationsReady());
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import translationService from '../services/translationService';
+
+export const useTranslation = (initialLanguage = 'uk') => {
+  const [currentLanguage, setCurrentLanguage] = useState(initialLanguage);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [lastLoadedLanguage, setLastLoadedLanguage] = useState(null);
 
-  // Функція перекладу з покращеною логікою
-  const t = useCallback((key, params = {}) => {
-    // Якщо переклади ще не готові, повертаємо ключ без попередження
-    if (!isReady) {
-      return key;
+  // Функція для завантаження перекладів
+  const loadLanguage = useCallback(async (language) => {
+    if (lastLoadedLanguage === language) {
+      return; // Вже завантажено
     }
-    
-    return ugcTranslationService.t(key, params);
-  }, [isReady]);
-
-  // Зміна мови
-  const changeLanguage = useCallback(async (lang) => {
-    if (lang === currentLanguage) return;
 
     setIsLoading(true);
     setError(null);
 
     try {
-      await ugcTranslationService.setLanguage(lang);
-      setCurrentLanguage(lang);
-      console.log(`✅ Мова змінена на: ${lang}`);
+      await translationService.loadTranslations(language);
+      setLastLoadedLanguage(language);
+      setCurrentLanguage(language);
     } catch (err) {
+      console.error('Translation loading error:', err);
       setError(err.message);
-      console.error('❌ Помилка зміни мови:', err);
+      // Все одно встановлюємо мову, бо є fallback
+      setCurrentLanguage(language);
+      setLastLoadedLanguage(language);
     } finally {
       setIsLoading(false);
+    }
+  }, [lastLoadedLanguage]);
+
+  // Завантажуємо початкову мову
+  useEffect(() => {
+    if (!lastLoadedLanguage) {
+      loadLanguage(currentLanguage);
+    }
+  }, [currentLanguage, lastLoadedLanguage, loadLanguage]);
+
+  // Функція перекладу з мемоізацією
+  const t = useCallback((key, interpolation = {}) => {
+    if (!key) return '';
+    
+    try {
+      return translationService.translate(key, currentLanguage, interpolation);
+    } catch (err) {
+      console.error(`Translation error for key "${key}":`, err);
+      return key; // Fallback до ключа
     }
   }, [currentLanguage]);
 
-  // Оновлення перекладів
-  const refreshTranslations = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
+  // Функція зміни мови
+  const changeLanguage = useCallback(async (newLanguage) => {
+    if (newLanguage === currentLanguage) return;
+    
+    await loadLanguage(newLanguage);
+    translationService.setLanguage(newLanguage);
+  }, [currentLanguage, loadLanguage]);
 
-    try {
-      await ugcTranslationService.refreshTranslations();
-      console.log('✅ Переклади оновлено');
-    } catch (err) {
-      setError(err.message);
-      console.error('❌ Помилка оновлення перекладів:', err);
-    } finally {
-      setIsLoading(false);
-    }
+  // Перевірка наявності перекладу
+  const hasTranslation = useCallback((key) => {
+    return translationService.hasTranslation(key, currentLanguage);
+  }, [currentLanguage]);
+
+  // Отримання доступних мов
+  const availableLanguages = useMemo(() => {
+    return translationService.getAvailableLanguages();
   }, []);
 
-  // Ініціалізація та слухач готовності перекладів
-  useEffect(() => {
-    const checkReadiness = async () => {
-      try {
-        // Чекаємо готовності перекладів
-        await ugcTranslationService.waitForReady();
-        setIsReady(true);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Помилка ініціалізації перекладів:', error);
-        setError(error.message);
-        setIsLoading(false);
-      }
-    };
-
-    if (!isReady) {
-      checkReadiness();
+  // Статистика для debug (тільки в development)
+  const stats = useMemo(() => {
+    if (process.env.NODE_ENV === 'development') {
+      return translationService.getStats();
     }
-  }, [isReady]);
-
-  // Слухач зміни мови
-  useEffect(() => {
-    const handleLanguageChange = (newLang) => {
-      setCurrentLanguage(newLang);
-      console.log(`🔄 Мова оновлена в хуку: ${newLang}`);
-    };
-
-    ugcTranslationService.addLanguageChangeListener(handleLanguageChange);
-
-    return () => {
-      ugcTranslationService.removeLanguageChangeListener(handleLanguageChange);
-    };
-  }, []);
+    return null;
+  }, [currentLanguage, isLoading]);
 
   return {
-    // Основні функції
     t,
-    changeLanguage,
-    refreshTranslations,
-    
-    // Стан
     currentLanguage,
+    changeLanguage,
     isLoading,
-    isReady,
     error,
-    
-    // Додаткові функції
-    clearError: () => setError(null),
-    
-    // Перевірки мови
-    isUkrainian: currentLanguage === 'uk',
-    isEnglish: currentLanguage === 'en',
+    hasTranslation,
+    availableLanguages,
+    stats
   };
 };
-
-/**
- * Хук для отримання списку доступних мов
- */
-export const useAvailableLanguages = () => {
-  const [languages, setLanguages] = useState(['uk', 'en']);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const loadLanguages = async () => {
-      setIsLoading(true);
-      try {
-        const availableLanguages = await ugcTranslationService.getAvailableLanguages();
-        setLanguages(availableLanguages);
-      } catch (error) {
-        console.error('Помилка завантаження списку мов:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadLanguages();
-  }, []);
-
-  return { languages, isLoading };
-};
-
-/**
- * Хук для статистики перекладів (для адміністраторів)
- */
-export const useTranslationStats = () => {
-  const [stats, setStats] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const loadStats = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const translationStats = await ugcTranslationService.getTranslationStats();
-      setStats(translationStats);
-    } catch (error) {
-      console.error('Помилка завантаження статистики:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadStats();
-  }, [loadStats]);
-
-  return { stats, isLoading, refreshStats: loadStats };
-};
-
-/**
- * Хук для компонентів, які потребують готових перекладів
- * Показує завантаження до готовності перекладів
- */
-export const useTranslationWithLoader = () => {
-  const translation = useTranslation();
-  
-  // Якщо переклади не готові, показуємо індикатор завантаження
-  if (!translation.isReady) {
-    return {
-      ...translation,
-      shouldShowLoader: true,
-    };
-  }
-
-  return {
-    ...translation,
-    shouldShowLoader: false,
-  };
-};
-
-export default useTranslation;

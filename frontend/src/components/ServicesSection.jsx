@@ -39,28 +39,7 @@ const ServicesSection = ({ data, scrollToSection }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAllServices, setShowAllServices] = useState(false);
 
-  // Об'єднання даних з різних джерел (пріоритет: props -> ViewSets API -> fallback)
-  const services = useMemo(() => {
-    if (data?.services?.length > 0) {
-      console.log('ServicesSection: використовуємо дані з props');
-      return data.services;
-    }
-    
-    if (showAllServices && apiServices?.length > 0) {
-      console.log('ServicesSection: використовуємо всі послуги з ViewSets API');
-      return apiServices;
-    }
-    
-    if (apiFeaturedServices?.length > 0) {
-      console.log('ServicesSection: використовуємо рекомендовані послуги з ViewSets API');
-      return apiFeaturedServices;
-    }
-    
-    console.log('ServicesSection: використовуємо fallback дані');
-    return getDefaultServices();
-  }, [data?.services, apiServices, apiFeaturedServices, showAllServices]);
-
-  // Fallback дані для демонстрації
+   // Fallback дані для демонстрації
   const getDefaultServices = () => [
     {
       id: 1,
@@ -130,6 +109,29 @@ const ServicesSection = ({ data, scrollToSection }) => {
     }
   ];
 
+
+  // Об'єднання даних з різних джерел (пріоритет: props -> ViewSets API -> fallback)
+  const services = useMemo(() => {
+    if (data?.services?.length > 0) {
+      console.log('ServicesSection: використовуємо дані з props');
+      return data.services;
+    }
+    
+    if (showAllServices && apiServices?.length > 0) {
+      console.log('ServicesSection: використовуємо всі послуги з ViewSets API');
+      return apiServices;
+    }
+    
+    if (apiFeaturedServices?.length > 0) {
+      console.log('ServicesSection: використовуємо рекомендовані послуги з ViewSets API');
+      return apiFeaturedServices;
+    }
+    
+    console.log('ServicesSection: використовуємо fallback дані');
+    return getDefaultServices();
+  }, [data?.services, apiServices, apiFeaturedServices, showAllServices]);
+
+ 
   // Іконки для різних категорій послуг
   const getServiceIcon = (iconName) => {
     const iconMap = {

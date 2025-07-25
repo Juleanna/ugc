@@ -1,5 +1,5 @@
 // frontend/src/components/AboutSection.jsx
-// Адаптовано для ViewSets архітектури з повною підтримкою API
+// Виправлена версія з правильним порядком функцій
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { Card, CardBody, Chip, Spinner, Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
@@ -54,29 +54,117 @@ const AboutSection = ({ data, scrollToSection }) => {
   const { isOpen: isTeamModalOpen, onOpen: onTeamModalOpen, onClose: onTeamModalClose } = useDisclosure();
   const { isOpen: isCertModalOpen, onOpen: onCertModalOpen, onClose: onCertModalClose } = useDisclosure();
 
-  // Об'єднання даних з різних джерел
-  const aboutData = useMemo(() => {
-    // Пріоритет: props -> ViewSets API -> fallback
-    const sourceData = data || homepageData || {};
+  // ВАЖЛИВО: Всі допоміжні функції оголошуємо ДО useMemo
+  
+  // Дефолтні особливості
+  const getDefaultFeatures = () => [
+    {
+      id: 1,
+      icon: 'shield',
+      title: t('about.features.reliability.title') || 'Надійність',
+      description: t('about.features.reliability.description') || 'Використовуємо тільки перевірені матеріали та технології',
+      color: 'blue'
+    },
+    {
+      id: 2,
+      icon: 'award',
+      title: t('about.features.quality.title') || 'Якість',
+      description: t('about.features.quality.description') || 'Контроль якості на кожному етапі виробництва',
+      color: 'green'
+    },
+    {
+      id: 3,
+      icon: 'users',
+      title: t('about.features.experience.title') || 'Досвід',
+      description: t('about.features.experience.description') || 'Понад 10 років у сфері професійного одягу',
+      color: 'purple'
+    },
+    {
+      id: 4,
+      icon: 'target',
+      title: t('about.features.precision.title') || 'Точність',
+      description: t('about.features.precision.description') || 'Індивідуальний підхід до кожного замовлення',
+      color: 'red'
+    }
+  ];
+
+  // Дефолтна статистика
+  const getDefaultStats = () => ({
+    years_experience: 10,
+    satisfied_clients: 95,
+    total_projects: 150,
+    team_members: 25,
+    services_count: 8
+  });
+
+  // Дефолтні досягнення
+  const getDefaultAchievements = () => [
+    {
+      id: 1,
+      title: 'ISO 9001:2015',
+      description: 'Сертифікат системи управління якістю',
+      year: 2023,
+      image: '/images/certificates/iso-9001.jpg',
+      organization: 'TÜV AUSTRIA'
+    },
+    {
+      id: 2,
+      title: 'Сертифікат відповідності ЄС',
+      description: 'Відповідність європейським стандартам',
+      year: 2023,
+      image: '/images/certificates/ce-marking.jpg',
+      organization: 'EU Conformity'
+    }
+  ];
+
+  // Дефолтна команда
+  const getDefaultTeam = () => [
+    {
+      id: 1,
+      name: 'Олександр Петренко',
+      position: 'Генеральний директор',
+      image: '/images/team/director.jpg',
+      experience: '15 років',
+      description: 'Очолює компанію з моменту заснування'
+    },
+    {
+      id: 2,
+      name: 'Марія Коваленко',
+      position: 'Головний технолог',
+      image: '/images/team/technologist.jpg',
+      experience: '12 років',
+      description: 'Відповідає за розробку нових видів продукції'
+    }
+  ];
+
+  // Дефолтні фото виробництва
+  const getDefaultProductionPhotos = () => [
+    {
+      id: 1,
+      title: 'Виробничий цех',
+      description: 'Сучасне обладнання для пошиття',
+      image: '/images/production/workshop.jpg',
+      is_featured: true
+    },
+    {
+      id: 2,
+      title: 'Контроль якості',
+      description: 'Перевірка кожного виробу',
+      image: '/images/production/quality-control.jpg',
+      is_featured: false
+    }
+  ];
+
+  // Отримання особливостей
+  const getFeatures = (sourceData) => {
+    // Якщо є дані з API, використовуємо їх
+    if (sourceData.features?.length > 0) {
+      return sourceData.features;
+    }
     
-    return {
-      title: sourceData.about_title || t('about.title') || 'Про нашу компанію',
-      subtitle: sourceData.about_subtitle || t('about.subtitle') || 'Наш багаторічний досвід гарантує якість',
-      description: sourceData.about_description || t('about.description') || 
-        'Ми створюємо одяг, який забезпечує безпеку і комфорт у будь-яких умовах. Наша продукція відповідає найвищим стандартам якості.',
-      mission: sourceData.mission_text || t('about.mission') || 
-        'Наша місія – забезпечити працівників якісним, зручним та безпечним професійним одягом.',
-      vision: sourceData.vision_text || t('about.vision') || 
-        'Стати провідним виробником професійного одягу в Україні та Східній Європі.',
-      values: sourceData.values_text || t('about.values') || 
-        'Якість, надійність, інновації та відповідальність – основа нашої роботи.',
-      features: getFeatures(sourceData),
-      stats: sourceData.stats || getDefaultStats(),
-      achievements: getCertificates(sourceData),
-      team: getTeamData(),
-      productionPhotos: getProductionPhotos(sourceData)
-    };
-  }, [data, homepageData, teamMembers, managementTeam, t]);
+    // Інакше генеруємо на основі статистики та стандартних особливостей
+    return getDefaultFeatures();
+  };
 
   // Отримання даних команди
   const getTeamData = () => {
@@ -119,183 +207,31 @@ const AboutSection = ({ data, scrollToSection }) => {
     return getDefaultProductionPhotos();
   };
 
-  // Отримання особливостей
-  const getFeatures = (sourceData) => {
-    // Якщо є дані з API, використовуємо їх
-    if (sourceData.features?.length > 0) {
-      return sourceData.features;
-    }
+  // Об'єднання даних з різних джерел - тепер усі функції доступні
+  const aboutData = useMemo(() => {
+    // Пріоритет: props -> ViewSets API -> fallback
+    const sourceData = data || homepageData || {};
     
-    // Інакше генеруємо на основі статистики та стандартних особливостей
-    return getDefaultFeatures();
-  };
-
-  // Дефолтні особливості
-  const getDefaultFeatures = () => [
-    {
-      id: 1,
-      icon: 'shield',
-      title: t('about.features.reliability.title') || 'Надійність',
-      description: t('about.features.reliability.description') || 'Використовуємо тільки перевірені матеріали та технології',
-      color: 'blue'
-    },
-    {
-      id: 2,
-      icon: 'award',
-      title: t('about.features.quality.title') || 'Якість',
-      description: t('about.features.quality.description') || 'Контроль якості на кожному етапі виробництва',
-      color: 'green'
-    },
-    {
-      id: 3,
-      icon: 'users',
-      title: t('about.features.trust.title') || 'Довіра',
-      description: t('about.features.trust.description') || 'Понад 50 задоволених клієнтів по всій Україні',
-      color: 'purple'
-    },
-    {
-      id: 4,
-      icon: 'target',
-      title: t('about.features.precision.title') || 'Точність',
-      description: t('about.features.precision.description') || 'Індивідуальний підхід до кожного замовлення',
-      color: 'orange'
-    },
-    {
-      id: 5,
-      icon: 'clock',
-      title: t('about.features.speed.title') || 'Швидкість',
-      description: t('about.features.speed.description') || 'Дотримуємося встановлених термінів виконання',
-      color: 'red'
-    },
-    {
-      id: 6,
-      icon: 'heart',
-      title: t('about.features.care.title') || 'Турбота',
-      description: t('about.features.care.description') || 'Підтримуємо клієнтів на всіх етапах співпраці',
-      color: 'pink'
-    }
-  ];
-
-  // Дефолтна статистика
-  const getDefaultStats = () => ({
-    experience: '10+',
-    projects: '150+',
-    clients: '95+',
-    employees: '25+',
-    support: '24/7'
-  });
-
-  // Дефолтні досягнення
-  const getDefaultAchievements = () => [
-    {
-      id: 1,
-      title: 'ISO 9001:2015',
-      description: 'Сертифікат системи управління якістю',
-      year: 2023,
-      organization: 'Міжнародна організація стандартизації'
-    },
-    {
-      id: 2,
-      title: 'Найкращий постачальник',
-      description: 'Нагорода від державних підприємств',
-      year: 2024,
-      organization: 'Міністерство економіки України'
-    },
-    {
-      id: 3,
-      title: 'Еко-сертифікація',
-      description: 'Використання екологічно чистих матеріалів',
-      year: 2024,
-      organization: 'Екологічна сертифікація України'
-    }
-  ];
-
-  // Дефолтна команда
-  const getDefaultTeam = () => [
-    {
-      id: 1,
-      name: 'Олександр Петренко',
-      position: 'Генеральний директор',
-      bio: 'Понад 15 років досвіду в текстильній промисловості',
-      photo: '/images/team/director.jpg',
-      email: 'director@company.com'
-    },
-    {
-      id: 2,
-      name: 'Марія Іваненко',
-      position: 'Головний технолог',
-      bio: 'Експерт з розробки та впровадження нових технологій',
-      photo: '/images/team/technologist.jpg',
-      email: 'tech@company.com'
-    },
-    {
-      id: 3,
-      name: 'Сергій Коваленко',
-      position: 'Менеджер з якості',
-      bio: 'Забезпечує високі стандарти якості продукції',
-      photo: '/images/team/quality.jpg',
-      email: 'quality@company.com'
-    }
-  ];
-
-  // Дефолтні фото виробництва
-  const getDefaultProductionPhotos = () => [
-    {
-      id: 1,
-      title: 'Сучасне обладнання',
-      description: 'Використовуємо найновіше обладнання для виробництва',
-      image: '/images/production/equipment.jpg',
-      is_featured: true
-    },
-    {
-      id: 2,
-      title: 'Контроль якості',
-      description: 'Перевірка кожного виробу перед відправкою',
-      image: '/images/production/quality.jpg',
-      is_featured: true
-    },
-    {
-      id: 3,
-      title: 'Складські приміщення',
-      description: 'Просторі склади для зберігання готової продукції',
-      image: '/images/production/warehouse.jpg',
-      is_featured: false
-    }
-  ];
-
-  // Іконки для особливостей
-  const getFeatureIcon = (iconName) => {
-    const icons = {
-      'shield': Shield,
-      'award': Award,
-      'users': Users,
-      'target': Target,
-      'clock': Clock,
-      'heart': Heart,
-      'star': Star,
-      'trending-up': TrendingUp,
-      'building': Building,
-      'check-circle': CheckCircle
+    return {
+      title: sourceData.about_title || t('about.title') || 'Про нашу компанію',
+      subtitle: sourceData.about_subtitle || t('about.subtitle') || 'Наш багаторічний досвід гарантує якість',
+      description: sourceData.about_description || t('about.description') || 
+        'Ми створюємо одяг, який забезпечує безпеку і комфорт у будь-яких умовах. Наша продукція відповідає найвищим стандартам якості.',
+      mission: sourceData.mission_text || t('about.mission') || 
+        'Наша місія – забезпечити працівників якісним, зручним та безпечним професійним одягом.',
+      vision: sourceData.vision_text || t('about.vision') || 
+        'Стати провідним виробником професійного одягу в Україні та Східній Европі.',
+      values: sourceData.values_text || t('about.values') || 
+        'Якість, надійність, інновації та відповідальність – основа нашої роботи.',
+      features: getFeatures(sourceData),
+      stats: sourceData.stats || getDefaultStats(),
+      achievements: getCertificates(sourceData),
+      team: getTeamData(),
+      productionPhotos: getProductionPhotos(sourceData)
     };
-    return icons[iconName] || Shield;
-  };
+  }, [data, homepageData, teamMembers, managementTeam, t]);
 
-  // Кольори для іконок
-  const getIconColor = (color) => {
-    const colors = {
-      'blue': 'from-blue-500 to-blue-600',
-      'green': 'from-green-500 to-green-600',
-      'purple': 'from-purple-500 to-purple-600',
-      'orange': 'from-orange-500 to-orange-600',
-      'red': 'from-red-500 to-red-600',
-      'pink': 'from-pink-500 to-pink-600',
-      'yellow': 'from-yellow-500 to-yellow-600',
-      'indigo': 'from-indigo-500 to-indigo-600'
-    };
-    return colors[color] || 'from-blue-500 to-blue-600';
-  };
-
-  // Обробники для модалів
+  // Обробники подій
   const handleTeamMemberClick = (member) => {
     setSelectedTeamMember(member);
     onTeamModalOpen();
@@ -306,8 +242,32 @@ const AboutSection = ({ data, scrollToSection }) => {
     onCertModalOpen();
   };
 
-  // Loading state
-  if (homepageLoading || teamLoading) {
+  const handleShowMorePhotos = () => {
+    setVisiblePhotos(prev => prev + 6);
+  };
+
+  // Отримання іконки для особливості
+  const getFeatureIcon = (iconName) => {
+    const icons = {
+      shield: Shield,
+      award: Award,
+      users: Users,
+      target: Target,
+      clock: Clock,
+      star: Star,
+      trending: TrendingUp,
+      heart: Heart,
+      trophy: Trophy,
+      building: Building,
+      check: CheckCircle
+    };
+    
+    const IconComponent = icons[iconName] || Shield;
+    return <IconComponent className="w-8 h-8" />;
+  };
+
+  // Стан завантаження
+  if (homepageLoading && !data) {
     return (
       <section id="about" className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -322,7 +282,7 @@ const AboutSection = ({ data, scrollToSection }) => {
     );
   }
 
-  // Error state
+  // Стан помилки
   if (homepageError && !data) {
     return (
       <section id="about" className="py-20 px-6 bg-white">
@@ -373,12 +333,14 @@ const AboutSection = ({ data, scrollToSection }) => {
           <div className="mb-16">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {Object.entries(aboutData.stats).map(([key, value], index) => (
-                <div key={key} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
-                    {value}
+                <div key={key} className="text-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
+                  <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                    {typeof value === 'number' ? value.toLocaleString() : value}
+                    {key.includes('clients') && '%'}
+                    {key.includes('experience') && '+'}
                   </div>
-                  <div className="text-gray-600 text-sm uppercase tracking-wide">
-                    {t(`about.stats.${key}`) || key}
+                  <div className="text-sm text-gray-600 capitalize">
+                    {t(`about.stats.${key}`) || key.replace('_', ' ')}
                   </div>
                 </div>
               ))}
@@ -389,74 +351,67 @@ const AboutSection = ({ data, scrollToSection }) => {
         {/* Особливості */}
         {aboutData.features && aboutData.features.length > 0 && (
           <div className="mb-16">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
+            <h3 className="text-2xl font-bold text-center mb-10">
               {t('about.features.title') || 'Наші переваги'}
             </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {aboutData.features.map((feature) => {
-                const IconComponent = getFeatureIcon(feature.icon);
-                const iconColorClass = getIconColor(feature.color);
-                
-                return (
-                  <Card 
-                    key={feature.id} 
-                    className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
-                  >
-                    <CardBody className="p-6 text-center">
-                      <div className={`w-16 h-16 bg-gradient-to-r ${iconColorClass} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                        <IconComponent className="w-8 h-8 text-white" />
-                      </div>
-                      <h4 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                        {feature.title}
-                      </h4>
-                      <p className="text-gray-600 leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </CardBody>
-                  </Card>
-                );
-              })}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {aboutData.features.map((feature, index) => (
+                <Card key={feature.id || index} className="p-6 hover:shadow-lg transition-shadow">
+                  <CardBody className="text-center">
+                    <div className={`inline-flex p-3 rounded-full mb-4 ${
+                      feature.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                      feature.color === 'green' ? 'bg-green-100 text-green-600' :
+                      feature.color === 'purple' ? 'bg-purple-100 text-purple-600' :
+                      feature.color === 'red' ? 'bg-red-100 text-red-600' :
+                      'bg-gray-100 text-gray-600'
+                    }`}>
+                      {getFeatureIcon(feature.icon)}
+                    </div>
+                    <h4 className="text-lg font-semibold mb-2">{feature.title}</h4>
+                    <p className="text-gray-600 text-sm">{feature.description}</p>
+                  </CardBody>
+                </Card>
+              ))}
             </div>
           </div>
         )}
 
-        {/* Місія, Візія, Цінності */}
+        {/* Місія, Бачення, Цінності */}
         <div className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-              <CardBody className="p-6 text-center">
-                <Target className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-gray-900 mb-3">
-                  {t('about.mission.title') || 'Наша місія'}
-                </h4>
-                <p className="text-gray-700">
-                  {aboutData.mission}
-                </p>
+            <Card className="p-6">
+              <CardBody>
+                <div className="flex items-center mb-4">
+                  <Target className="w-6 h-6 text-blue-600 mr-3" />
+                  <h4 className="text-lg font-semibold">
+                    {t('about.mission.title') || 'Місія'}
+                  </h4>
+                </div>
+                <p className="text-gray-600">{aboutData.mission}</p>
               </CardBody>
             </Card>
 
-            <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-              <CardBody className="p-6 text-center">
-                <Eye className="w-12 h-12 text-green-600 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-gray-900 mb-3">
-                  {t('about.vision.title') || 'Наше бачення'}
-                </h4>
-                <p className="text-gray-700">
-                  {aboutData.vision}
-                </p>
+            <Card className="p-6">
+              <CardBody>
+                <div className="flex items-center mb-4">
+                  <Eye className="w-6 h-6 text-green-600 mr-3" />
+                  <h4 className="text-lg font-semibold">
+                    {t('about.vision.title') || 'Бачення'}
+                  </h4>
+                </div>
+                <p className="text-gray-600">{aboutData.vision}</p>
               </CardBody>
             </Card>
 
-            <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-              <CardBody className="p-6 text-center">
-                <Heart className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-gray-900 mb-3">
-                  {t('about.values.title') || 'Наші цінності'}
-                </h4>
-                <p className="text-gray-700">
-                  {aboutData.values}
-                </p>
+            <Card className="p-6">
+              <CardBody>
+                <div className="flex items-center mb-4">
+                  <Heart className="w-6 h-6 text-purple-600 mr-3" />
+                  <h4 className="text-lg font-semibold">
+                    {t('about.values.title') || 'Цінності'}
+                  </h4>
+                </div>
+                <p className="text-gray-600">{aboutData.values}</p>
               </CardBody>
             </Card>
           </div>
@@ -465,97 +420,81 @@ const AboutSection = ({ data, scrollToSection }) => {
         {/* Команда */}
         {aboutData.team && aboutData.team.length > 0 && (
           <div className="mb-16">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
+            <h3 className="text-2xl font-bold text-center mb-10">
               {t('about.team.title') || 'Наша команда'}
             </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {aboutData.team.map((member) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {aboutData.team.map((member, index) => (
                 <Card 
-                  key={member.id} 
-                  className="hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                  key={member.id || index} 
+                  className="cursor-pointer hover:shadow-lg transition-shadow"
                   onClick={() => handleTeamMemberClick(member)}
                 >
-                  <CardBody className="p-0">
-                    <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-                      {member.photo ? (
+                  <CardBody className="text-center">
+                    {member.image && (
+                      <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-gray-200">
                         <img 
-                          src={member.photo} 
+                          src={member.image} 
                           alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.src = '/images/team/default-avatar.jpg';
+                          }}
                         />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Users className="w-16 h-16 text-gray-400" />
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-6">
-                      <h4 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                        {member.name}
-                      </h4>
-                      <p className="text-blue-600 font-medium mb-3">
-                        {member.position}
-                      </p>
-                      <p className="text-gray-600 text-sm line-clamp-2">
-                        {member.bio}
-                      </p>
-                    </div>
+                      </div>
+                    )}
+                    <h4 className="text-lg font-semibold mb-1">{member.name}</h4>
+                    <p className="text-blue-600 text-sm mb-2">{member.position}</p>
+                    {member.experience && (
+                      <Chip size="sm" variant="flat" color="primary">
+                        {member.experience}
+                      </Chip>
+                    )}
                   </CardBody>
                 </Card>
               ))}
             </div>
-
-            {teamError && (
-              <div className="text-center mt-6">
-                <p className="text-orange-600 text-sm mb-2">
-                  {t('about.team.api_error') || 'Помилка завантаження команди з API'}
-                </p>
-                <Button size="sm" variant="bordered" onClick={reloadTeam}>
-                  {t('common.retry') || 'Спробувати знову'}
-                </Button>
-              </div>
-            )}
           </div>
         )}
 
         {/* Досягнення та сертифікати */}
         {aboutData.achievements && aboutData.achievements.length > 0 && (
           <div className="mb-16">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
-              {t('about.achievements.title') || 'Наші досягнення'}
+            <h3 className="text-2xl font-bold text-center mb-10">
+              {t('about.achievements.title') || 'Сертифікати та досягнення'}
             </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {aboutData.achievements.map((achievement) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {aboutData.achievements.map((achievement, index) => (
                 <Card 
-                  key={achievement.id} 
-                  className="text-center hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                  key={achievement.id || index}
+                  className="cursor-pointer hover:shadow-lg transition-shadow"
                   onClick={() => handleCertificateClick(achievement)}
                 >
-                  <CardBody className="p-6">
-                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Trophy className="w-8 h-8 text-white" />
-                    </div>
-                    <h4 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                      {achievement.title}
-                    </h4>
+                  <CardBody>
+                    {achievement.image && (
+                      <div className="h-32 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+                        <img 
+                          src={achievement.image} 
+                          alt={achievement.title}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.src = '/images/certificates/default-certificate.jpg';
+                          }}
+                        />
+                      </div>
+                    )}
+                    <h4 className="text-lg font-semibold mb-2">{achievement.title}</h4>
                     <p className="text-gray-600 text-sm mb-3 line-clamp-2">
                       {achievement.description}
                     </p>
-                    <div className="flex items-center justify-center gap-2">
-                      <Chip size="sm" variant="flat" color="primary">
-                        <Calendar className="w-3 h-3 mr-1" />
+                    <div className="flex justify-between items-center">
+                      <Chip size="sm" variant="flat" color="success">
                         {achievement.year}
                       </Chip>
                       {achievement.organization && (
-                        <Chip size="sm" variant="flat" color="secondary">
-                          <Building className="w-3 h-3 mr-1" />
-                          {achievement.organization.length > 15 ? 
-                            `${achievement.organization.substring(0, 15)}...` : 
-                            achievement.organization
-                          }
-                        </Chip>
+                        <span className="text-xs text-gray-500">
+                          {achievement.organization}
+                        </span>
                       )}
                     </div>
                   </CardBody>
@@ -565,59 +504,44 @@ const AboutSection = ({ data, scrollToSection }) => {
           </div>
         )}
 
-        {/* Фото виробництва */}
+        {/* Виробничі фото */}
         {aboutData.productionPhotos && aboutData.productionPhotos.length > 0 && (
           <div className="mb-16">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
+            <h3 className="text-2xl font-bold text-center mb-10">
               {t('about.production.title') || 'Наше виробництво'}
             </h3>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {aboutData.productionPhotos.slice(0, visiblePhotos).map((photo) => (
-                <Card key={photo.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                  <CardBody className="p-0">
-                    <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-                      {photo.image ? (
-                        <img 
-                          src={photo.image} 
-                          alt={photo.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Building className="w-12 h-12 text-gray-400" />
-                        </div>
-                      )}
-                      {photo.is_featured && (
-                        <Chip 
-                          size="sm" 
-                          color="primary" 
-                          className="absolute top-2 right-2"
-                          startContent={<Star className="w-3 h-3" />}
-                        >
-                          {t('about.production.featured') || 'Рекомендовано'}
-                        </Chip>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h4 className="font-semibold text-gray-900 mb-2">
-                        {photo.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        {photo.description}
-                      </p>
-                    </div>
+              {aboutData.productionPhotos.slice(0, visiblePhotos).map((photo, index) => (
+                <Card key={photo.id || index} className="overflow-hidden">
+                  <div className="h-48 bg-gray-100 overflow-hidden">
+                    <img 
+                      src={photo.image} 
+                      alt={photo.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.src = '/images/production/default-production.jpg';
+                      }}
+                    />
+                  </div>
+                  <CardBody>
+                    <h4 className="text-lg font-semibold mb-2">{photo.title}</h4>
+                    <p className="text-gray-600 text-sm">{photo.description}</p>
+                    {photo.is_featured && (
+                      <Chip size="sm" variant="flat" color="warning" className="mt-2">
+                        {t('about.production.featured') || 'Рекомендоване'}
+                      </Chip>
+                    )}
                   </CardBody>
                 </Card>
               ))}
             </div>
-
+            
             {aboutData.productionPhotos.length > visiblePhotos && (
               <div className="text-center mt-8">
-                <Button
-                  variant="bordered"
-                  onClick={() => setVisiblePhotos(prev => prev + 6)}
-                  endContent={<ArrowRight className="w-4 h-4" />}
+                <Button 
+                  variant="bordered" 
+                  color="primary"
+                  onClick={handleShowMorePhotos}
                 >
                   {t('about.production.show_more') || 'Показати більше'}
                 </Button>
@@ -626,109 +550,85 @@ const AboutSection = ({ data, scrollToSection }) => {
           </div>
         )}
 
-        {/* Заклик до дії */}
-        <div className="text-center">
-          <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-100">
-            <CardBody className="p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                {t('about.cta.title') || 'Готові працювати з професіоналами?'}
-              </h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                {t('about.cta.description') || 'Наш досвід та якість говорять самі за себе. Дозвольте нам створити ідеальний одяг для вашої організації.'}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  color="primary"
-                  size="lg"
-                  onClick={() => scrollToSection?.('projects')}
-                  endContent={<ArrowRight className="w-5 h-5" />}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600"
-                >
-                  {t('about.cta.projects') || 'Переглянути проєкти'}
-                </Button>
-                <Button
-                  variant="bordered"
-                  size="lg"
-                  onClick={() => scrollToSection?.('contact')}
-                  startContent={<Users className="w-5 h-5" />}
-                >
-                  {t('about.cta.contact') || 'Зв\'язатися з нами'}
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
+        {/* CTA секція */}
+        <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-12">
+          <h3 className="text-2xl font-bold mb-4">
+            {t('about.cta.title') || 'Готові розпочати співпрацю?'}
+          </h3>
+          <p className="text-lg mb-6 opacity-90">
+            {t('about.cta.description') || 'Зв\'яжіться з нами для обговорення вашого проекту'}
+          </p>
+          <Button 
+            size="lg" 
+            color="default" 
+            variant="solid"
+            onClick={() => scrollToSection('contact')}
+            startContent={<ArrowRight className="w-5 h-5" />}
+            className="bg-white text-blue-600 hover:bg-gray-100"
+          >
+            {t('about.cta.button') || 'Зв\'язатися з нами'}
+          </Button>
         </div>
 
-        {/* Modal для деталей команди */}
+        {/* Модальне вікно для деталей команди */}
         <Modal 
           isOpen={isTeamModalOpen} 
           onClose={onTeamModalClose}
-          size="2xl"
+          size="lg"
           scrollBehavior="inside"
         >
           <ModalContent>
-            <ModalHeader className="flex items-center gap-3">
-              <Users className="w-6 h-6 text-blue-600" />
-              {selectedTeamMember?.name}
+            <ModalHeader className="flex flex-col gap-1">
+              <h3 className="text-xl font-bold">
+                {t('about.team.details') || 'Деталі співробітника'}
+              </h3>
             </ModalHeader>
             <ModalBody className="pb-6">
               {selectedTeamMember && (
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden flex-shrink-0">
-                      {selectedTeamMember.photo ? (
+                  <div className="flex items-center space-x-4">
+                    {selectedTeamMember.image && (
+                      <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
                         <img 
-                          src={selectedTeamMember.photo} 
+                          src={selectedTeamMember.image} 
                           alt={selectedTeamMember.name}
                           className="w-full h-full object-cover"
                         />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Users className="w-8 h-8 text-gray-400" />
-                        </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                     <div>
-                      <h4 className="text-xl font-semibold text-gray-900">
-                        {selectedTeamMember.name}
-                      </h4>
-                      <p className="text-blue-600 font-medium">
-                        {selectedTeamMember.position}
-                      </p>
-                      {selectedTeamMember.email && (
-                        <a 
-                          href={`mailto:${selectedTeamMember.email}`}
-                          className="text-gray-500 text-sm hover:text-blue-600 transition-colors"
-                        >
-                          {selectedTeamMember.email}
-                        </a>
+                      <h4 className="text-lg font-semibold">{selectedTeamMember.name}</h4>
+                      <p className="text-blue-600">{selectedTeamMember.position}</p>
+                      {selectedTeamMember.experience && (
+                        <Chip size="sm" variant="flat" color="primary">
+                          {selectedTeamMember.experience}
+                        </Chip>
                       )}
                     </div>
                   </div>
                   
-                  <div>
-                    <h5 className="font-semibold text-gray-900 mb-2">
-                      {t('about.team.bio') || 'Біографія'}
-                    </h5>
-                    <p className="text-gray-600 leading-relaxed">
-                      {selectedTeamMember.bio}
-                    </p>
-                  </div>
-
-                  {selectedTeamMember.linkedin && (
+                  {selectedTeamMember.description && (
                     <div>
-                      <h5 className="font-semibold text-gray-900 mb-2">
-                        {t('about.team.contacts') || 'Контакти'}
-                      </h5>
-                      <a 
-                        href={selectedTeamMember.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
-                      >
-                        LinkedIn профіль
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </a>
+                      <h6 className="font-medium text-gray-700 mb-2">
+                        {t('about.team.description') || 'Опис'}
+                      </h6>
+                      <p className="text-gray-600">{selectedTeamMember.description}</p>
+                    </div>
+                  )}
+
+                  {selectedTeamMember.responsibilities && (
+                    <div>
+                      <h6 className="font-medium text-gray-700 mb-2">
+                        {t('about.team.responsibilities') || 'Обов\'язки'}
+                      </h6>
+                      <ul className="text-gray-600 space-y-1">
+                        {selectedTeamMember.responsibilities.map((responsibility, index) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                            {responsibility}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                 </div>
@@ -737,41 +637,38 @@ const AboutSection = ({ data, scrollToSection }) => {
           </ModalContent>
         </Modal>
 
-        {/* Modal для деталей сертифіката */}
+        {/* Модальне вікно для сертифікатів */}
         <Modal 
           isOpen={isCertModalOpen} 
           onClose={onCertModalClose}
-          size="2xl"
+          size="lg"
           scrollBehavior="inside"
         >
           <ModalContent>
-            <ModalHeader className="flex items-center gap-3">
-              <Trophy className="w-6 h-6 text-yellow-600" />
-              {selectedCertificate?.title}
+            <ModalHeader className="flex flex-col gap-1">
+              <h3 className="text-xl font-bold">
+                {t('about.achievements.details') || 'Деталі сертифіката'}
+              </h3>
             </ModalHeader>
             <ModalBody className="pb-6">
               {selectedCertificate && (
                 <div className="space-y-4">
                   {selectedCertificate.image && (
-                    <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
+                    <div className="h-48 bg-gray-100 rounded-lg overflow-hidden">
                       <img 
                         src={selectedCertificate.image} 
                         alt={selectedCertificate.title}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   )}
                   
                   <div>
-                    <h5 className="font-semibold text-gray-900 mb-2">
-                      {t('about.achievements.description') || 'Опис'}
-                    </h5>
-                    <p className="text-gray-600 leading-relaxed">
-                      {selectedCertificate.description}
-                    </p>
+                    <h4 className="text-lg font-semibold mb-2">{selectedCertificate.title}</h4>
+                    <p className="text-gray-600 mb-4">{selectedCertificate.description}</p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <div>
                       <h6 className="font-medium text-gray-700 mb-1">
                         {t('about.achievements.year') || 'Рік отримання'}
@@ -842,7 +739,7 @@ const AboutSection = ({ data, scrollToSection }) => {
       </div>
 
       {/* CSS для анімацій */}
-      <style jsx>{`
+      <style>{`
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;

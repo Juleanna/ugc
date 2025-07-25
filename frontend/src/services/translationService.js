@@ -1,469 +1,329 @@
 // frontend/src/services/translationService.js
-class UGCTranslationService {
+// Виправлена версія з fallback-перекладами
+
+class TranslationService {
   constructor() {
-    // Використовуємо Vite environment variables
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1';
     this.currentLanguage = 'uk';
     this.translations = new Map();
-    this.listeners = new Set();
-    this.cache = new Map();
-    this.cacheTimeout = 30 * 60 * 1000; // 30 хвилин
-    
-    // Статус завантаження
     this.isLoading = false;
-    this.isReady = false;
-    this.loadingPromises = new Map();
+    this.fallbackTranslations = this.getFallbackTranslations();
     
-    // Ініціалізація
-    this.init();
+    console.log('🌍 Translation Service initialized');
   }
 
-  async init() {
-    // Отримуємо мову з localStorage або браузера
-    this.currentLanguage = this.getStoredLanguage() || this.getBrowserLanguage() || 'uk';
-    
-    // Ініціалізуємо базові переклади одразу
-    this.initializeFallbackTranslations();
-    
-    // Завантажуємо переклади з сервера
-    await this.loadTranslations(this.currentLanguage);
-    this.isReady = true;
-  }
-
-  /**
-   * Ініціалізує базові переклади для уникнення помилок
-   */
-  initializeFallbackTranslations() {
-    const ukTranslations = this.getFallbackTranslations('uk');
-    const enTranslations = this.getFallbackTranslations('en');
-    
-    this.translations.set('uk', ukTranslations);
-    this.translations.set('en', enTranslations);
-  }
-
-  getStoredLanguage() {
-    try {
-      return localStorage.getItem('ugc_language');
-    } catch (e) {
-      return null;
-    }
-  }
-
-  getBrowserLanguage() {
-    const lang = navigator.language || navigator.userLanguage;
-    if (lang.startsWith('uk')) return 'uk';
-    if (lang.startsWith('en')) return 'en';
-    return 'uk';
-  }
-
-  storeLanguage(lang) {
-    try {
-      localStorage.setItem('ugc_language', lang);
-    } catch (e) {
-      console.warn('Cannot save language to localStorage:', e);
-    }
-  }
-
-  /**
-   * Завантажує переклади з вашого Django API
-   */
-  async loadTranslations(lang, type = 'all') {
-    const cacheKey = `${lang}_${type}`;
-    
-    // Якщо вже завантажуємо цю мову, повертаємо існуючий проміс
-    if (this.loadingPromises.has(cacheKey)) {
-      return this.loadingPromises.get(cacheKey);
-    }
-    
-    // Перевіряємо кеш
-    if (this.cache.has(cacheKey)) {
-      const cached = this.cache.get(cacheKey);
-      if (Date.now() - cached.timestamp < this.cacheTimeout) {
-        // Об'єднуємо з існуючими fallback перекладами
-        const existingTranslations = this.translations.get(lang) || {};
-        const mergedTranslations = { ...existingTranslations, ...cached.data };
-        this.translations.set(lang, mergedTranslations);
-        return mergedTranslations;
+  // Fallback переклади для критичних ключів
+  getFallbackTranslations() {
+    return {
+      'uk': {
+        // Hero section
+        'hero.description': 'Ми створюємо високоякісний професійний одяг',
+        'hero.features.quality': 'Висока якість',
+        'hero.features.speed': 'Швидка доставка',
+        'hero.features.experience': 'Багаторічний досвід',
+        'hero.features.service': 'Професійний сервіс',
+        'hero.scroll_down': 'Прокрутити вниз',
+        
+        // About section
+        'about.title': 'Про нашу компанію',
+        'about.subtitle': 'Наш багаторічний досвід гарантує якість',
+        'about.description': 'Ми створюємо одяг, який забезпечує безпеку і комфорт у будь-яких умовах',
+        'about.mission': 'Наша місія – забезпечити працівників якісним професійним одягом',
+        'about.vision': 'Стати провідним виробником професійного одягу в Україні',
+        'about.values': 'Якість, надійність, інновації та відповідальність',
+        'about.loading': 'Завантаження інформації...',
+        'about.error.title': 'Помилка завантаження',
+        'about.error.message': 'Не вдалося завантажити інформацію про компанію',
+        
+        // Features
+        'about.features.title': 'Наші переваги',
+        'about.features.reliability.title': 'Надійність',
+        'about.features.reliability.description': 'Використовуємо тільки перевірені матеріали',
+        'about.features.quality.title': 'Якість',
+        'about.features.quality.description': 'Контроль якості на кожному етапі',
+        'about.features.experience.title': 'Досвід',
+        'about.features.experience.description': 'Понад 10 років у сфері професійного одягу',
+        'about.features.precision.title': 'Точність',
+        'about.features.precision.description': 'Індивідуальний підхід до кожного замовлення',
+        
+        // Stats
+        'about.stats.years_experience': 'Років досвіду',
+        'about.stats.satisfied_clients': 'Задоволених клієнтів',
+        'about.stats.total_projects': 'Завершених проектів',
+        'about.stats.team_members': 'Членів команди',
+        'about.stats.services_count': 'Видів послуг',
+        
+        // Team
+        'about.team.title': 'Наша команда',
+        'about.team.details': 'Деталі співробітника',
+        'about.team.description': 'Опис',
+        'about.team.responsibilities': 'Обов\'язки',
+        
+        // Achievements
+        'about.achievements.title': 'Сертифікати та досягнення',
+        'about.achievements.details': 'Деталі сертифіката',
+        'about.achievements.year': 'Рік отримання',
+        'about.achievements.organization': 'Організація',
+        'about.achievements.view_certificate': 'Переглянути сертифікат',
+        
+        // Production
+        'about.production.title': 'Наше виробництво',
+        'about.production.featured': 'Рекомендоване',
+        'about.production.show_more': 'Показати більше',
+        
+        // CTA
+        'about.cta.title': 'Готові розпочати співпрацю?',
+        'about.cta.description': 'Зв\'яжіться з нами для обговорення вашого проекту',
+        'about.cta.button': 'Зв\'язатися з нами',
+        
+        // Mission, Vision, Values
+        'about.mission.title': 'Місія',
+        'about.vision.title': 'Бачення',
+        'about.values.title': 'Цінності',
+        
+        // Common
+        'common.retry': 'Спробувати знову',
+        'common.loading': 'Завантаження...',
+        'common.error': 'Помилка'
+      },
+      'en': {
+        // Hero section
+        'hero.description': 'We create high-quality professional clothing',
+        'hero.features.quality': 'High Quality',
+        'hero.features.speed': 'Fast Delivery',
+        'hero.features.experience': 'Years of Experience',
+        'hero.features.service': 'Professional Service',
+        'hero.scroll_down': 'Scroll Down',
+        
+        // About section
+        'about.title': 'About Our Company',
+        'about.subtitle': 'Our years of experience guarantee quality',
+        'about.description': 'We create clothing that provides safety and comfort in any conditions',
+        'about.mission': 'Our mission is to provide workers with quality professional clothing',
+        'about.vision': 'To become a leading manufacturer of professional clothing in Ukraine',
+        'about.values': 'Quality, reliability, innovation and responsibility',
+        'about.loading': 'Loading information...',
+        'about.error.title': 'Loading Error',
+        'about.error.message': 'Failed to load company information',
+        
+        // Features
+        'about.features.title': 'Our Advantages',
+        'about.features.reliability.title': 'Reliability',
+        'about.features.reliability.description': 'We use only proven materials',
+        'about.features.quality.title': 'Quality',
+        'about.features.quality.description': 'Quality control at every stage',
+        'about.features.experience.title': 'Experience',
+        'about.features.experience.description': 'Over 10 years in professional clothing',
+        'about.features.precision.title': 'Precision',
+        'about.features.precision.description': 'Individual approach to each order',
+        
+        // Stats
+        'about.stats.years_experience': 'Years of Experience',
+        'about.stats.satisfied_clients': 'Satisfied Clients',
+        'about.stats.total_projects': 'Completed Projects',
+        'about.stats.team_members': 'Team Members',
+        'about.stats.services_count': 'Types of Services',
+        
+        // Team
+        'about.team.title': 'Our Team',
+        'about.team.details': 'Employee Details',
+        'about.team.description': 'Description',
+        'about.team.responsibilities': 'Responsibilities',
+        
+        // Achievements
+        'about.achievements.title': 'Certificates and Achievements',
+        'about.achievements.details': 'Certificate Details',
+        'about.achievements.year': 'Year Received',
+        'about.achievements.organization': 'Organization',
+        'about.achievements.view_certificate': 'View Certificate',
+        
+        // Production
+        'about.production.title': 'Our Production',
+        'about.production.featured': 'Featured',
+        'about.production.show_more': 'Show More',
+        
+        // CTA
+        'about.cta.title': 'Ready to Start Cooperation?',
+        'about.cta.description': 'Contact us to discuss your project',
+        'about.cta.button': 'Contact Us',
+        
+        // Mission, Vision, Values
+        'about.mission.title': 'Mission',
+        'about.vision.title': 'Vision',
+        'about.values.title': 'Values',
+        
+        // Common
+        'common.retry': 'Try Again',
+        'common.loading': 'Loading...',
+        'common.error': 'Error'
       }
-    }
-
-    const loadPromise = this.doLoadTranslations(lang, type, cacheKey);
-    this.loadingPromises.set(cacheKey, loadPromise);
-    
-    try {
-      const result = await loadPromise;
-      return result;
-    } finally {
-      this.loadingPromises.delete(cacheKey);
-    }
+    };
   }
 
-  async doLoadTranslations(lang, type, cacheKey) {
+  async loadTranslations(language = 'uk', namespace = 'all') {
+    if (this.isLoading) {
+      console.log('🔄 Translation loading already in progress');
+      return;
+    }
+
+    this.isLoading = true;
+    
     try {
-      let endpoint;
-      switch (type) {
-        case 'static':
-          endpoint = `/translations/${lang}/`;
-          break;
-        case 'dynamic':
-          endpoint = `/translations/${lang}/dynamic/`;
-          break;
-        case 'all':
-        default:
-          endpoint = `/translations/${lang}/all/`;
-          break;
-      }
+      const url = `${process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8000'}/api/v1/translations/${language}/${namespace}/`;
+      console.log(`🌍 Завантаження перекладів: ${url}`);
 
-      console.log(`🌍 Завантаження перекладів: ${this.baseURL}${endpoint}`);
-
-      const response = await fetch(`${this.baseURL}${endpoint}`, {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json();
-      const newTranslations = data.translations || {};
-
-      // Зберігаємо в кеш
-      this.cache.set(cacheKey, {
-        data: newTranslations,
-        timestamp: Date.now()
-      });
-
-      // Об'єднуємо з існуючими перекладами (fallback + нові)
-      const existingTranslations = this.translations.get(lang) || {};
-      const mergedTranslations = { ...existingTranslations, ...newTranslations };
-      this.translations.set(lang, mergedTranslations);
-
-      console.log(`✅ Завантажено ${Object.keys(newTranslations).length} перекладів для ${lang}`);
-      console.log(`📝 Загалом доступно ${Object.keys(mergedTranslations).length} перекладів`);
       
-      return mergedTranslations;
+      // Зберігаємо переклади
+      if (data.translations && typeof data.translations === 'object') {
+        this.translations.set(language, data.translations);
+        console.log(`✅ Завантажено ${Object.keys(data.translations).length} перекладів для ${language}`);
+      } else {
+        console.warn('⚠️ Неправильний формат даних перекладів');
+        // Використовуємо fallback
+        this.translations.set(language, this.fallbackTranslations[language] || {});
+      }
+
+      console.log(`📝 Загалом доступно ${this.getTotalTranslationsCount()} перекладів`);
+      this.currentLanguage = language;
 
     } catch (error) {
-      console.error(`❌ Помилка завантаження перекладів для ${lang}:`, error);
+      console.error('❌ Помилка завантаження перекладів:', error);
       
-      // При помилці використовуємо існуючі переклади або fallback
-      const existingTranslations = this.translations.get(lang);
-      if (existingTranslations) {
-        console.log(`🔄 Використовуємо існуючі переклади для ${lang}`);
-        return existingTranslations;
-      }
-      
-      const fallbackTranslations = this.getFallbackTranslations(lang);
-      this.translations.set(lang, fallbackTranslations);
-      return fallbackTranslations;
+      // Використовуємо fallback переклади при помилці
+      const fallback = this.fallbackTranslations[language] || this.fallbackTranslations['uk'] || {};
+      this.translations.set(language, fallback);
+      console.log(`🔄 Використовуємо fallback переклади: ${Object.keys(fallback).length} записів`);
+    } finally {
+      this.isLoading = false;
     }
   }
 
-  /**
-   * Розширені базові переклади для UGC проекту
-   */
-  getFallbackTranslations(lang) {
-    if (lang === 'uk') {
-      return {
-        // Навігація
-        'nav.home': 'Головна',
-        'nav.about': 'Про нас',
-        'nav.services': 'Послуги',
-        'nav.projects': 'Проекти',
-        'nav.contact': 'Контакти',
-
-        // Hero секція
-        'hero.title.main': 'Професійний одяг',
-        'hero.title.for': 'для',
-        'hero.title.sphere': 'будь-якої сфери',
-        'hero.subtitle': 'Ми створюємо високоякісний спецодяг, військову форму та корпоративний одяг для українських підприємств та організацій. Наш досвід і прагнення до досконалості допомагають нам задовольняти потреби професіоналів у різних галузях.',
-        'hero.button.projects': 'Наші проекти',
-        'hero.button.learn_more': 'Дізнатися більше',
-        'hero.stats.experience': 'Роки досвіду',
-        'hero.stats.projects': 'Проектів',
-        'hero.stats.clients': 'Клієнтів',
-        'hero.stats.support': 'Підтримка',
-
-        // Сервіси
-        'services.title': 'Повний цикл виробництва',
-        'services.subtitle': 'професійного одягу',
-        'services.description': 'Від проєктування до готового виробу - ми забезпечуємо якість на кожному етапі',
-        'services.details': 'Детальніше',
-
-        // Проекти
-        'projects.title': 'Наші проекти',
-        'projects.subtitle': 'Успішно реалізовані рішення',
-        'projects.badge.success': 'Успішний проєкт',
-
-        // Контакти
-        'contact.title': 'Зв\'яжіться з нами',
-        'contact.subtitle': 'прямо зараз',
-        'contact.description': 'Готові допомогти вам з будь-якими питаннями та замовленнями',
-
-        // Форма
-        'form.name': 'Ім\'я',
-        'form.email': 'Email',
-        'form.phone': 'Телефон',
-        'form.message': 'Повідомлення',
-        'form.send': 'Відправити',
-        'form.sending': 'Відправляємо...',
-
-        // Загальні
-        'common.loading': 'Завантаження...',
-        'common.error': 'Помилка',
-        'common.success': 'Успіх',
-        'common.close': 'Закрити',
-        'common.language': 'Мова',
-      };
-    } else {
-      return {
-        // Навігація
-        'nav.home': 'Home',
-        'nav.about': 'About',
-        'nav.services': 'Services',
-        'nav.projects': 'Projects',
-        'nav.contact': 'Contact',
-
-        // Hero секція
-        'hero.title.main': 'Professional clothing',
-        'hero.title.for': 'for',
-        'hero.title.sphere': 'any sphere',
-        'hero.subtitle': 'We create high-quality workwear, military uniforms and corporate clothing for Ukrainian enterprises and organizations. Our experience and pursuit of excellence help us meet the needs of professionals in various industries.',
-        'hero.button.projects': 'Our projects',
-        'hero.button.learn_more': 'Learn more',
-        'hero.stats.experience': 'Years of experience',
-        'hero.stats.projects': 'Completed projects',
-        'hero.stats.clients': 'Satisfied clients',
-        'hero.stats.support': '24/7 Support',
-
-        // Сервіси
-        'services.title': 'Full cycle of professional clothing production',
-        'services.subtitle': 'From design to finished product - we ensure quality at every stage',
-        'services.details': 'Details',
-
-        // Проекти
-        'projects.title': 'Our Projects',
-        'projects.subtitle': 'Successfully implemented solutions',
-        'projects.badge.success': 'Successful project',
-
-        // Контакти
-        'contact.title': 'Contact us',
-        'contact.subtitle': 'right now',
-        'contact.description': 'Ready to help you with any questions and orders',
-
-        // Форма
-        'form.name': 'Name',
-        'form.email': 'Email',
-        'form.phone': 'Phone',
-        'form.message': 'Message',
-        'form.send': 'Send',
-        'form.sending': 'Sending...',
-
-        // Загальні
-        'common.loading': 'Loading...',
-        'common.error': 'Error',
-        'common.success': 'Success',
-        'common.close': 'Close',
-        'common.language': 'Language',
-      };
+  getTotalTranslationsCount() {
+    let total = 0;
+    for (const [lang, translations] of this.translations) {
+      total += Object.keys(translations).length;
     }
+    return total;
   }
 
-  /**
-   * Отримує переклад за ключем з покращеною логікою
-   */
-  t(key, params = {}) {
-    const lang = this.currentLanguage;
+  translate(key, language = null, interpolation = {}) {
+    const lang = language || this.currentLanguage;
     const translations = this.translations.get(lang) || {};
     
-    let translation = translations[key];
+    // Спробуємо знайти переклад
+    let translation = this.getNestedValue(translations, key);
     
-    // Якщо переклад не знайдено, шукаємо в англійській мові
-    if (!translation && lang !== 'en') {
-      const enTranslations = this.translations.get('en') || {};
-      translation = enTranslations[key];
+    // Якщо не знайдено, спробуємо fallback
+    if (!translation) {
+      const fallback = this.fallbackTranslations[lang] || {};
+      translation = this.getNestedValue(fallback, key);
+      
+      if (!translation && lang !== 'uk') {
+        // Спробуємо українську як останній fallback
+        const ukFallback = this.fallbackTranslations['uk'] || {};
+        translation = this.getNestedValue(ukFallback, key);
+      }
     }
     
-    // Якщо і в англійській немає, повертаємо ключ
+    // Якщо все ще не знайдено, показуємо повідомлення (тільки в dev режимі)
     if (!translation) {
-      // Логуємо тільки якщо переклади готові (щоб уникнути спаму при ініціалізації)
-      if (this.isReady) {
+      if (process.env.NODE_ENV === 'development') {
         console.warn(`🔍 Переклад не знайдено: ${key} (${lang})`);
       }
-      
-      translation = key;
+      return key; // Повертаємо ключ як fallback
     }
 
-    // Заміна параметрів в перекладі
-    return this.interpolate(translation, params);
+    // Інтерполяція змінних (якщо потрібно)
+    if (typeof translation === 'string' && Object.keys(interpolation).length > 0) {
+      return this.interpolate(translation, interpolation);
+    }
+
+    return translation;
   }
 
-  /**
-   * Інтерполяція параметрів
-   */
-  interpolate(text, params) {
-    return text.replace(/\{\{(\w+)\}\}/g, (match, key) => {
-      return params[key] !== undefined ? params[key] : match;
+  getNestedValue(obj, path) {
+    return path.split('.').reduce((current, key) => {
+      return current && current[key] !== undefined ? current[key] : null;
+    }, obj);
+  }
+
+  interpolate(template, variables) {
+    return template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
+      return variables[key] !== undefined ? variables[key] : match;
     });
-  }
-
-  /**
-   * Змінює поточну мову
-   */
-  async setLanguage(lang) {
-    if (this.currentLanguage === lang) return;
-
-    console.log(`🔄 Зміна мови: ${this.currentLanguage} → ${lang}`);
-
-    this.currentLanguage = lang;
-    this.storeLanguage(lang);
-
-    // Завантажуємо переклади для нової мови
-    await this.loadTranslations(lang);
-
-    // Повідомляємо слухачів про зміну мови
-    this.notifyListeners();
   }
 
   getCurrentLanguage() {
     return this.currentLanguage;
   }
 
-  /**
-   * Перевіряє чи готові переклади
-   */
-  isTranslationsReady() {
-    return this.isReady;
-  }
-
-  /**
-   * Чекає готовності перекладів
-   */
-  async waitForReady() {
-    if (this.isReady) return;
-    
-    return new Promise((resolve) => {
-      const checkReady = () => {
-        if (this.isReady) {
-          resolve();
-        } else {
-          setTimeout(checkReady, 100);
-        }
-      };
-      checkReady();
-    });
-  }
-
-  /**
-   * Отримує список доступних мов
-   */
-  async getAvailableLanguages() {
-    try {
-      const response = await fetch(`${this.baseURL}/translations/stats/`);
-      const data = await response.json();
-      return Object.keys(data.languages || {});
-    } catch (error) {
-      console.error('Помилка отримання списку мов:', error);
-      return ['uk', 'en'];
+  setLanguage(language) {
+    if (this.currentLanguage !== language) {
+      this.currentLanguage = language;
+      // Автоматично завантажуємо переклади для нової мови
+      this.loadTranslations(language);
     }
   }
 
-  /**
-   * Очищає кеш перекладів
-   */
+  getAvailableLanguages() {
+    return ['uk', 'en'];
+  }
+
+  hasTranslation(key, language = null) {
+    const lang = language || this.currentLanguage;
+    const translations = this.translations.get(lang) || {};
+    const translation = this.getNestedValue(translations, key);
+    
+    if (translation) return true;
+    
+    // Перевіряємо fallback
+    const fallback = this.fallbackTranslations[lang] || {};
+    return !!this.getNestedValue(fallback, key);
+  }
+
+  // Метод для додавання перекладів в runtime (корисно для тестування)
+  addTranslations(language, translations) {
+    const existing = this.translations.get(language) || {};
+    this.translations.set(language, { ...existing, ...translations });
+    console.log(`✅ Додано ${Object.keys(translations).length} перекладів для ${language}`);
+  }
+
+  // Метод для очищення кешу перекладів
   clearCache() {
-    this.cache.clear();
+    this.translations.clear();
     console.log('🧹 Кеш перекладів очищено');
   }
 
-  /**
-   * Оновлює переклади з сервера
-   */
-  async refreshTranslations() {
-    console.log('🔄 Оновлення перекладів...');
-    this.clearCache();
-    await this.loadTranslations(this.currentLanguage);
-    this.notifyListeners();
-  }
-
-  /**
-   * Додає слухача для змін мови
-   */
-  addLanguageChangeListener(callback) {
-    this.listeners.add(callback);
-  }
-
-  /**
-   * Видаляє слухача
-   */
-  removeLanguageChangeListener(callback) {
-    this.listeners.delete(callback);
-  }
-
-  /**
-   * Повідомляє всіх слухачів про зміни
-   */
-  notifyListeners() {
-    this.listeners.forEach(callback => {
-      try {
-        callback(this.currentLanguage);
-      } catch (error) {
-        console.error('Помилка в слухачі зміни мови:', error);
-      }
-    });
-  }
-
-  /**
-   * Отримує статистику перекладів
-   */
-  async getTranslationStats() {
-    try {
-      const response = await fetch(`${this.baseURL}/translations/stats/`);
-      return await response.json();
-    } catch (error) {
-      console.error('Помилка отримання статистики:', error);
-      return null;
+  // Статистика для debug
+  getStats() {
+    const stats = {};
+    for (const [lang, translations] of this.translations) {
+      stats[lang] = Object.keys(translations).length;
     }
-  }
-
-  /**
-   * Синхронізація з Django API (викликає webhook для очищення кешу)
-   */
-  async syncWithBackend() {
-    try {
-      await fetch(`${this.baseURL}/webhooks/translations/update/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
-      // Оновлюємо локальний кеш
-      await this.refreshTranslations();
-      
-      console.log('✅ Синхронізація з backend завершена');
-    } catch (error) {
-      console.error('❌ Помилка синхронізації:', error);
-    }
+    return {
+      currentLanguage: this.currentLanguage,
+      isLoading: this.isLoading,
+      languages: stats,
+      fallbackAvailable: Object.keys(this.fallbackTranslations).length
+    };
   }
 }
 
-// Створюємо єдиний екземпляр сервісу
-const ugcTranslationService = new UGCTranslationService();
+// Створюємо singleton instance
+const translationService = new TranslationService();
 
-// Експортуємо сервіс та функції для зручності
-export default ugcTranslationService;
-
-// Зручні функції для використання в компонентах
-export const t = (key, params) => ugcTranslationService.t(key, params);
-export const setLanguage = (lang) => ugcTranslationService.setLanguage(lang);
-export const getCurrentLanguage = () => ugcTranslationService.getCurrentLanguage();
-export const addLanguageChangeListener = (callback) => ugcTranslationService.addLanguageChangeListener(callback);
-export const removeLanguageChangeListener = (callback) => ugcTranslationService.removeLanguageChangeListener(callback);
-export const refreshTranslations = () => ugcTranslationService.refreshTranslations();
-export const isTranslationsReady = () => ugcTranslationService.isTranslationsReady();
-export const waitForReady = () => ugcTranslationService.waitForReady();
+// Експортуємо інстанс та клас
+export default translationService;
+export { TranslationService };
