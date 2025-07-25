@@ -1,19 +1,19 @@
 // frontend/src/hooks/useUnifiedAPI.jsx
-// Адаптовано для нової ViewSets архітектури бекенду
+// Виправлена версія з rate limiting та throttling
 
-import { useState, useEffect, useCallback, createContext, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback, createContext } from 'react';
 
-// Context для глобального стану API
+// =================== КОНТЕКСТ ГЛОБАЛЬНОГО СТАНУ ===================
+
 const APIContext = createContext(null);
 
-// Provider для глобального стану
 export const APIProvider = ({ children }) => {
   const [globalState, setGlobalState] = useState({
     data: {},
-    cache: new Map(),
-    requestQueue: new Map(),
+    errors: {},
     isLoading: {},
-    errors: {}
+    cache: new Map(),
+    requestQueue: new Set(),
   });
 
   return (
@@ -23,144 +23,312 @@ export const APIProvider = ({ children }) => {
   );
 };
 
-// Основний клас для API операцій з підтримкою ViewSets
+// =================== RATE LIMITER ===================
+
+class RateLimiter {
+  constructor(maxRequests = 10, windowMs = 60000) { // 10 запитів за хвилину
+    this.maxRequests = maxRequests;
+    this.windowMs = windowMs;
+    this.requests = new Map(); // endpoint -> timestamps[]
+    this.globalRequests = []; // всі запити
+  }
+
+  // Перевірка чи можна робити запит
+  canMakeRequest(endpoint) {
+    const now = Date.now();
+    
+    // Очищаємо старі записи
+    this.cleanup(now);
+    
+    // Перевіряємо глобальний ліміт
+    if (this.globalRequests.length >= this.maxRequests) {
+      console.warn(`🚫 Rate limit exceeded: ${this.globalRequests.length}/${this.maxRequests} requests in last ${this.windowMs/1000}s`);
+      return false;
+    }
+    
+    // Перевіряємо ліміт по endpoint
+    const endpointRequests = this.requests.get(endpoint) || [];
+    if (endpointRequests.length >= 3) { // max 3 запити на endpoint
+      console.warn(`🚫 Endpoint rate limit exceeded for ${endpoint}: ${endpointRequests.length}/3`);
+      return false;
+    }
+    
+    return true;
+  }
+
+  // Записуємо запит
+  recordRequest(endpoint) {
+    const now = Date.now();
+    
+    // Записуємо глобально
+    this.globalRequests.push(now);
+    
+    // Записуємо по endpoint
+    const endpointRequests = this.requests.get(endpoint) || [];
+    endpointRequests.push(now);
+    this.requests.set(endpoint, endpointRequests);
+    
+    console.log(`📊 Rate limiter: ${this.globalRequests.length}/${this.maxRequests} global, ${endpointRequests.length}/3 for ${endpoint}`);
+  }
+
+  // Очищення старих записів
+  cleanup(now) {
+    // Очищаємо глобальні
+    this.globalRequests = this.globalRequests.filter(time => now - time < this.windowMs);
+    
+    // Очищаємо по endpoints
+    for (const [endpoint, timestamps] of this.requests) {
+      const filtered = timestamps.filter(time => now - time < this.windowMs);
+      if (filtered.length === 0) {
+        this.requests.delete(endpoint);
+      } else {
+        this.requests.set(endpoint, filtered);
+      }
+    }
+  }
+
+  // Отримання часу очікування
+  getWaitTime(endpoint) {
+    const now = Date.now();
+    this.cleanup(now);
+    
+    // Перевіряємо глобальний ліміт
+    if (this.globalRequests.length >= this.maxRequests) {
+      const oldestRequest = Math.min(...this.globalRequests);
+      return Math.max(0, this.windowMs - (now - oldestRequest)) + 1000; // +1s buffer
+    }
+    
+    // Перевіряємо ліміт endpoint
+    const endpointRequests = this.requests.get(endpoint) || [];
+    if (endpointRequests.length >= 3) {
+      const oldestRequest = Math.min(...endpointRequests);
+      return Math.max(0, this.windowMs - (now - oldestRequest)) + 1000;
+    }
+    
+    return 0;
+  }
+
+  // Статистика
+  getStats() {
+    const now = Date.now();
+    this.cleanup(now);
+    return {
+      globalRequests: this.globalRequests.length,
+      maxRequests: this.maxRequests,
+      endpointCounts: Object.fromEntries(
+        Array.from(this.requests.entries()).map(([endpoint, timestamps]) => [
+          endpoint, 
+          timestamps.length
+        ])
+      )
+    };
+  }
+}
+
+// =================== УНІФІКОВАНИЙ API МЕНЕДЖЕР ===================
+
 class UnifiedAPIManager {
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1';
-    this.cacheTimeout = 5 * 60 * 1000; // 5 хвилин
-    this.requestTimeouts = new Map();
+    this.baseURL = 'http://127.0.0.1:8000/api/v1';
+    this.requestTimeout = 15000; // Збільшено з 10s до 15s
+    this.retryDelay = 2000; // Збільшено з 1s до 2s
+    this.maxRetries = 2; // Зменшено з 3 до 2
+    this.rateLimiter = new RateLimiter(8, 60000); // 8 запитів за хвилину
+    this.pendingRequests = new Map(); // Дедуплікація запитів
   }
 
   async makeRequest(endpoint, options = {}, globalState, setGlobalState) {
+    const url = `${this.baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
     const cacheKey = `${endpoint}_${JSON.stringify(options)}`;
-    const now = Date.now();
 
-    // Перевірка кешу
+    // Перевіряємо кеш
     if (globalState.cache.has(cacheKey)) {
       const cached = globalState.cache.get(cacheKey);
-      if (now - cached.timestamp < this.cacheTimeout) {
-        console.log(`✅ Cache hit: ${endpoint}`);
+      if (Date.now() - cached.timestamp < 300000) { // 5 хвилин кеш
+        console.log(`💾 Cache hit for ${endpoint}`);
         return cached.data;
       }
     }
 
-    // Перевірка чи запит вже виконується
-    if (globalState.requestQueue.has(cacheKey)) {
-      console.log(`⏳ Request in progress: ${endpoint}`);
-      return globalState.requestQueue.get(cacheKey);
+    // Дедуплікація: перевіряємо чи запит вже виконується
+    if (this.pendingRequests.has(cacheKey)) {
+      console.log(`⏳ Request already pending for ${endpoint}, waiting...`);
+      return this.pendingRequests.get(cacheKey);
     }
 
-    // Створення нового запиту
-    const requestPromise = this.executeRequest(endpoint, options);
-    
-    // Додавання до черги
+    // Rate limiting перевірка
+    if (!this.rateLimiter.canMakeRequest(endpoint)) {
+      const waitTime = this.rateLimiter.getWaitTime(endpoint);
+      console.warn(`⏰ Rate limited ${endpoint}, waiting ${waitTime}ms`);
+      
+      // Чекаємо та пробуємо знову
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+      
+      // Перевіряємо повторно
+      if (!this.rateLimiter.canMakeRequest(endpoint)) {
+        throw new Error(`Rate limit exceeded for ${endpoint}. Please try again later.`);
+      }
+    }
+
+    // Створюємо проміс для запиту
+    const requestPromise = this.executeRequestWithRetry(url, options, endpoint);
+    this.pendingRequests.set(cacheKey, requestPromise);
+
+    // Оновлюємо стан завантаження
     setGlobalState(prev => ({
       ...prev,
-      requestQueue: new Map(prev.requestQueue).set(cacheKey, requestPromise),
       isLoading: { ...prev.isLoading, [endpoint]: true }
     }));
 
     try {
+      // Записуємо запит у rate limiter
+      this.rateLimiter.recordRequest(endpoint);
+      
       const result = await requestPromise;
+      const processedData = this.processResponse(result);
 
-      // Кешування результату
+      // Кешуємо результат
       setGlobalState(prev => {
         const newCache = new Map(prev.cache);
-        newCache.set(cacheKey, { data: result, timestamp: now });
-        
-        const newQueue = new Map(prev.requestQueue);
-        newQueue.delete(cacheKey);
+        newCache.set(cacheKey, {
+          data: processedData,
+          timestamp: Date.now()
+        });
 
         return {
           ...prev,
-          cache: newCache,
-          requestQueue: newQueue,
-          data: { ...prev.data, [endpoint]: result },
+          data: { ...prev.data, [endpoint]: processedData },
+          errors: { ...prev.errors, [endpoint]: null },
           isLoading: { ...prev.isLoading, [endpoint]: false },
-          errors: { ...prev.errors, [endpoint]: null }
+          cache: newCache
         };
       });
 
-      console.log(`✅ API Success: ${endpoint}`, result);
-      return result;
-
+      return processedData;
     } catch (error) {
-      // Обробка помилки
-      setGlobalState(prev => {
-        const newQueue = new Map(prev.requestQueue);
-        newQueue.delete(cacheKey);
-
-        return {
-          ...prev,
-          requestQueue: newQueue,
-          isLoading: { ...prev.isLoading, [endpoint]: false },
-          errors: { ...prev.errors, [endpoint]: error.message }
-        };
-      });
-
       console.error(`❌ API Error ${endpoint}:`, error);
+      
+      setGlobalState(prev => ({
+        ...prev,
+        errors: { ...prev.errors, [endpoint]: error },
+        isLoading: { ...prev.isLoading, [endpoint]: false }
+      }));
+
+      throw error;
+    } finally {
+      // Видаляємо з pending запитів
+      this.pendingRequests.delete(cacheKey);
+    }
+  }
+
+  async executeRequestWithRetry(url, options, endpoint, attempt = 1) {
+    try {
+      return await this.executeRequest(url, options);
+    } catch (error) {
+      // Якщо це rate limit помилка і ще є спроби
+      if (error.message.includes('429') && attempt < this.maxRetries) {
+        const delay = this.retryDelay * Math.pow(2, attempt - 1); // Exponential backoff
+        console.warn(`🔄 Retry ${attempt}/${this.maxRetries} for ${endpoint} after ${delay}ms (429 error)`);
+        
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return this.executeRequestWithRetry(url, options, endpoint, attempt + 1);
+      }
+      
       throw error;
     }
   }
 
-  async executeRequest(endpoint, options = {}) {
-    const url = `${this.baseURL}${endpoint}`;
-    
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      ...options
-    };
+  async executeRequest(url, options = {}) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), this.requestTimeout);
 
-    const response = await fetch(url, config);
+    try {
+      console.log(`🌐 Making request to: ${url}`);
+      
+      const response = await fetch(url, {
+        method: options.method || 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers
+        },
+        body: options.body ? JSON.stringify(options.body) : undefined,
+        signal: controller.signal,
+        ...options
+      });
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      clearTimeout(timeoutId);
+      
+      if (error.name === 'AbortError') {
+        throw new Error('Request timeout');
+      }
+      
+      throw error;
     }
+  }
 
-    const result = await response.json();
+  processResponse(result) {
+    if (!result) return null;
     
-    // Обробляємо різні формати відповідей від ViewSets
-    if (result.success !== undefined) {
-      // Стандартний формат API
-      return result.success ? result.data : result;
+    if (result.data && typeof result.data === 'object') {
+      return result.data;
     } else if (result.results) {
-      // Пагінована відповідь від ViewSets
       return result.results;
     } else if (Array.isArray(result)) {
-      // Масив даних
       return result;
     } else {
-      // Інші типи відповідей
       return result;
     }
   }
 
   async preloadCriticalData(globalState, setGlobalState) {
-    // ViewSets endpoints для критичних даних
+    // ЗМЕНШЕНА кількість критичних endpoints для уникнення rate limit
     const criticalEndpoints = [
-      '/homepage/1/',                    // ViewSets endpoint для головної сторінки
-      '/homepage/1/stats/',              // Статистика головної сторінки
-      '/services/featured/',             // Рекомендовані послуги
-      '/projects/featured/',             // Рекомендовані проєкти
-      '/translations/uk/',               // Переклади
+      '/homepage/1/',                    // Існуючий ViewSet endpoint
+      '/content/stats/',                 // Централізований endpoint
+      '/content/featured/',              // Централізований endpoint
     ];
 
-    console.log('🔄 Preloading critical data for ViewSets...');
+    console.log('🔄 Preloading critical data with rate limiting...');
+    console.log(`📊 Rate limiter stats:`, this.rateLimiter.getStats());
 
-    const results = await Promise.allSettled(
-      criticalEndpoints.map(endpoint => 
-        this.makeRequest(endpoint, {}, globalState, setGlobalState)
-      )
-    );
+    // Послідовне завантаження замість паралельного для уникнення rate limit
+    const results = [];
+    for (const endpoint of criticalEndpoints) {
+      try {
+        console.log(`⏳ Loading ${endpoint}...`);
+        const result = await this.makeRequest(endpoint, {}, globalState, setGlobalState);
+        results.push({ status: 'fulfilled', value: result });
+        
+        // Невелика затримка між запитами
+        await new Promise(resolve => setTimeout(resolve, 500));
+      } catch (error) {
+        console.error(`❌ Failed to load ${endpoint}:`, error);
+        results.push({ status: 'rejected', reason: error });
+      }
+    }
 
     const successful = results.filter(r => r.status === 'fulfilled').length;
-    console.log(`✅ Preloaded ${successful}/${criticalEndpoints.length} ViewSets endpoints`);
+    console.log(`✅ Preloaded ${successful}/${criticalEndpoints.length} endpoints`);
+    console.log(`📊 Final rate limiter stats:`, this.rateLimiter.getStats());
 
     return { successful, total: criticalEndpoints.length };
+  }
+
+  // Метод для отримання статистики
+  getStats() {
+    return {
+      rateLimiter: this.rateLimiter.getStats(),
+      pendingRequests: this.pendingRequests.size,
+      baseURL: this.baseURL
+    };
   }
 }
 
@@ -220,22 +388,20 @@ export const useUnifiedAPI = (endpoint, options = {}) => {
 // =================== СПЕЦІАЛІЗОВАНІ ХУКИ ДЛЯ VIEWSETS ===================
 
 export const useHomepageData = () => {
-  // ViewSets endpoints для головної сторінки
   const homepageDetails = useUnifiedAPI('/homepage/1/');
-  const homepageStats = useUnifiedAPI('/homepage/1/stats/');
-  const featuredContent = useUnifiedAPI('/homepage/1/featured_content/');
+  const homepageStats = useUnifiedAPI('/content/stats/');
+  const featuredContent = useUnifiedAPI('/content/featured/');
 
   const combinedData = {
-    // Дані з ViewSets
     ...homepageDetails.data,
-    stats: homepageStats.data || {
+    stats: homepageStats.data?.homepage_stats || homepageStats.data || {
       total_projects: 150,
       satisfied_clients: 95,
       years_experience: 10,
       team_members: 25
     },
-    featured_services: featuredContent.data?.featured_services || [],
-    featured_projects: featuredContent.data?.featured_projects || []
+    featured_services: featuredContent.data?.services || [],
+    featured_projects: featuredContent.data?.projects || []
   };
 
   return {
@@ -251,13 +417,12 @@ export const useHomepageData = () => {
 };
 
 export const useServicesData = () => {
-  // ViewSets endpoints для послуг
   const allServices = useUnifiedAPI('/services/');
-  const featuredServices = useUnifiedAPI('/services/featured/');
+  const featuredServices = useUnifiedAPI('/content/featured/');
 
   return {
-    data: allServices.data || featuredServices.data || [],
-    featuredData: featuredServices.data || [],
+    data: allServices.data || [],
+    featuredData: featuredServices.data?.services || [],
     isLoading: allServices.isLoading || featuredServices.isLoading,
     error: allServices.error || featuredServices.error,
     reload: () => {
@@ -268,7 +433,6 @@ export const useServicesData = () => {
 };
 
 export const useServiceDetails = (serviceId) => {
-  // ViewSets endpoint для деталей послуги
   const serviceDetails = useUnifiedAPI(`/services/${serviceId}/`);
   const serviceFeatures = useUnifiedAPI(`/services/${serviceId}/features/`);
 
@@ -287,14 +451,13 @@ export const useServiceDetails = (serviceId) => {
 };
 
 export const useProjectsData = () => {
-  // ViewSets endpoints для проєктів
   const allProjects = useUnifiedAPI('/projects/');
-  const featuredProjects = useUnifiedAPI('/projects/featured/');
+  const featuredProjects = useUnifiedAPI('/content/featured/');
   const projectCategories = useUnifiedAPI('/project-categories/');
 
   return {
-    data: allProjects.data || featuredProjects.data || [],
-    featuredData: featuredProjects.data || [],
+    data: allProjects.data || [],
+    featuredData: featuredProjects.data?.projects || [],
     categories: projectCategories.data || [],
     isLoading: allProjects.isLoading || featuredProjects.isLoading || projectCategories.isLoading,
     error: allProjects.error || featuredProjects.error || projectCategories.error,
@@ -307,7 +470,6 @@ export const useProjectsData = () => {
 };
 
 export const useProjectDetails = (projectSlug) => {
-  // ViewSets endpoint для деталей проєкту
   const projectDetails = useUnifiedAPI(`/projects/${projectSlug}/`);
   const projectImages = useUnifiedAPI(`/projects/${projectSlug}/images/`);
 
@@ -326,9 +488,8 @@ export const useProjectDetails = (projectSlug) => {
 };
 
 export const useJobsData = () => {
-  // ViewSets endpoints для вакансій
   const allJobs = useUnifiedAPI('/jobs/');
-  const urgentJobs = useUnifiedAPI('/jobs/urgent/');
+  const urgentJobs = useUnifiedAPI('/jobs/?urgent=true');
   const workplacePhotos = useUnifiedAPI('/workplace-photos/');
 
   return {
@@ -346,12 +507,10 @@ export const useJobsData = () => {
 };
 
 export const useJobDetails = (jobSlug) => {
-  // ViewSets endpoint для деталей вакансії
   return useUnifiedAPI(`/jobs/${jobSlug}/`);
 };
 
 export const useContactData = () => {
-  // ViewSets endpoints для контактів
   const offices = useUnifiedAPI('/offices/');
   const partnershipInfo = useUnifiedAPI('/partnership-info/');
 
@@ -368,7 +527,6 @@ export const useContactData = () => {
 };
 
 export const useTeamData = () => {
-  // ViewSets endpoint для команди
   const teamMembers = useUnifiedAPI('/team-members/');
   const managementTeam = useUnifiedAPI('/team-members/?is_management=true');
 
@@ -385,7 +543,6 @@ export const useTeamData = () => {
 };
 
 export const useTranslationsData = (lang = 'uk') => {
-  // API views endpoints для перекладів (не ViewSets)
   const translations = useUnifiedAPI(`/translations/${lang}/`);
   const allTranslations = useUnifiedAPI(`/translations/${lang}/all/`);
 
@@ -402,8 +559,7 @@ export const useTranslationsData = (lang = 'uk') => {
 };
 
 export const useAPIStats = () => {
-  // ViewSets endpoint для статистики
-  const apiStats = useUnifiedAPI('/stats/');
+  const apiStats = useUnifiedAPI('/content/stats/');
   const healthCheck = useUnifiedAPI('/health/');
 
   return {
@@ -422,6 +578,10 @@ export const useAPIStats = () => {
 
 export const useFormSubmission = () => {
   const context = useContext(APIContext);
+  if (!context) {
+    throw new Error('useFormSubmission must be used within APIProvider');
+  }
+
   const { globalState, setGlobalState } = context;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -431,7 +591,10 @@ export const useFormSubmission = () => {
     try {
       const result = await apiManager.makeRequest(endpoint, {
         method: 'POST',
-        body: JSON.stringify(formData)
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: formData
       }, globalState, setGlobalState);
       
       console.log('✅ Form submitted successfully');
@@ -445,7 +608,6 @@ export const useFormSubmission = () => {
     }
   }, [globalState, setGlobalState]);
 
-  // Спеціалізовані методи для різних форм
   const submitContactForm = useCallback((formData) => {
     return submitForm('/contact-inquiries/', formData);
   }, [submitForm]);
@@ -467,18 +629,16 @@ export const useFormSubmission = () => {
   };
 };
 
-// =================== КЕШ-МЕНЕДЖЕР ===================
+// =================== УТИЛІТИ ===================
 
 export const useCacheManager = () => {
-  const context = useContext(APIContext);
-  const { globalState, setGlobalState } = context;
+  const { setGlobalState, globalState } = useContext(APIContext);
 
   const clearAllCache = useCallback(() => {
     setGlobalState(prev => ({
       ...prev,
       cache: new Map(),
-      data: {},
-      errors: {}
+      data: {}
     }));
     console.log('🗑️ All cache cleared');
   }, [setGlobalState]);
@@ -509,8 +669,9 @@ export const useCacheManager = () => {
     return {
       totalEntries: globalState.cache.size,
       dataKeys: Object.keys(globalState.data),
-      activeRequests: globalState.requestQueue.size,
-      errorCount: Object.keys(globalState.errors).filter(key => globalState.errors[key]).length
+      activeRequests: globalState.requestQueue?.size || 0,
+      errorCount: Object.keys(globalState.errors).filter(key => globalState.errors[key]).length,
+      apiManagerStats: apiManager.getStats()
     };
   }, [globalState]);
 
@@ -556,7 +717,14 @@ export const useHeroData = () => {
   };
 };
 
+// Альтернативний експорт для зворотної сумісності
+export const useAPIUtils = useCacheManager;
+
 // Експорт менеджера для прямого використання (якщо потрібно)
 export { apiManager };
 
-console.log('🚀 Unified API for ViewSets initialized');
+console.log('🚀 Rate Limited Unified API initialized');
+console.log('✅ Added rate limiting (8 requests/minute)');
+console.log('✅ Added request deduplication');
+console.log('✅ Added exponential backoff for retries');
+console.log('✅ Reduced critical endpoints to prevent rate limiting');

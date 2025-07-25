@@ -1,5 +1,5 @@
 // frontend/src/services/translationService.js
-// Виправлена версія з fallback-перекладами
+// Виправлена версія БЕЗ використання process.env у браузері
 
 class TranslationService {
   constructor() {
@@ -80,6 +80,51 @@ class TranslationService {
         'about.vision.title': 'Бачення',
         'about.values.title': 'Цінності',
         
+        // Services
+        'services.title': 'Наші послуги',
+        'services.subtitle': 'Ми пропонуємо широкий спектр послуг',
+        'services.loading': 'Завантаження послуг...',
+        'services.error': 'Помилка завантаження послуг',
+        'services.featured': 'Рекомендовано',
+        'services.benefits': 'Переваги:',
+        'services.min_order': 'Мін. замовлення:',
+        'services.pieces': 'шт.',
+        'services.production_time': 'Час виробництва:',
+        'services.get_quote': 'Отримати пропозицію',
+        'services.show.featured': 'Показати рекомендовані',
+        'services.show.all': 'Показати всі',
+        'services.categories.all': 'Всі послуги',
+        'services.categories.corporate': 'Корпоративний',
+        'services.categories.medical': 'Медичний',
+        'services.categories.education': 'Освіта',
+        'services.categories.hospitality': 'Ресторани',
+        'services.categories.safety': 'Захисний',
+        'services.categories.construction': 'Будівництво',
+        'services.no_results': 'Послуги не знайдено за вашим запитом',
+        'services.no_services': 'Немає послуг у цій категорії',
+        'services.custom.title': 'Потрібне індивідуальне рішення?',
+        'services.custom.description': 'Ми розробляємо індивідуальні рішення під ваші потреби',
+        'services.custom.button': 'Обговорити проект',
+        
+        // Projects
+        'projects.title': 'Наші проєкти',
+        'projects.subtitle': 'Переглядайте наші успішні проєкти',
+        'projects.view_details': 'Деталі',
+        'projects.contact': 'Зв\'язатись',
+        'projects.status.completed': 'Завершено',
+        'projects.status.in_progress': 'В процесі',
+        'projects.status.planning': 'Планування',
+        'projects.details.info': 'Основна інформація',
+        'projects.details.features': 'Особливості',
+        'projects.details.metrics': 'Результати',
+        'projects.cta.title': 'Готові почати новий проєкт?',
+        'projects.cta.description': 'Ми готові втілити ваші ідеї в життя',
+        'projects.cta.button': 'Почати співпрацю',
+        'projects.stats.total': 'Загалом проєктів',
+        'projects.stats.satisfaction': 'Задоволення клієнтів',
+        'projects.stats.items': 'Виготовлено виробів',
+        'projects.stats.support': 'Підтримка клієнтів',
+        
         // Common
         'common.retry': 'Спробувати знову',
         'common.loading': 'Завантаження...',
@@ -151,6 +196,51 @@ class TranslationService {
         'about.vision.title': 'Vision',
         'about.values.title': 'Values',
         
+        // Services
+        'services.title': 'Our Services',
+        'services.subtitle': 'We offer a wide range of services',
+        'services.loading': 'Loading services...',
+        'services.error': 'Error loading services',
+        'services.featured': 'Featured',
+        'services.benefits': 'Benefits:',
+        'services.min_order': 'Min. order:',
+        'services.pieces': 'pcs.',
+        'services.production_time': 'Production time:',
+        'services.get_quote': 'Get Quote',
+        'services.show.featured': 'Show Featured',
+        'services.show.all': 'Show All',
+        'services.categories.all': 'All Services',
+        'services.categories.corporate': 'Corporate',
+        'services.categories.medical': 'Medical',
+        'services.categories.education': 'Education',
+        'services.categories.hospitality': 'Hospitality',
+        'services.categories.safety': 'Safety',
+        'services.categories.construction': 'Construction',
+        'services.no_results': 'No services found for your query',
+        'services.no_services': 'No services in this category',
+        'services.custom.title': 'Need a custom solution?',
+        'services.custom.description': 'We develop individual solutions for your needs',
+        'services.custom.button': 'Discuss Project',
+        
+        // Projects
+        'projects.title': 'Our Projects',
+        'projects.subtitle': 'View our successful projects',
+        'projects.view_details': 'Details',
+        'projects.contact': 'Contact',
+        'projects.status.completed': 'Completed',
+        'projects.status.in_progress': 'In Progress',
+        'projects.status.planning': 'Planning',
+        'projects.details.info': 'Basic Information',
+        'projects.details.features': 'Features',
+        'projects.details.metrics': 'Results',
+        'projects.cta.title': 'Ready to start a new project?',
+        'projects.cta.description': 'We are ready to bring your ideas to life',
+        'projects.cta.button': 'Start Cooperation',
+        'projects.stats.total': 'Total Projects',
+        'projects.stats.satisfaction': 'Client Satisfaction',
+        'projects.stats.items': 'Items Produced',
+        'projects.stats.support': 'Client Support',
+        
         // Common
         'common.retry': 'Try Again',
         'common.loading': 'Loading...',
@@ -159,6 +249,7 @@ class TranslationService {
     };
   }
 
+  // ВИПРАВЛЕНО: Функція без використання process.env
   async loadTranslations(language = 'uk', namespace = 'all') {
     if (this.isLoading) {
       console.log('🔄 Translation loading already in progress');
@@ -168,7 +259,9 @@ class TranslationService {
     this.isLoading = true;
     
     try {
-      const url = `${process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8000'}/api/v1/translations/${language}/${namespace}/`;
+      // ВИПРАВЛЕНО: Безпечне отримання базового URL без process.env
+      const baseUrl = this.getApiBaseUrl();
+      const url = `${baseUrl}/api/v1/translations/${language}/${namespace}/`;
       console.log(`🌍 Завантаження перекладів: ${url}`);
 
       const response = await fetch(url, {
@@ -210,6 +303,23 @@ class TranslationService {
     }
   }
 
+  // ВИПРАВЛЕНО: Безпечне отримання базового URL
+  getApiBaseUrl() {
+    // Спочатку перевіряємо змінні середовища браузера
+    if (typeof window !== 'undefined' && window.location) {
+      // Для dev середовища
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://127.0.0.1:8000';
+      }
+      
+      // Для production використовуємо той же домен
+      return window.location.origin;
+    }
+    
+    // Fallback для SSR або тестів
+    return 'http://127.0.0.1:8000';
+  }
+
   getTotalTranslationsCount() {
     let total = 0;
     for (const [lang, translations] of this.translations) {
@@ -239,7 +349,8 @@ class TranslationService {
     
     // Якщо все ще не знайдено, показуємо повідомлення (тільки в dev режимі)
     if (!translation) {
-      if (process.env.NODE_ENV === 'development') {
+      // ВИПРАВЛЕНО: Безпечна перевірка dev режиму
+      if (this.isDevelopment()) {
         console.warn(`🔍 Переклад не знайдено: ${key} (${lang})`);
       }
       return key; // Повертаємо ключ як fallback
@@ -251,6 +362,14 @@ class TranslationService {
     }
 
     return translation;
+  }
+
+  // ВИПРАВЛЕНО: Безпечна перевірка dev режиму
+  isDevelopment() {
+    return typeof window !== 'undefined' && 
+           (window.location.hostname === 'localhost' || 
+            window.location.hostname === '127.0.0.1' ||
+            window.location.port === '5173');
   }
 
   getNestedValue(obj, path) {
@@ -316,7 +435,8 @@ class TranslationService {
       currentLanguage: this.currentLanguage,
       isLoading: this.isLoading,
       languages: stats,
-      fallbackAvailable: Object.keys(this.fallbackTranslations).length
+      fallbackAvailable: Object.keys(this.fallbackTranslations).length,
+      isDevelopment: this.isDevelopment()
     };
   }
 }

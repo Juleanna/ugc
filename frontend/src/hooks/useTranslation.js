@@ -71,9 +71,11 @@ export const useTranslation = (initialLanguage = 'uk') => {
     return translationService.getAvailableLanguages();
   }, []);
 
-  // Статистика для debug (тільки в development)
+  // ВИПРАВЛЕНО: Статистика для debug без process.env
   const stats = useMemo(() => {
-    if (process.env.NODE_ENV === 'development') {
+    // Перевіряємо чи це dev середовище безпечно
+    const isDev = translationService.isDevelopment();
+    if (isDev) {
       return translationService.getStats();
     }
     return null;

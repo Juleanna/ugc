@@ -1,5 +1,5 @@
 // frontend/src/components/ServicesSection.jsx
-// Адаптовано для ViewSets архітектури
+// Виправлена версія без jsx атрибуту та з правильними стилями
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { Card, CardBody, Button, Spinner, Chip } from "@nextui-org/react";
@@ -59,140 +59,141 @@ const ServicesSection = ({ data, scrollToSection }) => {
       icon: 'stethoscope',
       main_image: '/images/services/medical.jpg',
       is_featured: true,
-      benefits: ['Антибактеріальні тканини', 'Зручний крій', 'Відповідність стандартам'],
-      min_order_quantity: 20,
+      benefits: ['Антибактеріальні тканини', 'Зручний дизайн', 'Гіпоалергенні матеріали'],
+      min_order_quantity: 5,
       production_time: '1-2 тижні'
     },
     {
       id: 3,
-      name: t('services.safety.title') || 'Спецодяг та захист',
-      short_description: t('services.safety.description') || 'Захисний одяг для промислових об\'єктів',
-      icon: 'hardhat',
-      main_image: '/images/services/safety.jpg',
-      is_featured: true,
-      benefits: ['Підвищена міцність', 'Світловідбивні елементи', 'Сертифікація'],
-      min_order_quantity: 15,
-      production_time: '2-4 тижні'
-    },
-    {
-      id: 4,
-      name: t('services.education.title') || 'Шкільна форма',
-      short_description: t('services.education.description') || 'Якісна та зручна форма для навчальних закладів',
+      name: t('services.school.title') || 'Шкільна форма',
+      short_description: t('services.school.description') || 'Стильна та зручна форма для навчальних закладів',
       icon: 'graduation-cap',
-      main_image: '/images/services/education.jpg',
+      main_image: '/images/services/school.jpg',
       is_featured: false,
-      benefits: ['Натуральні матеріали', 'Різні розміри', 'Доступні ціни'],
-      min_order_quantity: 50,
+      benefits: ['Міцні тканини', 'Різноманітні розміри', 'Доступні ціни'],
+      min_order_quantity: 20,
       production_time: '3-4 тижні'
     },
     {
-      id: 5,
-      name: t('services.horeca.title') || 'Одяг для HoReCa',
-      short_description: t('services.horeca.description') || 'Професійний одяг для ресторанів та готелів',
+      id: 4,
+      name: t('services.chef.title') || 'Кухарський одяг',
+      short_description: t('services.chef.description') || 'Професійний одяг для працівників ресторанів',
       icon: 'chef-hat',
-      main_image: '/images/services/horeca.jpg',
+      main_image: '/images/services/chef.jpg',
       is_featured: false,
-      benefits: ['Стійкість до плям', 'Легкий догляд', 'Стильний вигляд'],
-      min_order_quantity: 25,
+      benefits: ['Вогнестійкі матеріали', 'Легке прання', 'Ергономічний крій'],
+      min_order_quantity: 10,
       production_time: '2-3 тижні'
     },
     {
-      id: 6,
-      name: t('services.security.title') || 'Форма охорони',
-      short_description: t('services.security.description') || 'Професійна форма для служб безпеки',
+      id: 5,
+      name: t('services.safety.title') || 'Захисний одяг',
+      short_description: t('services.safety.description') || 'Спеціалізований одяг для небезпечних умов праці',
       icon: 'shield',
-      main_image: '/images/services/security.jpg',
+      main_image: '/images/services/safety.jpg',
+      is_featured: true,
+      benefits: ['Високий рівень захисту', 'Сертифіковані матеріали', 'Відповідність стандартам'],
+      min_order_quantity: 5,
+      production_time: '2-4 тижні'
+    },
+    {
+      id: 6,
+      name: t('services.construction.title') || 'Будівельний одяг',
+      short_description: t('services.construction.description') || 'Міцний та зручний одяг для будівельників',
+      icon: 'hard-hat',
+      main_image: '/images/services/construction.jpg',
       is_featured: false,
-      benefits: ['Міцні матеріали', 'Функціональність', 'Представницький вигляд'],
-      min_order_quantity: 10,
-      production_time: '2-3 тижні'
+      benefits: ['Підвищена міцність', 'Вологостійкість', 'Світловідбиваючі елементи'],
+      min_order_quantity: 15,
+      production_time: '3-4 тижні'
     }
   ];
 
-
-  // Об'єднання даних з різних джерел (пріоритет: props -> ViewSets API -> fallback)
+  // Об'єднання даних з різних джерел
   const services = useMemo(() => {
+    console.log('ServicesSection: Combining data sources', {
+      hasPropsData: !!data?.services?.length,
+      hasApiData: !!apiServices?.length,
+      hasFeaturedData: !!apiFeaturedServices?.length
+    });
+
     if (data?.services?.length > 0) {
-      console.log('ServicesSection: використовуємо дані з props');
       return data.services;
-    }
-    
-    if (showAllServices && apiServices?.length > 0) {
-      console.log('ServicesSection: використовуємо всі послуги з ViewSets API');
+    } else if (apiServices?.length > 0) {
       return apiServices;
-    }
-    
-    if (apiFeaturedServices?.length > 0) {
-      console.log('ServicesSection: використовуємо рекомендовані послуги з ViewSets API');
+    } else if (apiFeaturedServices?.length > 0) {
       return apiFeaturedServices;
+    } else {
+      return getDefaultServices();
     }
-    
-    console.log('ServicesSection: використовуємо fallback дані');
-    return getDefaultServices();
-  }, [data?.services, apiServices, apiFeaturedServices, showAllServices]);
+  }, [data?.services, apiServices, apiFeaturedServices]);
 
- 
-  // Іконки для різних категорій послуг
-  const getServiceIcon = (iconName) => {
-    const iconMap = {
-      'shirt': ShirtIcon,
-      'stethoscope': Stethoscope,
-      'hardhat': HardHat,
-      'graduation-cap': GraduationCap,
-      'chef-hat': ChefHat,
-      'shield': Shield
-    };
-    return iconMap[iconName] || ShirtIcon;
-  };
+  // Категорії послуг
+  const categories = [
+    { key: 'all', label: t('services.categories.all') || 'Всі послуги', icon: null },
+    { key: 'corporate', label: t('services.categories.corporate') || 'Корпоративний', icon: ShirtIcon },
+    { key: 'medical', label: t('services.categories.medical') || 'Медичний', icon: Stethoscope },
+    { key: 'education', label: t('services.categories.education') || 'Освіта', icon: GraduationCap },
+    { key: 'hospitality', label: t('services.categories.hospitality') || 'Ресторани', icon: ChefHat },
+    { key: 'safety', label: t('services.categories.safety') || 'Захисний', icon: Shield },
+    { key: 'construction', label: t('services.categories.construction') || 'Будівництво', icon: HardHat }
+  ];
 
-  // Фільтрація послуг за категорією та пошуком
+  // Фільтрація послуг
   const filteredServices = useMemo(() => {
     let filtered = services;
 
     // Фільтр за категорією
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(service => 
-        service.category === selectedCategory || 
-        service.icon === selectedCategory ||
-        (selectedCategory === 'featured' && service.is_featured)
+        service.category === selectedCategory ||
+        service.name.toLowerCase().includes(selectedCategory) ||
+        service.short_description?.toLowerCase().includes(selectedCategory)
       );
     }
 
-    // Пошук
+    // Фільтр за пошуковим запитом
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(service =>
-        service.name?.toLowerCase().includes(query) ||
+        service.name.toLowerCase().includes(query) ||
         service.short_description?.toLowerCase().includes(query) ||
-        service.benefits?.some(benefit => benefit.toLowerCase().includes(query))
+        service.benefits?.some(benefit => 
+          benefit.toLowerCase().includes(query)
+        )
       );
     }
 
+    // Показувати тільки рекомендовані або всі
+    if (!showAllServices) {
+      filtered = filtered.filter(service => service.is_featured);
+    }
+
     return filtered;
-  }, [services, selectedCategory, searchQuery]);
+  }, [services, selectedCategory, searchQuery, showAllServices]);
 
-  // Анімація появи карток
+  // Оновлення видимих послуг
   useEffect(() => {
-    setVisibleServices([]);
-    const timer = setTimeout(() => {
-      setVisibleServices(filteredServices);
-    }, 100);
-
-    return () => clearTimeout(timer);
+    setVisibleServices(filteredServices);
   }, [filteredServices]);
 
-  // Категорії для фільтра
-  const categories = [
-    { key: 'all', label: t('services.categories.all') || 'Всі послуги', icon: null },
-    { key: 'featured', label: t('services.categories.featured') || 'Рекомендовані', icon: CheckCircle },
-    { key: 'shirt', label: t('services.categories.corporate') || 'Корпоративний', icon: ShirtIcon },
-    { key: 'stethoscope', label: t('services.categories.medical') || 'Медичний', icon: Stethoscope },
-    { key: 'hardhat', label: t('services.categories.safety') || 'Спецодяг', icon: HardHat },
-  ];
+  // Отримання іконки для послуги
+  const getServiceIcon = (iconName) => {
+    const icons = {
+      shirt: ShirtIcon,
+      'hard-hat': HardHat,
+      stethoscope: Stethoscope,
+      'graduation-cap': GraduationCap,
+      'chef-hat': ChefHat,
+      shield: Shield
+    };
+    
+    return icons[iconName] || ShirtIcon;
+  };
 
   return (
-    <section id="services" className="py-20 px-6 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" className="section-padding bg-gray-50">
+      <div className="container-custom">
         
         {/* Header */}
         <div className="text-center mb-16">
@@ -200,31 +201,17 @@ const ServicesSection = ({ data, scrollToSection }) => {
             {t('services.title') || 'Наші послуги'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            {t('services.subtitle') || 'Ми пропонуємо повний спектр послуг з виробництва професійного одягу для різних галузей'}
+            {t('services.subtitle') || 'Ми пропонуємо широкий спектр послуг з виробництва професійного одягу'}
           </p>
 
-          {/* Контроли пошуку та фільтрації */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            
-            {/* Пошук */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <input
-                type="text"
-                placeholder={t('services.search.placeholder') || 'Пошук послуг...'}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Переключення між рекомендованими та всіма */}
+          {/* Кнопка перемикання */}
+          <div className="flex justify-center mb-8">
             <Button
-              variant={showAllServices ? "solid" : "bordered"}
-              color="primary"
-              size="sm"
+              color={showAllServices ? "default" : "primary"}
+              variant={showAllServices ? "bordered" : "solid"}
               onClick={() => setShowAllServices(!showAllServices)}
-              className="whitespace-nowrap"
+              className="transition-all duration-300"
+              startContent={<Filter className="w-4 h-4" />}
             >
               {showAllServices ? 
                 (t('services.show.featured') || 'Показати рекомендовані') : 
@@ -301,10 +288,9 @@ const ServicesSection = ({ data, scrollToSection }) => {
                   return (
                     <Card 
                       key={service.id} 
-                      className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+                      className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group service-card"
                       style={{ 
                         animationDelay: `${index * 150}ms`,
-                        animation: 'fadeInUp 0.6s ease-out forwards'
                       }}
                     >
                       <CardBody className="p-6">
@@ -337,7 +323,7 @@ const ServicesSection = ({ data, scrollToSection }) => {
                             <ul className="space-y-1">
                               {service.benefits.slice(0, 3).map((benefit, idx) => (
                                 <li key={idx} className="flex items-center text-sm text-gray-600">
-                                  <CheckCircle className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
+                                  <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
                                   {benefit}
                                 </li>
                               ))}
@@ -345,27 +331,28 @@ const ServicesSection = ({ data, scrollToSection }) => {
                           </div>
                         )}
 
-                        {/* Інформація про замовлення */}
-                        <div className="border-t border-gray-100 pt-4 mb-4">
-                          <div className="flex justify-between text-sm text-gray-500">
-                            <span>
-                              {t('services.min_order') || 'Мін. замовлення:'} {service.min_order_quantity || 'За домовленістю'}
-                            </span>
-                            <span>
-                              {service.production_time || '2-3 тижні'}
-                            </span>
-                          </div>
+                        {/* Додаткова інформація */}
+                        <div className="text-xs text-gray-500 mb-4 space-y-1">
+                          {service.min_order_quantity && (
+                            <div>
+                              {t('services.min_order') || 'Мін. замовлення:'} {service.min_order_quantity} {t('services.pieces') || 'шт.'}
+                            </div>
+                          )}
+                          {service.production_time && (
+                            <div>
+                              {t('services.production_time') || 'Час виробництва:'} {service.production_time}
+                            </div>
+                          )}
                         </div>
 
-                        <Button
-                          color="primary"
-                          variant="flat"
-                          className="w-full group-hover:bg-blue-600 group-hover:text-white transition-all"
-                          endContent={<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+                        {/* Кнопка дії - БЕЗ вкладених кнопок */}
+                        <div 
+                          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg text-center cursor-pointer hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center justify-center gap-2"
                           onClick={() => scrollToSection?.('contact')}
                         >
-                          {t('services.order_button') || 'Замовити послугу'}
-                        </Button>
+                          <span>{t('services.get_quote') || 'Отримати пропозицію'}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </div>
                       </CardBody>
                     </Card>
                   );
@@ -375,8 +362,8 @@ const ServicesSection = ({ data, scrollToSection }) => {
           </>
         )}
 
-        {/* CTA Section */}
-        <div className="text-center mt-16 p-8 bg-white rounded-2xl shadow-lg">
+        {/* Кастомізовані рішення */}
+        <div className="text-center mt-16 p-8 bg-white rounded-xl shadow-lg">
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
             {t('services.custom.title') || 'Потрібне індивідуальне рішення?'}
           </h3>
@@ -396,7 +383,7 @@ const ServicesSection = ({ data, scrollToSection }) => {
         </div>
 
         {/* Debug Info (тільки в режимі розробки) */}
-        {process.env.NODE_ENV === 'development' && (
+        {typeof window !== 'undefined' && window.location.hostname === 'localhost' && (
           <div className="mt-8 p-4 bg-gray-100 rounded-lg text-sm text-gray-600">
             <h4 className="font-semibold mb-2">🔧 Debug Info (ViewSets API):</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -425,8 +412,8 @@ const ServicesSection = ({ data, scrollToSection }) => {
         )}
       </div>
 
-      {/* CSS для анімацій */}
-      <style jsx>{`
+      {/* ВИПРАВЛЕНО: CSS без jsx атрибуту */}
+      <style>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -438,11 +425,31 @@ const ServicesSection = ({ data, scrollToSection }) => {
           }
         }
         
+        .service-card {
+          animation: fadeInUp 0.6s ease-out forwards;
+          opacity: 0;
+        }
+        
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        .section-padding {
+          padding: 5rem 1.5rem;
+        }
+        
+        .container-custom {
+          max-width: 1280px;
+          margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+          .section-padding {
+            padding: 3rem 1rem;
+          }
         }
       `}</style>
     </section>

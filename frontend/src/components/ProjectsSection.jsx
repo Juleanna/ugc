@@ -1,4 +1,6 @@
 // frontend/src/components/ProjectsSection.jsx
+// Виправлена версія БЕЗ вкладених кнопок
+
 import React, { useState, useMemo } from 'react';
 import { Card, CardBody, CardHeader, Chip, Button, Spinner } from "@nextui-org/react";
 import { 
@@ -13,7 +15,6 @@ import {
 
 // Хуки
 import { useTranslation } from '../hooks/useTranslation';
-// ВИКОРИСТОВУЄМО UNIFIED API
 import { useProjectsData } from '../hooks/useUnifiedAPI.jsx';
 
 const ProjectsSection = ({ data, scrollToSection }) => {
@@ -86,60 +87,38 @@ const ProjectsSection = ({ data, scrollToSection }) => {
       client: 'Медичний центр "Віта"',
       subtitle: 'Медичний одяг нового покоління',
       description: 'Комплексне забезпечення медичного центру сучасним одягом для персоналу з антибактеріальною обробкою та ергономічним дизайном.',
-      badge: 'В розробці',
+      badge: 'В процесі',
       status: 'in_progress',
       category: 'medical',
-      completion_date: '2025',
-      team_size: '15+',
+      completion_date: '2024',
+      team_size: '30+',
       features: [
-        'Антибактеріальна обробка',
-        'Гіпоалергенні матеріали',
-        'Сучасний дизайн',
-        'Легка дезінфекція'
+        'Антибактеріальні властивості',
+        'Зручний крій',
+        'Легкий догляд',
+        'Професійний вигляд'
       ],
       image: '/images/projects/medical-center.jpg',
       metrics: {
-        progress: '75%',
-        delivery_time: '1 місяць',
-        items_planned: '500+'
+        satisfaction: '95%',
+        delivery_time: '1.5 місяці',
+        items_produced: '500+'
       }
     }
   ];
 
-  // Об'єднання даних з різних джерел
+  // Об'єднання даних
   const projects = useMemo(() => {
-    // Пріоритет: props -> API -> defaultProjects
     if (data?.projects?.length > 0) {
-      console.log('ProjectsSection: використовуємо дані з props');
       return data.projects;
-    }
-    
-    if (apiProjects?.length > 0) {
-      console.log('ProjectsSection: використовуємо дані з Unified API');
+    } else if (apiProjects?.length > 0) {
       return apiProjects;
+    } else {
+      return getDefaultProjects();
     }
-    
-    console.log('ProjectsSection: використовуємо defaultProjects як fallback');
-    return getDefaultProjects();
   }, [data?.projects, apiProjects]);
 
-  // Обробники подій
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
-    console.log('Clicked project:', project.client || project.name || project.title);
-  };
-
-  const handleViewDetailsClick = (e, project) => {
-    e.stopPropagation();
-    setSelectedProject(project);
-    console.log('View project details:', project.client || project.name || project.title);
-  };
-
-  const handleContactClick = () => {
-    scrollToSection?.('contact');
-  };
-
-  // Отримання кольору для статусу
+  // Функція для отримання кольору статусу
   const getStatusColor = (status) => {
     switch (status) {
       case 'completed': return 'success';
@@ -149,56 +128,41 @@ const ProjectsSection = ({ data, scrollToSection }) => {
     }
   };
 
-  // Отримання тексту статусу
+  // Функція для отримання тексту статусу
   const getStatusText = (status) => {
     switch (status) {
       case 'completed': return t('projects.status.completed') || 'Завершено';
       case 'in_progress': return t('projects.status.in_progress') || 'В процесі';
       case 'planning': return t('projects.status.planning') || 'Планування';
-      default: return t('projects.status.unknown') || 'Невідомо';
+      default: return status || 'Невідомо';
     }
   };
 
-  // Обробка помилки API
-  if (apiError && !data?.projects?.length) {
-    return (
-      <section id="projects" className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="text-center">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-              <AlertCircle className="w-12 h-12 text-red-600 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-red-800 mb-2">Помилка завантаження проєктів</h3>
-              <p className="text-red-600 mb-4">{apiError}</p>
-              <Button 
-                color="danger" 
-                variant="flat" 
-                onPress={reloadProjects}
-                className="mx-auto"
-              >
-                Спробувати знову
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // ВИПРАВЛЕНО: Обробник кліків без вкладених кнопок
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+  };
+
+  const handleContactClick = () => {
+    scrollToSection?.('contact');
+  };
+
+  const handleViewDetailsClick = (e, project) => {
+    e.stopPropagation();
+    setSelectedProject(project);
+  };
 
   return (
     <section id="projects" className="section-padding bg-white">
       <div className="container-custom">
         
-        {/* Заголовок секції */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             {t('projects.title') || 'Наші проєкти'}
-            <br />
-            <span className="text-gradient-blue">
-              {t('projects.subtitle') || 'успішно реалізовані'}
-            </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            {t('projects.description') || 'Ми пишаємося довірою наших клієнтів та успішно реалізованими проєктами у різних галузях.'}
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            {t('projects.subtitle') || 'Переглядайте наші успішні проєкти та дізнайтеся, як ми допомагаємо організаціям досягати їхніх цілей'}
           </p>
         </div>
 
@@ -210,14 +174,13 @@ const ProjectsSection = ({ data, scrollToSection }) => {
           </div>
         )}
 
-        {/* Сітка проєктів */}
+        {/* ВИПРАВЛЕНО: Сітка проєктів БЕЗ isPressable */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {projects.map((project, index) => (
             <Card 
               key={project.id || index}
-              className="hover-lift cursor-pointer transition-all duration-300 hover:shadow-xl"
-              isPressable
-              onPress={() => handleProjectClick(project)}
+              className="hover-lift transition-all duration-300 hover:shadow-xl cursor-pointer"
+              onClick={() => handleProjectClick(project)}
             >
               <CardHeader className="pb-2">
                 
@@ -298,28 +261,26 @@ const ProjectsSection = ({ data, scrollToSection }) => {
                   </div>
                 )}
 
-                {/* Кнопки дій */}
+                {/* ВИПРАВЛЕНО: Кнопки дій БЕЗ вкладених кнопок */}
                 <div className="flex gap-2 mt-auto">
-                  <Button
-                    size="sm"
-                    variant="flat"
-                    color="primary"
-                    className="flex-1"
-                    startContent={<FolderOpen className="w-4 h-4" />}
-                    onPress={(e) => handleViewDetailsClick(e, project)}
+                  <div
+                    className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 px-3 rounded-lg text-center cursor-pointer transition-colors duration-200 flex items-center justify-center gap-2 text-sm font-medium"
+                    onClick={(e) => handleViewDetailsClick(e, project)}
                   >
-                    {t('projects.view_details') || 'Деталі'}
-                  </Button>
+                    <FolderOpen className="w-4 h-4" />
+                    <span>{t('projects.view_details') || 'Деталі'}</span>
+                  </div>
                   
-                  <Button
-                    size="sm"
-                    color="primary"
-                    className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600"
-                    startContent={<ExternalLink className="w-4 h-4" />}
-                    onPress={handleContactClick}
+                  <div
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-2 px-3 rounded-lg text-center cursor-pointer transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleContactClick();
+                    }}
                   >
-                    {t('projects.contact') || 'Зв\'язатись'}
-                  </Button>
+                    <ExternalLink className="w-4 h-4" />
+                    <span>{t('projects.contact') || 'Зв\'язатись'}</span>
+                  </div>
                 </div>
 
                 {/* Значок успіху для завершених проєктів */}
@@ -347,43 +308,48 @@ const ProjectsSection = ({ data, scrollToSection }) => {
             <Button
               color="primary"
               size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600"
-              startContent={<ExternalLink className="w-5 h-5" />}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition-transform"
               onPress={handleContactClick}
             >
-              {t('projects.cta.button') || 'Обговорити проєкт'}
+              {t('projects.cta.button') || 'Почати співпрацю'}
             </Button>
           </div>
         </div>
 
         {/* Статистика проєктів */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">
-              {projects.filter(p => p.status === 'completed').length}+
+            <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-1">
+              {projects.length}
             </div>
-            <div className="text-gray-600 text-sm">
-              {t('projects.stats.completed') || 'Завершених проєктів'}
+            <div className="text-sm text-gray-600">
+              {t('projects.stats.total') || 'Загалом проєктів'}
             </div>
           </div>
           
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-600 mb-2">98%</div>
-            <div className="text-gray-600 text-sm">
+            <div className="text-3xl md:text-4xl font-bold text-green-600 mb-1">
+              98%
+            </div>
+            <div className="text-sm text-gray-600">
               {t('projects.stats.satisfaction') || 'Задоволення клієнтів'}
             </div>
           </div>
           
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-2">5000+</div>
-            <div className="text-gray-600 text-sm">
-              {t('projects.stats.items') || 'Виготовлених виробів'}
+            <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-1">
+              5000+
+            </div>
+            <div className="text-sm text-gray-600">
+              {t('projects.stats.items') || 'Виготовлено виробів'}
             </div>
           </div>
           
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange-600 mb-2">24/7</div>
-            <div className="text-gray-600 text-sm">
+            <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-1">
+              24/7
+            </div>
+            <div className="text-sm text-gray-600">
               {t('projects.stats.support') || 'Підтримка клієнтів'}
             </div>
           </div>
@@ -411,13 +377,12 @@ const ProjectsSection = ({ data, scrollToSection }) => {
                       {selectedProject.client}
                     </p>
                   </div>
-                  <Button
-                    isIconOnly
-                    variant="light"
-                    onPress={() => setSelectedProject(null)}
+                  <button
+                    className="text-gray-400 hover:text-gray-600 text-2xl font-bold p-2"
+                    onClick={() => setSelectedProject(null)}
                   >
                     ✕
-                  </Button>
+                  </button>
                 </div>
 
                 {/* Статус та метрики */}
@@ -436,33 +401,59 @@ const ProjectsSection = ({ data, scrollToSection }) => {
                   )}
                 </div>
 
-                {/* Опис */}
-                <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 mb-2">Опис проєкту</h4>
-                  <p className="text-gray-600 leading-relaxed">
-                    {selectedProject.description}
-                  </p>
-                </div>
+                {/* Повний опис */}
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {selectedProject.description}
+                </p>
 
-                {/* Особливості */}
-                {selectedProject.features && (
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">Ключові особливості</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {selectedProject.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-500" />
-                          <span className="text-gray-600 text-sm">{feature}</span>
-                        </div>
-                      ))}
+                {/* Детальна інформація */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  
+                  {/* Основна інформація */}
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3">
+                      {t('projects.details.info') || 'Основна інформація'}
+                    </h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Клієнт:</span>
+                        <span className="font-medium">{selectedProject.client}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Рік завершення:</span>
+                        <span className="font-medium">{selectedProject.completion_date}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Команда:</span>
+                        <span className="font-medium">{selectedProject.team_size}</span>
+                      </div>
                     </div>
                   </div>
-                )}
 
-                {/* Метрики */}
+                  {/* Особливості */}
+                  {selectedProject.features && (
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-3">
+                        {t('projects.details.features') || 'Особливості'}
+                      </h4>
+                      <ul className="space-y-2">
+                        {selectedProject.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm">
+                            <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-600">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                {/* Метрики проєкту */}
                 {selectedProject.metrics && (
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">Результати</h4>
+                    <h4 className="font-semibold text-gray-900 mb-3">
+                      {t('projects.details.metrics') || 'Результати'}
+                    </h4>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       {Object.entries(selectedProject.metrics).map(([key, value]) => (
                         <div key={key} className="bg-gray-50 p-3 rounded-lg text-center">
@@ -500,8 +491,8 @@ const ProjectsSection = ({ data, scrollToSection }) => {
           </div>
         )}
 
-        {/* Статистика API (тільки в режимі розробки) */}
-        {process.env.NODE_ENV === 'development' && (
+        {/* Debug Info (тільки в режимі розробки) */}
+        {typeof window !== 'undefined' && window.location.hostname === 'localhost' && (
           <div className="mt-8 text-center text-sm text-gray-500">
             <p>
               📊 API Status: {apiIsLoading ? 'Loading...' : 'Ready'} | 
@@ -512,6 +503,53 @@ const ProjectsSection = ({ data, scrollToSection }) => {
           </div>
         )}
       </div>
+
+      {/* CSS для анімацій */}
+      <style>{`
+        .hover-lift {
+          transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-4px);
+        }
+        
+        .line-clamp-1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .section-padding {
+          padding: 5rem 1.5rem;
+        }
+        
+        .container-custom {
+          max-width: 1280px;
+          margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+          .section-padding {
+            padding: 3rem 1rem;
+          }
+        }
+      `}</style>
     </section>
   );
 };
