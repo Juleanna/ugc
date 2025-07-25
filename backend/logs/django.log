@@ -9571,3 +9571,4 @@ WARNING 2025-07-24 11:45:13,115 basehttp 3920 500 "GET /api/v1/services/ HTTP/1.
 WARNING 2025-07-24 11:45:13,127 log 3920 17816 Too Many Requests: /api/v1/services/featured/
 WARNING 2025-07-24 11:45:13,131 log 3920 12296 Too Many Requests: /api/v1/project-categories/
 WARNING 2025-07-24 11:45:13,132 log 3920 716 Too Many Requests: /api/v1/homepage/1/
+INFO 2025-07-25 08:18:07,838 autoreload 17536 832 Watching for file changes with StatReloader
