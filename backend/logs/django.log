@@ -14176,3 +14176,307 @@ WARNING 2025-07-25 08:53:35,493 log 16280 15908 Not Found: /api/v1/projects/feat
 WARNING 2025-07-25 08:53:35,494 basehttp 16280 15908 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
 WARNING 2025-07-25 08:53:35,658 log 16280 17516 Not Found: /api/v1/projects/featured/
 WARNING 2025-07-25 08:53:35,659 basehttp 16280 17516 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:36,324 log 16280 17516 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:36,378 basehttp 16280 17516 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:38,537 log 16280 17516 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:38,565 log 16280 15908 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:38,566 basehttp 16280 17516 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:38,595 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:38,596 basehttp 16280 15908 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:38,627 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:38,631 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:38,661 log 16280 15908 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:38,667 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:38,670 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:38,698 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:38,698 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:38,701 basehttp 16280 15908 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:38,738 log 16280 9196 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:38,741 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:38,742 basehttp 16280 9196 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:38,775 log 16280 17516 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:38,804 log 16280 9196 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:38,827 log 16280 15908 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:38,831 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:38,832 basehttp 16280 17516 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:38,833 basehttp 16280 9196 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:38,838 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:38,839 basehttp 16280 15908 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:38,878 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:38,889 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:38,907 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:38,938 log 16280 15908 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:38,941 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:38,942 basehttp 16280 15908 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:38,950 log 16280 9196 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:38,976 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:38,977 basehttp 16280 9196 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:38,984 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:38,991 log 16280 16960 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:38,992 basehttp 16280 16960 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:39,002 log 16280 15908 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:39,003 basehttp 16280 15908 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:39,019 log 16280 16960 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:39,021 basehttp 16280 16960 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:39,039 log 16280 15908 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:39,041 basehttp 16280 15908 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:39,059 log 16280 16960 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:39,060 basehttp 16280 16960 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:40,240 log 16280 16960 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:40,242 basehttp 16280 16960 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:40,272 log 16280 15908 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:40,298 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:40,299 basehttp 16280 15908 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:40,302 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:40,354 log 16280 15908 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:40,363 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:40,367 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:40,368 basehttp 16280 15908 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:40,400 log 16280 9196 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:40,425 log 16280 17516 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:40,426 basehttp 16280 9196 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:40,426 basehttp 16280 17516 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:40,481 log 16280 16960 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:40,485 log 16280 15908 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:40,486 basehttp 16280 16960 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:40,492 basehttp 16280 15908 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:40,511 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:40,521 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:40,548 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:40,550 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:40,551 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:40,557 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:40,679 log 16280 15908 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:40,680 basehttp 16280 15908 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:40,878 log 16280 16960 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:40,879 basehttp 16280 16960 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:41,003 log 16280 15908 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:41,004 basehttp 16280 15908 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:41,130 log 16280 16960 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:41,131 basehttp 16280 16960 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:41,257 log 16280 15908 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:41,258 basehttp 16280 15908 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:41,798 log 16280 15908 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:41,825 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:41,827 basehttp 16280 15908 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:41,832 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:41,859 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:41,868 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:41,892 log 16280 9196 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:41,896 log 16280 15908 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:41,924 log 16280 16960 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:41,927 basehttp 16280 9196 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:41,951 basehttp 16280 16960 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:41,960 log 16280 1104 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:41,973 basehttp 16280 15908 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:42,007 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:42,033 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:42,041 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:42,042 basehttp 16280 1104 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:42,048 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:42,052 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:42,080 log 16280 9956 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:42,081 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:42,110 log 16280 1104 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:42,132 basehttp 16280 9956 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:42,141 log 16280 17356 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:42,148 log 16280 16960 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:42,150 log 16280 17516 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:42,151 basehttp 16280 1104 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:42,183 log 16280 9956 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:42,183 basehttp 16280 17516 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:42,184 basehttp 16280 17356 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:42,184 basehttp 16280 16960 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:42,216 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:42,219 basehttp 16280 9956 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:42,222 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:42,256 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:42,260 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:42,266 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:42,267 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:42,285 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:42,286 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:42,305 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:42,306 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:42,323 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:42,325 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:44,065 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:44,076 log 16280 17356 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:44,077 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:44,079 basehttp 16280 17356 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:44,139 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:44,145 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:44,166 log 16280 1104 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:44,193 log 16280 17516 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:44,194 basehttp 16280 1104 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:44,212 basehttp 16280 17516 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:44,232 log 16280 9956 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:44,245 basehttp 16280 9956 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:44,270 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:44,297 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:44,299 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:44,299 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:44,329 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:44,345 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:44,358 log 16280 1104 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:44,379 log 16280 17356 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:44,388 log 16280 17516 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:44,389 basehttp 16280 1104 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:44,390 basehttp 16280 17356 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:44,391 basehttp 16280 17516 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:44,631 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:44,632 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:44,765 log 16280 17516 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:44,766 basehttp 16280 17516 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:44,891 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:44,892 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:45,019 log 16280 17516 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:45,020 basehttp 16280 17516 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:45,140 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:45,141 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:45,868 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:45,902 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:45,907 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:45,923 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:45,926 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:45,927 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:45,989 log 16280 17516 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:45,994 log 16280 17356 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:45,997 basehttp 16280 17516 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:46,001 basehttp 16280 17356 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:46,028 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:46,034 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:46,039 log 16280 1104 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:46,063 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:46,071 basehttp 16280 1104 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:46,093 log 16280 17356 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:46,126 basehttp 16280 17356 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:46,127 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:46,147 log 16280 1104 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:46,154 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:46,184 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:46,192 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:46,197 basehttp 16280 1104 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:46,199 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:46,223 log 16280 17356 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:46,224 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:46,224 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:46,247 basehttp 16280 17356 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:46,273 log 16280 1104 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:46,297 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:46,305 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:46,306 basehttp 16280 1104 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:46,309 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:46,309 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:46,345 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:46,348 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:46,359 log 16280 1104 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:46,360 basehttp 16280 1104 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:46,376 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:46,383 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:46,404 log 16280 1104 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:46,406 basehttp 16280 1104 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:46,478 log 16280 17516 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:46,479 basehttp 16280 17516 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:48,498 log 16280 17516 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:48,499 basehttp 16280 17516 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:48,547 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:48,550 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:48,620 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:48,622 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:48,632 log 16280 17516 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:48,638 basehttp 16280 17516 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:48,722 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:48,735 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:48,736 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:48,737 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:48,802 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:48,811 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:49,266 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:49,291 log 16280 17516 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:49,293 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:49,295 basehttp 16280 17516 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:49,304 log 16280 9196 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:49,350 log 16280 17356 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:49,357 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:49,359 basehttp 16280 9196 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:49,363 basehttp 16280 17356 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:49,365 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:49,371 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:49,377 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:49,402 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:49,425 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:49,429 log 16280 17356 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:49,431 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:49,437 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:49,437 basehttp 16280 17356 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:49,452 log 16280 16960 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:49,459 basehttp 16280 16960 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:49,494 log 16280 16960 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:49,495 basehttp 16280 16960 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:49,585 log 16280 9956 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:49,586 basehttp 16280 9956 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:49,617 log 16280 9956 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:49,620 basehttp 16280 9956 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:49,737 log 16280 16960 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:49,738 basehttp 16280 16960 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:49,879 log 16280 9956 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:49,880 basehttp 16280 9956 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:50,008 log 16280 16960 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:50,009 basehttp 16280 16960 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:51,120 log 16280 16960 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:51,142 basehttp 16280 16960 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:51,152 log 16280 9956 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:51,179 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:51,179 basehttp 16280 9956 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:51,186 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:51,197 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:51,226 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:51,243 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:51,255 log 16280 9956 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:51,264 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:51,305 log 16280 17356 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:51,306 basehttp 16280 9956 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:51,316 log 16280 1104 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:51,320 basehttp 16280 17356 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:51,330 basehttp 16280 1104 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:51,361 log 16280 16960 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:51,380 log 16280 9956 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:51,386 basehttp 16280 16960 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:51,413 log 16280 1104 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:51,415 log 16280 9196 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:51,415 basehttp 16280 9956 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:51,440 log 16280 17516 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:51,456 basehttp 16280 9196 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:51,473 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:51,486 log 16280 16960 Not Found: /api/v1/homepage/1/featured_content/
+WARNING 2025-07-25 08:53:51,487 basehttp 16280 17516 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:51,487 basehttp 16280 1104 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:51,533 log 16280 9196 Not Found: /api/v1/stats/
+WARNING 2025-07-25 08:53:51,533 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:51,566 basehttp 16280 16960 "GET /api/v1/homepage/1/featured_content/ HTTP/1.1" 404 31279
+WARNING 2025-07-25 08:53:51,619 log 16280 1104 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:51,620 basehttp 16280 9196 "GET /api/v1/stats/ HTTP/1.1" 404 31213
+WARNING 2025-07-25 08:53:51,637 log 16280 17356 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:51,643 basehttp 16280 1104 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:51,652 log 16280 9956 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:51,677 log 16280 9196 Not Found: /api/v1/homepage/1/stats/
+WARNING 2025-07-25 08:53:51,678 basehttp 16280 17356 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:51,684 basehttp 16280 9956 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:51,689 basehttp 16280 9196 "GET /api/v1/homepage/1/stats/ HTTP/1.1" 404 31246
+WARNING 2025-07-25 08:53:51,699 log 16280 1104 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:51,702 basehttp 16280 1104 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:51,728 log 16280 9196 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:51,757 basehttp 16280 9196 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:51,786 log 16280 1104 Not Found: /api/v1/services/featured/
+WARNING 2025-07-25 08:53:51,793 basehttp 16280 1104 "GET /api/v1/services/featured/ HTTP/1.1" 404 35
+WARNING 2025-07-25 08:53:51,867 log 16280 17356 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:51,870 basehttp 16280 17356 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:52,006 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:52,006 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:52,139 log 16280 17356 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:52,141 basehttp 16280 17356 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:52,272 log 16280 1104 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:52,273 basehttp 16280 1104 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
+WARNING 2025-07-25 08:53:52,530 log 16280 17356 Not Found: /api/v1/projects/featured/
+WARNING 2025-07-25 08:53:52,532 basehttp 16280 17356 "GET /api/v1/projects/featured/ HTTP/1.1" 404 48
