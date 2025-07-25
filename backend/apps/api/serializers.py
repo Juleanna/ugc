@@ -586,7 +586,6 @@ class WorkStageSerializer(serializers.ModelSerializer):
             'order'
         ]
 
-
 class PartnershipInfoSerializer(serializers.ModelSerializer):
     """Серіалізатор для інформації про партнерство"""
     work_stages = WorkStageSerializer(many=True, read_only=True, source='workstage_set')

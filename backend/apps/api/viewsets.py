@@ -1,5 +1,5 @@
 # backend/apps/api/viewsets.py
-# Повна реалізація ViewSets для Django REST API
+# Оптимізована реалізація ViewSets без дублювання
 
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
@@ -57,79 +57,6 @@ class HomePageViewSet(viewsets.ReadOnlyModelViewSet):
             'certificate_set', 
             'productionphoto_set'
         ).all()
-    
-    @action(detail=True, methods=['get'])
-    def stats(self, request, pk=None):
-        """Статистика для головної сторінки"""
-        try:
-            homepage = self.get_object()
-            
-            cache_key = f'homepage_stats_{pk}'
-            stats = cache.get(cache_key)
-            
-            if not stats:
-                stats = {
-                    'total_projects': Project.objects.filter(is_active=True).count(),
-                    'satisfied_clients': 95,  # Можна замінити на реальні дані
-                    'years_experience': 10,
-                    'team_members': homepage.teammember_set.count(),
-                    'services_count': Service.objects.filter(is_active=True).count(),
-                    'certificates_count': homepage.certificate_set.filter(is_active=True).count()
-                }
-                cache.set(cache_key, stats, 1800)  # 30 хвилин
-            
-            return Response({
-                'success': True,
-                'data': stats,
-                'message': 'Статистика отримана успішно'
-            })
-            
-        except Exception as e:
-            logger.error(f"Error in homepage stats: {str(e)}")
-            return Response({
-                'success': False,
-                'message': 'Помилка при отриманні статистики',
-                'error': str(e)
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-    @action(detail=True, methods=['get'])
-    def featured_content(self, request, pk=None):
-        """Рекомендований контент для головної сторінки"""
-        try:
-            homepage = self.get_object()
-            
-            data = {
-                'featured_services': ServiceListSerializer(
-                    Service.objects.filter(is_active=True, is_featured=True)[:3],
-                    many=True,
-                    context={'request': request}
-                ).data,
-                'featured_projects': ProjectListSerializer(
-                    Project.objects.filter(is_active=True, is_featured=True)[:3],
-                    many=True,
-                    context={'request': request}
-                ).data,
-                'team_members': TeamMemberSerializer(
-                    homepage.teammember_set.filter(is_management=True)[:4],
-                    many=True,
-                    context={'request': request}
-                ).data
-            }
-            
-            return Response({
-                'success': True,
-                'data': data,
-                'message': 'Рекомендований контент отримано'
-            })
-            
-        except Exception as e:
-            logger.error(f"Error in featured content: {str(e)}")
-            return Response({
-                'success': False,
-                'message': 'Помилка при отриманні рекомендованого контенту',
-                'error': str(e)
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 
 class AboutPageViewSet(viewsets.ReadOnlyModelViewSet):
@@ -138,7 +65,7 @@ class AboutPageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AboutPage.objects.filter(is_active=True)
     serializer_class = AboutPageSerializer
     permission_classes = [AllowAny]
-    ordering = ['-updated_at', 'id']  # Додано упорядкування
+    ordering = ['-updated_at', 'id']
     
     def get_queryset(self):
         """Оптимізований queryset з упорядкуванням"""
@@ -146,13 +73,13 @@ class AboutPageViewSet(viewsets.ReadOnlyModelViewSet):
             'teammember_set',
             'certificate_set',
             'productionphoto_set'
-        ).order_by('-updated_at', 'id')  # Явне упорядкування
+        ).order_by('-updated_at', 'id')
 
 
 class TeamMemberViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet для членів команди"""
     
-    queryset = TeamMember.objects.all()
+    queryset = TeamMember.objects.filter(is_active=True)
     serializer_class = TeamMemberSerializer
     permission_classes = [AllowAny]
     filter_backends = [django_filters.DjangoFilterBackend, filters.OrderingFilter]
@@ -184,31 +111,7 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     
     def get_queryset(self):
         """Оптимізований queryset"""
-        queryset = Service.objects.filter(is_active=True).prefetch_related('features')
-        
-        # Фільтрація по featured
-        if self.request.query_params.get('featured'):
-            queryset = queryset.filter(is_featured=True)
-            
-        return queryset
-    
-    @action(detail=False, methods=['get'])
-    def featured(self, request):
-        """Рекомендовані послуги"""
-        featured_services = self.get_queryset().filter(is_featured=True)
-        page = self.paginate_queryset(featured_services)
-        
-        if page is not None:
-            serializer = ServiceListSerializer(page, many=True, context={'request': request})
-            return self.get_paginated_response(serializer.data)
-        
-        serializer = ServiceListSerializer(featured_services, many=True, context={'request': request})
-        return Response({
-            'success': True,
-            'data': serializer.data,
-            'count': featured_services.count(),
-            'message': 'Рекомендовані послуги отримано'
-        })
+        return Service.objects.filter(is_active=True).prefetch_related('features')
     
     @action(detail=True, methods=['get'])
     def features(self, request, pk=None):
@@ -282,24 +185,6 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
             'category'
         ).prefetch_related('images')
     
-    @action(detail=False, methods=['get'])
-    def featured(self, request):
-        """Рекомендовані проєкти"""
-        featured_projects = self.get_queryset().filter(is_featured=True)
-        page = self.paginate_queryset(featured_projects)
-        
-        if page is not None:
-            serializer = ProjectListSerializer(page, many=True, context={'request': request})
-            return self.get_paginated_response(serializer.data)
-        
-        serializer = ProjectListSerializer(featured_projects, many=True, context={'request': request})
-        return Response({
-            'success': True,
-            'data': serializer.data,
-            'count': featured_projects.count(),
-            'message': 'Рекомендовані проєкти отримано'
-        })
-    
     @action(detail=True, methods=['get'])
     def images(self, request, slug=None):
         """Зображення проєкту"""
@@ -342,19 +227,6 @@ class JobPositionViewSet(viewsets.ReadOnlyModelViewSet):
             is_active=True,
             expires_at__gte=timezone.now()
         )
-    
-    @action(detail=False, methods=['get'])
-    def urgent(self, request):
-        """Терміновi вакансії"""
-        urgent_jobs = self.get_queryset().filter(is_urgent=True)
-        
-        serializer = JobPositionListSerializer(urgent_jobs, many=True, context={'request': request})
-        return Response({
-            'success': True,
-            'data': serializer.data,
-            'count': urgent_jobs.count(),
-            'message': 'Термінові вакансії отримано'
-        })
 
 
 class JobApplicationViewSet(viewsets.ModelViewSet):
@@ -362,23 +234,25 @@ class JobApplicationViewSet(viewsets.ModelViewSet):
     
     queryset = JobApplication.objects.all()
     serializer_class = JobApplicationSerializer
-    permission_classes = [AllowAny]  # Для створення заявок
-    http_method_names = ['post', 'get']  # Тільки створення та читання
+    permission_classes = [AllowAny]
+    http_method_names = ['post', 'get']
+    ordering = ['-created_at', 'id']
     
     def get_permissions(self):
         """Дозволи залежно від дії"""
         if self.action == 'create':
             return [AllowAny()]
-        return [IsAuthenticated()]  # Для перегляду потрібна авторизація
+        return [IsAuthenticated()]
+    
+    def get_queryset(self):
+        """Queryset з явним упорядкуванням"""
+        return JobApplication.objects.all().order_by('-created_at', 'id')
     
     def create(self, request, *args, **kwargs):
         """Створення нової заявки"""
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             application = serializer.save()
-            
-            # Тут можна додати відправку email уведомлення
-            # send_application_notification.delay(application.id)
             
             return Response({
                 'success': True,
@@ -399,7 +273,7 @@ class WorkplacePhotoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WorkplacePhoto.objects.filter(is_active=True)
     serializer_class = WorkplacePhotoSerializer
     permission_classes = [AllowAny]
-    ordering = ['order', 'created_at']
+    ordering = ['order', 'id']
 
 
 # ============================================================================
@@ -412,13 +286,13 @@ class PartnershipInfoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = PartnershipInfo.objects.filter(is_active=True)
     serializer_class = PartnershipInfoSerializer
     permission_classes = [AllowAny]
-    ordering = ['-updated_at', 'id']  # Додано явне упорядкування
+    ordering = ['-updated_at', 'id']
     
     def get_queryset(self):
         """Оптимізований queryset з упорядкуванням"""
         return PartnershipInfo.objects.filter(is_active=True).prefetch_related(
             'workstage_set'
-        ).order_by('-updated_at', 'id')  # Явне упорядкування в queryset
+        ).order_by('-updated_at', 'id')
 
 
 class WorkStageViewSet(viewsets.ReadOnlyModelViewSet):
@@ -427,7 +301,7 @@ class WorkStageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WorkStage.objects.all()
     serializer_class = WorkStageSerializer
     permission_classes = [AllowAny]
-    ordering = ['order', 'id']  # Додано упорядкування
+    ordering = ['order', 'id']
 
 
 class PartnerInquiryViewSet(viewsets.ModelViewSet):
@@ -435,9 +309,9 @@ class PartnerInquiryViewSet(viewsets.ModelViewSet):
     
     queryset = PartnerInquiry.objects.all()
     serializer_class = PartnerInquirySerializer
-    permission_classes = [AllowAny]  # Для створення запитів
+    permission_classes = [AllowAny]
     http_method_names = ['post', 'get']
-    ordering = ['-created_at', 'id']  # Додано упорядкування
+    ordering = ['-created_at', 'id']
     
     def get_permissions(self):
         if self.action == 'create':
@@ -454,9 +328,6 @@ class PartnerInquiryViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             inquiry = serializer.save()
             
-            # Можна додати відправку уведомлення
-            # send_partner_inquiry_notification.delay(inquiry.id)
-            
             return Response({
                 'success': True,
                 'data': serializer.data,
@@ -469,6 +340,7 @@ class PartnerInquiryViewSet(viewsets.ModelViewSet):
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
+
 # ============================================================================
 # CONTACT VIEWSETS
 # ============================================================================
@@ -480,8 +352,8 @@ class OfficeViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OfficeSerializer
     permission_classes = [AllowAny]
     filter_backends = [django_filters.DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['city', 'is_main']
-    ordering = ['order', 'city']
+    filterset_fields = ['office_type', 'is_main']  # Виправлено: прибрано 'city'
+    ordering = ['order', 'name']  # Виправлено: прибрано 'city'
 
 
 class ContactInquiryViewSet(viewsets.ModelViewSet):
@@ -491,20 +363,22 @@ class ContactInquiryViewSet(viewsets.ModelViewSet):
     serializer_class = ContactInquirySerializer
     permission_classes = [AllowAny]
     http_method_names = ['post', 'get']
+    ordering = ['-created_at', 'id']
     
     def get_permissions(self):
         if self.action == 'create':
             return [AllowAny()]
         return [IsAuthenticated()]
     
+    def get_queryset(self):
+        """Queryset з явним упорядкуванням"""
+        return ContactInquiry.objects.all().order_by('-created_at', 'id')
+    
     def create(self, request, *args, **kwargs):
         """Створення нового звернення"""
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             inquiry = serializer.save()
-            
-            # Відправка уведомлення
-            # send_contact_inquiry_notification.delay(inquiry.id)
             
             return Response({
                 'success': True,
@@ -518,47 +392,97 @@ class ContactInquiryViewSet(viewsets.ModelViewSet):
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
+
 # ============================================================================
-# UTILITY VIEWSETS
+# ЦЕНТРАЛІЗОВАНИЙ VIEWSET ДЛЯ СТАТИСТИКИ ТА FEATURED CONTENT
 # ============================================================================
 
-class APIStatsViewSet(viewsets.ViewSet):
-    """ViewSet для загальної статистики API"""
+class UnifiedContentViewSet(viewsets.ViewSet):
+    """Централізований ViewSet для статистики та featured контенту"""
     
     permission_classes = [AllowAny]
     
-    def list(self, request):
+    @action(detail=False, methods=['get'])
+    def stats(self, request):
         """Загальна статистика сайту"""
         try:
-            cache_key = 'api_general_stats'
+            cache_key = 'unified_site_stats'
             stats = cache.get(cache_key)
             
             if not stats:
                 stats = {
-                    'total_services': Service.objects.filter(is_active=True).count(),
-                    'featured_services': Service.objects.filter(is_active=True, is_featured=True).count(),
-                    'total_projects': Project.objects.filter(is_active=True).count(),
-                    'featured_projects': Project.objects.filter(is_active=True, is_featured=True).count(),
-                    'active_jobs': JobPosition.objects.filter(
-                        is_active=True, 
-                        expires_at__gte=timezone.now()
-                    ).count(),
-                    'offices': Office.objects.filter(is_active=True).count(),
-                    'team_members': TeamMember.objects.count(),
-                    'project_categories': ProjectCategory.objects.filter(is_active=True).count(),
+                    'general': {
+                        'total_services': Service.objects.filter(is_active=True).count(),
+                        'featured_services': Service.objects.filter(is_active=True, is_featured=True).count(),
+                        'total_projects': Project.objects.filter(is_active=True).count(),
+                        'featured_projects': Project.objects.filter(is_active=True, is_featured=True).count(),
+                        'active_jobs': JobPosition.objects.filter(
+                            is_active=True, 
+                            expires_at__gte=timezone.now()
+                        ).count(),
+                        'offices': Office.objects.filter(is_active=True).count(),
+                        'team_members': TeamMember.objects.filter(is_active=True).count(),
+                        'project_categories': ProjectCategory.objects.filter(is_active=True).count(),
+                    },
+                    'homepage_specific': {
+                        'satisfied_clients': 95,
+                        'years_experience': 10,
+                        'certificates_count': Certificate.objects.filter(is_active=True).count(),
+                    }
                 }
                 cache.set(cache_key, stats, 3600)  # 1 година
             
             return Response({
                 'success': True,
                 'data': stats,
-                'message': 'Загальна статистика отримана'
+                'message': 'Статистика отримана успішно'
             })
             
         except Exception as e:
-            logger.error(f"Error in API stats: {str(e)}")
+            logger.error(f"Error in unified stats: {str(e)}")
             return Response({
                 'success': False,
                 'message': 'Помилка при отриманні статистики',
+                'error': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['get'])
+    def featured(self, request):
+        """Весь featured контент в одному endpoint"""
+        try:
+            cache_key = 'unified_featured_content'
+            data = cache.get(cache_key)
+            
+            if not data:
+                data = {
+                    'services': ServiceListSerializer(
+                        Service.objects.filter(is_active=True, is_featured=True)[:6],
+                        many=True,
+                        context={'request': request}
+                    ).data,
+                    'projects': ProjectListSerializer(
+                        Project.objects.filter(is_active=True, is_featured=True)[:6],
+                        many=True,
+                        context={'request': request}
+                    ).data,
+                    'team_members': TeamMemberSerializer(
+                        TeamMember.objects.filter(is_active=True, is_management=True)[:4],
+                        many=True,
+                        context={'request': request}
+                    ).data
+                }
+                cache.set(cache_key, data, 1800)  # 30 хвилин
+            
+            return Response({
+                'success': True,
+                'data': data,
+                'message': 'Рекомендований контент отримано'
+            })
+            
+        except Exception as e:
+            logger.error(f"Error in unified featured content: {str(e)}")
+            return Response({
+                'success': False,
+                'message': 'Помилка при отриманні рекомендованого контенту',
                 'error': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
