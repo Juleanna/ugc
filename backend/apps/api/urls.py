@@ -2,6 +2,7 @@
 # Оптимізована конфігурація URL без дублювання
 
 from django.urls import path, include
+from django.conf import settings
 from rest_framework.routers import DefaultRouter
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -179,24 +180,14 @@ urlpatterns = [
     path('cache/', CacheManagementView.as_view(), name='cache-management'),
 ]
 
-# =============== DEBUG INFO ===============
+# =============== DEBUG INFO (REMOVED FOR PRODUCTION) ===============
 
-print("🚀 Оптимізовану URL конфігурацію завантажено!")
-print(f"📊 Загальна кількість ViewSets: {len(router.registry)}")
-print(f"🔗 Загальна кількість URL patterns: {len(urlpatterns)}")
-print("✅ Архітектура: Оптимізовані ViewSets + DRF Router")
-
-# Виводимо список зареєстрованих ViewSets
-print("\n📋 ЗАРЕЄСТРОВАНІ VIEWSETS:")
-for prefix, viewset, basename in router.registry:
-    print(f"  • {prefix:20} -> {viewset.__name__:25} (basename: {basename})")
-
-print("\n🔧 ОПТИМІЗАЦІЇ:")
-print("  ✅ Видалено дублюючі альтернативні маршрути")
-print("  ✅ Об'єднано статистику в UnifiedContentViewSet")
-print("  ✅ Централізовано featured контент")
-print("  ✅ Додано відсутній WorkStageViewSet")
-print("  ✅ Виправлено помилки з полем city")
+# Debug output moved to development settings only
+if settings.DEBUG:
+    print("🚀 Оптимізовану URL конфігурацію завантажено!")
+    print(f"📊 Загальна кількість ViewSets: {len(router.registry)}")
+    print(f"🔗 Загальна кількість URL patterns: {len(urlpatterns)}")
+    print("✅ Архітектура: Оптимізовані ViewSets + DRF Router")
 
 # =============== ENDPOINT DOCUMENTATION ===============
 """

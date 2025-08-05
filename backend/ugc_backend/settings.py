@@ -30,11 +30,18 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'django_filters',
     'corsheaders',
-    'parler', 
+    'drf_spectacular',
+    'django_ratelimit',
+    'django_prometheus',
+    'django_extensions',
     'rosetta',
     'ckeditor',
     'ckeditor_uploader',
 ]
+
+# Додаємо debug toolbar тільки в DEBUG режимі
+if DEBUG:
+    THIRD_PARTY_APPS += ['debug_toolbar']
 
 LOCAL_APPS = [
     'apps.content',
@@ -62,6 +69,7 @@ INSTALLED_APPS = UNFOLD + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # ========== MIDDLEWARE ==========
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -71,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 ROOT_URLCONF = 'ugc_backend.urls'
@@ -295,6 +304,7 @@ TRANSLATION_EXPORT_SETTINGS = {
 # ========== REST FRAMEWORK ==========
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
@@ -309,9 +319,13 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '1000/hour',
-        'user': '2000/hour',
+        'anon': '100/hour',
+        'user': '1000/hour',
         'translations': '100/min',
+        'login': '5/min',
+        'contact': '10/hour',
+        'webhook': '60/hour',
+        'cache': '30/hour',
     },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 50,
@@ -320,9 +334,58 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'DEFAULT_VERSION': 'v1',
-    'ALLOWED_VERSIONS': ['v1'],
+    'ALLOWED_VERSIONS': ['v1', 'v2'],
+    'VERSION_PARAM': 'version',
+}
+
+# ========== API ДОКУМЕНТАЦІЯ ==========
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'UGC Company API',
+    'DESCRIPTION': 'API для управління контентом та послугами компанії UGC',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SCHEMA_PATH_PREFIX': '/api/v[0-9]',
+    'COMPONENT_SPLIT_REQUEST': True,
+    'CONTACT': {
+        'name': 'UGC Development Team',
+        'email': 'dev@ugc.com',
+    },
+    'LICENSE': {
+        'name': 'Private License',
+    },
+    'TAGS': [
+        {'name': 'Content', 'description': 'Управління контентом сайту'},
+        {'name': 'Services', 'description': 'Управління послугами'},
+        {'name': 'Projects', 'description': 'Управління проєктами'},
+        {'name': 'Jobs', 'description': 'Управління вакансіями'},
+        {'name': 'Partners', 'description': 'Управління партнерськими відносинами'},
+        {'name': 'Contacts', 'description': 'Управління контактами'},
+        {'name': 'Translations', 'description': 'Система перекладів'},
+        {'name': 'Utils', 'description': 'Утилітарні endpoints'},
+    ],
+    'SERVERS': [
+        {'url': '/api/v1', 'description': 'Production API v1'},
+        {'url': '/api/v2', 'description': 'Development API v2'},
+    ],
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'persistAuthorization': True,
+        'displayOperationId': True,
+        'filter': True,
+    },
+    'REDOC_UI_SETTINGS': {
+        'hideDownloadButton': True,
+        'theme': {
+            'colors': {
+                'primary': {
+                    'main': '#3b82f6'
+                }
+            }
+        }
+    }
 }
 
 # ========== CORS НАЛАШТУВАННЯ ==========

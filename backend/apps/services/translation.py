@@ -10,5 +10,3 @@ class ServiceFeatureTranslationOptions(TranslationOptions):
 
 translator.register(Service, ServiceTranslationOptions)
 translator.register(ServiceFeature, ServiceFeatureTranslationOptions)
-
-

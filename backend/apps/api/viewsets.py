@@ -1,13 +1,18 @@
 # backend/apps/api/viewsets.py
-# Оптимізована реалізація ViewSets без дублювання
+# Оптимізована реалізація ViewSets з rate limiting та документацією
 
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from django_filters import rest_framework as django_filters
+from django_ratelimit.decorators import ratelimit
 from django.core.cache import cache
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 import logging
 
 # Імпорт моделей
@@ -92,11 +97,49 @@ class TeamMemberViewSet(viewsets.ReadOnlyModelViewSet):
 # SERVICE VIEWSETS
 # ============================================================================
 
+@extend_schema_view(
+    list=extend_schema(
+        summary="Список послуг",
+        description="Отримання списку всіх активних послуг компанії",
+        tags=['Services'],
+        parameters=[
+            OpenApiParameter(
+                name='is_featured',
+                type=OpenApiTypes.BOOL,
+                description='Фільтр за рекомендованими послугами'
+            ),
+            OpenApiParameter(
+                name='search',
+                type=OpenApiTypes.STR,
+                description='Пошук по назві та опису послуги'
+            ),
+        ]
+    ),
+    retrieve=extend_schema(
+        summary="Деталі послуги",
+        description="Отримання детальної інформації про послугу",
+        tags=['Services']
+    ),
+    features=extend_schema(
+        summary="Особливості послуги",
+        description="Отримання списку особливостей конкретної послуги",
+        tags=['Services']
+    )
+)
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet для послуг"""
+    """
+    ViewSet для управління послугами компанії.
+    
+    Надає можливість:
+    - Перегляду списку активних послуг
+    - Отримання детальної інформації про послугу
+    - Фільтрування та пошуку послуг
+    - Перегляду особливостей послуги
+    """
     
     queryset = Service.objects.filter(is_active=True)
     permission_classes = [AllowAny]
+    throttle_classes = [AnonRateThrottle, UserRateThrottle]
     filter_backends = [django_filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['is_featured', 'is_active']
     search_fields = ['name', 'short_description', 'detailed_description']
@@ -110,9 +153,15 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
         return ServiceListSerializer
     
     def get_queryset(self):
-        """Оптимізований queryset"""
+        """Оптимізований queryset з prefetch для features"""
         return Service.objects.filter(is_active=True).prefetch_related('features')
     
+    @extend_schema(
+        summary="Особливості послуги",
+        description="Отримання списку особливостей та переваг конкретної послуги",
+        responses=ServiceFeatureSerializer(many=True),
+        tags=['Services']
+    )
     @action(detail=True, methods=['get'])
     def features(self, request, pk=None):
         """Особливості конкретної послуги"""

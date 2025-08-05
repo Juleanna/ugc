@@ -4,6 +4,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAdminUser
 from django.core.cache import cache
 from django.conf import settings
 from django.utils import timezone
@@ -46,6 +47,7 @@ class UnifiedAPIResponse:
 
 class TranslationsAPIView(APIView):
     """API для отримання перекладів конкретної мови"""
+    permission_classes = []  # Public access for translations
     
     def get(self, request, lang='uk'):
         try:
@@ -196,6 +198,7 @@ class TranslationsAPIView(APIView):
 
 class AllTranslationsAPIView(APIView):
     """API для отримання всіх перекладів мови (розширений формат)"""
+    permission_classes = []  # Public access for translations
     
     def get(self, request, lang='uk'):
         try:
@@ -243,6 +246,7 @@ class AllTranslationsAPIView(APIView):
 
 class APIHealthCheckView(APIView):
     """Перевірка здоров'я API та системи"""
+    permission_classes = []  # Public access for health checks
     
     def get(self, request):
         try:
@@ -386,6 +390,7 @@ class APIHealthCheckView(APIView):
 
 class CacheManagementView(APIView):
     """Управління кешем системи"""
+    permission_classes = [IsAdminUser]  # Only admin access for cache management
     
     def get(self, request):
         """Статистика кешу"""

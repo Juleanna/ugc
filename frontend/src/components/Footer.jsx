@@ -1,57 +1,141 @@
-import React from 'react';
-import { Home, Info, Briefcase, FolderOpen, Mail } from 'lucide-react';
+'use client'
 
-const Footer = ({ scrollToSection }) => {
+import { Link } from 'react-router-dom'
+
+import { Container } from '@/components/Container'
+import { FadeIn } from '@/components/FadeIn'
+import { Logo } from '@/components/Logo'
+import { socialMediaProfiles } from '@/components/SocialMedia'
+import { useTranslations } from '@/context/TranslationContext'
+
+function Navigation() {
+  const { t, currentLocale } = useTranslations()
+  
   const navigation = [
-    { id: 'home', label: 'Головна', icon: Home },
-    { id: 'about', label: 'Про нас', icon: Info },
-    { id: 'services', label: 'Послуги', icon: Briefcase },
-    { id: 'projects', label: 'Проєкти', icon: FolderOpen },
-    { id: 'contact', label: 'Контакти', icon: Mail }
-  ];
+    {
+      title: t('navigation.work') || 'Наші вироби',
+      links: [
+        { title: 'КВВЗ', href: `/${currentLocale}/work/family-fund` },
+        { title: 'КЛП', href: `/${currentLocale}/work/unseal` },
+        { title: 'Футболка поло', href: `/${currentLocale}/work/phobia` },
+        {
+          title: (
+            <>
+              {t('caseStudies.readMore') || 'Дізнатись більше'} <span aria-hidden="true">&rarr;</span>
+            </>
+          ),
+          href: `/${currentLocale}/work`,
+        },
+      ],
+    },
+    {
+      title: t('footer.company') || 'Компанія',
+      links: [
+        { title: t('navigation.about') || 'Про компанію', href: `/${currentLocale}/about` },
+        { title: t('navigation.process') || 'Процес виробництва', href: `/${currentLocale}/process` },
+        { title: t('navigation.job') || 'Робота', href: `/${currentLocale}/job` },
+        { title: t('header.contact') || 'Контакти', href: `/${currentLocale}/contact` },
+      ],
+    },
+    {
+      title: t('footer.socialMedia') || 'Соціальні мережі',
+      links: socialMediaProfiles,
+    },
+  ]
 
   return (
-    <footer className="bg-gray-800 text-white py-8">
-      <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-          <div>
-            <h3 className="text-xl font-bold mb-4">UGC</h3>
-            <p className="text-gray-400">
-              Професійний одяг для кожної сфери діяльності
-            </p>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Швидкі посилання</h4>
-            <div className="space-y-2">
-              {navigation.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="block text-gray-400 hover:text-white transition-colors"
-                >
-                  {item.label}
-                </button>
+    <nav>
+      <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        {navigation.map((section, sectionIndex) => (
+          <li key={sectionIndex}>
+            <div className="font-display text-sm font-semibold tracking-wider text-neutral-950">
+              {section.title}
+            </div>
+            <ul role="list" className="mt-4 text-sm text-neutral-700">
+              {section.links.map((link, linkIndex) => (
+                <li key={linkIndex} className="mt-4">
+                  <Link
+                    to={link.href}
+                    className="transition hover:text-neutral-950"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
               ))}
-            </div>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Контакти</h4>
-            <div className="space-y-2 text-gray-400">
-              <p>+38 (067) 123-45-67</p>
-              <p>info@ugc.ua</p>
-              <p>м. Київ, вул. Промислова, 15</p>
-            </div>
-          </div>
-        </div>
-        
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 UGC. Всі права захищені.</p>
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+function ArrowIcon(props) {
+  return (
+    <svg viewBox="0 0 16 6" aria-hidden="true" {...props}>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M16 3 10 .5v2H0v1h10v2L16 3Z"
+      />
+    </svg>
+  )
+}
+
+function NewsletterForm() {
+  const { t } = useTranslations()
+  
+  return (
+    <form className="max-w-sm">
+      <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
+        {t('footer.newsletter') || 'Залиште свою пошту'}
+      </h2>
+      <p className="mt-4 text-sm text-neutral-700">
+        Subscribe to get the latest design news, articles, resources and
+        inspiration.
+      </p>
+      <div className="relative mt-6">
+        <input
+          type="email"
+          placeholder={t('footer.emailPlaceholder') || 'Email address'}
+          autoComplete="email"
+          aria-label="Email address"
+          className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
+        />
+        <div className="absolute inset-y-1 right-1 flex justify-end">
+          <button
+            type="submit"
+            aria-label="Submit"
+            className="flex aspect-square h-full items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
+          >
+            <ArrowIcon className="w-4" />
+          </button>
         </div>
       </div>
-    </footer>
-  );
-};
+    </form>
+  )
+}
 
-export default Footer;
+export function Footer() {
+  return (
+    <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
+      <FadeIn>
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
+          <Navigation />
+          {/*<div className="flex lg:justify-end">*/}
+          {/*  <NewsletterForm />*/}
+          {/*</div>*/}
+        </div>
+        <div className="mb-20 mt-24 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 border-t border-neutral-950/10 pt-12">
+          <Link to="/" aria-label="Home">
+            <Logo className="h-8" fillOnHover />
+          </Link>
+          <p className="text-sm text-neutral-700">
+            © UGC LLC {new Date().getFullYear()}
+          </p>
+        </div>
+      </FadeIn>
+    </Container>
+  )
+}
